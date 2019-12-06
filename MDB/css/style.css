@@ -42,25 +42,25 @@ header,
 }
 
 .top-nav-collapse {
-    background-color: #9da4b1 !important;
+    background-color: #373a6d !important;
 }
 .navbar:not(.top-nav-collapse) {
     background: transparent !important;
 }
 @media (max-width: 768px) {
     .navbar:not(.top-nav-collapse) {
-        background: #9da4b1 !important;
+        background: #373a6d !important;
     }
 }
 
 @media (min-width: 800px) and (max-width: 850px) {
     .navbar:not(.top-nav-collapse) {
-        background: #9da4b1!important;
+        background: #373a6d!important;
     }
 }
 
 footer.page-footer {
-    background-color: #9da4b1;
+    background-color: #373a6d;
 }
 
  /* Modal CSS */
