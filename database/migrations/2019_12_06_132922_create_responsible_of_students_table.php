@@ -14,8 +14,8 @@ class CreateResponsibleOfStudentsTable extends Migration
     public function up()
     {
         Schema::create('jerd_responsible_of_students', function (Blueprint $table) {
-            $table->integer('student_id')->unsigned();//->primary();
-            $table->integer('user_id')->unsigned();//->primary();
+            $table->integer('student_id')->unsigned();
+            $table->integer('user_id')->unsigned();
 
             $table->foreign('student_id')->references('id')->on('jerd_students');
             $table->foreign('user_id')->references('id')->on('jerd_users');

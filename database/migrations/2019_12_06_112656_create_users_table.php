@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->date('date_of_birth')->nullable();
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('password');
             $table->enum('role', ['Teacher', 'Guardian', 'MaRe']);
         });

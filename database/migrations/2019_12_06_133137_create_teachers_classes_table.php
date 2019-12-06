@@ -14,8 +14,8 @@ class CreateTeachersClassesTable extends Migration
     public function up()
     {
         Schema::create('jerd_teachers_classes', function (Blueprint $table) {
-            $table->integer('class_id')->unsigned();//->primary();
-            $table->integer('user_id')->unsigned();//->primary();
+            $table->integer('class_id')->unsigned();
+            $table->integer('user_id')->unsigned();
 
             $table->foreign('class_id')->references('id')->on('jerd_classes');
             $table->foreign('user_id')->references('id')->on('jerd_users');
