@@ -11,8 +11,8 @@ class Student extends Model
         return $this->belongsToMany('App\User');
     }
 
-    public function class()
+    public function klass()
     {
-        return $this->belongsTo('App\ClassModel');
+        return $this->belongsTo('App\Klass');
     }
 }

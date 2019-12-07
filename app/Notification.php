@@ -15,9 +15,9 @@ class Notification extends Model
     {
         return $this->belongsTo('App\Student');
     }
-    public function class()
+    public function klass()
     {
-        return $this->belongsTo('App\Class');
+        return $this->belongsTo('App\Klass');
     }
     public function user()
     {

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class School extends Model
 {
-    public function classes(){
-        return $this->hasMany('App\ClassModel');
+    public function klasss(){
+        return $this->hasMany('App\Klass');
     }
     public function guardians()
     {

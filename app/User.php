@@ -11,9 +11,9 @@ class User extends Model
         return $this->belongsToMany('App\Students');
     }
 
-    public function classes()
+    public function klasss()
     {
-        return $this->belongsToMany('App\Class');
+        return $this->belongsToMany('App\Klass');
     }
 
     public function comments()
