@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeachersClassesTable extends Migration
+class CreateTeachersKlassesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateTeachersClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('jerd_teachers_classes', function (Blueprint $table) {
-            $table->integer('class_id')->unsigned();
+        Schema::create('jerd_teachers_klasses', function (Blueprint $table) {
+            $table->integer('klass_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
-            $table->foreign('class_id')->references('id')->on('jerd_classes');
+            $table->foreign('klass_id')->references('id')->on('jerd_klasses');
             $table->foreign('user_id')->references('id')->on('jerd_users');
 
-            $table->primary(['class_id', 'user_id']);
-            $table->index(['class_id', 'user_id']);
+            $table->primary(['klass_id', 'user_id']);
+            $table->index(['klass_id', 'user_id']);
         });
     }
 
@@ -32,6 +32,6 @@ class CreateTeachersClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jerd_teachers_classes');
+        Schema::dropIfExists('jerd_teachers_klasses');
     }
 }
