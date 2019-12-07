@@ -17,14 +17,14 @@ class CreateNotificationsTable extends Migration
             $table->increments('id');
             $table->string('description');
             $table->date('date');
-            $table->enum('type', ['Homework', 'Absense', 'Note']);
+            $table->enum('type', ['Homework', 'Absence', 'Note']);
             $table->boolean('checked');
-            $table->integer('class_id')->unsigned()->nullable();
+            $table->integer('klass_id')->unsigned()->nullable();
             $table->integer('student_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('class_id')->references('id')->on('jerd_classes');
+            $table->foreign('klass_id')->references('id')->on('jerd_klasses');
             $table->foreign('student_id')->references('id')->on('jerd_students');
             $table->foreign('user_id')->references('id')->on('jerd_users');
         });

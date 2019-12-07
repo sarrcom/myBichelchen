@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateResponsibleOfStudentsTable extends Migration
+class CreateTeachersKlassesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateResponsibleOfStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jerd_responsible_of_students', function (Blueprint $table) {
-            $table->integer('student_id')->unsigned();
+        Schema::create('jerd_teachers_klasses', function (Blueprint $table) {
+            $table->integer('klass_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
-            $table->foreign('student_id')->references('id')->on('jerd_students');
+            $table->foreign('klass_id')->references('id')->on('jerd_klasses');
             $table->foreign('user_id')->references('id')->on('jerd_users');
 
-            $table->primary(['student_id', 'user_id']);
-            $table->index(['student_id', 'user_id']);
+            $table->primary(['klass_id', 'user_id']);
+            $table->index(['klass_id', 'user_id']);
         });
     }
 
@@ -32,6 +32,6 @@ class CreateResponsibleOfStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jerd_responsible_of_students');
+        Schema::dropIfExists('jerd_teachers_klasses');
     }
 }
