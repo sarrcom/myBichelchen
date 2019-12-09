@@ -27,7 +27,7 @@
             </ul>
 
             <div class="dropdown">
-                <button class="btn btn-outline-orange dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Child
                 </button>
