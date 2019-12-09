@@ -26,16 +26,32 @@
                 </li>
             </ul>
 
-            <div class="dropdown">
-                <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Child
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
-                    <a class="dropdown-item" href="#">Devil Spawn</a>
-                    <a class="dropdown-item" href="#">Satan</a>
-                    <a class="dropdown-item" href="#">Hell Spawn</a>
-                </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Child
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                            <a class="dropdown-item" href="#">Devil Spawn</a>
+                            <a class="dropdown-item" href="#">Satan</a>
+                            <a class="dropdown-item" href="#">Hell Spawn</a>
+                        </div>
+
+
+
+                    <div class="dropdown">
+                        <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Class
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                            <a class="dropdown-item" href="#">Maths</a>
+                            <a class="dropdown-item" href="#">Art</a>
+                            <a class="dropdown-item" href="#">Science</a>
+                        </div>
+                    </div>
+
+
             </div>
         </div>
     </div>
