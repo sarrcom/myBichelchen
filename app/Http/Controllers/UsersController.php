@@ -118,4 +118,22 @@ class UsersController extends Controller
     {
         return view('user-messages');
     }
+
+    public function login(Request $request)
+    {
+        $user = User::where('username', $request->loginFormUserName)->get();
+        if ($user) {
+            //with hashed password
+            //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password)
+
+            if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
+                session_start();
+                $_SESSION['userlogged']= serialize($user);
+                return redirect('/'.$user[0]->username.'/');
+            }
+        }
+
+        return redirect('/');
+
+    }
 }

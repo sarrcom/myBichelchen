@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
+
+    protected $table='jerd_notifactions';
     public function comments()
     {
         return $this->hasMany('App\Comment');
