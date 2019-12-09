@@ -16,6 +16,7 @@ class CreateNotificationsTable extends Migration
         Schema::create('jerd_notifications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description');
+            $table->string('subject');
             $table->date('date');
             $table->enum('type', ['Homework', 'Absence', 'Note']);
             $table->boolean('checked');
