@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\User;
+use App\Klass;
 
 class UsersController extends Controller
 {
@@ -13,7 +16,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users-list');
+        $users = User::all();
+        return view('admin.users-list', ['users' => $users]);
     }
 
     /**
@@ -23,7 +27,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('add-user');
+        return view('admin.add-user');
     }
 
     /**
