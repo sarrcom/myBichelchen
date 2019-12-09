@@ -38,7 +38,24 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'first_name' => 'required|min:2|max:20',
+            'password' => 'required'
+        ]);
+
+        $user = new User;
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->date_of_birth = $request->date_of_birth;
+        $user->username = $request->username;
+        $user->password = $request->password;
+        $user->role = $request->role;
+        $user->timestamps = false;
+
+        $user->save();
+
+        return redirect('/admin/users');
     }
 
     /**
