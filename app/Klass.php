@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Klass extends Model
 {
+    protected $table='jerd_klasses';
     public function teachers()
     {
         return $this->belongsToMany('App\User');
