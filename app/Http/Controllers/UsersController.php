@@ -81,4 +81,37 @@ class UsersController extends Controller
     {
         //
     }
+
+    /**
+     * Display the overview of the user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function overview($id)
+    {
+        return view('user-overview');
+    }
+
+    /**
+     * Display the overview of the user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function homework($id)
+    {
+        return view('user-homework');
+    }
+
+    /**
+     * Display the overview of the user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function messages($id)
+    {
+        return view('user-messages');
+    }
 }

@@ -15,8 +15,13 @@ Route::get('/', function () {
     return view('landing-page');
 });
 
-Route::resource('user', 'UsersController');
-Route::resource('student', 'StudentsController');
-Route::resource('school', 'SchoolsController');
-Route::resource('klass', 'KlassesController');
-Route::resource('admin', 'AdminsController');
+Route::get('/admin/users', 'UsersController@index');
+Route::get('/admin/user/create', 'UsersController@create');
+Route::get('/admin/user/edit/{id}', 'UsersController@edit');
+Route::get('/admin/klasses', 'KlassesController@index');
+Route::get('/admin/klass/create', 'KlassesController@create');
+Route::get('/admin/klass/edit/{id}', 'KlassesController@edit');
+
+Route::get('/{username}', 'UsersController@overview');
+Route::get('/{username}/homework', 'UsersController@homework');
+Route::get('/{username}/messages', 'UsersController@messages');
