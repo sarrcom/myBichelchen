@@ -26,19 +26,19 @@
                 @csrf
                 @method('POST')
                 <div class="md-form mb-5">
-                <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="Form-email1">Your Username</label>
+                    <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="Form-email1">Your Username</label>
                 </div>
                 
                 <div class="md-form pb-3">
-                <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
-                <p class="font-small orange-text d-flex justify-content-end">Forgot <a href="#" class="orange-text ml-1">
-                Password?</a></p>
+                    <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
+                    <p class="font-small orange-text d-flex justify-content-end">Forgot <a href="#" class="orange-text ml-1">
+                    Password?</a></p>
                 </div>
                 
                 <div class="text-center mb-3">
-                <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
+                    <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
                 </div>
             </form>
 
