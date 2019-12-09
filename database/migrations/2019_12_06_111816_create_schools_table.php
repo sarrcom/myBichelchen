@@ -16,8 +16,9 @@ class CreateSchoolsTable extends Migration
         Schema::create('jerd_schools', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('city')->nullable();
             $table->string('address', 250)->unique();
+            $table->string('zip');
+            $table->string('city')->nullable();
         });
     }
 

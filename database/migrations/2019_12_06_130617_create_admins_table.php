@@ -18,7 +18,7 @@ class CreateAdminsTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->integer('school_id')->unsigned()->nullable();
-            
+
             $table->foreign('school_id')->references('id')->on('jerd_schools');
         });
     }
