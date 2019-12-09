@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\UsersController;
+
 Route::get('/', function () {
     return view('landing-page');
 });
@@ -31,3 +33,5 @@ Route::delete('/admin/klass/{id}', 'KlassesController@destroy');
 Route::get('/{username}', 'UsersController@overview');
 Route::get('/{username}/homework', 'UsersController@homework');
 Route::get('/{username}/messages', 'UsersController@messages');
+
+Route::post('/', 'UsersController@login');
