@@ -61,101 +61,46 @@
 
 <!-------------------------------------------------->
 
-  <!--Main Navigation-->
-  <header>
-
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="#"><strong>myBichelchen</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
-          aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#aboutUs">About us</a>
-            </li>
-          </ul>
-          <form class="form-inline">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </div>
-          </form>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Intro Section -->
-    <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-      <div class="mask rgba-white-slight">
-        <div class="container h-100 d-flex justify-content-center align-items-center">
-          <div class="row pt-5 mt-3">
-            <div class="col-md-12 wow fadeIn mb-3">
-              <div class="text-center">
-                <h1 class="display-4 font-weight-bold mb-5 wow fadeInUp"><img src="../../MDB/img/logo.PNG" alt=""></h1>
-                </li>
-                <h5 class="mb-5 wow fadeInUp" data-wow-delay="0.2s">No More Paper Forms Makes Everyone Happy!</h5>
-                <div class="wow fadeInUp" data-wow-delay="0.4s">
-                  <a class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#elegantModalForm"><i class="fas fa-user left"></i>Sign in</a>
-                  <a href="#contact" class="btn btn-outline-orange btn-rounded"><i class="fas fa-book left"></i>Contact us</a>
-                </div>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-</header>
-    <!--Main Navigation-->
+    @include('templates.header')
 
     <!--Main Layout-->
     <main>
 
         <div class="container">
 
-        <!--Section: Features v.4-->
-        <section id="aboutUs" class="section wow fadeIn" data-wow-delay="0.3s">
+            <!--About us Section: Features v.4 -->
+            <section id="aboutUs" class="section wow fadeIn" data-wow-delay="0.3s">
 
-                <!--Section heading-->
-                <h1 class="font-weight-bold text-center h1 my-5">Why is it so great?</h1>
-                <!--Section description-->
-                <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Reginald had always loved quaint Luxembourg with its tense, terrible trees. It was a place where he felt excited.
+                    <!--About us Section heading-->
+                    <h1 class="font-weight-bold text-center h1 my-5">Why is it so great?</h1>
+                    <!--About us Section description-->
+                    <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Reginald had always loved quaint Luxembourg with its tense, terrible trees. It was a place where he felt excited.
 
-                        He was an intelligent, articulate, wine drinker with beautiful fingers and curvaceous toes. His friends saw him as a purring, panicky patient. Once, he had even saved a raspy toddler that was stuck in a drain. That's the sort of man he was.
+                            He was an intelligent, articulate, wine drinker with beautiful fingers and curvaceous toes. His friends saw him as a purring, panicky patient. Once, he had even saved a raspy toddler that was stuck in a drain. That's the sort of man he was.
 
-                        Reginald, walked over to the window and reflected on his pleasant surroundings. The rain hammered like loving pigeons.
+                            Reginald, walked over to the window and reflected on his pleasant surroundings. The rain hammered like loving pigeons.
 
-                        Then he saw something in the distance, or rather someone. It was the figure of Dennis. Dennis was a friendly do gooder with red fingers and solid toes.
+                            Then he saw something in the distance, or rather someone. It was the figure of Dennis. Dennis was a friendly do gooder with red fingers and solid toes.
 
-                        Reginald, gulped. He was not prepared for Dennis,.
+                            Reginald, gulped. He was not prepared for Dennis,.
 
-                        As Reginald, stepped outside and Dennis, came closer, he could see the stormy smile on his face.
+                            As Reginald, stepped outside and Dennis, came closer, he could see the stormy smile on his face.
 
-                        "Look Reginald" growled Dennis with a loving glare that reminded Reginald, of friendly flamingos. "It's not that I don't love you, but I want business. You owe me 1186 euros."
+                            "Look Reginald" growled Dennis with a loving glare that reminded Reginald, of friendly flamingos. "It's not that I don't love you, but I want business. You owe me 1186 euros."
 
-                        Reginald, looked back, even more convincing and still fingering the round rock. "Dennis let's make a website," he replied.
+                            Reginald, looked back, even more convincing and still fingering the round rock. "Dennis let's make a website," he replied.
 
-                        They looked at each other with interesting feelings, like two beautiful, brave badgers talking at a very admirable snow storm, which had drum and bass music playing in the background and two cowardly uncles laughing to the beat.
+                            They looked at each other with interesting feelings, like two beautiful, brave badgers talking at a very admirable snow storm, which had drum and bass music playing in the background and two cowardly uncles laughing to the beat.
 
-                        Reginald regarded Dennis's red fingers and solid toes. "I don't have the funds ..." he lied.
+                            Reginald regarded Dennis's red fingers and solid toes. "I don't have the funds ..." he lied.
 
-                        Dennis glared. "Do you want me to shove that round rock where the sun don't shine?"
+                            Dennis glared. "Do you want me to shove that round rock where the sun don't shine?"
 
-                        Reginald promptly remembered his intelligent and articulate values. "Actually, I do have the funds," he admitted. He reached into his pockets. "Here's what I owe you."
+                            Reginald promptly remembered his intelligent and articulate values. "Actually, I do have the funds," he admitted. He reached into his pockets. "Here's what I owe you."
 
-                        Dennis, looked delighted, his wallet blushing like a rotten, relieved ruler.
+                            Dennis, looked delighted, his wallet blushing like a rotten, relieved ruler.
 
-                        Then Dennis, came inside for a nice glass of wine.</p>
+                            Then Dennis, came inside for a nice glass of wine.</p>
 
         <hr class="mb-5">
 
@@ -343,6 +288,7 @@
                 </li>
 
                 <li>
+                    <!-- Google Maps with orange border -->
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14464.011438319163!2d-71.00875476328515!3d25.000018791136952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89451ab5034cb7ab%3A0xb600ecf3df7aca4d!2sBermuda%20Triangle!5e0!3m2!1sen!2slu!4v1575729231122!5m2!1sen!2slu" width="400" height="300" frameborder="0" style="border:2px solid orange; border-radius: 2.5px;" allowfullscreen=""></iframe>
                 </li>
                 </ul>
@@ -360,23 +306,10 @@
     <!--Main Layout-->
 
     <!--/.Footer-->
-
     @include('templates.footer')
 
-    <!--/.Footer-->
-
     <!--  SCRIPTS  -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="../../MDB/js/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../../MDB/js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../../MDB/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../../MDB/js/mdb.min.js"></script>
-    <script>
-    new WOW().init();
-    </script>
+    @include('templates.scripts')
 </body>
 
 </html>
