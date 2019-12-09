@@ -6,21 +6,37 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#aboutUs">About us</a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Children</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Homework</a>
+                </li>
             </ul>
-            <form class="form-inline">
-                <div class="md-form my-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+
+            <div class="dropdown">
+                <button class="btn btn-outline-orange dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Child
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                    <a class="dropdown-item" href="#">Devil Spawn</a>
+                    <a class="dropdown-item" href="#">Satan</a>
+                    <a class="dropdown-item" href="#">Hell Spawn</a>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </nav>
