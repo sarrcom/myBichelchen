@@ -1,42 +1,26 @@
-<!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-
     <div class="container">
-
         <a class="navbar-brand" href="#"><strong>myBichelchen</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
-          aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-
             <ul class="navbar-nav mr-auto">
-                <!-- Homepage -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
-                <!-- Profile -->
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profile</a>
                 </li>
-                <!-- About us -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#aboutUs">About</a>
+                    <a class="nav-link" href="#aboutUs">About us</a>
                 </li>
-                <!-- Contact us -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-
             </ul>
-
-            <!-- <form class="form-inline">
+            <form class="form-inline">
                 <div class="md-form my-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 </div>
-            </form> -->
-
+            </form>
         </div>
     </div>
 </nav>

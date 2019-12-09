@@ -8,5 +8,5 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="../../MDB/js/mdb.min.js"></script>
 <script>
-new WOW().init();
+    new WOW().init();
 </script>
