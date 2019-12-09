@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    public function students()
+    protected $table='jerd_users';
+    /*public function students()
     {
         return $this->belongsToMany('App\Students');
     }
@@ -24,5 +25,5 @@ class User extends Model
     public function guardians()
     {
         return $this->hasMany('App\Notification');
-    }
+    }*/
 }

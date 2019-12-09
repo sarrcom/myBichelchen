@@ -1,3 +1,6 @@
+@php
+    session_start();
+@endphp
 <!DOCTYPE html>
 <html lang="en" class="full-height">
 
@@ -36,21 +39,26 @@
         <!--Body-->
         <div class="modal-body mx-4">
             <!--Body-->
-            <div class="md-form mb-5">
-            <input type="email" id="Form-email1" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="Form-email1">Your email</label>
-            </div>
-
-            <div class="md-form pb-3">
-            <input type="password" id="Form-pass1" class="form-control validate">
-            <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
-            <p class="font-small orange-text d-flex justify-content-end">Forgot <a href="#" class="orange-text ml-1">
+            
+            <form  method="POST" id="loginForm">
+                @csrf
+                @method('POST')
+                <div class="md-form mb-5">
+                <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
+                <label data-error="wrong" data-success="right" for="Form-email1">Your Username</label>
+                </div>
+                
+                <div class="md-form pb-3">
+                <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
+                <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
+                <p class="font-small orange-text d-flex justify-content-end">Forgot <a href="#" class="orange-text ml-1">
                 Password?</a></p>
-            </div>
-
-            <div class="text-center mb-3">
-            <button type="button" class="btn peach-gradient btn-block btn-rounded z-depth-1a">Sign in</button>
-            </div>
+                </div>
+                
+                <div class="text-center mb-3">
+                <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
+                </div>
+            </form>
 
         </div>
         </div>
@@ -376,6 +384,9 @@
     <script type="text/javascript" src="../../MDB/js/mdb.min.js"></script>
     <script>
     new WOW().init();
+    </script>
+    <script>
+         
     </script>
 </body>
 
