@@ -11,10 +11,9 @@ class ResponsibleOfStudentsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('jerd_responsible_of_studnets')->insert([
-            'name' => 'Sanem',
-            'city' => 'Sanem',
-            'address' => '298 rue de tralalala'
+        DB::table('jerd_responsible_of_students')->insert([
+            'student_id' => 1,
+            'user_id' => 1,
         ]);
     }
 }
