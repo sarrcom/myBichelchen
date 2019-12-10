@@ -59,13 +59,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			<?php foreach($users as $jerd_user):?>
+			<?php foreach($users as $user):?>
 				<tr>
-					<td><?php echo $jerd_user['role'];?></td>
-					<td><?php echo $jerd_user['first_name'];?></td>
-					<td><?php echo $jerd_user['last_name'];?></td>
-					<td><?php echo DateTime::createFromFormat('Y-m-d', $jerd_user['date_of_birth'])->diff(new DateTime('now'))->y;?> ans</td>
-                    <td><?php echo $jerd_user['username'];?></td>
+					<td><?php echo $user['role'];?></td>
+					<td><?php echo $user['first_name'];?></td>
+					<td><?php echo $user['last_name'];?></td>
+					<td><?php echo DateTime::createFromFormat('Y-m-d', $user['date_of_birth'])->diff(new DateTime('now'))->y;?> ans</td>
+                    <td><?php echo $user['username'];?></td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
