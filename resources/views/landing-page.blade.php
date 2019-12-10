@@ -21,7 +21,7 @@
         <!--Body-->
         <div class="modal-body mx-4">
             <!--Body-->
-            
+
             <form  method="POST" id="loginForm">
                 @csrf
                 @method('POST')
@@ -29,14 +29,14 @@
                 <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
                 <label data-error="wrong" data-success="right" for="Form-email1">Your Username</label>
                 </div>
-                
+
                 <div class="md-form pb-3">
                 <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
                 <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
                 <p class="font-small orange-text d-flex justify-content-end">Forgot <a href="#" class="orange-text ml-1">
                 Password?</a></p>
                 </div>
-                
+
                 <div class="text-center mb-3">
                 <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
                 </div>
@@ -58,7 +58,7 @@
                 He was an intelligent, articulate, wine drinker with beautiful fingers and curvaceous toes. His friends saw him as a purring, panicky patient. Once, he had even saved a raspy toddler that was stuck in a drain. That's the sort of man he was.
                 Reginald, walked over to the window and reflected on his pleasant surroundings. The rain hammered like loving pigeons.
                 Then he saw something in the distance, or rather someone. It was the figure of Dennis. Dennis was a friendly do gooder with red fingers and solid toes.
-                Reginald, gulped. He was not prepared for Dennis,.
+                Reginald, gulped. He is not prepared for Dennis,.
                 As Reginald, stepped outside and Dennis, came closer, he could see the stormy smile on his face.
                 "Look Reginald" growled Dennis with a loving glare that reminded Reginald, of friendly flamingos. "It's not that I don't love you, but I want business. You owe me 1186 euros."
                 Reginald, looked back, even more convincing and still fingering the round rock. "Dennis let's make a website," he replied.
