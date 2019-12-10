@@ -88,3 +88,8 @@ footer.page-footer {
 
 .form-elegant .modal-body, .form-elegant .modal-footer {
     font-weight: 400; }
+
+#errorMessage{
+    text-align: center;
+    color: red;
+}
