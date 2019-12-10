@@ -93,3 +93,7 @@ footer.page-footer {
     text-align: center;
     color: red;
 }
+
+#logo {
+    width: 100%;
+}

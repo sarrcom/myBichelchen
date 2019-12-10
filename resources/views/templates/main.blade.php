@@ -18,6 +18,7 @@
 <body>
     <header>
         @include('templates.navbar')
+        @yield('home-header')
     </header>
     <main>
         @yield('content')
@@ -25,7 +26,9 @@
     <footer>
         @include('templates.footer')
     </footer>
-    @include('templates.scripts')
-    @yield('ajax')
+        @include('templates.scripts')
+        @yield('extra-scripts')
+        {{-- Google Analytics --}}
+        @include('templates.google_anal')
 </body>
 </html>
