@@ -26,5 +26,6 @@
         @include('templates.footer')
     </footer>
     @include('templates.scripts')
+    @yield('ajax')
 </body>
 </html>

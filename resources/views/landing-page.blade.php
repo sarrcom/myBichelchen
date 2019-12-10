@@ -1,7 +1,4 @@
-@php
-    session_start();
-    $error=$_SESSION['error'];
-@endphp
+
 @extends('templates.main')
 
 @section('title', 'myBichelchen')
@@ -21,9 +18,6 @@
         </div>
         <!--Body-->
     <div id="errorMessage">
-        @if(!empty($error))
-        {{$error}}
-        @endif
     </div>
         <div class="modal-body mx-4">
             <!--Body-->
@@ -237,4 +231,33 @@
     <!--Section: Contact v.2-->
 
   </div>
+
+  
+@endsection
+@section('ajax')
+<script>
+    $(function(){
+        $('button[type="button submit"]').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/',
+                type: 'post',
+                data: $('#loginForm').serialize(),
+                success: function(result){
+                    console.log(result);
+                    if (result === 'Login') {
+                        window.location.replace('/user');
+                    }else{
+                        $('#errorMessage').html(result);
+
+                    }
+                    
+                },
+                error: function(err){
+                    console.log('Oh boi')
+                }
+            });
+        });
+    });
+</script>
 @endsection
