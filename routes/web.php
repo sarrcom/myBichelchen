@@ -13,6 +13,11 @@
 
 use App\Http\Controllers\UsersController;
 
+Route::get('locale/{locale}', function ($locale){
+    Session::put('locale', $locale);
+    return redirect()->back();
+});
+
 Route::get('/', function () {
     return view('landing-page');
 });
@@ -32,9 +37,9 @@ Route::get('/admin/klass/edit/{id}', 'KlassesController@edit');
 Route::put('/admin/klass/edit/{id}', 'KlassesController@update');
 Route::delete('/admin/klass/{id}', 'KlassesController@destroy');
 
-Route::get('/{username}', 'UsersController@overview');
-Route::get('/{username}/homework', 'UsersController@homework');
-Route::get('/{username}/messages', 'UsersController@messages');
+Route::get('/user', 'UsersController@overview');
+Route::get('/user/homework', 'UsersController@homework');
+Route::get('/user/messages', 'UsersController@messages');
 
 Route::post('/', 'UsersController@login');
 
