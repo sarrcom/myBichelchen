@@ -36,5 +36,5 @@ Route::get('/{username}', 'UsersController@overview');
 Route::get('/{username}/homework', 'UsersController@homework');
 Route::get('/{username}/messages', 'UsersController@messages');
 
-Route::post('/', 'UsersController@login');
+Route::post('/login', 'UsersController@login');
 
