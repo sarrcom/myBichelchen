@@ -1,5 +1,6 @@
 @php
     session_start();
+    $error=$_SESSION['error'];
 @endphp
 @extends('templates.main')
 
@@ -19,6 +20,11 @@
             </button>
         </div>
         <!--Body-->
+    <div id="errorMessage">
+        @if(!empty($error))
+        {{$error}}
+        @endif
+    </div>
         <div class="modal-body mx-4">
             <!--Body-->
             
@@ -26,19 +32,19 @@
                 @csrf
                 @method('POST')
                 <div class="md-form mb-5">
-                <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="Form-email1">Your Username</label>
+                    <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="Form-email1">Your Username</label>
                 </div>
-                
+
                 <div class="md-form pb-3">
-                <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
-                <p class="font-small orange-text d-flex justify-content-end">Forgot <a href="#" class="orange-text ml-1">
-                Password?</a></p>
+                    <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
+                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">Forgot 
+                    Password?</a></p>
                 </div>
-                
+            
                 <div class="text-center mb-3">
-                <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
+                    <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
                 </div>
             </form>
 
@@ -220,6 +226,7 @@
                         <p>contact@myBichelchen.com</p>
                     </li>
                     <li>
+                        <!-- Goole Maps -->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14464.011438319163!2d-71.00875476328515!3d25.000018791136952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89451ab5034cb7ab%3A0xb600ecf3df7aca4d!2sBermuda%20Triangle!5e0!3m2!1sen!2slu!4v1575729231122!5m2!1sen!2slu" width="400" height="300" frameborder="0" style="border:2px solid orange; border-radius: 2.5px;" allowfullscreen=""></iframe>
                     </li>
                 </ul>
