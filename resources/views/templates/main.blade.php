@@ -26,5 +26,9 @@
         @include('templates.footer')
     </footer>
         @include('templates.scripts')
+        
+        {{-- Google Analytics --}}
+        @include('templates.google_anal')
+
 </body>
 </html>
