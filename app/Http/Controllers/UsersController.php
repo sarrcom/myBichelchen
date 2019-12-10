@@ -38,7 +38,11 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+
+        $user->first_name = $request->first_name;
+
+        $user->save();
     }
 
     /**
@@ -60,7 +64,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return view('edit-user');
+        return view('admin.edit-user');
     }
 
     /**
