@@ -6,10 +6,10 @@
         $error = $_SESSION['error'];
     }
 @endphp
+
 @extends('templates.main')
-
+@include('templates.header')
 @section('title', 'myBichelchen')
-
 @section('content')
 <!-- Modal -->
 <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -25,13 +25,10 @@
         </div>
         <!--Body-->
     <div id="errorMessage">
-        @if(!empty($error))
-        {{$error}}
-        @endif
     </div>
         <div class="modal-body mx-4">
             <!--Body-->
-
+            
             <form  method="POST" id="loginForm">
                 @csrf
                 @method('POST')
@@ -43,10 +40,10 @@
                 <div class="md-form pb-3">
                     <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
                     <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
-                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">Forgot
+                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">Forgot 
                     Password?</a></p>
                 </div>
-
+            
                 <div class="text-center mb-3">
                     <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
                 </div>
@@ -61,23 +58,22 @@
 <div class="container">
     <!--Section: Features v.4-->
     <section id="aboutUs" class="section wow fadeIn" data-wow-delay="0.3s">
-        <!--Section heading-->
-        <h1 class="font-weight-bold text-center h1 my-5">Why is it so great?</h1>
-        <!--Section description-->
-        <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Reginald had always loved quaint Luxembourg with its tense, terrible trees. It was a place where he felt excited.
-                He was an intelligent, articulate, wine drinker with beautiful fingers and curvaceous toes. His friends saw him as a purring, panicky patient. Once, he had even saved a raspy toddler that was stuck in a drain. That's the sort of man he was.
-                Reginald, walked over to the window and reflected on his pleasant surroundings. The rain hammered like loving pigeons.
-                Then he saw something in the distance, or rather someone. It was the figure of Dennis. Dennis was a friendly do gooder with red fingers and solid toes.
-                Reginald, gulped. He was not prepared for Dennis,.
-                As Reginald, stepped outside and Dennis, came closer, he could see the stormy smile on his face.
-                "Look Reginald" growled Dennis with a loving glare that reminded Reginald, of friendly flamingos. "It's not that I don't love you, but I want business. You owe me 1186 euros."
-                Reginald, looked back, even more convincing and still fingering the round rock. "Dennis let's make a website," he replied.
-                They looked at each other with interesting feelings, like two beautiful, brave badgers talking at a very admirable snow storm, which had drum and bass music playing in the background and two cowardly uncles laughing to the beat.
-                Reginald regarded Dennis's red fingers and solid toes. "I don't have the funds ..." he lied.
-                Dennis glared. "Do you want me to shove that round rock where the sun don't shine?"
-                Reginald promptly remembered his intelligent and articulate values. "Actually, I do have the funds," he admitted. He reached into his pockets. "Here's what I owe you."
-                Dennis, looked delighted, his wallet blushing like a rotten, relieved ruler.
-                Then Dennis, came inside for a nice glass of wine.</p>
+            <!--Section heading-->
+            <h1 class="font-weight-bold text-center h1 my-5">What is myBichelchen?</h1>
+            <!--Section description-->
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong> is a digital version of the <em>Bichelchen</em> - the agenda the teachers use to note the students’ homework in primary school and to communicate with parents.</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong> allows an administrator to create teachers, parents, and day care attendants (known as Maison Relais).</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Parents, teachers, and day care attendants can see their children's homework, notes, planned activities, and manage absences.</p>
+
+            {{-- making it multilingual --}}
+            <li><a href="{{ url('locale/en') }}" >EN</a></li>
+            <li><a href="{{ url('locale/fr') }}" >FR</a></li>
+
+            <h1>{{ __('messages.welcome') }}</h1>
+
+
         <hr class="mb-5">
     </section>
     <!--Section: Testimonials v.3-->
@@ -96,9 +92,9 @@
                         <img src="../../MDB/img/jorge.jpg" class="rounded-circle z-depth-1 img-fluid">
                     </div>
                     <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Orgie Man Speedy Gonzales</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">Web Designer</h6>
-                    <p><i class="fas fa-quote-left"></i> Eu gosto porque eu fiz isso.</p>
+                    <h4 class="font-weight-bold mt-4 mb-3">Jorge Gonzales</h4>
+                    <h6 class="mb-3 font-weight-bold grey-text">Teacher</h6>
+                    <p><i class="fas fa-quote-left"></i> myBichelchen saves me an hour per day.</p>
                     <!--Review-->
                     <div class="orange-text">
                         <i class="fas fa-star"> </i>
@@ -118,8 +114,8 @@
                         <img src="../../MDB/img/dennis.jpg" class="rounded-circle z-depth-1 img-fluid">
                     </div>
                     <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Dennis McFortressBurger</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">Web Developer</h6>
+                    <h4 class="font-weight-bold mt-4 mb-3">Dennis Burgers</h4>
+                    <h6 class="mb-3 font-weight-bold grey-text">Maison Relais</h6>
                     <p><i class="fas fa-quote-left"></i> Viru laanger Zäit gegrënnt, hunn ech mech iergendwéi an dëst verstréckt.</p>
                     <!--Review-->
                     <div class="orange-text">
@@ -140,8 +136,8 @@
                         <img src="../../MDB/img/reginald.jpg" class="rounded-circle z-depth-1 img-fluid">
                     </div>
                     <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Reginald van Wahahaha</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">Professional Dad</h6>
+                    <h4 class="font-weight-bold mt-4 mb-3">Reginald Wagner</h4>
+                    <h6 class="mb-3 font-weight-bold grey-text">Parent</h6>
                     <p><i class="fas fa-quote-left"></i>
                     Cela a complètement transformé ma vie autour de 360 ​​degrés.</p>
                     <!--Review-->
@@ -224,10 +220,10 @@
                         <p>Esch-sur-Alzette, Luxembourg</p>
                     </li>
                     <li><i class="fas fa-phone fa-2x orange-text"></i>
-                        <p>+ 34 234 567 89</p>
+                        <p>+352 691 22 36 00</p>
                     </li>
                     <li><i class="fas fa-envelope fa-2x orange-text"></i>
-                        <p>contact@myBichelchen.com</p>
+                        <p>hello@mybichelchen.lu</p>
                     </li>
                     <li>
                         <!-- Goole Maps -->
@@ -241,4 +237,33 @@
     <!--Section: Contact v.2-->
 
   </div>
+
+  
+@endsection
+@section('ajax')
+<script>
+    $(function(){
+        $('button[type="button submit"]').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/',
+                type: 'post',
+                data: $('#loginForm').serialize(),
+                success: function(result){
+                    console.log(result);
+                    if (result === 'Login') {
+                        window.location.replace('/user');
+                    }else{
+                        $('#errorMessage').html(result);
+
+                    }
+                    
+                },
+                error: function(err){
+                    console.log('Oh boi')
+                }
+            });
+        });
+    });
+</script>
 @endsection

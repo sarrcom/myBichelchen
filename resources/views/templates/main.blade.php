@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        @include('templates.header')
+        @include('templates.navbar')
     </header>
     <main>
         @yield('content')
@@ -26,5 +26,6 @@
         @include('templates.footer')
     </footer>
     @include('templates.scripts')
+    @yield('ajax')
 </body>
 </html>
