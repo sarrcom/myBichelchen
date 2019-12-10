@@ -48,8 +48,6 @@
                             <a class="dropdown-item" href="#">Physics</a>
                         </div>
                     </div>
-
-
             </div>
         </div>
     </div>
