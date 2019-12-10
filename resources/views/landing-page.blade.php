@@ -1,5 +1,6 @@
 @php
     session_start();
+    $error=$_SESSION['error'];
 @endphp
 @extends('templates.main')
 
@@ -19,6 +20,11 @@
             </button>
         </div>
         <!--Body-->
+    <div id="errorMessage">
+        @if(!empty($error))
+        {{$error}}
+        @endif
+    </div>
         <div class="modal-body mx-4">
             <!--Body-->
             
