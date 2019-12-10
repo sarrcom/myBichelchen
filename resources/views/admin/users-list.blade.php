@@ -6,6 +6,89 @@
 @section('title', 'myBichelchen')
 
 @section('content')
+<?php
+//connect to database
+require_once 'connect.php';
+//order the users first by initializing the order variable
+$order = '';
+
+if(isset($_GET['order']) && isset($_GET['column'])){
+    //order list alphabetically by lastname
+	if($_GET['column'] == 'lastname'){
+		$order = ' ORDER BY lastname';
+    }
+    //order list alphabetically by firstname
+	elseif($_GET['column'] = 'first_name'){
+		$order = ' ORDER BY first_name';
+    }
+    //order list numerically by birthdate
+	elseif($_GET['column'] == 'date_of_birth'){
+		$order = ' ORDER BY date_of_birth';
+    }
+    //ascending list order
+	if($_GET['order'] == 'asc'){
+		$order.= ' ASC';
+    }
+    //descending list order
+	elseif($_GET['order'] == 'desc'){
+		$order.= ' DESC';
+	}
+}
+
+//select all the users
+$queryUsers = $db->prepare('SELECT * FROM jerd_users'. $order);
+if($queryUsers->execute()){
+	$users = $queryUsers->fetchAll();
+}
+
+//audits for adding a new user, if the fields ARE NOT empty check for these particular criterias
+if(!empty($_POST)){
+
+    //declare and initialize an empty array called $errors
+    $errors=[];
+
+    //this is to prevent injections
+	foreach($_POST as $key => $value){
+		$_POST[$key] = strip_tags(trim($value));
+    }
+
+    //first name must be more than 3 characters
+	if(strlen($_POST['first_name']) < 3){
+		$errors[] = 'The first name should have more than 3 characters';
+    }
+
+    //last name must be more than 3 characters
+	if(strlen($_POST['last_name']) < 3){
+		$errors[] = 'The last name should have more than 3 characters';
+    }
+	
+    //birthdate should not be empty
+	if(empty($_POST['date_of_birth'])){
+		$errors[] = 'The date of birth is incomplete';
+    }
+
+    //if the array has errors return/display the errors
+	if(count($errors) > 0){
+        return $errors;
+	}else{
+	//if there are no errors (is equal to 0) add(INSERT) a new user into the database
+    $insertUser = $db->prepare('INSERT INTO jerd_users (role, first_name, last_name, date_of_birth) VALUES(:role, :first_name, :last_name, :date_of_birth)');
+
+	$insertUser->bindValue(':role', $_POST['role']);
+	$insertUser->bindValue(':first_name', $_POST['first_name']);
+	$insertUser->bindValue(':last_name', $_POST['last_name']);
+	$insertUser->bindValue(':date_of_birth', date('Y-m-d', strtotime($_POST['date_of_birth'])));
+
+	    if($insertUser->execute()){
+		$createUser = true;
+	    } else {
+            //if it didn't ADD/INSERT into the database add the error to the errors array
+		    $errors[] = 'SQL Error';
+        }
+    }
+}
+?>
+
 <div class="container">
 
     <h1>Users List</h1>
@@ -139,3 +222,5 @@
 </body>
 </html>
 @endsection
+
+
