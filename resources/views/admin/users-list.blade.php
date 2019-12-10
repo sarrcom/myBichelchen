@@ -4,3 +4,7 @@
     <p><strong>Role: </strong>{{ $user->role }}</p>
     <hr>
 @endforeach
+@foreach ($students as $student)
+    <p><strong>Name: </strong>{{ $student->first_name }} {{ $student->last_name }}</p>
+    <hr>
+@endforeach
