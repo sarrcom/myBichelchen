@@ -7,12 +7,12 @@
         <!--First column-->
         <div class="col-md-12">
             <ul class="list-unstyled d-flex justify-content-center mb-0 py-4 list-inline">
-                <li class="list-inline-item"><a class="p-2 m-2 fa-lg fb-ic"><i class="fab fa-facebook-f white-text fa-lg"></i></a></li>
-                <li class="list-inline-item"><a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-twitter white-text fa-lg"> </i></a></li>
-                <li class="list-inline-item"><a class="p-2 m-2 fa-lg gplus-ic"><i class="fab fa-google-plus-g white-text fa-lg"></i></a></li>
-                <li class="list-inline-item"><a class="p-2 m-2 fa-lg li-ic"><i class="fab fa-linkedin-in white-text fa-lg"></i></a></li>
-                <li class="list-inline-item"><a class="p-2 m-2 fa-lg ins-ic"><i class="fab fa-instagram white-text fa-lg"></i></a></li>
-                <li class="list-inline-item"><a class="p-2 m-2 fa-lg pin-ic"><i class="fab fa-pinterest white-text fa-lg"></i></a></li>
+                <li class="list-inline-item"><a class="p-2 m-2 fa-lg fb-ic"><i class="fab fa-facebook-f fa-lg"></i></a></li>
+                <li class="list-inline-item"><a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-twitter fa-lg"> </i></a></li>
+                <li class="list-inline-item"><a class="p-2 m-2 fa-lg gplus-ic"><i class="fab fa-google-plus-g fa-lg"></i></a></li>
+                <li class="list-inline-item"><a class="p-2 m-2 fa-lg li-ic"><i class="fab fa-linkedin-in fa-lg"></i></a></li>
+                <li class="list-inline-item"><a class="p-2 m-2 fa-lg ins-ic"><i class="fab fa-instagram fa-lg"></i></a></li>
+                <li class="list-inline-item"><a class="p-2 m-2 fa-lg pin-ic"><i class="fab fa-pinterest fa-lg"></i></a></li>
             </ul>
         </div>
         <!--/First column-->
