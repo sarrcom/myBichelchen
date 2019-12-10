@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Student;
 use App\Klass;
-use App\Student;
 
 class UsersController extends Controller
 {
@@ -92,6 +91,7 @@ class UsersController extends Controller
             $student->first_name = trim($request->first_name);
             $student->last_name = trim($request->last_name);
             $student->date_of_birth = $request->date_of_birth;
+            $student->klass_id = $request->klass;
             $student->timestamps = false;
 
             $student->save();
@@ -167,15 +167,15 @@ class UsersController extends Controller
         $loggedUser = session()->get('loggedUser');
         $user = $loggedUser[0];
         if ($user->role === 'Teacher') {
-            
+
             return view('users.teacher.overview',['user'=> $user]);
         }
         if ($user->role === 'Guardian') {
-            
+
             return view('users.guardian.overview',['user'=> $user]);
         }
         if ($user->role === 'MaRe') {
-        
+
             return view('users.mare.overview',['user'=> $user]);
         }
 
@@ -228,7 +228,7 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
-         
+
         $user = User::where('username', $request->loginFormUserName)->get();
 
         if (count($user) != 0) {
