@@ -1,4 +1,4 @@
-@include('templates.navbar')
+@include('templates.signInModal')
 
 <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="mask rgba-white-slight">

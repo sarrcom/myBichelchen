@@ -1,10 +1,19 @@
+<!-- @foreach ($users as $user)
+    <p><strong>Name: </strong>{{ $user->first_name }} {{ $user->last_name }}</p>
+    <p><strong>Username: </strong>{{ $user->username }}</p>
+    <p><strong>Role: </strong>{{ $user->role }}</p>
+    <hr>
+@endforeach -->
 @php
-    session_start();
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    if (isset($_SESSION['error'])) {
+        $error = $_SESSION['error'];
+    }
 @endphp
 @extends('templates.main')
-
 @section('title', 'myBichelchen')
-
 @section('content')
 <div class="container">
 
@@ -29,21 +38,6 @@
     </p>
     <br>
 
-	<!-- for displaying the users added and corresponding errors -->
-	<div class="row">
-    <?php
-        //if criteria has been met, this message will appear 'The new user has been added successfully.'
-        if(isset($createUser)){
-            echo '<div class="col-md-6 col-md-offset-3">';
-            echo '<div class="alert alert-success">The user has been added successfully</div>';
-        }
-        //if there are errors, an error message will appear according to the error
-        if(!empty($errors)){
-            echo '<div class="col-md-6 col-md-offset-3">';
-            echo '<div class="alert alert-danger">'.implode('<br>', $errors).'</div>';
-        }
-    ?>
-    </div>
 
     <!-- Users Table -->
 	<div class="col-md-7">
@@ -59,13 +53,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			<?php foreach($users as $jerd_user):?>
+			<?php foreach($users as $user):?>
 				<tr>
-					<td><?php echo $jerd_user['role'];?></td>
-					<td><?php echo $jerd_user['first_name'];?></td>
-					<td><?php echo $jerd_user['last_name'];?></td>
-					<td><?php echo DateTime::createFromFormat('Y-m-d', $jerd_user['date_of_birth'])->diff(new DateTime('now'))->y;?> ans</td>
-                    <td><?php echo $jerd_user['username'];?></td>
+					<td>{{ $user->role }}</td>
+					<td>{{ $user->first_name }}</td>
+					<td>{{ $user->last_name }}</td>
+					<td><?php echo DateTime::createFromFormat('Y-m-d', $user['date_of_birth'])->diff(new DateTime('now'))->y;?> yrs</td>
+                    <td>{{ $user->username }}</td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
@@ -107,8 +101,8 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="date_of_birth">Date of Birth</label>
 			<div class="col-md-8">
-				<input id="date_of_birth" name="date_of_birth" type="text" placeholder="JJ-MM-AAAA" class="form-control input-md" required>
-				<span class="help-block">DD-MM-YYYY</span>
+				<input id="date_of_birth" name="date_of_birth" type="text" placeholder="dd-mm-yyyy" class="form-control input-md" required>
+				<span class="help-block"></span>
 			</div>
 		</div>
         <!-- input for username -->
@@ -135,7 +129,6 @@
 	<!-- div form end -->
 </div>
 </div>
-
-</body>
-</html>
 @endsection
+
+

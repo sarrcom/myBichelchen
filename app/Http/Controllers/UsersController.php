@@ -16,7 +16,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users-list');
+        $users = User::all();
+        return view('admin.users-list', ['users' => $users]);
     }
 
     /**
@@ -26,7 +27,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('add-user');
+        return view('admin.add-user');
     }
 
     /**
@@ -37,7 +38,51 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'first_name' => 'required|min:2|max:20',
+            'last_name' => 'required|min:2|max:20'
+        ]);
+
+        $user = new User;
+
+        $user->first_name = trim($request->first_name);
+        $user->last_name = trim($request->last_name);
+        $user->date_of_birth = $request->date_of_birth;
+
+        // Generate the username
+        do {
+            $usernameId = rand(1, 9999);
+            $username = $user->first_name . $usernameId;
+            $duplicate = count(User::where('username', $username)->get());
+        } while ($duplicate != 0);
+        $user->username = $username;
+
+        // Randomly generate the password
+        $seed = str_split('abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '0123456789');
+        shuffle($seed);
+        $pwRand = '';
+        foreach (array_rand($seed, 8) as $k) $pwRand .= $seed[$k];
+
+        // Saving the password in users.json
+        $allUsers = [];
+        $jsonFile = file_get_contents('users.json');
+        $jsonDecoded = json_decode($jsonFile);
+        if ($jsonDecoded == '') {
+            $jsonDecoded = [];
+        }
+        foreach ($jsonDecoded as $value) {
+            $allUsers[] = $value;
+        }
+        $allUsers[] = ['username' => $user->username, 'password' => $pwRand];
+        file_put_contents('users.json', json_encode($allUsers, JSON_PRETTY_PRINT));
+        $user->password = password_hash($pwRand, PASSWORD_DEFAULT);
+
+        $user->role = $request->role;
+        $user->timestamps = false;
+
+        $user->save();
+
+        return redirect('/admin/users');
     }
 
     /**
@@ -59,7 +104,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return view('edit-user');
+        return view('admin.edit-user');
     }
 
     /**
@@ -103,7 +148,7 @@ class UsersController extends Controller
         if ($user[0]->role=='MaRe') {
             return view('users.mare.overview');
         }
-        
+
     }
 
     /**
@@ -153,10 +198,13 @@ class UsersController extends Controller
 
         if (count($user) != 0) {
             //with hashed password
-            //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password)
+            $passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
 
-            if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
-                $_SESSION['userlogged']= serialize($user);
+            if($passwordValid){
+                if(!isset($_SESSION)) {
+                    session_start();
+                }
+                $_SESSION['userlogged'] = serialize($user);
                 return redirect('/'.$user[0]->username.'/');
             }else{
                 $error='Wrong Password';
