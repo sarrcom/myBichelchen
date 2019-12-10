@@ -13,7 +13,7 @@ class KlassesController extends Controller
      */
     public function index()
     {
-        //
+        return view('klasses-list');
     }
 
     /**
@@ -23,7 +23,7 @@ class KlassesController extends Controller
      */
     public function create()
     {
-        //
+        return view('add-klass');
     }
 
     /**
@@ -56,7 +56,7 @@ class KlassesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('edit-klass');
     }
 
     /**

@@ -11,12 +11,27 @@
 |
 */
 
+use App\Http\Controllers\UsersController;
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing-page');
 });
 
-Route::resource('user', 'UsersController');
-Route::resource('student', 'StudentsController');
-Route::resource('school', 'SchoolsController');
-Route::resource('klass', 'KlassesController');
-Route::resource('admin', 'AdminsController');
+Route::get('/admin/users', 'UsersController@index');
+Route::get('/admin/user/create', 'UsersController@create');
+Route::post('/admin/user/create', 'UsersController@store');
+Route::get('/admin/user/edit/{id}', 'UsersController@edit');
+Route::put('/admin/user/edit/{id}', 'UsersController@update');
+Route::delete('/admin/user/{id}', 'UsersController@destroy');
+Route::get('/admin/klasses', 'KlassesController@index');
+Route::get('/admin/klass/create', 'KlassesController@create');
+Route::post('/admin/klass/create', 'KlassesController@store');
+Route::get('/admin/klass/edit/{id}', 'KlassesController@edit');
+Route::put('/admin/klass/edit/{id}', 'KlassesController@update');
+Route::delete('/admin/klass/{id}', 'KlassesController@destroy');
+
+Route::get('/{username}', 'UsersController@overview');
+Route::get('/{username}/homework', 'UsersController@homework');
+Route::get('/{username}/messages', 'UsersController@messages');
+
+Route::post('/', 'UsersController@login');
