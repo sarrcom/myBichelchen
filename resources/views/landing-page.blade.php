@@ -1,6 +1,10 @@
 @php
-    session_start();
-    $error=$_SESSION['error'];
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    if (isset($_SESSION['error'])) {
+        $error = $_SESSION['error'];
+    }
 @endphp
 @extends('templates.main')
 
@@ -27,7 +31,7 @@
     </div>
         <div class="modal-body mx-4">
             <!--Body-->
-            
+
             <form  method="POST" id="loginForm">
                 @csrf
                 @method('POST')
@@ -39,10 +43,10 @@
                 <div class="md-form pb-3">
                     <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
                     <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
-                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">Forgot 
+                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">Forgot
                     Password?</a></p>
                 </div>
-            
+
                 <div class="text-center mb-3">
                     <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
                 </div>

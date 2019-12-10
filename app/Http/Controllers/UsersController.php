@@ -201,8 +201,10 @@ class UsersController extends Controller
             $passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
 
             if($passwordValid){
-                session_start();
-                $_SESSION['userlogged']= serialize($user);
+                if(!isset($_SESSION)) {
+                    session_start();
+                }
+                $_SESSION['userlogged'] = serialize($user);
                 return redirect('/'.$user[0]->username.'/');
             }else{
                 $error='Wrong Password';
