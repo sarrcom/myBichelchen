@@ -1,5 +1,29 @@
 @extends('templates.main')
 @section('title', 'myBichelchen')
+
+@section('home-header')
+@include('templates.signInModal')
+
+<div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="mask rgba-white-slight">
+        <div class="container h-100 d-flex justify-content-center align-items-center">
+            <div class="row pt-5 mt-3">
+                <div class="col-md-12 wow fadeIn mb-3">
+                    <div class="text-center">
+                        <h1 class="display-4 font-weight-bold mb-5 wow fadeInUp"><img id="logo" src="../../MDB/img/logo.PNG" alt=""></h1>
+                        <h5 class="mb-5 wow fadeInUp" data-wow-delay="0.2s">No More Paper Forms Makes Everyone Happy!</h5>
+                        <div class="wow fadeInUp" data-wow-delay="0.4s">
+                            <a class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#elegantModalForm"><i class="fas fa-user left"></i>Sign in</a>
+                            <a href="#contact" class="btn btn-outline-orange btn-rounded"><i class="fas fa-book left"></i>Contact us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('content')
 <!-- Modal -->
 <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -21,7 +45,7 @@
     </div>
         <div class="modal-body mx-4">
             <!--Body-->
-            
+
             <form  method="POST" id="loginForm">
                 @csrf
                 @method('POST')
@@ -229,7 +253,9 @@
             <div class="col-md-4 col-xl-3">
                 <ul class="contact-icons text-center list-unstyled">
                     <li><i class="fas fa-map-marker fa-2x orange-text"></i>
-                        <p>Esch-sur-Alzette, Luxembourg</p>
+                        <p>9, avenue des Hauts-Fourneaux<br>
+                            L-4362 Belval<br>
+                            Luxembourg</p>
                     </li>
                     <li><i class="fas fa-phone fa-2x orange-text"></i>
                         <p>+352 691 22 36 00</p>
@@ -239,7 +265,12 @@
                     </li>
                     <li>
                         <!-- Goole Maps -->
+                        {{--
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14464.011438319163!2d-71.00875476328515!3d25.000018791136952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89451ab5034cb7ab%3A0xb600ecf3df7aca4d!2sBermuda%20Triangle!5e0!3m2!1sen!2slu!4v1575729231122!5m2!1sen!2slu" width="400" height="300" frameborder="0" style="border:2px solid orange; border-radius: 2.5px;" allowfullscreen=""></iframe>
+                        --}}
+
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2591.0504564132575!2d5.946978215870579!3d49.50244116309531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47eacad49ef04f7d%3A0x8599a1646a7921b9!2sTECHNOPORT%20SA%20%E2%80%93%20BELVAL%2C%209%20Avenue%20des%20Hauts-Fourneaux%2C%204362%20Esch%20an%20der%20Alzette!5e0!3m2!1sen!2slu!4v1575989181454!5m2!1sen!2slu" width="200" height="300" frameborder="0" style="border:2px solid orange; border-radius: 2.5px;"></iframe>
+
                     </li>
                 </ul>
             </div>
@@ -250,7 +281,7 @@
 
   </div>
 
-  
+
 @endsection
 @section('extra-scripts')
 <script>
@@ -269,7 +300,7 @@
                         $('#errorMessage').html(result);
 
                     }
-                    
+
                 },
                 error: function(err){
                     console.log('Oh boi')
@@ -278,6 +309,4 @@
         });
     });
 </script>
-<!-- Admin User List Script -->
-
 @endsection

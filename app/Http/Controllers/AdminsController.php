@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use Illuminate\Http\Request;
 
 class AdminsController extends Controller
@@ -84,6 +85,19 @@ class AdminsController extends Controller
 
     public function login(Request $request)
     {
-        //
+        $admin = Admin::where('username', $request->loginFormUserName)->get();
+
+        if (count($admin) != 0) {
+            //with hashed password
+            //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
+
+            if($request->loginFormPassword == $admin[0]->password/*$passwordValid/*/){
+                session()->flush();
+                session(['loggedUser' => $admin[0]]);
+                return 'Login';
+            }
+        }
+
+        return 'Wrong Username or Password';
     }
 }
