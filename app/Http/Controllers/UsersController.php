@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Klass;
+use App\Student;
 
 class UsersController extends Controller
 {
@@ -136,17 +137,21 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function overview($username)
+    public function overview()
     {
-        $user = User::where('username', $username)->get();
-        if ($user[0]->role=='Teacher') {
-            return view('users.teacher.overview');
+        $loggedUser = session()->get('loggedUser');
+        $user = $loggedUser[0];
+        if ($user->role === 'Teacher') {
+            
+            return view('users.teacher.overview',['user'=> $user]);
         }
-        if ($user[0]->role=='Guardian') {
-            return view('users.guardian.overview',);
+        if ($user->role === 'Guardian') {
+            
+            return view('users.guardian.overview',['user'=> $user]);
         }
-        if ($user[0]->role=='MaRe') {
-            return view('users.mare.overview');
+        if ($user->role === 'MaRe') {
+        
+            return view('users.mare.overview',['user'=> $user]);
         }
 
     }
@@ -157,17 +162,19 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function homework($username)
+    public function homework()
     {
-        $user = User::where('username', $username)->get();
-        if ($user[0]->role=='Teacher') {
-            return view('users.teacher.homework');
+        $loggedUser = session()->get('loggedUser');
+        $user = $loggedUser[0];
+
+        if ($user->role=='Teacher') {
+            return view('users.teacher.homework',['user'=> $user]);
         }
-        if ($user[0]->role=='Guardian') {
-            return view('users.guardian.homework',);
+        if ($user->role=='Guardian') {
+            return view('users.guardian.homework',['user'=> $user]);
         }
-        if ($user[0]->role=='MaRe') {
-            return view('users.mare.homework');
+        if ($user->role=='MaRe') {
+            return view('users.mare.homework',['user'=> $user]);
         }
     }
 
@@ -177,43 +184,40 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function messages($username)
+    public function messages()
     {
-        $user = User::where('username', $username)->get();
-        if ($user[0]->role=='Teacher') {
+
+        $loggedUser = session()->get('loggedUser');
+        $user = $loggedUser[0];
+
+        if ($user->role=='Teacher') {
             return view('users.teacher.messages');
         }
-        if ($user[0]->role=='Guardian') {
+        if ($user->role=='Guardian') {
             return view('users.guardian.messages',);
         }
-        if ($user[0]->role=='MaRe') {
+        if ($user->role=='MaRe') {
             return view('users.mare.messages');
         }
     }
 
     public function login(Request $request)
     {
-        session_start();
+         
         $user = User::where('username', $request->loginFormUserName)->get();
 
         if (count($user) != 0) {
             //with hashed password
-            $passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
+            //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
 
-            if($passwordValid){
-                if(!isset($_SESSION)) {
-                    session_start();
-                }
-                $_SESSION['userlogged'] = serialize($user);
-                return redirect('/'.$user[0]->username.'/');
-            }else{
-                $error='Wrong Password';
+            if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
+                session()->flush();
+                $user = session('loggedUser');
+                return 'Login';
             }
-        }else{
-            $error='Wrong Username';
         }
-        $_SESSION['error']=$error;
-        return redirect('/');
+
+        return 'Wrong Username or Password';
 
     }
 }
