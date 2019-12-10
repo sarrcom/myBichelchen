@@ -25,7 +25,10 @@
     <footer>
         @include('templates.footer')
     </footer>
-    @include('templates.scripts')
-    @yield('ajax')
+        @include('templates.scripts')
+
+        {{-- Google Analytics --}}
+        @include('templates.google_anal')
+
 </body>
 </html>
