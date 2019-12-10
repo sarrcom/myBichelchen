@@ -8,3 +8,4 @@
     <p><strong>Name: </strong>{{ $student->first_name }} {{ $student->last_name }}</p>
     <hr>
 @endforeach
+
