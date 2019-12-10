@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        @include('templates.header')
+        @include('templates.navbar')
     </header>
     <main>
         @yield('content')
@@ -25,6 +25,6 @@
     <footer>
         @include('templates.footer')
     </footer>
-    @include('templates.scripts')
+        @include('templates.scripts')
 </body>
 </html>
