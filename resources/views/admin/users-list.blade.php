@@ -4,4 +4,3 @@
     <p><strong>Role: </strong>{{ $user->role }}</p>
     <hr>
 @endforeach
-
