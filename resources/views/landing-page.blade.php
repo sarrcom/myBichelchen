@@ -1,7 +1,7 @@
-@php
+{{-- @php
     session_start();
     $error=$_SESSION['error'];
-@endphp
+@endphp --}}
 @extends('templates.main')
 
 @section('title', 'myBichelchen')
@@ -64,6 +64,13 @@
             <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong> allows an administrator to create teachers, parents, and day care attendants (known as Maison Relais).</p>
 
             <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Parents, teachers, and day care attendants can see their children's homework, notes, planned activities, and manage absences.</p>
+
+            {{-- making it multilingual --}}
+            <li><a href="{{ url('locale/en') }}" >EN</a></li>
+            <li><a href="{{ url('locale/fr') }}" >FR</a></li>
+
+            <h1>{{ __('messages.welcome') }}</h1>
+
 
         <hr class="mb-5">
     </section>
