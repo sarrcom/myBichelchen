@@ -1,3 +1,6 @@
+<!--Footer-->
+<footer class="page-footer pt-4 mt-4   text-center text-md-left mt-5">
+
 <div class="container">
     <!--Grid row-->
     <div class="row mb-3">
@@ -22,3 +25,5 @@
     </div>
 </div>
 <!--/.Copyright-->
+</footer>
+<!-- Footer -->

@@ -25,17 +25,29 @@
                     <a class="nav-link" href="#">Homework</a>
                 </li>
             </ul>
-
-            <div class="dropdown">
-                <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Child
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
-                    <a class="dropdown-item" href="#">Devil Spawn</a>
-                    <a class="dropdown-item" href="#">Satan</a>
-                    <a class="dropdown-item" href="#">Hell Spawn</a>
-                </div>
+                    <!-- Drop down menu for Parents -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Child
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                            <a class="dropdown-item" href="#">Sam Winchester</a>
+                            <a class="dropdown-item" href="#">Dean Winchester</a>
+                            <a class="dropdown-item" href="#">Bobby Singer</a>
+                        </div>
+                    <!-- Drop down menu for Teachers -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Class
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                            <a class="dropdown-item" href="#">Maths</a>
+                            <a class="dropdown-item" href="#">Biology</a>
+                            <a class="dropdown-item" href="#">Physics</a>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

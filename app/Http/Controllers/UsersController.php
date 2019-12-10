@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Klass;
 
 class UsersController extends Controller
 {
@@ -15,7 +16,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users-list');
+        return view('admin.users-list');
     }
 
     /**
@@ -90,9 +91,19 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function overview($id)
+    public function overview($username)
     {
-        return view('user-overview');
+        $user = User::where('username', $username)->get();
+        if ($user[0]->role=='Teacher') {
+            return view('users.teacher.overview');
+        }
+        if ($user[0]->role=='Guardian') {
+            return view('users.guardian.overview',);
+        }
+        if ($user[0]->role=='MaRe') {
+            return view('users.mare.overview');
+        }
+        
     }
 
     /**
@@ -101,9 +112,18 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function homework($id)
+    public function homework($username)
     {
-        return view('user-homework');
+        $user = User::where('username', $username)->get();
+        if ($user[0]->role=='Teacher') {
+            return view('users.teacher.homework');
+        }
+        if ($user[0]->role=='Guardian') {
+            return view('users.guardian.homework',);
+        }
+        if ($user[0]->role=='MaRe') {
+            return view('users.mare.homework');
+        }
     }
 
     /**
@@ -112,26 +132,40 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function messages($id)
+    public function messages($username)
     {
-        return view('user-messages');
+        $user = User::where('username', $username)->get();
+        if ($user[0]->role=='Teacher') {
+            return view('users.teacher.messages');
+        }
+        if ($user[0]->role=='Guardian') {
+            return view('users.guardian.messages',);
+        }
+        if ($user[0]->role=='MaRe') {
+            return view('users.mare.messages');
+        }
     }
 
     public function login(Request $request)
     {
+        session_start();
         $user = User::where('username', $request->loginFormUserName)->get();
-        if ($user) {
+
+        if (count($user) != 0) {
             //with hashed password
             //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password)
-            
+
             if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
-                session_start();
                 $_SESSION['userlogged']= serialize($user);
                 return redirect('/'.$user[0]->username.'/');
+            }else{
+                $error='Wrong Password';
             }
+        }else{
+            $error='Wrong Username';
         }
-
+        $_SESSION['error']=$error;
         return redirect('/');
-       
+
     }
 }

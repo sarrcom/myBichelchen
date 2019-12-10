@@ -13,7 +13,7 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.admin-login');
     }
 
     /**
@@ -78,6 +78,11 @@ class AdminsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        //
+    }
+
+    public function login(Request $request)
     {
         //
     }

@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('landing-page');
 });
 
+Route::get('/admin/login', 'AdminsController@index');
+
 Route::get('/admin/users', 'UsersController@index');
 Route::get('/admin/user/create', 'UsersController@create');
 Route::post('/admin/user/create', 'UsersController@store');
@@ -34,4 +36,5 @@ Route::get('/{username}', 'UsersController@overview');
 Route::get('/{username}/homework', 'UsersController@homework');
 Route::get('/{username}/messages', 'UsersController@messages');
 
-Route::post('/', 'UsersController@login');
+Route::post('/login', 'UsersController@login');
+
