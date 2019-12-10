@@ -38,11 +38,38 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        /*$validation = $request->validate([
+            'first_name' => 'required|min:2|max:20',
+            'password' => 'required'
+        ]);*/
+
         $user = new User;
 
-        $user->first_name = $request->first_name;
+        $user->first_name = trim($request->first_name);
+        $user->last_name = trim($request->last_name);
+        $user->date_of_birth = $request->date_of_birth;
+
+        // Generate the username
+        do {
+            $usernameId = rand(1, 9999);
+            $username = $user->first_name . $usernameId;
+            $duplicate = count(User::where('username', $username)->get());
+        } while ($duplicate != 0);
+        $user->username = $username;
+
+        // Randomly generate the password
+        $seed = str_split('abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '0123456789');
+        shuffle($seed);
+        $pwRand = '';
+        foreach (array_rand($seed, 8) as $k) $pwRand .= $seed[$k];
+        $user->password = $pwRand;
+
+        $user->role = $request->role;
+        $user->timestamps = false;
 
         $user->save();
+
+        return redirect('/admin/users');
     }
 
     /**
