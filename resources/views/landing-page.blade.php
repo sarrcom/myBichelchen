@@ -1,11 +1,3 @@
-@php
-    if(!isset($_SESSION)) {
-        session_start();
-    }
-    if (isset($_SESSION['error'])) {
-        $error = $_SESSION['error'];
-    }
-@endphp
 
 @extends('templates.main')
 @include('templates.header')
