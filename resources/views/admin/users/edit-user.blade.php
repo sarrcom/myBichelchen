@@ -17,8 +17,3 @@
     </select>
     <input type="submit" value="SAVE">
 </form>
-<form action="/admin/user/{{ $user->id }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <input type="submit" value="DELETE">
-</form>
