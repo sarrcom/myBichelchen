@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('landing-page');
 });
 
-Route::get('/admin/admin-login', 'AdminsController@index');
+Route::get('/admin/login', 'AdminsController@index');
 
 Route::get('/admin/users', 'UsersController@index');
 Route::get('/admin/user/create', 'UsersController@create');
