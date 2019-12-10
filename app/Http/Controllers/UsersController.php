@@ -139,8 +139,8 @@ class UsersController extends Controller
      */
     public function overview()
     {
-        $loggedUser = session()->get('loggedUser');
-        $user = $loggedUser[0];
+        $user = session()->get('loggedUser');
+
         if ($user->role === 'Teacher') {
             
             return view('users.teacher.overview',['user'=> $user]);
@@ -164,8 +164,8 @@ class UsersController extends Controller
      */
     public function homework()
     {
-        $loggedUser = session()->get('loggedUser');
-        $user = $loggedUser[0];
+        $user = session()->get('loggedUser');
+
 
         if ($user->role=='Teacher') {
             return view('users.teacher.homework',['user'=> $user]);
@@ -187,17 +187,16 @@ class UsersController extends Controller
     public function messages()
     {
 
-        $loggedUser = session()->get('loggedUser');
-        $user = $loggedUser[0];
+        $user = session()->get('loggedUser');
 
         if ($user->role=='Teacher') {
-            return view('users.teacher.messages');
+            return view('users.teacher.messages',['user'=> $user]);
         }
         if ($user->role=='Guardian') {
-            return view('users.guardian.messages',);
+            return view('users.guardian.messages',['user'=> $user]);
         }
         if ($user->role=='MaRe') {
-            return view('users.mare.messages');
+            return view('users.mare.messages',['user'=> $user]);
         }
     }
 
@@ -212,7 +211,7 @@ class UsersController extends Controller
 
             if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
                 session()->flush();
-                $user = session('loggedUser');
+                session(['loggedUser' => $user[0]]);
                 return 'Login';
             }
         }
