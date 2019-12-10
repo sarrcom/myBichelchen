@@ -94,16 +94,18 @@ class UsersController extends Controller
      */
     public function overview()
     {
-        $userlogged = session()->get('loggedUser');
-        $user = $userlogged[0];
+        $loggedUser = session()->get('loggedUser');
+        $user = $loggedUser[0];
         if ($user->role === 'Teacher') {
+            
             return view('users.teacher.overview',['user'=> $user]);
         }
-        if ($user[0]->role === 'Guardian') {
-
+        if ($user->role === 'Guardian') {
+            
             return view('users.guardian.overview',['user'=> $user]);
         }
-        if ($user[0]->role === 'MaRe') {
+        if ($user->role === 'MaRe') {
+        
             return view('users.mare.overview',['user'=> $user]);
         }
         
@@ -117,16 +119,16 @@ class UsersController extends Controller
      */
     public function homework()
     {
-        $userlogged = session()->get('loggedUser');
-        $user = $userlogged[0];
+        $loggedUser = session()->get('loggedUser');
+        $user = $loggedUser[0];
 
-        if ($user[0]->role=='Teacher') {
+        if ($user->role=='Teacher') {
             return view('users.teacher.homework',['user'=> $user]);
         }
-        if ($user[0]->role=='Guardian') {
+        if ($user->role=='Guardian') {
             return view('users.guardian.homework',['user'=> $user]);
         }
-        if ($user[0]->role=='MaRe') {
+        if ($user->role=='MaRe') {
             return view('users.mare.homework',['user'=> $user]);
         }
     }
@@ -140,16 +142,16 @@ class UsersController extends Controller
     public function messages()
     {
 
-        $userlogged = session()->get('loggedUser');
-        $user = $userlogged[0];
+        $loggedUser = session()->get('loggedUser');
+        $user = $loggedUser[0];
 
-        if ($user[0]->role=='Teacher') {
+        if ($user->role=='Teacher') {
             return view('users.teacher.messages');
         }
-        if ($user[0]->role=='Guardian') {
+        if ($user->role=='Guardian') {
             return view('users.guardian.messages',);
         }
-        if ($user[0]->role=='MaRe') {
+        if ($user->role=='MaRe') {
             return view('users.mare.messages');
         }
     }
@@ -164,6 +166,7 @@ class UsersController extends Controller
             //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password)
 
             if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
+                session()->flush();
                 $user = session('loggedUser');
                 return 'Login';
             }
