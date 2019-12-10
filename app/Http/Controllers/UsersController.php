@@ -15,7 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users-list');
+        return view('admin.users-list');
     }
 
     /**
@@ -123,7 +123,7 @@ class UsersController extends Controller
         if ($user) {
             //with hashed password
             //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password)
-            
+
             if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
                 session_start();
                 $_SESSION['userlogged']= serialize($user);
@@ -132,6 +132,6 @@ class UsersController extends Controller
         }
 
         return redirect('/');
-       
+
     }
 }
