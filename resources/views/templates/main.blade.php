@@ -18,6 +18,7 @@
 <body>
     <header>
         @include('templates.navbar')
+        @yield('home-header')
     </header>
     <main>
         @yield('content')
@@ -26,6 +27,6 @@
         @include('templates.footer')
     </footer>
     @include('templates.scripts')
-    @yield('ajax')
+    @yield('extra-scripts')
 </body>
 </html>

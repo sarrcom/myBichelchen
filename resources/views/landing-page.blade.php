@@ -8,8 +8,31 @@
 @endphp
 
 @extends('templates.main')
-@include('templates.header')
 @section('title', 'myBichelchen')
+
+@section('home-header')
+@include('templates.signInModal')
+
+<div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="mask rgba-white-slight">
+        <div class="container h-100 d-flex justify-content-center align-items-center">
+            <div class="row pt-5 mt-3">
+                <div class="col-md-12 wow fadeIn mb-3">
+                    <div class="text-center">
+                        <h1 class="display-4 font-weight-bold mb-5 wow fadeInUp"><img id="logo" src="../../MDB/img/logo.PNG" alt=""></h1>
+                        <h5 class="mb-5 wow fadeInUp" data-wow-delay="0.2s">No More Paper Forms Makes Everyone Happy!</h5>
+                        <div class="wow fadeInUp" data-wow-delay="0.4s">
+                            <a class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#elegantModalForm"><i class="fas fa-user left"></i>Sign in</a>
+                            <a href="#contact" class="btn btn-outline-orange btn-rounded"><i class="fas fa-book left"></i>Contact us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('content')
 <!-- Modal -->
 <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -28,7 +51,7 @@
     </div>
         <div class="modal-body mx-4">
             <!--Body-->
-            
+
             <form  method="POST" id="loginForm">
                 @csrf
                 @method('POST')
@@ -40,10 +63,10 @@
                 <div class="md-form pb-3">
                     <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
                     <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
-                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">Forgot 
+                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">Forgot
                     Password?</a></p>
                 </div>
-            
+
                 <div class="text-center mb-3">
                     <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">Sign in</button>
                 </div>
@@ -238,9 +261,9 @@
 
   </div>
 
-  
+
 @endsection
-@section('ajax')
+@section('extra-scripts')
 <script>
     $(function(){
         $('button[type="button submit"]').click(function(e){
@@ -257,7 +280,7 @@
                         $('#errorMessage').html(result);
 
                     }
-                    
+
                 },
                 error: function(err){
                     console.log('Oh boi')
