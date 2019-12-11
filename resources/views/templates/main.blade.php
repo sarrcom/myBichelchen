@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../MDB/css/mdb.min.css">
     <!-- Style -->
     <link rel="stylesheet" href="../../MDB/css/style.css">
+    <!-- Table style admin -->
     <link rel="stylesheet" href="../../MDB/css/addons/datatables.min.css">
     <link rel="stylesheet" href="../../MDB/css/addons/table-editor.min.css">
 </head>
