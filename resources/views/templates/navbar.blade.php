@@ -1,3 +1,4 @@
+<!-- position: sticky; top: 0; -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
     <div class="container">
         <a class="navbar-brand" href="#"><strong>myBichelchen</strong></a>
