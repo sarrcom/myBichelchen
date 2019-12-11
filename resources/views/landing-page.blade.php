@@ -1,4 +1,3 @@
-
 @extends('templates.main')
 @section('title', 'myBichelchen')
 
@@ -72,7 +71,7 @@
 <!-- Modal -->
 <div class="container">
     <!--Section: Features v.4-->
-    <section id="aboutUs" class="section wow fadeIn" data-wow-delay="0.3s">
+    <section id="about" class="section wow fadeIn" data-wow-delay="0.3s">
             <!--Section heading-->
             <h1 class="font-weight-bold text-center h1 my-5">What is myBichelchen?</h1>
             <!--Section description-->
@@ -83,10 +82,13 @@
             <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Parents, teachers, and day care attendants can see their children's homework, notes, planned activities, and manage absences.</p>
 
             {{-- making it multilingual --}}
-            <li><a href="{{ url('locale/en') }}" >EN</a></li>
-            <li><a href="{{ url('locale/fr') }}" >FR</a></li>
-
-            <h1>{{ __('messages.welcome') }}</h1>
+            <div class="text-center">
+                <h1>{{ __('messages.welcome') }}</h1>
+                <div class="wow fadeInUp" data-wow-delay="0.4s">
+                    <a class="btn btn-blue btn-rounded" href="{{ url('locale/en') }}"></i>EN</a>
+                    <a href="{{ url('locale/fr') }}" class="btn btn-blue btn-rounded"></i>FR</a>
+                </div>
+            </div>
 
 
         <hr class="mb-5">

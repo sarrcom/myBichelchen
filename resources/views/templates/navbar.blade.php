@@ -1,4 +1,3 @@
-<!-- position: sticky; top: 0; -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
     <div class="container">
         <a class="navbar-brand" href="#"><strong>myBichelchen</strong></a>
@@ -7,11 +6,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
             <ul class="navbar-nav mr-auto">
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="#contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#aboutUs">About us</a>
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#">Overview</a>

@@ -34,7 +34,7 @@ html, body, header, .jarallax {
     background-color: #373a6d !important;
 }
 .navbar:not(.top-nav-collapse) {
-    background: transparent !important;
+    background: #373a6d !important;
 }
 @media (max-width: 768px) {
     .navbar:not(.top-nav-collapse) {
@@ -49,7 +49,7 @@ html, body, header, .jarallax {
 footer.page-footer {
     background-color: #373a6d;
 }
-/* Modal CSS */
+/* Landing-page Modal CSS */
 .form-elegant .font-small {
     font-size: 0.8rem;
 }
@@ -77,3 +77,8 @@ footer.page-footer {
 #logo {
     width: 100%;
 }
+/* Amin-users Modal CSS */
+/* #formedit label {
+
+} */
+

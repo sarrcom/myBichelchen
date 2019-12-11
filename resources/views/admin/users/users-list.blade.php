@@ -2,6 +2,7 @@
 @section('title', 'Admin')
 
 @section('content')
+
 <div class="container">
         <div class="wrapper-editor">
             <div class="block my-4">
@@ -61,26 +62,26 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body mx-3 modal-inputs">
+                            <div id="formedit" class="modal-body mx-3 modal-inputs">
                                 <div class="md-form mb-5">
                                     <input type="text" id="formNameEdit15" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="formNameEdit15">Name</label>
+                                    <label data-error="wrong" data-success="right" for="formNameEdit15" class="active">Role</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formPositionEdit15" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="formPositionEdit15">Position</label>
+                                    <label data-error="wrong" data-success="right" for="formPositionEdit15" class="active">First Name</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formOfficeEdit15" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="formOfficeEdit15">Office</label>
+                                    <label data-error="wrong" data-success="right" for="formOfficeEdit15" class="active">Last Name</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formAgeEdit15" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="formAgeEdit15">Age</label>
+                                    <label data-error="wrong" data-success="right" for="formAgeEdit15" class="active">Date of Birth</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formDateEdit" class="form-control datepicker">
-                                    <label data-error="wrong" data-success="right" for="formDateEdit15">Date</label>
+                                    <label data-error="wrong" data-success="right" for="formDateEdit15" class="active">Age</label>
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center editInsideWrapper">
