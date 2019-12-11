@@ -14,6 +14,6 @@ class Student extends Model
 
     public function klass()
     {
-        return $this->belongsTo('App\Klass','jerd_klasses');
+        return $this->belongsTo('App\Klass');
     }
 }

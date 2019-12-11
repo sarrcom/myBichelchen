@@ -12,18 +12,18 @@ class User extends Model
         return $this->belongsToMany('App\Student', 'jerd_responsible_of_students');
     }
 
-    public function klasss()
+    public function klasses()
     {
         return $this->belongsToMany('App\Klass', 'jerd_teachers_klasses');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Comment','jerd_comments');
+        return $this->hasMany('App\Comment');
     }
 
     public function notifications()
     {
-        return $this->hasMany('App\Notification','jerd_notifications');
+        return $this->hasMany('App\Notification');
     }
 }

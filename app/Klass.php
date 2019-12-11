@@ -14,11 +14,11 @@ class Klass extends Model
 
     public function students()
     {
-        return $this->hasMany('App\Student','jerd_students');
+        return $this->hasMany('App\Student');
     }
 
     public function school()
     {
-        return $this->belongsTo('App\School','jerd_schools');
+        return $this->belongsTo('App\School');
     }
 }

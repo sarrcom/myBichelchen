@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class School extends Model
 {
     protected $table='jerd_schools';
-    public function klasss(){
+    public function klasses(){
         return $this->hasMany('App\Klass','jerd_klasses');
     }
     public function guardians()
