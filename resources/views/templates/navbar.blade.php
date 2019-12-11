@@ -60,7 +60,7 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
                                     @foreach ($user->students as $student)
-                                        <a class="dropdown-item" href="#">{{ $student->first_name}} {{ $student->last_name}}</a>
+                                        <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
                                     @endforeach
                                     </div>
                                 </div>
@@ -89,7 +89,6 @@
                                                 </div>
                                             </div>
                                                 @endif
-                </ul>
         </div>
     </div>
 </nav>
