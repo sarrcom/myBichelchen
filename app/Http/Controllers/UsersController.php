@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 use App\User;
 use App\Student;
-use App\Klass;
 
 class UsersController extends Controller
 {
@@ -18,8 +18,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        $students = Student::all();
-        return view('admin.users-list', ['users' => $users, 'students' => $students]);
+        return view('admin.users.users-list', ['users' => $users]);
     }
 
     /**
@@ -29,8 +28,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $klasses = Klass::all();
-        return view('admin.add-user', ['klasses' => $klasses]);
+        $students = Student::all();
+        return view('admin.users.add-user', ['students' => $students]);
     }
 
     /**
@@ -46,59 +45,46 @@ class UsersController extends Controller
             'last_name' => 'required|min:2|max:20'
         ]);
 
-        if ($request->role === "Teacher" || $request->role === "Guardian" || $request->role === "MaRe") {
-            $user = new User;
+        $user = new User;
 
-            $user->first_name = trim($request->first_name);
-            $user->last_name = trim($request->last_name);
-            $user->date_of_birth = $request->date_of_birth;
+        $user->first_name = trim($request->first_name);
+        $user->last_name = trim($request->last_name);
+        $user->date_of_birth = $request->date_of_birth;
 
-            // Generate the username
-            do {
-                $usernameId = rand(1, 9999);
-                $username = $user->first_name . $usernameId;
-                $duplicate = count(User::where('username', $username)->get());
-            } while ($duplicate != 0);
-            $user->username = $username;
+        // Generate the username
+        do {
+            $usernameId = rand(1, 9999);
+            $username = $user->first_name . $usernameId;
+            $duplicate = count(User::where('username', $username)->get());
+        } while ($duplicate != 0);
+        $user->username = $username;
 
-            // Randomly generate the password
-            $seed = str_split('abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '0123456789');
-            shuffle($seed);
-            $pwRand = '';
-            foreach (array_rand($seed, 8) as $k) $pwRand .= $seed[$k];
+        // Randomly generate the password
+        $seed = str_split('abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '0123456789');
+        shuffle($seed);
+        $pwRand = '';
+        foreach (array_rand($seed, 8) as $k) $pwRand .= $seed[$k];
 
-            // Saving the password in users.json
-            $allUsers = [];
-            $jsonFile = file_get_contents('users.json');
-            $jsonDecoded = json_decode($jsonFile);
-            if ($jsonDecoded == '') {
-                $jsonDecoded = [];
-            }
-            foreach ($jsonDecoded as $value) {
-                $allUsers[] = $value;
-            }
-            $allUsers[] = ['username' => $user->username, 'password' => $pwRand];
-            file_put_contents('users.json', json_encode($allUsers, JSON_PRETTY_PRINT));
-            $user->password = password_hash($pwRand, PASSWORD_DEFAULT);
-
-            $user->role = $request->role;
-            $user->timestamps = false;
-
-            $user->save();
-        } elseif ($request->role === "Student") {
-            $student = new Student;
-
-            $student->first_name = trim($request->first_name);
-            $student->last_name = trim($request->last_name);
-            $student->date_of_birth = $request->date_of_birth;
-            $student->klass_id = $request->klass;
-            $student->timestamps = false;
-
-            $student->save();
+        // Saving the password in users.json
+        $allUsers = [];
+        $jsonFile = file_get_contents('users.json');
+        $jsonDecoded = json_decode($jsonFile);
+        if ($jsonDecoded == '') {
+            $jsonDecoded = [];
         }
+        foreach ($jsonDecoded as $value) {
+            $allUsers[] = $value;
+        }
+        $allUsers[] = ['username' => $user->username, 'password' => $pwRand];
+        file_put_contents('users.json', json_encode($allUsers, JSON_PRETTY_PRINT));
+        $user->password = password_hash($pwRand, PASSWORD_DEFAULT);
 
+        $user->role = $request->role;
+        $user->timestamps = false;
 
-        return redirect('/admin/users');
+        $user->save();
+
+        return redirect('/admin/users/users-list');
     }
 
     /**
@@ -121,7 +107,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.edit-user', ['user' => $user]);
+        return view('admin.users.edit-user', ['user' => $user]);
     }
 
     /**

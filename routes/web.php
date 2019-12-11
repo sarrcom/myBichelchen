@@ -24,18 +24,11 @@ Route::get('/', function () {
 
 Route::get('/admin/login', 'AdminsController@index');
 
-Route::get('/admin/users', 'UsersController@index');
-Route::get('/admin/user/create', 'UsersController@create');
-Route::post('/admin/user/create', 'UsersController@store');
-Route::get('/admin/user/edit/{id}', 'UsersController@edit');
-Route::put('/admin/user/edit/{id}', 'UsersController@update');
-Route::delete('/admin/user/{id}', 'UsersController@destroy');
-Route::get('/admin/klasses', 'KlassesController@index');
-Route::get('/admin/klass/create', 'KlassesController@create');
-Route::post('/admin/klass/create', 'KlassesController@store');
-Route::get('/admin/klass/edit/{id}', 'KlassesController@edit');
-Route::put('/admin/klass/edit/{id}', 'KlassesController@update');
-Route::delete('/admin/klass/{id}', 'KlassesController@destroy');
+Route::resources([
+    'users' => 'UsersController',
+    'students' => 'UsersController',
+    'klasses' => 'UsersController'
+]);
 
 Route::get('/user', 'UsersController@overview');
 Route::get('/user/homework', 'UsersController@homework');

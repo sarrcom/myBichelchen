@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use App\Klass;
 
 class KlassesController extends Controller
 {
@@ -13,7 +16,8 @@ class KlassesController extends Controller
      */
     public function index()
     {
-        return view('klasses-list');
+        $klasses = Klass::all();
+        return view('admin.klasses.klasses-list', ['klasses' => $klasses]);
     }
 
     /**
@@ -23,7 +27,7 @@ class KlassesController extends Controller
      */
     public function create()
     {
-        return view('add-klass');
+        return view('admin.klasses.add-klass');
     }
 
     /**
@@ -56,7 +60,8 @@ class KlassesController extends Controller
      */
     public function edit($id)
     {
-        return view('edit-klass');
+        $klass = Klass::find($id);
+        return view('admin.klasses.edit-klass', ['klass' => $klass]);
     }
 
     /**
