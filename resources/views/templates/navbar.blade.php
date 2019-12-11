@@ -8,25 +8,22 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
+                    <a class="nav-link" href="#">{{ __('navbar.profile') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="#aboutUs">{{ __('navbar.about_us') }}</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Overview</a>
+                    <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Children</a>
+                    <a class="nav-link" href="#">{{ __('navbar.children') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Messages</a>
+                    <a class="nav-link" href="#">{{ __('navbar.messages') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Homework</a>
+                    <a class="nav-link" href="#">{{ __('navbar.homework') }}</a>
                 </li>
             </ul>
                     <!-- Drop down menu for Parents -->
