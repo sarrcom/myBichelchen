@@ -87,7 +87,24 @@ class UsersController extends Controller
 
         $user->save();
 
-        return redirect('/admin/users/users-list');
+        $i = 0;
+        $klassName = 'klass' . $i;
+        $childName = 'child' . $i;
+        if ($user->role == 'Teacher') {
+            while (isset($request->$klassName)) {
+                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $i++;
+                $klassName = 'klass' . $i;
+            }
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            while (isset($request->$childName)) {
+                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $i++;
+                $childName = 'child' . $i;
+            }
+        }
+
+        return redirect('/users');
     }
 
     /**

@@ -19,32 +19,39 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body mx-3 modal-add-inputs" id="foo">
-                                <div class="md-form mb-5">
-                                    <select id="role" name="role" class="form-control input-md" required>
-                                        <option value="Guardian">Guardian</option>
-                                        <option value="Teacher">Teacher</option>
-                                        <option value="MaRe">Maison Relais</option>
-                                    </select>
+                            <form method="POST" id="addForm">
+                                @csrf
+                                @method('POST')
+                                <div class="modal-body mx-3 modal-add-inputs">
+                                    <div class="md-form mb-5">
+                                        <select id="role" name="role" class="form-control input-md" required>
+                                            <option value="Guardian">Guardian</option>
+                                            <option value="Teacher">Teacher</option>
+                                            <option value="MaRe">Maison Relais</option>
+                                        </select>
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="inputPosition15">First Name</label>
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <input type="text" id="inputOfficeInput15" name="last_name" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="inputOfficeInput15">Last Name</label>
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <input type="date" id="inputDate" name="date_of_birth" class="form-control" placeholder="Select Date">
+                                        <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
+                                    </div>
+                                    <div id="itemsContainer"></div>
+                                    <p id="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
+                                    <p id="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
                                 </div>
-                                <div class="md-form mb-5">
-                                    <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputPosition15">First Name</label>
+                                <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
+                                    <button name="addSubmit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Add form
+                                        <i class="far fa-paper-plane ml-1"></i>
+                                    </button>
                                 </div>
-                                <div class="md-form mb-5">
-                                    <input type="text" id="inputOfficeInput15" name="last_name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputOfficeInput15">Last Name</label>
-                                </div>
-                                <div class="md-form mb-5">
-                                    <input type="date" id="inputDate" name="date_of_birth" class="form-control" placeholder="Select Date">
-                                    <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
-                                <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Add form
-                                    <i class="far fa-paper-plane ml-1"></i>
-                                </button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -133,13 +140,13 @@
                 </thead>
                 <tbody>
                     @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user->role }}</td>
-                        <td>{{ $user->first_name }}</td>
-                        <td>{{ $user->last_name }}</td>
-                        <td>{{ $user->username }}</td>
-                        <td><?php echo DateTime::createFromFormat('Y-m-d', $user->date_of_birth)->diff(new DateTime('now'))->y;?> yrs</td>
-                    </tr>
+                        <tr>
+                            <td>{{ $user->role }}</td>
+                            <td>{{ $user->first_name }}</td>
+                            <td>{{ $user->last_name }}</td>
+                            <td>{{ $user->username }}</td>
+                            <td><?php echo DateTime::createFromFormat('Y-m-d', $user->date_of_birth)->diff(new DateTime('now'))->y;?> yrs</td>
+                        </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
@@ -173,41 +180,107 @@
 </script>
 <script>
     $('#dtBasicExample, #dtBasicExample-1, #dt-more-columns, #dt-less-columns').mdbEditor({
-      modalEditor: true
+        modalEditor: true
     });
     $('.dataTables_length').addClass('bs-select');
 </script>
 <script>
-    const addForm = $('#foo');
-    let i = 0;
-    
-    function addItem(done, task) {
-        let select = $('<select></select>');
-        let option = $('<option></option>');
-        let checkbox = $('<input type="checkbox">');
-        let span = $('<span></span>');
+    const itemsContainer = $("#itemsContainer");
+    let previousRole = $("#role").val();
+    let co = 0;
+    let ko = 0;
 
-        select.attr("name", "child" + i);
-        select.attr("class", "form-control input-md");
-        span.text(task);
-
-        if (done) {
-            checkbox.prop("checked", true);
-            myDoneList.append(li.append(checkbox).append(label).append(span));
-        } else {
-            myTodoList.append(li.append(checkbox).append(label).append(span));
-        }
-
-        checkbox.click(checkClicking);
-        i++;
+    if (previousRole == "Teacher") {
+        showAddKlass();
+    } else {
+        showAddChild();
     }
 
     $('#modalAdd15 option').click(function(e) {
-        if (this.value == "Teacher") {
-            console.log(this.value);
+        let newRole = this.value;
+
+        if (newRole == "Teacher") {
+            showAddKlass();
+            if (previousRole != "Teacher") {
+                itemsContainer.html("");
+                co = 0;
+                previousRole = newRole;
+            }
         } else {
-            console.log('ssdsdsds');
+            showAddChild();
+            if (previousRole != "Guardian" && previousRole != "MaRe") {
+                itemsContainer.html("");
+                ko = 0;
+                previousRole = newRole;
+            }
         }
-    })
+    });
+
+    function showAddChild() {
+        $("#addKlass").css("display", "none");
+        $("#addChild").css("display", "initial");
+    }
+
+    function showAddKlass() {
+        $("#addChild").css("display", "none");
+        $("#addKlass").css("display", "initial");
+    }
+
+    $('#addChild').click(addChildItem);
+    $('#addKlass').click(addKlassItem);
+
+    function addChildItem() {
+        let select = $('<select></select>');
+
+        select.attr("name", "child" + co);
+        select.attr("class", "form-control input-md");
+
+        @foreach($students as $student)
+            select.append(new Option("{{ $student->first_name }} {{ $student->last_name }}", "{{ $student->id }}"));
+        @endforeach
+
+        itemsContainer.append(select);
+
+        co++;
+    }
+
+    function addKlassItem() {
+        let select = $('<select></select>');
+
+        select.attr("name", "klass" + ko);
+        select.attr("class", "form-control input-md");
+
+        @foreach($klasses as $klass)
+        select.append(new Option("{{ $klass->name }}", "{{ $klass->id }}"));
+        @endforeach
+
+        itemsContainer.append(select);
+
+        ko++;
+    }
+
+</script>
+<script>
+    $(function(){
+        $('button[name="addSubmit"]').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/users',
+                type: 'post',
+                data: $('#addForm').serialize(),
+                success: function(result){
+                    console.log(result);
+                    /*if (result === 'Login') {
+                        window.location.replace('/user');
+                    }else{
+                        $('#errorMessage').html(result);
+                    }*/
+                },
+                error: function(err){
+                    console.log('Oh boi')
+                }
+            });
+        });
+    });
 </script>
 @endsection
