@@ -9,7 +9,7 @@ class Klass extends Model
     protected $table='jerd_klasses';
     public function teachers()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User','jerd_users');
     }
 
     public function students()

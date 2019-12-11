@@ -32,7 +32,11 @@ Route::resources([
 
 Route::get('/user', 'UsersController@overview');
 Route::get('/user/homework', 'UsersController@homework');
+Route::post('/user/homework', 'UsersController@submitHomework');
+Route::get('/test', 'UsersController@test');
+
 Route::get('/user/messages', 'UsersController@messages');
+
 
 Route::post('/', 'UsersController@login');
 
