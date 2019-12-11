@@ -14,16 +14,16 @@ class User extends Model
 
     public function klasss()
     {
-        return $this->belongsToMany('App\Klass');
+        return $this->belongsToMany('App\Klass', 'jerd_teachers_klasses');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comment','jerd_comments');
     }
 
-    public function guardians()
+    public function notifications()
     {
-        return $this->hasMany('App\Notification');
+        return $this->hasMany('App\Notification','jerd_notifications');
     }
 }

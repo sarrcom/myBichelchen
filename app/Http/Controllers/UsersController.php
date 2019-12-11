@@ -193,6 +193,7 @@ class UsersController extends Controller
 
 
         if ($user->role=='Teacher') {
+            
             return view('users.teacher.homework',['user'=> $user]);
         }
         if ($user->role=='Guardian') {
@@ -215,6 +216,7 @@ class UsersController extends Controller
         $user = session()->get('loggedUser');
 
         if ($user->role=='Teacher') {
+
             return view('users.teacher.messages',['user'=> $user]);
         }
         if ($user->role=='Guardian') {
