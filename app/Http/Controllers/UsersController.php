@@ -253,12 +253,12 @@ class UsersController extends Controller
         $user = session()->get('loggedUser');
         
         //we check for subject and description, because the other fields are filled in by default
-        /*$validation = $request->validate([
+        $validation = $request->validate([
             'subject' => 'required|min:4|max:255',
-            'description' => 'required|min:2|max:255'
-            //'dueDate' => 'after:today'
+            'description' => 'required|min:2|max:255',
+            'dueDate' => 'after:today'
             
-        ]);*/
+        ]);
         
         $homework = new Notification();
         
@@ -277,7 +277,7 @@ class UsersController extends Controller
 
         $homework->save();
 
-        return $homework;
+        return 'submitted';
     }
 
     /*

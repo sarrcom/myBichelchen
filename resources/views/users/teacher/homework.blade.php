@@ -64,12 +64,9 @@ teacher-homework
                 data: $('#homeworkForm').serialize(),
                 success: function(result){
                     console.log(result);
-                    if (result === 'submitted') {
-                        $('#status').html(result);
-                    }else{
-                        $('#status').html(result);
-
-                    }
+                    if (result === 'submitted')
+                        $('#status').html('Homework submitted');
+                    
 
                 },
                 error: function(err){
