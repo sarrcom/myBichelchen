@@ -12,10 +12,10 @@
                 <div class="col-md-12 wow fadeIn mb-3">
                     <div class="text-center">
                         <h1 class="display-4 font-weight-bold mb-5 wow fadeInUp"><img id="logo" src="../../MDB/img/logo.PNG" alt=""></h1>
-                        <h5 class="mb-5 wow fadeInUp" data-wow-delay="0.2s">{{ __('messages.slug') }}</h5>
+                        <h5 class="mb-5 wow fadeInUp" data-wow-delay="0.2s">{{ __('landing-page.slug') }}</h5>
                         <div class="wow fadeInUp" data-wow-delay="0.4s">
-                            <a class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#elegantModalForm"><i class="fas fa-user left"></i>{{ __('messages.sign_in') }}</a>
-                            <a href="#contact" class="btn btn-outline-orange btn-rounded"><i class="fas fa-book left"></i>{{ __('messages.contact_us') }}</a>
+                            <a class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#elegantModalForm"><i class="fas fa-user left"></i>{{ __('landing-page.sign_in') }}</a>
+                            <a href="#contact" class="btn btn-outline-orange btn-rounded"><i class="fas fa-book left"></i>{{ __('landing-page.contact_us') }}</a>
                         </div>
                     </div>
                 </div>
@@ -49,17 +49,17 @@
                 @method('POST')
                 <div class="md-form mb-5">
                     <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="Form-email1">{{ __('messages.your_username') }}</label>
+                    <label data-error="wrong" data-success="right" for="Form-email1">{{ __('landing-page.your_username') }}</label>
                 </div>
 
                 <div class="md-form pb-3">
                     <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="Form-pass1">{{ __('messages.your_password') }}</label>
-                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">{{ __('messages.forgot_password') }}</a></p>
+                    <label data-error="wrong" data-success="right" for="Form-pass1">{{ __('landing-page.your_password') }}</label>
+                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">{{ __('landing-page.forgot_password') }}</a></p>
                 </div>
 
                 <div class="text-center mb-3">
-                    <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">{{ __('messages.sign_in') }}</button>
+                    <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">{{ __('landing-page.sign_in') }}</button>
                 </div>
             </form>
 
@@ -73,13 +73,13 @@
     <!--Section: Features v.4-->
     <section id="aboutUs" class="section wow fadeIn" data-wow-delay="0.3s">
             <!--Section heading-->
-            <h1 class="font-weight-bold text-center h1 my-5">{{ __('messages.welcome_h_1') }}</h1>
+            <h1 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.welcome_h_1') }}</h1>
             <!--Section description-->
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('messages.welcome_p_1') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('landing-page.welcome_p_1') }}</p>
 
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('messages.welcome_p_2') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('landing-page.welcome_p_2') }}</p>
 
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">{{ __('messages.welcome_p_3') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">{{ __('landing-page.welcome_p_3') }}</p>
 
             {{-- making it multilingual --}}
             <li><a href="{{ url('locale/en') }}" >EN</a></li>
@@ -90,9 +90,9 @@
     <!--Section: Testimonials v.3-->
     <section class="section team-section text-center pb-3 wow fadeIn" data-wow-delay="0.3s">
         <!--Section heading-->
-        <h1 class="font-weight-bold text-center h1 my-5">{{ __('messages.testimonials') }}</h1>
+        <h1 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.testimonials') }}</h1>
         <!--Section description-->
-        <p class="text-center grey-text mb-5 mx-auto w-responsive">{{ __('messages.tell_us_why') }}</p>
+        <p class="text-center grey-text mb-5 mx-auto w-responsive">{{ __('landing-page.tell_us_why') }}</p>
         <!--Grid row-->
         <div class="row text-center">
             <!--Grid column-->
@@ -104,8 +104,8 @@
                     </div>
                     <!--Content-->
                     <h4 class="font-weight-bold mt-4 mb-3">Jorge Gonzales</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('messages.profession_1') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('messages.testimonial_1') }}</p>
+                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_1') }}</h6>
+                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_1') }}</p>
                     <!--Review-->
                     <div class="orange-text">
                         <i class="fas fa-star"> </i>
@@ -126,8 +126,8 @@
                     </div>
                     <!--Content-->
                     <h4 class="font-weight-bold mt-4 mb-3">Dennis Burgers</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('messages.profession_2') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('messages.testimonial_2') }}</p>
+                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_2') }}</h6>
+                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_2') }}</p>
                     <!--Review-->
                     <div class="orange-text">
                         <i class="fas fa-star"> </i>
@@ -148,8 +148,8 @@
                     </div>
                     <!--Content-->
                     <h4 class="font-weight-bold mt-4 mb-3">Reginald Wagner</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('messages.profession_3') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('messages.testimonial_3') }}</p>
+                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_3') }}</h6>
+                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_3') }}</p>
                     <!--Review-->
                     <div class="orange-text">
                         <i class="fas fa-star"> </i>
@@ -169,9 +169,9 @@
     <!--Section: Contact v.2-->
     <section id="contact" class="section pb-5 wow fadeIn" data-wow-delay="0.3s">
         <!--Section heading-->
-        <h2 class="font-weight-bold text-center h1 my-5">{{ __('messages.contact_us') }}</h2>
+        <h2 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.contact_us') }}</h2>
         <!--Section description-->
-        <p class="text-center grey-text mb-5 mx-auto w-responsive">{{ __('messages.contact_msg') }}</p>
+        <p class="text-center grey-text mb-5 mx-auto w-responsive">{{ __('landing-page.contact_msg') }}</p>
         <div class="row">
             <!--Grid column-->
             <div class="col-md-8 col-xl-9">
@@ -182,7 +182,7 @@
                         <div class="col-md-6">
                             <div class="md-form">
                                 <input type="text" id="contact-name" class="form-control">
-                                <label for="contact-name" class="">{{ __('messages.your_name') }}</label>
+                                <label for="contact-name" class="">{{ __('landing-page.your_name') }}</label>
                             </div>
                         </div>
                         <!--Grid column-->
@@ -190,7 +190,7 @@
                         <div class="col-md-6">
                             <div class="md-form">
                                 <input type="text" id="contact-email" class="form-control">
-                                <label for="contact-email" class="">{{ __('messages.your_email') }}</label>
+                                <label for="contact-email" class="">{{ __('landing-page.your_email') }}</label>
                             </div>
                         </div>
                         <!--Grid column-->
@@ -201,7 +201,7 @@
                         <div class="col-md-12">
                             <div class="md-form">
                                 <input type="text" id="contact-Subject" class="form-control">
-                                <label for="contact-Subject" class="">{{ __('messages.your_subject') }}</label>
+                                <label for="contact-Subject" class="">{{ __('landing-page.your_subject') }}</label>
                             </div>
                         </div>
                     </div>
@@ -212,14 +212,14 @@
                         <div class="col-md-12">
                             <div class="md-form">
                                 <textarea type="text" id="contact-message" class="md-textarea form-control" rows="3"></textarea>
-                                <label for="contact-message">{{ __('messages.your_message') }}</label>
+                                <label for="contact-message">{{ __('landing-page.your_message') }}</label>
                             </div>
                         </div>
                     </div>
                     <!--Grid row-->
                 </form>
                 <div class="text-center text-md-left my-4">
-                    <a class="btn btn-orange btn-rounded">{{ __('messages.send') }}</a>
+                    <a class="btn btn-orange btn-rounded">{{ __('landing-page.send') }}</a>
                 </div>
             </div>
             <!--Grid column-->
