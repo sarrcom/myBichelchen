@@ -11,7 +11,10 @@
                     <a class="nav-link" href="#">{{ __('navbar.profile') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#aboutUs">{{ __('navbar.about_us') }}</a>
+                    <a class="nav-link" href="#">{{ __('navbar.contact') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">{{ __('navbar.about') }}</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>

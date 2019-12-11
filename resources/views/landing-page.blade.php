@@ -174,7 +174,7 @@
     <!--Section: Contact v.2-->
     <section id="contact" class="section pb-5 wow fadeIn" data-wow-delay="0.3s">
         <!--Section heading-->
-        <h2 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.contact_us') }}</h2>
+        <h2 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.contact') }}</h2>
         <!--Section description-->
         <p class="text-center grey-text mb-5 mx-auto w-responsive">{{ __('landing-page.contact_msg') }}</p>
         <div class="row">
