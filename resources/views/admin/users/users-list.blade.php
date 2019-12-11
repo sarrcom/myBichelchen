@@ -112,10 +112,10 @@
             <p class="text-center h4">Are you sure to delete selected row?</p>
           </div>
           <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
-            <button type="button" class="btn btn-outline-danger btnYesClass" id="btnYes15" data-dismiss="modal">Yes
+            <button type="button" class="btn btn-outline-danger btn-rounded btnYesClass" id="btnYes15" data-dismiss="modal">Yes
               <i class="far fa-paper-plane ml-1"></i>
             </button>
-            <button type="button" class="btn btn-outline-primary btnNoClass" id="btnNo15" data-dismiss="modal">No
+            <button type="button" class="btn btn-outline-primary btn-rounded btnNoClass" id="btnNo15" data-dismiss="modal">No
               <i class="far fa-paper-plane ml-1"></i>
             </button>
           </div>
@@ -143,7 +143,7 @@
       </tr>
     </thead>
     <tbody>
-		<?php foreach($users as $user):?>
+		@foreach($users as $user)
 			<tr>
 				<td>{{ $user->role }}</td>
 				<td>{{ $user->first_name }}</td>
@@ -151,7 +151,7 @@
 				<td>{{ $user->username }}</td>
 				<td><?php echo DateTime::createFromFormat('Y-m-d', $user['date_of_birth'])->diff(new DateTime('now'))->y;?> yrs</td>
 			</tr>
-			<?php endforeach; ?>
+		@endforeach
 		</tbody>
     <tfoot>
       <tr>
