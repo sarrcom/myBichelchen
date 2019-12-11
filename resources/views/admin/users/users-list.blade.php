@@ -107,10 +107,10 @@
                                 <p class="text-center h4">Are you sure to delete selected row?</p>
                             </div>
                             <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
-                                <button type="button" class="btn btn-outline-danger btnYesClass" id="btnYes15" data-dismiss="modal">Yes
+                                <button type="button" class="btn btn-outline-danger btn-rounded btnYesClass" id="btnYes15" data-dismiss="modal">Yes
                                     <i class="far fa-paper-plane ml-1"></i>
                                 </button>
-                                <button type="button" class="btn btn-outline-primary btnNoClass" id="btnNo15" data-dismiss="modal">No
+                                <button type="button" class="btn btn-outline-primary btn-rounded btnNoClass" id="btnNo15" data-dismiss="modal">No
                                     <i class="far fa-paper-plane ml-1"></i>
                                 </button>
                             </div>
