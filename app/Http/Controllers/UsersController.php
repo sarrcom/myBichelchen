@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\Student;
+use App\Klass;
 
 class UsersController extends Controller
 {
@@ -18,7 +19,9 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.users.users-list', ['users' => $users]);
+        $students = Student::all();
+        $klasses = Klass::all();
+        return view('admin.users.users-list', ['users' => $users, 'students' => $students, 'klasses' => $klasses]);
     }
 
     /**
