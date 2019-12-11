@@ -9,13 +9,13 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../../MDB/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('MDB/css/bootstrap.min.css') }}">
     <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" href="../../MDB/css/mdb.min.css">
+    <link rel="stylesheet" href="{{ asset('MDB/css/mdb.min.css') }}">
     <!-- Style -->
-    <link rel="stylesheet" href="../../MDB/css/style.css">
-    <link rel="stylesheet" href="../../MDB/css/addons/datatables.min.css">
-    <link rel="stylesheet" href="../../MDB/css/addons/table-editor.min.css">
+    <link rel="stylesheet" href="{{ asset('MDB/css/addons/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('MDB/css/addons/table-editor.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
 </head>
 <body>
     <header>
