@@ -22,7 +22,7 @@ return [
     'profession_2' => 'Maison Relais',
     'testimonial_2' => 'Créé il y a longtemps, je me suis empêtré là-dedans. Je ne sais pas comment, mais ça me plaît.',
     'profession_3' => 'Parent',
-    'testimonial_3' => 'Cela a complètement bouleversé ma vie à 360 degrés. Maintenant, je sais enfin où je vais.',
+    'testimonial_3' => 'Cela a complètement bouleversé ma vie à 360 degrés. Maintenant, je sais enfin où je vais - et pourquoi.',
 
     'contact_msg' => 'Envoyez-nous un message, nous aimerions avoir de vos nouvelles !',
     'your_name' => 'Votre nom',
