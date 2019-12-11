@@ -20,10 +20,10 @@
                                 <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">{{ __('navbar.messages') }}</a>
+                                <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">{{ __('navbar.homework') }}</a>
+                                <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
                             </li>
                         </ul>
                         <!-- Drop down menu for Teachers -->
@@ -34,7 +34,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
                                 @foreach ($user->klasses as $klass)
-                                    <a class="dropdown-item" href="#">{{ $klass->name }} {{ $klass->grade }}</a>
+                                    <a class="dropdown-item" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
                                 @endforeach
                             </div>
                         </div>
