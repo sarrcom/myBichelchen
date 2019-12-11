@@ -29,9 +29,9 @@
     <footer>
         @include('templates.footer')
     </footer>
-        @include('templates.scripts')
-        @yield('extra-scripts')
-        {{-- Google Analytics --}}
-        @include('templates.google_anal')
+    @include('templates.scripts')
+    @yield('extra-scripts')
+    {{-- Google Analytics --}}
+    @include('templates.google_anal')
 </body>
 </html>
