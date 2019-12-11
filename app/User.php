@@ -12,7 +12,7 @@ class User extends Model
         return $this->belongsToMany('App\Student', 'jerd_responsible_of_students');
     }
 
-    public function klasss()
+    public function klasses()
     {
         return $this->belongsToMany('App\Klass');
     }
