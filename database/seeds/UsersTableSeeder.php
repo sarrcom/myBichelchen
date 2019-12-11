@@ -11,6 +11,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+
+        // teachers
+
         DB::table('jerd_users')->insert([
             'first_name' => 'Tania',
             'last_name' => 'Hippert',
@@ -19,7 +22,7 @@ class UsersTableSeeder extends Seeder
             'password' => 'test',
             'role' => 'Teacher'
         ]);
-        
+
         DB::table('jerd_users')->insert([
             'first_name' => 'Surya',
             'last_name' => 'Schneider',
@@ -28,7 +31,27 @@ class UsersTableSeeder extends Seeder
             'password' => 'test',
             'role' => 'Teacher'
         ]);
-        
+
+        DB::table('jerd_users')->insert([
+            'first_name' => 'Gonzalo',
+            'last_name' => 'Seifert',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Seifert1',
+            'password' => 'test',
+            'role' => 'Teacher'
+        ]);
+
+        DB::table('jerd_users')->insert([
+            'first_name' => 'Lucius',
+            'last_name' => 'Peasley',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Peasley1',
+            'password' => 'test',
+            'role' => 'Teacher'
+        ]);
+
+        // guardians
+
         DB::table('jerd_users')->insert([
             'first_name' => 'Reginald',
             'last_name' => 'Wagner',
@@ -37,7 +60,7 @@ class UsersTableSeeder extends Seeder
             'password' => 'test',
             'role' => 'Guardian'
         ]);
-        
+
         DB::table('jerd_users')->insert([
             'first_name' => 'Isabelle',
             'last_name' => 'Holmes',
@@ -46,7 +69,7 @@ class UsersTableSeeder extends Seeder
             'password' => 'test',
             'role' => 'Guardian'
         ]);
-        
+
         DB::table('jerd_users')->insert([
             'first_name' => 'Bonnie',
             'last_name' => 'Nilles',
@@ -55,7 +78,7 @@ class UsersTableSeeder extends Seeder
             'password' => 'test',
             'role' => 'Guardian'
         ]);
-        
+
         DB::table('jerd_users')->insert([
             'first_name' => 'Myriam',
             'last_name' => 'Reuter',
@@ -64,7 +87,164 @@ class UsersTableSeeder extends Seeder
             'password' => 'test',
             'role' => 'Guardian'
         ]);
-        
+
+
+        DB::table('jerd_users')->insert([
+            'first_name' => 'Esther',
+            'last_name' => 'Merkel',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Merkel1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+        DB::table('jerd_users')->insert([
+            'first_name' => 'Timmy',
+            'last_name' => 'Warfel',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Warfel1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Nilsa',
+            'last_name' => 'Keagle',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Keagle1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Shasta',
+            'last_name' => 'Vorpahl',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Vorpahl1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Alena',
+            'last_name' => 'Holder',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Holder1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Amberly',
+            'last_name' => 'Crandle',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Crandle1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Nan',
+            'last_name' => 'Ruple',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Ruple1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Mozelle',
+            'last_name' => 'Demott',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Demott1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Mauro',
+            'last_name' => 'Birmingham',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Birmingham1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Eboni',
+            'last_name' => 'Garnica',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Garnica1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Woodrow',
+            'last_name' => 'McGown',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'McGown1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Jannie',
+            'last_name' => 'Whittington',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Whittington1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Elidia',
+            'last_name' => 'Blackstock',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Blackstock1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Britteny',
+            'last_name' => 'Chambers',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Chambers1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Elizabeth',
+            'last_name' => 'McRae',
+            'date_of_birth' => '1980-05-05',
+            'username' => '1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Craig',
+            'last_name' => 'Glaspie',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Glaspie1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+                DB::table('jerd_users')->insert([
+            'first_name' => 'Cyrus',
+            'last_name' => 'Kohl',
+            'date_of_birth' => '1980-05-05',
+            'username' => 'Kohl1',
+            'password' => 'test',
+            'role' => 'Guardian'
+        ]);
+
+
+        // mare
+
         DB::table('jerd_users')->insert([
             'first_name' => 'Yannick',
             'last_name' => 'Wolff',
@@ -73,7 +253,7 @@ class UsersTableSeeder extends Seeder
             'password' => 'test',
             'role' => 'MaRe'
         ]);
-        
+
         DB::table('jerd_users')->insert([
             'first_name' => 'Andrea',
             'last_name' => 'Thill',

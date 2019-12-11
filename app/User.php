@@ -14,7 +14,7 @@ class User extends Model
 
     public function klasses()
     {
-        return $this->belongsToMany('App\Klass');
+        return $this->belongsToMany('App\Klass', 'jerd_teachers_klasses');
     }
 
     public function comments()
@@ -22,7 +22,7 @@ class User extends Model
         return $this->hasMany('App\Comment');
     }
 
-    public function guardians()
+    public function notifications()
     {
         return $this->hasMany('App\Notification');
     }
