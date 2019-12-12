@@ -8,6 +8,7 @@
 </header>
 
 @section('content')
+
     <div class="container">
         <div class="wrapper-editor">
             <div class="block my-4">
@@ -92,39 +93,9 @@
                                         <input type="date" id="formOfficeEdit15" name="date_of_birth" class="form-control validate">
                                         <label data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
                                     </div>
-                                    <div id="editItemsContainer">
-                                        @if($user->role ?? '' == "Teacher")
-                                            @foreach($teachersKlasses as $teacherKlass)
-                                                @if($teacherKlass->user_id === $user->id ?? '')
-                                                    <select name="role" class="form-control input-md" required>
-                                                        @foreach($klasses as $klass)
-                                                            @if($teacherKlass->klass_id === $klass->id)
-                                                                <option value="{{ $klass->id }}" selected>{{ $klass->name }}</option>
-                                                            @else
-                                                                <option value="{{ $klass->id }}">{{ $klass->name }}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            @foreach($responsibleStudents as $responsibleStudent)
-                                                @if($responsibleStudent->user_id ?? '' === $user->id ?? '')
-                                                    <select name="role" class="form-control input-md" required>
-                                                        @foreach($students as $student)
-                                                            @if($responsibleStudent->student_id === $student->id)
-                                                                <option value="{{ $student->id }}" selected>{{ $student->first_name }} {{ $student->last_name }}</option>
-                                                            @else
-                                                                <option value="{{ $student->id }}">{{ $student->first_name }} {{ $student->last_name }}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                    <p id="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
-                                    <p id="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
+                                    <div id="editItemsContainer"></div>
+                                    <p id="editChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
+                                    <p id="editKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center editInsideWrapper">
                                     <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Edit form
@@ -214,6 +185,8 @@
 </script>
 <script>
     const addItemsContainer = $("#addItemsContainer");
+    const editItemsContainer = $("#editItemsContainer")
+    
     let previousRole = $("#addRole").val();
     let co = 0;
     let ko = 0;
@@ -228,14 +201,14 @@
         let newRole = this.value;
 
         if (newRole == "Teacher") {
-            showAddKlass();
+            showAddKlass("add");
             if (previousRole != "Teacher") {
                 addItemsContainer.html("");
                 co = 0;
                 previousRole = newRole;
             }
         } else {
-            showAddChild();
+            showAddChild("add");
             if (previousRole != "Guardian" && previousRole != "MaRe") {
                 addItemsContainer.html("");
                 ko = 0;
@@ -244,20 +217,55 @@
         }
     });
 
-    function showAddChild() {
-        $("#addKlass").css("display", "none");
-        $("#addChild").css("display", "initial");
+    $('#modalEdit15 #addRole option').click(function(e) {
+        let newRole = this.value;
+
+        if (newRole == "Teacher") {
+            showAddKlass("add");
+            if (previousRole != "Teacher") {
+                addItemsContainer.html("");
+                co = 0;
+                previousRole = newRole;
+            }
+        } else {
+            showAddChild("add");
+            if (previousRole != "Guardian" && previousRole != "MaRe") {
+                addItemsContainer.html("");
+                ko = 0;
+                previousRole = newRole;
+            }
+        }
+    });
+
+    function showAddChild(mode) {
+        if (mode == "add") {
+            $("#addKlass").css("display", "none");
+            $("#addChild").css("display", "initial");
+        } else if (mode == "edit") {
+            $("#editKlass").css("display", "none");
+            $("#editChild").css("display", "initial");
+        }
     }
 
-    function showAddKlass() {
-        $("#addChild").css("display", "none");
-        $("#addKlass").css("display", "initial");
+    function showAddKlass(mode) {
+        if (mode == "add") {
+            $("#addChild").css("display", "none");
+            $("#addKlass").css("display", "initial");
+        } else if (mode == "edit") {
+            $("#editChild").css("display", "none");
+            $("#editKlass").css("display", "initial");
+        }
+        
     }
 
-    $('#addChild').click(addChildItem);
-    $('#addKlass').click(addKlassItem);
+    $('#addChild').click(function() {
+        addChildItem(addItemsContainer, false, false);
+    });
+    $('#addKlass').click(function() {
+        addKlassItem(addItemsContainer, false, false);
+    });
 
-    function addChildItem() {
+    function addChildItem(container, user) {
         let select = $('<select></select>');
 
         select.attr("name", "child" + co);
@@ -267,22 +275,32 @@
             select.append(new Option("{{ $student->first_name }} {{ $student->last_name }}", "{{ $student->id }}"));
         @endforeach
 
-        addItemsContainer.append(select);
+        container.append(select);
 
         co++;
     }
 
-    function addKlassItem() {
+    function addKlassItem(container, user, klassId) {
         let select = $('<select></select>');
 
         select.attr("name", "klass" + ko);
         select.attr("class", "form-control input-md");
 
-        @foreach($klasses as $klass)
-            select.append(new Option("{{ $klass->name }}", "{{ $klass->id }}"));
-        @endforeach
+        if (!user) {
+            @foreach($klasses as $klass)
+                select.append(new Option("{{ $klass->name }}", "{{ $klass->id }}"));
+            @endforeach
+        } else {
+            @foreach($klasses as $klass)
+                if (klassId === {{ $klass->id }}) {
+                    select.append(new Option("{{ $klass->name }}", "{{ $klass->id }}", true, true));
+                } else {
+                    select.append(new Option("{{ $klass->name }}", "{{ $klass->id }}"));
+                }
+            @endforeach
+        }
 
-        addItemsContainer.append(select);
+        container.append(select);
 
         ko++;
     }
@@ -302,22 +320,18 @@
     }
 
     function fillChilds(user) {
-        var roles = {'Guardian': 'Guardian', 'Teacher': 'Teacher', 'MaRe': 'Maison Relais'};
-        let select = $('#editRole');
-        select.html("");
-
-        for (const key in roles) {
-            if (user.role == key) {
-                select.append(new Option(roles[key], key, true, true));
-            } else {
-                select.append(new Option(roles[key], key));
+        @foreach($teachersKlasses as $teacherKlass)            
+            if ({{ $teacherKlass->user_id }} === user.id) {
+                addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
             }
-        }
+        @endforeach
     }
 
     function fillKlasses(user) {
-        @foreach($teachersKlasses as $teacherKlass)
-            console.log($teacherKlass);
+        @foreach($teachersKlasses as $teacherKlass)            
+            if ({{ $teacherKlass->user_id }} === user.id) {
+                addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
+            }
         @endforeach
     }
 </script>
@@ -360,6 +374,7 @@
                     $('#modalEdit15 input[name="last_name"]').val(result.last_name);
                     $('#modalEdit15 input[name="date_of_birth"]').val(result.date_of_birth);
 
+                    editItemsContainer.html("");
                     if (result.role == "Teacher") {
                         fillKlasses(result);
                     } else {
@@ -372,38 +387,5 @@
             });
         });
     });
-</script>
-<script>
-    const addForm = $('#foo');
-    let i = 0;
-
-    function addItem(done, task) {
-        let select = $('<select></select>');
-        let option = $('<option></option>');
-        let checkbox = $('<input type="checkbox">');
-        let span = $('<span></span>');
-
-        select.attr("name", "child" + i);
-        select.attr("class", "form-control input-md");
-        span.text(task);
-
-        if (done) {
-            checkbox.prop("checked", true);
-            myDoneList.append(li.append(checkbox).append(label).append(span));
-        } else {
-            myTodoList.append(li.append(checkbox).append(label).append(span));
-        }
-
-        checkbox.click(checkClicking);
-        i++;
-    }
-
-    $('#modalAdd15 option').click(function(e) {
-        if (this.value == "Teacher") {
-            console.log(this.value);
-        } else {
-            console.log('ssdsdsds');
-        }
-    })
 </script>
 @endsection

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-
     protected $table='jerd_notifications';
     public function comments()
     {

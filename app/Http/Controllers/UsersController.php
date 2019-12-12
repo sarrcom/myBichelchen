@@ -9,6 +9,8 @@ use App\User;
 use App\Student;
 use App\Klass;
 use App\Notification;
+use App\ResponsibleOfStudent;
+use App\TeacherKlass;
 
 class UsersController extends Controller
 {
@@ -22,8 +24,8 @@ class UsersController extends Controller
         $users = User::all();
         $students = Student::all();
         $klasses = Klass::all();
-        $responsibleStudents = DB::select('SELECT * FROM jerd_responsible_of_students');
-        $teachersKlasses = DB::select('SELECT * FROM jerd_teachers_klasses');
+        $responsibleStudents = ResponsibleOfStudent::all();
+        $teachersKlasses = TeacherKlass::all();
 
         return view('admin.users.users-list', [
             'users' => $users,
