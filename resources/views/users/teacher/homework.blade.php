@@ -32,29 +32,8 @@ teacher-homework
 </form>
 
 <button id="previous">previous</button> <button id="next">next</button>
-<div id="dayOne">
-    <span id="dateOne"></span>
-    
-</div>
 
-<div id="dayTwo">
-    <span id="dateTwo"></span>
-    <h3></h3>
-    <p></p>
-</div>
-
-<div id="dayThree">
-   <span id="dateThree"></span>
-
-</div>
-
-<div id="dayFour">
-    <span id="dateFour"></span>
-
-</div>
-
-<div id="dayFive">
-    <span id="dateFive"></span>
+<div class="homeworkcalendar">
 
 </div>
 
@@ -72,36 +51,19 @@ teacher-homework
     //show the date of the tables from today and the next 3 days;
     //by clicking th buttomn and changing the page variable you can scroll 4 day back/forth
     function showTables(){
+        $(".homeworkcalendar").empty();
 
-        let date1 = $.now();
-        date1 += ((5*page)*24*3600*1000);
-        let date1formated = getDateFormat(date1)
-        $('#dayOne').html(date1formated);
-        requestHomework(date1formated);
+        for (let i = 0; i < 5; i++) {
+
+            let date = $.now();
+            date += ((5*page+i)*24*3600*1000);
+            let dateformated = getDateFormat(date);
+            let divWithID ='<div id="d'+i+'"></div>'
+            $(".homeworkcalendar").append(divWithID);
+            $('#d'+i).append(dateformated);       
+            
+        }
         
-        date1 = $.now();
-        date1 += ((5*page+1)*24*3600*1000)
-        let date2formated = getDateFormat(date1)
-        $('#dayTwo').html(date2formated);
-        requestHomework(date2formated);
-
-        date1 = $.now();
-        date1 += ((5*page+2)*24*3600*1000)
-        let date3formated = getDateFormat(date1)
-        $('#dayThree').html(date3formated);
-        requestHomework(date3formated);
-
-        date1 = $.now();
-        date1 += ((5*page+3)*24*3600*1000)
-        let date4formated = getDateFormat(date1)
-        $('#dayFour').html(date4formated);
-        requestHomework(date4formated);
-
-        date1 = $.now();
-        date1 += ((5*page+4)*24*3600*1000)
-        let date5formated = getDateFormat(date1)
-        $('#dayFive').html(date5formated); 
-        requestHomework(date5formated);
     }
     
 
@@ -137,6 +99,14 @@ teacher-homework
 
     }
 
+    function fillobjects(array){
+        for (let index = 0; index < array.length; index++) {
+            console.log(array[index].subject);
+            
+            $('#subjectOne').html(array[index].subject)
+           }
+
+    }
 
     function getDateFormat(date) {
         var d = new Date(date),
@@ -189,7 +159,7 @@ function requestHomework(date) {
         type: 'get',
         success: function(result){
             console.log(result);
-        
+            fillobjects(result)
             
 
         },
