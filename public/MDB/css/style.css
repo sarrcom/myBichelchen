@@ -5,7 +5,7 @@ html, body, header, .jarallax {
     height: 700px;
 }
 #secondaryHeader {
-    height: 150px;;
+    height: 150px;
 }
 @media (max-width: 740px) {
     html, body, header, .jarallax {
