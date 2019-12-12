@@ -32,22 +32,23 @@
             <div class="card-body px-lg-5 pt-0">
 
                 <!-- Form -->
-                <form class="text-center" style="color: #757575;" action="#!">
-
+                <form class="text-center" style="color: #757575;" action="#!" id="loginForm">
+                @csrf
+                @method('POST')
                 <!-- Email -->
                 <div class="md-form">
-                    <input type="email" id="materialLoginFormName" class="form-control">
-                    <label for="materialLoginFormName">Username</label>
+                    <input type="text" name="loginFormUserName" id="loginFormUserName" class="form-control">
+                    <label for="loginFormUserName">Username</label>
                 </div>
 
                 <!-- Password -->
                 <div class="md-form">
-                    <input type="password" id="materialLoginFormPassword" class="form-control">
-                    <label for="materialLoginFormPassword">Password</label>
+                    <input type="password" name="loginFormPassword" id="loginFormPassword" class="form-control">
+                    <label for="loginFormPassword">Password</label>
                 </div>
 
                 <!-- Sign in button -->
-                <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" type="button submit" id="loginButtonHome">Sign in</button>
+                <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" type="button submit" id="loginButtonAdmin">Sign in</button>
 
                 </form>
                 <!-- Form -->
@@ -182,7 +183,7 @@
         $('button[type="button submit"]').click(function(e){
             e.preventDefault();
             $.ajax({
-                url: '/',
+                url: '/admin/login',
                 type: 'post',
                 data: $('#loginForm').serialize(),
                 success: function(result){
