@@ -24,6 +24,7 @@ return [
     'profession_3' => 'Parent',
     'testimonial_3' => 'Cela a complètement bouleversé ma vie à 360 degrés. Maintenant, je sais enfin où je vais - et pourquoi.',
 
+    'contact' => 'Contactez-nous',
     'contact_msg' => 'Envoyez-nous un message, nous aimerions avoir de vos nouvelles !',
     'your_name' => 'Votre nom',
     'your_email' => 'Votre email',

@@ -67,7 +67,6 @@
 
             {{-- making it multilingual --}}
             <div class="text-center">
-                <h1>{{ __('messages.welcome') }}</h1>
                 <div class="wow fadeInUp" data-wow-delay="0.4s">
                     <a class="btn btn-blue btn-rounded" href="{{ url('locale/en') }}"></i>EN</a>
                     <a href="{{ url('locale/fr') }}" class="btn btn-blue btn-rounded"></i>FR</a>
