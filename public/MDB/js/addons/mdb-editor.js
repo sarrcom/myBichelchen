@@ -131,7 +131,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           }
         },
             buttonEditInput = function buttonEditInput() {
-          for (var _i2 = 0; _i2 < editorOptions.headerLength; _i2++) {
+                for (var _i2 = 0; _i2 < editorOptions.headerLength; _i2++) {
             $DataTable.row($wrapperEditor.find('.modalEditClass input').eq(_i2).val($DataTable.cell($selectedRow, _i2).data()));
           }
         },

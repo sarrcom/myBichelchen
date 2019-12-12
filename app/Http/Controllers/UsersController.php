@@ -21,7 +21,16 @@ class UsersController extends Controller
         $users = User::all();
         $students = Student::all();
         $klasses = Klass::all();
-        return view('admin.users.users-list', ['users' => $users, 'students' => $students, 'klasses' => $klasses]);
+        $responsibleStudents = DB::select('SELECT * FROM jerd_responsible_of_students');
+        $teachersKlasses = DB::select('SELECT * FROM jerd_teachers_klasses');
+
+        return view('admin.users.users-list', [
+            'users' => $users,
+            'students' => $students,
+            'klasses' => $klasses,
+            'responsibleStudents' => $responsibleStudents,
+            'teachersKlasses' => $teachersKlasses
+        ]);
     }
 
     /**
@@ -31,8 +40,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $students = Student::all();
-        return view('admin.users.add-user', ['students' => $students]);
+        //
     }
 
     /**
@@ -87,6 +95,7 @@ class UsersController extends Controller
 
         $user->save();
 
+        // Saving the records on the in between table
         $i = 0;
         $klassName = 'klass' . $i;
         $childName = 'child' . $i;
@@ -124,10 +133,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($username)
     {
-        $user = User::find($id);
-        return view('admin.users.edit-user', ['user' => $user]);
+        $user = User::where('username', $username)->first();
+        return $user;
     }
 
     /**
@@ -139,6 +148,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validation = $request->validate([
+            'first_name' => 'required|min:2|max:20',
+            'last_name' => 'required|min:2|max:20'
+        ]);
+
         $user = User::find($id);
 
         $user->first_name = trim($request->first_name);
