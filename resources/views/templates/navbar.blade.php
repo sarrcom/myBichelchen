@@ -95,7 +95,7 @@
                                                     <button class="btn btn-outline-white waves-effect waves-light btn-rounded" type="button" id="dropdownMenu6" data-toggle="modal" aria-haspopup="true" data-target="#elegantModalForm">Sign In
                                                 </button>
                                                 </div>
-                                            @endif
+                                                    @endif
         </div>
     </div>
 </nav>
