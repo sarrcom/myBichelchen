@@ -18,10 +18,7 @@
     <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
 </head>
 <body>
-    <header>
         @yield('navbar')
-        @yield('home-header')
-    </header>
     <main>
         @yield('content')
     </main>

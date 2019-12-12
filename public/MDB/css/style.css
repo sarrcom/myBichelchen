@@ -4,6 +4,9 @@
 html, body, header, .jarallax {
     height: 700px;
 }
+#secondaryHeader {
+    height: 150px;;
+}
 @media (max-width: 740px) {
     html, body, header, .jarallax {
         height: 100vh;
@@ -77,8 +80,7 @@ footer.page-footer {
 #logo {
     width: 100%;
 }
-/* Amin-users Modal CSS */
-/* #formedit label {
-
-} */
-
+/* Amin Login page */
+#adminLoginForm {
+    padding-bottom: 150px;
+}
