@@ -197,7 +197,7 @@
         showAddChild();
     }
 
-    $('#modalAdd15 option').click(function(e) {
+    $('#modalAdd15 #addRole option').click(function(e) {
         let newRole = this.value;
 
         if (newRole == "Teacher") {
@@ -217,20 +217,20 @@
         }
     });
 
-    $('#modalEdit15 #addRole option').click(function(e) {
+    $('#modalEdit15 #editRole option').click(function(e) {
         let newRole = this.value;
 
         if (newRole == "Teacher") {
-            showAddKlass("add");
+            showAddKlass("edit");
             if (previousRole != "Teacher") {
-                addItemsContainer.html("");
+                editItemsContainer.html("");
                 co = 0;
                 previousRole = newRole;
             }
         } else {
-            showAddChild("add");
+            showAddChild("edit");
             if (previousRole != "Guardian" && previousRole != "MaRe") {
-                addItemsContainer.html("");
+                editItemsContainer.html("");
                 ko = 0;
                 previousRole = newRole;
             }
