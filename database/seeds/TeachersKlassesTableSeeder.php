@@ -21,5 +21,15 @@ class TeachersKlassesTableSeeder extends Seeder
             'user_id' => 2,
         ]);
 
+        DB::table('jerd_teachers_klasses')->insert([
+            'klass_id' => 5,
+            'user_id' => 3,
+        ]);
+
+        DB::table('jerd_teachers_klasses')->insert([
+            'klass_id' => 6,
+            'user_id' => 4,
+        ]);
+
     }
 }
