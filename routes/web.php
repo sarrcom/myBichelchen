@@ -32,6 +32,7 @@ Route::resources([
 
 Route::get('/user', 'UsersController@overview');
 Route::get('/user/homework', 'UsersController@homework');
+Route::get('/user/showHomework/{date}', 'UsersController@showHomework');
 Route::post('/user/homework', 'UsersController@submitHomework');
 Route::get('/test', 'UsersController@test');
 
