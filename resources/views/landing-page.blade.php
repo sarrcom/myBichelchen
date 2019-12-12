@@ -90,7 +90,6 @@
                 </div>
             </div>
 
-
         <hr class="mb-5">
     </section>
     <!--Section: Testimonials v.3-->
@@ -244,9 +243,7 @@
                         <p>hello@mybichelchen.lu</p>
                     </li>
                     <li>
-
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2591.0504564132575!2d5.946978215870579!3d49.50244116309531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47eacad49ef04f7d%3A0x8599a1646a7921b9!2sTECHNOPORT%20SA%20%E2%80%93%20BELVAL%2C%209%20Avenue%20des%20Hauts-Fourneaux%2C%204362%20Esch%20an%20der%20Alzette!5e0!3m2!1sen!2slu!4v1575989181454!5m2!1sen!2slu" width="200" height="300" frameborder="0" style="border:2px solid orange; border-radius: 2.5px;"></iframe>
-
                     </li>
                 </ul>
             </div>
@@ -258,7 +255,6 @@
   </div>
 
 @endsection
-
 
 @section('footer')
 @include('templates.footer')
