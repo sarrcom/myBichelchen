@@ -1,11 +1,3 @@
-@php
-    ($roles = [
-        'Guardian' => 'Guardian',
-        'Teacher' => 'Teacher',
-        'MaRe' => 'Maison Relais'
-    ]);
-@endphp
-
 @extends('templates.main')
 @section('title', 'Admin')
 
@@ -283,6 +275,40 @@
 
         ko++;
     }
+
+    function fillRoles(user) {
+        var roles = {'Guardian': 'Guardian', 'Teacher': 'Teacher', 'MaRe': 'Maison Relais'};
+        let select = $('#editRole');
+        select.html("");
+
+        for (const key in roles) {
+            if (user.role == key) {
+                select.append(new Option(roles[key], key, true, true));
+            } else {
+                select.append(new Option(roles[key], key));
+            }
+        }
+    }
+
+    function fillChilds(user) {
+        var roles = {'Guardian': 'Guardian', 'Teacher': 'Teacher', 'MaRe': 'Maison Relais'};
+        let select = $('#editRole');
+        select.html("");
+
+        for (const key in roles) {
+            if (user.role == key) {
+                select.append(new Option(roles[key], key, true, true));
+            } else {
+                select.append(new Option(roles[key], key));
+            }
+        }
+    }
+
+    function fillKlasses(user) {
+        @foreach($teachersKlasses as $teacherKlass)
+            console.log($teacherKlass);
+        @endforeach
+    }
 </script>
 <script>
     $(function(){
@@ -317,18 +343,17 @@
                 url: "/users/" + username + "/edit",
                 type: 'get',
                 success: function(result){
-                    let select = $('#editRole');
-                    console.log(role);
+                    fillRoles(result);
 
-                    select.html("");
+                    $('#modalEdit15 input[name="first_name"]').val(result.first_name);
+                    $('#modalEdit15 input[name="last_name"]').val(result.last_name);
+                    $('#modalEdit15 input[name="date_of_birth"]').val(result.date_of_birth);
 
-                    @foreach($roles as $key => $role)
-                        @if(result->role == $key)
-                            select.append(new Option("{{ $role }}", "{{ $key }}", true));
-                        @else
-                            select.append(new Option("{{ $role }}", "{{ $key }}"));
-                        @endif
-                    @endforeach
+                    if (result.role == "Teacher") {
+                        fillKlasses(result);
+                    } else {
+                        fillChilds(result);
+                    }
                 },
                 error: function(err){
                     console.log('Oh boi');
