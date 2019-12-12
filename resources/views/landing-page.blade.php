@@ -1,6 +1,10 @@
 @extends('templates.main')
 @section('title', 'myBichelchen')
 
+@section('navbar')
+@include('templates.navbar')
+@endsection
+
 @section('home-header')
 @include('templates.home-header')
 @endsection
@@ -237,8 +241,13 @@
 
   </div>
 
-
 @endsection
+
+
+@section('footer')
+@include('templates.footer')
+@endsection
+
 @section('extra-scripts')
 <script>
     $(function(){

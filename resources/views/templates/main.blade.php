@@ -19,14 +19,14 @@
 </head>
 <body>
     <header>
-        @include('templates.navbar')
+        @yield('navbar')
         @yield('home-header')
     </header>
     <main>
         @yield('content')
     </main>
     <footer>
-        @include('templates.footer')
+        @yield('footer')
     </footer>
     @include('templates.scripts')
     @yield('extra-scripts')
