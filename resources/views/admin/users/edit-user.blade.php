@@ -1,4 +1,4 @@
-@php ($roles = ['Student', 'Teacher', 'Guardian', 'MaRe'])
+@php ($roles = ['Teacher', 'Guardian', 'MaRe'])
 
 <form method="POST">
     @csrf

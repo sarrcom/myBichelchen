@@ -20,7 +20,18 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.users.users-list', ['users' => $users]);
+        $students = Student::all();
+        $klasses = Klass::all();
+        $responsibleStudents = DB::select('SELECT * FROM jerd_responsible_of_students');
+        $teachersKlasses = DB::select('SELECT * FROM jerd_teachers_klasses');
+
+        return view('admin.users.users-list', [
+            'users' => $users,
+            'students' => $students,
+            'klasses' => $klasses,
+            'responsibleStudents' => $responsibleStudents,
+            'teachersKlasses' => $teachersKlasses
+        ]);
     }
 
     /**
@@ -30,8 +41,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $students = Student::all();
-        return view('admin.users.add-user', ['students' => $students]);
+        //
     }
 
     /**
@@ -86,7 +96,25 @@ class UsersController extends Controller
 
         $user->save();
 
-        return redirect('/admin/users/users-list');
+        // Saving the records on the in between table
+        $i = 0;
+        $klassName = 'klass' . $i;
+        $childName = 'child' . $i;
+        if ($user->role == 'Teacher') {
+            while (isset($request->$klassName)) {
+                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $i++;
+                $klassName = 'klass' . $i;
+            }
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            while (isset($request->$childName)) {
+                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $i++;
+                $childName = 'child' . $i;
+            }
+        }
+
+        return redirect('/users');
     }
 
     /**
@@ -106,10 +134,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($username)
     {
-        $user = User::find($id);
-        return view('admin.users.edit-user', ['user' => $user]);
+        $user = User::where('username', $username)->first();
+        return $user;
     }
 
     /**
@@ -121,6 +149,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validation = $request->validate([
+            'first_name' => 'required|min:2|max:20',
+            'last_name' => 'required|min:2|max:20'
+        ]);
+
         $user = User::find($id);
 
         $user->first_name = trim($request->first_name);
@@ -238,22 +271,22 @@ class UsersController extends Controller
     public function submitHomework(Request $request){
         // get the current user to provide id
         $user = session()->get('loggedUser');
-        
+
         //we check for subject and description, because the other fields are filled in by default
         $validation = $request->validate([
             'subject' => 'required|min:4|max:255',
             'description' => 'required|min:2|max:255',
             'dueDate' => 'after:today'
-            
+
         ]);
-        
+
         $homework = new Notification();
-        
+
         $homework->description = trim($request->description);
         $homework->subject = trim($request->subject);
         $homework->type = 'Homework';
 
-        if ($request->sendTo == 'class') 
+        if ($request->sendTo == 'class')
             $homework->klass_id = $request->recipient;
         else if($request->sendTo == 'student')
             $homework->student_id = $request->recipient;
@@ -272,26 +305,26 @@ class UsersController extends Controller
     for debugging the homework query we may need it later so dont delete this
 
     it shows the error page in stead of staying in the same page
-    typo in the Model:( 
+    typo in the Model:(
 
     public function test(){
         // get the current user to provide id
-        
+
         //we check for subject and description, because the other fields are filled in by default
         $validation = $request->validate([
             'subject' => 'required|min:4|max:255',
             'description' => 'required|min:2|max:255'
             //'dueDate' => 'after:today'
-            
+
         ]);
-        
+
         $homework = new Notification();
-        
+
         $homework->description = 'hello';
         $homework->subject = 'random';
         $homework->type = 'Homework';
         $homework->klass_id = 1;
-        
+
 
         $homework->user_id = 1;
         $homework->date = '2019-12-12';
