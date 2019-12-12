@@ -1,25 +1,28 @@
 @extends('templates.main')
 @section('title', 'Admin Login')
 
-@section('navbar')
-
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="#"><strong>myBichelchen</strong></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                <ul class="navbar-nav mr-auto">
-                    <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
-                    <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>
-                </ul>
+<header id="secondaryHeader">
+    @section('navbar')
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#"><strong>myBichelchen</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                    <ul class="navbar-nav mr-auto">
+                        <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
+                        <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    @endsection
+</header>
 
+@section('content')
 <!-- Login Form -->
-    <div class="container" style="padding-top:250px;">
+    <div class="container" id="adminLoginForm">
         <div class="row d-flex justify-content-center modalWrapper">
             <!-- Material form login -->
             <div class="card">
@@ -60,10 +63,6 @@
         </div>
     </div>
 <!-- Login Form -->
-
-@endsection
-
-@section('content')
 
 <hr class="mb-5">
 <div class="container">
@@ -189,7 +188,7 @@
                 success: function(result){
                     console.log(result);
                     if (result === 'Login') {
-                        window.location.replace('/user');
+                        window.location.replace('/users');
                     }else{
                         $('#errorMessage').html(result);
 

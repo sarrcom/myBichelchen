@@ -1,13 +1,29 @@
 @extends('templates.main')
 @section('title', 'myBichelchen')
 
+<header>
 @section('navbar')
 @include('templates.navbar')
 @endsection
-
-@section('home-header')
-@include('templates.home-header')
-@endsection
+<div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <div class="mask rgba-white-slight">
+        <div class="container h-100 d-flex justify-content-center align-items-center">
+            <div class="row pt-5 mt-3">
+                <div class="col-md-12 wow fadeIn mb-3">
+                    <div class="text-center">
+                        <h1 class="display-4 font-weight-bold mb-5 wow fadeInUp"><img id="logo" src="../../MDB/img/logo.PNG" alt=""></h1>
+                        <h5 class="mb-5 wow fadeInUp" data-wow-delay="0.2s">{{ __('landing-page.slug') }}</h5>
+                        <div class="wow fadeInUp" data-wow-delay="0.4s">
+                            <a class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#elegantModalForm"><i class="fas fa-user left"></i>{{ __('landing-page.sign_in') }}</a>
+                            <a href="#contact" class="btn btn-outline-orange btn-rounded"><i class="fas fa-book left"></i>{{ __('landing-page.contact_us') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</header>
 
 @section('content')
 <!-- Modal -->
@@ -72,7 +88,6 @@
                     <a href="{{ url('locale/fr') }}" class="btn btn-blue btn-rounded"></i>FR</a>
                 </div>
             </div>
-
 
         <hr class="mb-5">
     </section>
@@ -227,9 +242,7 @@
                         <p>hello@mybichelchen.lu</p>
                     </li>
                     <li>
-
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2591.0504564132575!2d5.946978215870579!3d49.50244116309531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47eacad49ef04f7d%3A0x8599a1646a7921b9!2sTECHNOPORT%20SA%20%E2%80%93%20BELVAL%2C%209%20Avenue%20des%20Hauts-Fourneaux%2C%204362%20Esch%20an%20der%20Alzette!5e0!3m2!1sen!2slu!4v1575989181454!5m2!1sen!2slu" width="200" height="300" frameborder="0" style="border:2px solid orange; border-radius: 2.5px;"></iframe>
-
                     </li>
                 </ul>
             </div>
@@ -241,7 +254,6 @@
   </div>
 
 @endsection
-
 
 @section('footer')
 @include('templates.footer')

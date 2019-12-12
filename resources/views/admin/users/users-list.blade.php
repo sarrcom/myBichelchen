@@ -1,5 +1,11 @@
 @extends('templates.main')
-@section('title', 'Admin')
+@section('title', 'Admin Users List')
+
+<header id="secondaryHeader">
+@section('navbar')
+@include('templates.navbar')
+@endsection
+</header>
 
 @section('content')
 
@@ -156,6 +162,11 @@
         </div>
     </div>
 @endsection
+
+@section('footer')
+@include('templates.footer')
+@endsection
+
 @section('extra-scripts')
 <script>
     $('#your-table-id').mdbEditor({
