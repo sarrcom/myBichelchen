@@ -83,18 +83,19 @@
                                     </div>
                                     <div class="md-form mb-5">
                                         <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
-                                        <label data-error="wrong" data-success="right" for="formNameEdit15">First Name</label>
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">First Name</label>
                                     </div>
                                     <div class="md-form mb-5">
                                         <input type="text" id="formPositionEdit15" name="last_name" class="form-control validate">
-                                        <label data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
+                                        <label class="active" data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
                                     </div>
                                     <div class="md-form mb-5">
                                         <input type="date" id="formOfficeEdit15" name="date_of_birth" class="form-control validate">
-                                        <label data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
+                                        <label class="active" data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
                                     </div>
                                     <div id="editItemsContainer"></div>
                                     <p id="editChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
+
                                     <p id="editKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center editInsideWrapper">
@@ -182,11 +183,14 @@
         rowEditor: true
     });
     $('.dataTables_length').addClass('bs-select');
+    $('#editButton').on('click', function () {
+        $('#editForm label').addClass('active');
+    })
 </script>
 <script>
     const addItemsContainer = $("#addItemsContainer");
     const editItemsContainer = $("#editItemsContainer")
-    
+
     let previousRole = $("#addRole").val();
     let co = 0;
     let ko = 0;
@@ -255,7 +259,7 @@
             $("#editChild").css("display", "none");
             $("#editKlass").css("display", "initial");
         }
-        
+
     }
 
     $('#addChild').click(function() {
@@ -320,7 +324,7 @@
     }
 
     function fillChilds(user) {
-        @foreach($teachersKlasses as $teacherKlass)            
+        @foreach($teachersKlasses as $teacherKlass)
             if ({{ $teacherKlass->user_id }} === user.id) {
                 addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
             }
@@ -328,7 +332,7 @@
     }
 
     function fillKlasses(user) {
-        @foreach($teachersKlasses as $teacherKlass)            
+        @foreach($teachersKlasses as $teacherKlass)
             if ({{ $teacherKlass->user_id }} === user.id) {
                 addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
             }
