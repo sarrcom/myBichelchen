@@ -204,45 +204,42 @@
         showAddChild();
     }
 
-    $('#modalAdd15 option').click(function(e) {
+    $('#modalAdd15 #addRole option').click(function(e) {
+        roleSelector("add");
+    });
+
+    $('#modalEdit15 #editRole option').click(function(e) {
+        roleSelector("edit");
+    });
+
+    function roleSelector(method) {
         let newRole = this.value;
+        console.log(newRole);
 
         if (newRole == "Teacher") {
-            showAddKlass("add");
+            showAddKlass(method);
             if (previousRole != "Teacher") {
-                addItemsContainer.html("");
+                if (method == "add") {
+                    addItemsContainer.html("");
+                } else if (method == "edit") {
+                    editItemsContainer.html("");
+                }
                 co = 0;
                 previousRole = newRole;
             }
         } else {
-            showAddChild("add");
+            showAddChild(method);
             if (previousRole != "Guardian" && previousRole != "MaRe") {
-                addItemsContainer.html("");
+                if (method == "add") {
+                    addItemsContainer.html("");
+                } else if (method == "edit") {
+                    editItemsContainer.html("");
+                }
                 ko = 0;
                 previousRole = newRole;
             }
         }
-    });
-
-    $('#modalEdit15 #addRole option').click(function(e) {
-        let newRole = this.value;
-
-        if (newRole == "Teacher") {
-            showAddKlass("add");
-            if (previousRole != "Teacher") {
-                addItemsContainer.html("");
-                co = 0;
-                previousRole = newRole;
-            }
-        } else {
-            showAddChild("add");
-            if (previousRole != "Guardian" && previousRole != "MaRe") {
-                addItemsContainer.html("");
-                ko = 0;
-                previousRole = newRole;
-            }
-        }
-    });
+    }
 
     function showAddChild(mode) {
         if (mode == "add") {
