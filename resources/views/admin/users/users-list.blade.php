@@ -52,8 +52,8 @@
                                         <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
                                     </div>
                                     <div id="addItemsContainer"></div>
-                                    <p id="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
-                                    <p id="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
+                                    <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
+                                    <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
                                     <button name="addSubmit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Add form
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <a href="" class="btn btn-info btn-rounded btn-sm" data-toggle="modal" data-target="#modalAdd15">Add<i class="fas fa-plus-square ml-1"></i></a>
+                    <a href="" id="addOpenModal" class="btn btn-info btn-rounded btn-sm" data-toggle="modal" data-target="#modalAdd15">Add<i class="fas fa-plus-square ml-1"></i></a>
                 </div>
                 <div class="modal fade modalEditClass" id="modalEdit15" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -96,9 +96,8 @@
                                         <label class="active" data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
                                     </div>
                                     <div id="editItemsContainer"></div>
-                                    <p id="editChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
-
-                                    <p id="editKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
+                                    <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
+                                    <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center editInsideWrapper">
                                     <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Edit form
@@ -110,7 +109,7 @@
                     </div>
                 </div>
                 <div class="text-center buttonEditWrapper">
-                    <button id="editButton" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>
+                    <button id="editOpenModal" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>
                 </div>
                 <div class="modal fade" id="modalDelete15" tabindex="-1" role="dialog" aria-labelledby="modalDelete15" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -192,31 +191,54 @@
 </script>
 <script>
     const addItemsContainer = $("#addItemsContainer");
-    const editItemsContainer = $("#editItemsContainer")
-
-    let previousRole = $("#addRole").val();
+    const editItemsContainer = $("#editItemsContainer");
+    let previousRole;
     let co = 0;
     let ko = 0;
 
-    if (previousRole == "Teacher") {
-        showAddKlass();
-    } else {
-        showAddChild();
+    $('#addOpenModal').click(function(e) {
+        previousRole = $("#addRole").val();
+        displayAddKlassOrChild(previousRole, "add");
+    });
+
+    $('#modalAdd15 #addRole').click(function(e) {
+        roleSelector("add", this.value);
+    });
+
+    $('#modalEdit15 #editRole').click(function(e) {
+        roleSelector("edit", this.value);
+    });
+
+    $('#modalAdd15 .addChild').click(function() {
+        addChildItem(addItemsContainer, false, false);
+    });
+
+    $('#modalAdd15 .addKlass').click(function() {
+        addKlassItem(addItemsContainer, false, false);
+    });
+
+    $('#modalEdit15 .addChild').click(function() {
+        addChildItem(editItemsContainer, false, false);
+    });
+
+    $('#modalEdit15 .addKlass').click(function() {
+        addKlassItem(editItemsContainer, false, false);
+    });
+
+    $('.divFlex').click(function() {
+        console.log("hello");
+    });
+
+    function displayAddKlassOrChild(role, method) {
+        if (role == "Teacher") {
+            showAddKlass(method);
+        } else if (role == "Guardian" || role == "MaRe") {
+            showAddChild(method);
+        }
     }
 
-    $('#modalAdd15 #addRole option').click(function(e) {
-        roleSelector("add");
-    });
-
-    $('#modalEdit15 #editRole option').click(function(e) {
-        roleSelector("edit");
-    });
-
-    function roleSelector(method) {
-        let newRole = this.value;
-        console.log(newRole);
-
-        if (newRole == "Teacher") {
+    function roleSelector(method, role) {
+        if (role == "Teacher") {
             showAddKlass(method);
             if (previousRole != "Teacher") {
                 if (method == "add") {
@@ -225,7 +247,7 @@
                     editItemsContainer.html("");
                 }
                 co = 0;
-                previousRole = newRole;
+                previousRole = role;
             }
         } else {
             showAddChild(method);
@@ -236,50 +258,65 @@
                     editItemsContainer.html("");
                 }
                 ko = 0;
-                previousRole = newRole;
+                previousRole = role;
             }
         }
     }
 
     function showAddChild(mode) {
         if (mode == "add") {
-            $("#addKlass").css("display", "none");
-            $("#addChild").css("display", "initial");
+            $("#modalAdd15 .addKlass").css("display", "none");
+            $("#modalAdd15 .addChild").css("display", "initial");
         } else if (mode == "edit") {
-            $("#editKlass").css("display", "none");
-            $("#editChild").css("display", "initial");
+            $("#modalEdit15 .addKlass").css("display", "none");
+            $("#modalEdit15 .addChild").css("display", "initial");
         }
     }
 
     function showAddKlass(mode) {
         if (mode == "add") {
-            $("#addChild").css("display", "none");
-            $("#addKlass").css("display", "initial");
+            $("#modalAdd15 .addChild").css("display", "none");
+            $("#modalAdd15 .addKlass").css("display", "initial");
         } else if (mode == "edit") {
-            $("#editChild").css("display", "none");
-            $("#editKlass").css("display", "initial");
+            $("#modalEdit15 .addChild").css("display", "none");
+            $("#modalEdit15 .addKlass").css("display", "initial");
         }
 
     }
 
-    $('#addChild').click(function() {
-        addChildItem(addItemsContainer, false, false);
-    });
-    $('#addKlass').click(function() {
-        addKlassItem(addItemsContainer, false, false);
-    });
-
-    function addChildItem(container, user) {
+    function addChildItem(container, user, studentId) {
+        let div = $('<div></div>')
         let select = $('<select></select>');
+        let button = $('<button></button>');
+        let span = $('<span></span>');
 
+        div.attr("class", "divFlex");
         select.attr("name", "child" + co);
         select.attr("class", "form-control input-md");
+        button.attr("type", "button");
+        button.attr("class", "close text-primary");
+        span.attr("aria-hidden", "true");
+        span.html("&times;");
 
-        @foreach($students as $student)
-            select.append(new Option("{{ $student->first_name }} {{ $student->last_name }}", "{{ $student->id }}"));
-        @endforeach
 
-        container.append(select);
+        if (!user) {
+            @foreach($students as $student)
+                select.append(new Option("{{ $student->first_name }} {{ $student->last_name }}", "{{ $student->id }}"));
+            @endforeach
+        } else {
+            @foreach($students as $student)
+                if (studentId === {{ $student->id }}) {
+                    select.append(new Option("{{ $student->first_name }} {{ $student->last_name }}", "{{ $student->id }}", true, true));
+                } else {
+                    select.append(new Option("{{ $student->first_name }} {{ $student->last_name }}", "{{ $student->id }}"));
+                }
+            @endforeach
+        }
+
+        button.append(span);
+        div.append(select);
+        div.append(button);
+        container.append(div);
 
         co++;
     }
@@ -324,9 +361,9 @@
     }
 
     function fillChilds(user) {
-        @foreach($teachersKlasses as $teacherKlass)
-            if ({{ $teacherKlass->user_id }} === user.id) {
-                addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
+        @foreach($responsibleStudents as $responsibleStudent)
+            if ({{ $responsibleStudent->user_id }} === user.id) {
+                addChildItem(editItemsContainer, user, {{ $responsibleStudent->student_id }});
             }
         @endforeach
     }
@@ -364,7 +401,7 @@
 </script>
 <script>
     $(function(){
-        $('#editButton').click(function(e){
+        $('#editOpenModal').click(function(e){
             let username = $('#dt-less-columns .tr-color-selected td').eq(3).text();
 
             e.preventDefault();
@@ -384,6 +421,9 @@
                     } else {
                         fillChilds(result);
                     }
+
+                    previousRole = $("#editRole").val();
+                    displayAddKlassOrChild(previousRole, "edit");
                 },
                 error: function(err){
                     console.log('Oh boi');
