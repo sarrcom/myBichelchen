@@ -81,12 +81,21 @@
                                                 Child
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
-                                            @foreach ($user->students as $student)
-                                                <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
-                                            @endforeach
+                                                @foreach ($user->students as $student)
+                                                    <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
+                                                @endforeach
                                             </div>
                                         </div>
-                                            @endif
+                                            @else
+                                                <ul class="navbar-nav mr-auto">
+                                                    <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
+                                                <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>
+                                                </ul>
+                                                <div>
+                                                    <button class="btn btn-outline-white waves-effect waves-light btn-rounded" type="button" data-toggle="modal" aria-haspopup="true" data-target="#elegantModalForm">Sign In
+                                                    </button>
+                                                </div>
+                                                    @endif
         </div>
     </div>
 </nav>

@@ -18,15 +18,12 @@
     <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
 </head>
 <body>
-    <header>
-        @include('templates.navbar')
-        @yield('home-header')
-    </header>
+        @yield('navbar')
     <main>
         @yield('content')
     </main>
     <footer>
-        @include('templates.footer')
+        @yield('footer')
     </footer>
     @include('templates.scripts')
     @yield('extra-scripts')

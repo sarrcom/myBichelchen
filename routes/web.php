@@ -23,6 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('/admin/login', 'AdminsController@index');
+Route::post('/admin/login', 'AdminsController@login');
 
 Route::resources([
     'users' => 'UsersController',

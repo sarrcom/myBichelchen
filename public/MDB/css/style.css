@@ -4,6 +4,9 @@
 html, body, header, .jarallax {
     height: 700px;
 }
+#secondaryHeader {
+    height: 150px;
+}
 @media (max-width: 740px) {
     html, body, header, .jarallax {
         height: 100vh;
@@ -65,7 +68,7 @@ footer.page-footer {
     border-bottom: none;
 }
 .modal-dialog .form-elegant .btn .fab {
-    color: #2196f3!important;
+    color: #2196F3 !important;
 }
 .form-elegant .modal-body, .form-elegant .modal-footer {
     font-weight: 400;
@@ -77,8 +80,7 @@ footer.page-footer {
 #logo {
     width: 100%;
 }
-/* Amin-users Modal CSS */
-/* #formedit label {
-
-} */
-
+/* Amin Login page */
+#adminLoginForm {
+    padding-bottom: 150px;
+}

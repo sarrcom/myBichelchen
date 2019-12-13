@@ -24,6 +24,7 @@ return [
     'profession_3' => 'Parent',
     'testimonial_3' => 'This completely threw my life around 360 degrees. Now I finally know where I\'m heading.',
 
+    'contact' => 'Contact Us',
     'contact_msg' => 'Drop us a message, we\'d love to hear from you!',
     'your_name' => 'Your name',
     'your_email' => 'Your email',
