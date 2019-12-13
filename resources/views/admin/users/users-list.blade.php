@@ -185,7 +185,7 @@
     });
     $('.dataTables_length').addClass('bs-select');
     //Add the class 'active'on the Edit form inputs so it doesn't overlap the pre-existing fields
-    $('#editButton').on('click', function(e) {
+    $('#editOpenModal').on('click', function () {
         $('#editForm label').addClass('active');
     })
 </script>
