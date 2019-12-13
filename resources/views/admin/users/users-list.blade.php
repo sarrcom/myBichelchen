@@ -186,7 +186,7 @@
 <script>
     const addItemsContainer = $("#addItemsContainer");
     const editItemsContainer = $("#editItemsContainer")
-    
+
     let previousRole = $("#addRole").val();
     let co = 0;
     let ko = 0;
@@ -198,44 +198,41 @@
     }
 
     $('#modalAdd15 #addRole option').click(function(e) {
-        let newRole = this.value;
-
-        if (newRole == "Teacher") {
-            showAddKlass("add");
-            if (previousRole != "Teacher") {
-                addItemsContainer.html("");
-                co = 0;
-                previousRole = newRole;
-            }
-        } else {
-            showAddChild("add");
-            if (previousRole != "Guardian" && previousRole != "MaRe") {
-                addItemsContainer.html("");
-                ko = 0;
-                previousRole = newRole;
-            }
-        }
+        roleSelector("add");
     });
 
     $('#modalEdit15 #editRole option').click(function(e) {
+        roleSelector("edit");
+    });
+
+    function roleSelector(method) {
         let newRole = this.value;
+        console.log(newRole);
 
         if (newRole == "Teacher") {
-            showAddKlass("edit");
+            showAddKlass(method);
             if (previousRole != "Teacher") {
-                editItemsContainer.html("");
+                if (method == "add") {
+                    addItemsContainer.html("");
+                } else if (method == "edit") {
+                    editItemsContainer.html("");
+                }
                 co = 0;
                 previousRole = newRole;
             }
         } else {
-            showAddChild("edit");
+            showAddChild(method);
             if (previousRole != "Guardian" && previousRole != "MaRe") {
-                editItemsContainer.html("");
+                if (method == "add") {
+                    addItemsContainer.html("");
+                } else if (method == "edit") {
+                    editItemsContainer.html("");
+                }
                 ko = 0;
                 previousRole = newRole;
             }
         }
-    });
+    }
 
     function showAddChild(mode) {
         if (mode == "add") {
@@ -255,7 +252,7 @@
             $("#editChild").css("display", "none");
             $("#editKlass").css("display", "initial");
         }
-        
+
     }
 
     $('#addChild').click(function() {
@@ -320,7 +317,7 @@
     }
 
     function fillChilds(user) {
-        @foreach($teachersKlasses as $teacherKlass)            
+        @foreach($teachersKlasses as $teacherKlass)
             if ({{ $teacherKlass->user_id }} === user.id) {
                 addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
             }
@@ -328,7 +325,7 @@
     }
 
     function fillKlasses(user) {
-        @foreach($teachersKlasses as $teacherKlass)            
+        @foreach($teachersKlasses as $teacherKlass)
             if ({{ $teacherKlass->user_id }} === user.id) {
                 addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
             }
