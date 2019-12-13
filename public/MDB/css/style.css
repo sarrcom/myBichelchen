@@ -84,3 +84,11 @@ footer.page-footer {
 #adminLoginForm {
     padding-bottom: 150px;
 }
+
+.divFlex {
+    display: flex;
+}
+
+.divFlex span {
+    margin: 0 15px;
+}
