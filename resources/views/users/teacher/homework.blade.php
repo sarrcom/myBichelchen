@@ -61,7 +61,8 @@ teacher-homework
             let divWithID ='<div id="d'+i+'"></div>'
             $(".homeworkcalendar").append(divWithID);
             $('#d'+i).append(dateformated);       
-            
+            requestHomework(dateformated,'#d'+i)
+
         }
         
     }
@@ -99,11 +100,11 @@ teacher-homework
 
     }
 
-    function fillobjects(array){
+    function fillobjects(array, divID){
         for (let index = 0; index < array.length; index++) {
             console.log(array[index].subject);
             
-            $('#subjectOne').html(array[index].subject)
+            $(divID).append(array[index].subject)
            }
 
     }
@@ -152,14 +153,14 @@ teacher-homework
     });
 
 // request homwork for a specific day
-function requestHomework(date) {
+function requestHomework(date,divID) {
     let url = '/user/showHomework/'+date;
     $.ajax({
         url: url,
         type: 'get',
         success: function(result){
             console.log(result);
-            fillobjects(result)
+            fillobjects(result,divID)
             
 
         },
