@@ -33,6 +33,9 @@
                                 @method('POST')
                                 <div class="modal-body mx-3">
                                     <div class="md-form mb-5">
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
+                                    </div>
+                                    <div class="md-form mb-5">
                                         <select id="addRole" name="role" class="form-control input-md" required>
                                             <option value="Guardian">Guardian</option>
                                             <option value="Teacher">Teacher</option>
@@ -51,6 +54,10 @@
                                         <input type="date" id="inputDate" name="date_of_birth" class="form-control" placeholder="Select Date">
                                         <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
                                     </div>
+                                    <div class="md-form mb-5">
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Child/ren</label>
+                                    </div>
+                                    <br>
                                     <div id="addItemsContainer"></div>
                                     <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
                                     <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
@@ -81,6 +88,9 @@
                                 @method('PUT')
                                 <div class="modal-body mx-3 modal-inputs">
                                     <div class="md-form mb-5">
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
+                                    </div>
+                                    <div class="md-form mb-5">
                                         <select id="editRole" name="role" class="form-control input-md" required></select>
                                     </div>
                                     <div class="md-form mb-5">
@@ -95,6 +105,10 @@
                                         <input type="date" id="formOfficeEdit15" name="date_of_birth" class="form-control validate">
                                         <label class="active" data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
                                     </div>
+                                    <div class="md-form mb-5">
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Child/ren</label>
+                                    </div>
+                                    <br>
                                     <div id="editItemsContainer"></div>
                                     <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
                                     <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
