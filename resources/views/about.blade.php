@@ -73,13 +73,13 @@
     <!--Section: Features v.4-->
     <section id="about" class="section wow fadeIn" data-wow-delay="0.3s">
             <!--Section heading-->
-            <h1 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.welcome_h_1') }}</h1>
+            <h1 class="font-weight-bold text-center h1 my-5">{{ __('about.intro_h_1') }}</h1>
             <!--Section description-->
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('landing-page.welcome_p_1') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('about.intro_p_1') }}</p>
 
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('landing-page.welcome_p_2') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('about.intro_p_2') }}</p>
 
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">{{ __('landing-page.welcome_p_3') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">{{ __('about.intro_p_3') }}</p>
 
             {{-- making it multilingual --}}
             <div class="text-center">
@@ -91,84 +91,7 @@
 
         <hr class="mb-5">
     </section>
-    <!--Section: Testimonials v.3-->
-    <section class="section team-section text-center pb-3 wow fadeIn" data-wow-delay="0.3s">
-        <!--Section heading-->
-        <h1 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.testimonials') }}</h1>
-        <!--Section description-->
-        <p class="text-center grey-text mb-5 mx-auto w-responsive">{{ __('landing-page.tell_us_why') }}</p>
-        <!--Grid row-->
-        <div class="row text-center">
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/jorge.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Jorge Gonzales</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_1') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_1') }}</p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star-half-alt"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/dennis.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Dennis Burgers</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_2') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_2') }}</p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/reginald.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Reginald Wagner</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_3') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_3') }}</p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="far fa-star"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
-    </section>
-    <!--Section: Testimonials v.3-->
+
     <hr class="mb-5">
     <!--Section: Contact v.2-->
     <section id="contact" class="section pb-5 wow fadeIn" data-wow-delay="0.3s">

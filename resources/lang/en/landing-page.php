@@ -6,6 +6,7 @@ return [
 
     'sign_in' => 'Sign in',
     'contact_us' => 'Contact us',
+    'sign_in_2' => 'Log in',
     'your_username' => 'Your username',
     'your_password' => 'Your password',
     'forgot_password' => 'Forgot password?',
