@@ -219,10 +219,6 @@
         addKlassItem(editItemsContainer, false, false);
     });
 
-    $('.divFlex').click(function() {
-        console.log("hello");
-    });
-
     function displayAddKlassOrChild(role, method) {
         if (role == "Teacher") {
             showAddKlass(method);
@@ -279,7 +275,7 @@
     }
 
     function addChildItem(container, user, studentId) {
-        let div = $('<div></div>')
+        let div = $('<div></div>');
         let select = $('<select></select>');
         let button = $('<button></button>');
         let span = $('<span></span>');
@@ -291,7 +287,10 @@
         button.attr("class", "close text-primary");
         span.attr("aria-hidden", "true");
         span.html("&times;");
-
+        button.click(function() {
+            button.parent()[0].remove();
+            renameItems(container);
+        });
 
         if (!user) {
             @foreach($students as $student)
@@ -316,10 +315,22 @@
     }
 
     function addKlassItem(container, user, klassId) {
+        let div = $('<div></div>');
         let select = $('<select></select>');
+        let button = $('<button></button>');
+        let span = $('<span></span>');
 
+        div.attr("class", "divFlex");
         select.attr("name", "klass" + ko);
         select.attr("class", "form-control input-md");
+        button.attr("type", "button");
+        button.attr("class", "close text-primary");
+        span.attr("aria-hidden", "true");
+        span.html("&times;");
+        button.click(function() {
+            button.parent()[0].remove();
+            renameItems(container);
+        });
 
         if (!user) {
             @foreach($klasses as $klass)
@@ -335,13 +346,16 @@
             @endforeach
         }
 
-        container.append(select);
+        button.append(span);
+        div.append(select);
+        div.append(button);
+        container.append(div);
 
         ko++;
     }
 
     function fillRoles(user) {
-        var roles = {'Guardian': 'Guardian', 'Teacher': 'Teacher', 'MaRe': 'Maison Relais'};
+        let roles = {'Guardian': 'Guardian', 'Teacher': 'Teacher', 'MaRe': 'Maison Relais'};
         let select = $('#editRole');
         select.html("");
 
@@ -368,6 +382,10 @@
                 addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
             }
         @endforeach
+    }
+
+    function renameItems(container) {
+        console.log(container);
     }
 </script>
 <script>
