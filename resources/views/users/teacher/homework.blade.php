@@ -159,7 +159,6 @@ function requestHomework(date,divID) {
         url: url,
         type: 'get',
         success: function(result){
-            console.log(result);
             fillobjects(result,divID)
             
 
