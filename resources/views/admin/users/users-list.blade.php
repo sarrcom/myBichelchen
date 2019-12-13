@@ -12,6 +12,8 @@
     <div class="container">
         <div class="wrapper-editor">
             <div class="block my-4">
+                <h1 class="d-flex justify-content-center">Admin Users List</h1>
+                <br>
                 <div class="d-flex justify-content-center">
                     <p class="h5 text-primary createShowP">0 row selected</p>
                 </div>
