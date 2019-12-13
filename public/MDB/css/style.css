@@ -1,37 +1,46 @@
 * {
     scroll-behavior: smooth;
 }
-html, body, header, .jarallax {
+html,
+body,
+header,
+.jarallax {
     height: 700px;
 }
 #secondaryHeader {
     height: 150px;
 }
 @media (max-width: 740px) {
-    html, body, header, .jarallax {
+    html,
+    body,
+    header,
+    .jarallax {
         height: 100vh;
-   }
+    }
 }
 @media (min-width: 800px) and (max-width: 850px) {
-    html, body, header, .jarallax {
+    html,
+    body,
+    header,
+    .jarallax {
         height: 100vh;
-   }
+    }
 }
 @media (min-width: 560px) and (max-width: 650px) {
     header .jarallax h1 {
-        margin-bottom: .5rem !important;
-   }
+        margin-bottom: 0.5rem !important;
+    }
     header .jarallax h5 {
-        margin-bottom: .5rem !important;
-   }
+        margin-bottom: 0.5rem !important;
+    }
 }
 @media (min-width: 660px) and (max-width: 700px) {
     header .jarallax h1 {
         margin-bottom: 1.5rem !important;
-   }
+    }
     header .jarallax h5 {
         margin-bottom: 1.5rem !important;
-   }
+    }
 }
 .top-nav-collapse {
     background-color: #373a6d !important;
@@ -42,12 +51,12 @@ html, body, header, .jarallax {
 @media (max-width: 768px) {
     .navbar:not(.top-nav-collapse) {
         background: #373a6d !important;
-   }
+    }
 }
 @media (min-width: 800px) and (max-width: 850px) {
     .navbar:not(.top-nav-collapse) {
-        background: #373a6d!important;
-   }
+        background: #373a6d !important;
+    }
 }
 footer.page-footer {
     background-color: #373a6d;
@@ -57,23 +66,29 @@ footer.page-footer {
     font-size: 0.8rem;
 }
 .form-elegant .z-depth-1a {
-    -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
-    box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+    -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26),
+        0 4px 12px 0 rgba(121, 155, 254, 0.25);
+    box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26),
+        0 4px 12px 0 rgba(121, 155, 254, 0.25);
 }
-.form-elegant .z-depth-1-half, .form-elegant .btn:hover {
-    -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
-    box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+.form-elegant .z-depth-1-half,
+.form-elegant .btn:hover {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28),
+        0 4px 15px 0 rgba(36, 133, 255, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28),
+        0 4px 15px 0 rgba(36, 133, 255, 0.15);
 }
 .form-elegant .modal-header {
     border-bottom: none;
 }
 .modal-dialog .form-elegant .btn .fab {
-    color: #2196F3 !important;
+    color: #2196f3 !important;
 }
-.form-elegant .modal-body, .form-elegant .modal-footer {
+.form-elegant .modal-body,
+.form-elegant .modal-footer {
     font-weight: 400;
 }
-#errorMessage{
+#errorMessage {
     text-align: center;
     color: red;
 }
@@ -99,25 +114,32 @@ footer.page-footer {
 .md-form .form-control.input-md {
     display: block;
     width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color:#495057;
-    background-color:#fff;
+    color: #495057;
+    background-color: #fff;
     background-clip: padding-box;
     border: 1px solid#ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+/* Admin Users List Modal Forms */
 .divFlex {
     display: flex;
-    padding-bottom: 3px;;
+    padding-bottom: 3px;
 }
 .divFlex span {
     margin: 0 15px;
 }
 .addChild {
-    color: #4285F4;
+    color: #4285f4;
+    font-weight: 400;
+}
+#editRole:focus {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
 }
