@@ -90,7 +90,11 @@ footer.page-footer {
     justify-content: space-evenly;
 }
 #cardWidth {
-    width: 30rem;
+    width: 30em;
+    height: 20em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .md-form .form-control.input-md {
     display: block;
@@ -109,7 +113,11 @@ footer.page-footer {
 }
 .divFlex {
     display: flex;
+    padding-bottom: 3px;;
 }
 .divFlex span {
     margin: 0 15px;
+}
+.addChild {
+    color: #4285F4;
 }

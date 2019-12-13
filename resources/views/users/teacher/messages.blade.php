@@ -18,8 +18,11 @@
 @endforeach -->
 
 <h1 class="d-flex justify-content-center">Teacher {{$user->first_name}}'s Messages</h1>
-<h4 class="d-flex justify-content-center">{{date("l")}}, {{date("d/m/Y")}}</h4>
-<br>
+<div class="d-flex justify-content-center">
+    <p class="h5 text-primary createShowP">{{date("l")}}, {{date("d/m/Y")}}</p>
+    <br><br><br>
+</div>
+
 <div class="container">
     <div class="card rare-wind-gradient chat-room">
     <div class="card-body">
