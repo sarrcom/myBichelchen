@@ -19,159 +19,98 @@
     <br>
 @endforeach -->
 
-<div class="container">
-    <!-- Table with panel -->
-    <div class="card card-cascade narrower">
+<div id="overview" class="container">
+    <!-- Card -->
+    <div class="row mx-1">
+        <div class="card card-cascade narrower">
 
-    <!--Card image-->
-    <div
-        class="view view-cascade gradient-card-header peach-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header purple-gradient">
 
-        <div>
-        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-            <i class="fas fa-th-large mt-0"></i>
-        </button>
-        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-            <i class="fas fa-columns mt-0"></i>
-        </button>
+            <!-- Title -->
+            <h2 class="card-header-title mb-3">Homework</h2>
+            <!-- Subtitle -->
+            <p class="card-header-subtitle mb-0">Deserve for her own card</p>
         </div>
 
-        <a href="" class="white-text mx-3">Table name</a>
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
 
-        <div>
-        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-            <i class="fas fa-pencil-alt mt-0"></i>
-        </button>
-        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-            <i class="far fa-trash-alt mt-0"></i>
-        </button>
-        <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-            <i class="fas fa-info-circle mt-0"></i>
-        </button>
+            <!-- Text -->
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam dignissimos neque rem nihil ratione est placeat vel, natus non quos laudantium veritatis sequi.Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi.</p>
+            <!-- Link -->
+            <a href="#!" class="purple-text d-flex flex-row-reverse p-2">
+            <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
+            </a>
+
         </div>
 
+        </div>
     </div>
-    <!--/Card image-->
+    <!-- Card -->
 
-    <div class="px-4">
+    <!-- Card -->
+    <div class="row mx-1">
+        <div class="card card-cascade narrower">
 
-        <div class="table-wrapper">
-        <!--Table-->
-        <table class="table table-hover mb-0">
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header peach-gradient">
 
-            <!--Table head-->
-            <thead>
-            <tr>
-                <th>
-                <input class="form-check-input" type="checkbox" id="checkbox">
-                <label class="form-check-label" for="checkbox" class="mr-2 label-table"></label>
-                </th>
-                <th class="th-lg">
-                <a>First Name
-                    <i class="fas fa-sort ml-1"></i>
-                </a>
-                </th>
-                <th class="th-lg">
-                <a href="">Last Name
-                    <i class="fas fa-sort ml-1"></i>
-                </a>
-                </th>
-                <th class="th-lg">
-                <a href="">Username
-                    <i class="fas fa-sort ml-1"></i>
-                </a>
-                </th>
-                <th class="th-lg">
-                <a href="">Username
-                    <i class="fas fa-sort ml-1"></i>
-                </a>
-                </th>
-                <th class="th-lg">
-                <a href="">Username
-                    <i class="fas fa-sort ml-1"></i>
-                </a>
-                </th>
-                <th class="th-lg">
-                <a href="">Username
-                    <i class="fas fa-sort ml-1"></i>
-                </a>
-                </th>
-            </tr>
-            </thead>
-            <!--Table head-->
+            <!-- Title -->
+            <h2 class="card-header-title mb-3">Notes</h2>
+            <!-- Subtitle -->
+            <p class="card-header-subtitle mb-0">Deserve for her own card</p>
 
-            <!--Table body-->
-            <tbody>
-            <tr>
-                <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkbox1">
-                <label class="form-check-label" for="checkbox1" class="label-table"></label>
-                </th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkbox2">
-                <label class="form-check-label" for="checkbox2" class="label-table"></label>
-                </th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkbox3">
-                <label class="form-check-label" for="checkbox3" class="label-table"></label>
-                </th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            <tr>
-                <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkbox4">
-                <label class="form-check-label" for="checkbox4" class="label-table"></label>
-                </th>
-                <td>Paul</td>
-                <td>Topolski</td>
-                <td>@P_Topolski</td>
-                <td>Paul</td>
-                <td>Topolski</td>
-                <td>@P_Topolski</td>
-            </tr>
-            <tr>
-                <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkbox5">
-                <label class="form-check-label" for="checkbox5" class="label-table"></label>
-                </th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            </tbody>
-            <!--Table body-->
-        </table>
-        <!--Table-->
         </div>
 
-    </div>
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
 
+            <!-- Text -->
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex minis recusandae. Facere modi sunt, quod quibusdam dignissimos neque rem nihil ratione est placeat vel, natus non quos laudantium veritatis sequi.Ut enim ad minima veniam, quis nostrum.</p>
+            <!-- Link -->
+            <a href="#!" class="orange-text d-flex flex-row-reverse p-2">
+            <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
+            </a>
+
+        </div>
+        <!-- Card content -->
+
+        </div>
     </div>
-    <!-- Table with panel -->
+    <!-- Card -->
+
+    <!-- Card -->
+    <div class="row mx-1">
+        <div class="card card-cascade narrower">
+
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header blue-gradient">
+
+            <!-- Title -->
+            <h2 class="card-header-title mb-3">Absences</h2>
+            <!-- Subtitle -->
+            <p class="card-header-subtitle mb-0">Deserve for her own card</p>
+
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
+
+            <!-- Text -->
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam dignissimos neque rem nihil ratione est placeat vel, natus non quos laudantium veritatis sequi.Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
+            <!-- Link -->
+            <a href="#!" class="blue-text d-flex flex-row-reverse p-2">
+            <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
+            </a>
+
+        </div>
+
+        </div>
+    </div>
+    <!-- Card -->
+    
+
 </div>
 @endsection
 

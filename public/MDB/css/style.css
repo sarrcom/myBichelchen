@@ -84,6 +84,9 @@ footer.page-footer {
 #adminLoginForm {
     padding-bottom: 150px;
 }
-/* Add and Edit User Role Selector */
-
+/* User Overview */
+#overview {
+    display: flex;
+    justify-content: space-evenly;
+}
 
