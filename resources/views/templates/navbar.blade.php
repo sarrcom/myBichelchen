@@ -17,7 +17,7 @@
                     @elseif (isset($user) && $user->role=='Teacher')
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item ">
-                                <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>
+                                <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
@@ -41,13 +41,13 @@
                             @elseif (isset($user) && $user->role=='Guardian')
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item ">
-                                        <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>
+                                        <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">{{ __('navbar.messages') }}</a>
+                                        <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">{{ __('navbar.homework') }}</a>
+                                        <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
                                     </li>
                                 </ul>
                                 <!-- Drop down menu for Parents -->
@@ -65,13 +65,13 @@
                                     @elseif (isset($user) && $user->role=='MaRe')
                                         <ul class="navbar-nav mr-auto">
                                             <li class="nav-item ">
-                                                <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>
+                                                <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#">{{ __('navbar.messages') }}</a>
+                                                <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#">{{ __('navbar.homework') }}</a>
+                                                <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
                                             </li>
                                         </ul>
                                         <!-- Drop down menu for MaRe -->

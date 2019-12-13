@@ -31,7 +31,7 @@
                             <form method="POST" id="addForm">
                                 @csrf
                                 @method('POST')
-                                <div class="modal-body mx-3 modal-add-inputs">
+                                <div class="modal-body mx-3">
                                     <div class="md-form mb-5">
                                         <select id="addRole" name="role" class="form-control input-md" required>
                                             <option value="Guardian">Guardian</option>

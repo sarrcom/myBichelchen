@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="{{ asset('MDB/css/addons/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('MDB/css/addons/table-editor.min.css') }}">
     <link rel="stylesheet" href="{{ asset('MDB/css/style.css') }}">
+    <!-- Chat CSS -->
+    <link href="{{ asset('MDB/css/addons-pro/chat.css') }}" rel="stylesheet">
+    <!-- Chat CSS - minified-->
+    <link href="{{ asset('MDB/css/addons-pro/chat.min.css') }}" rel="stylesheet">
 </head>
 <body>
         @yield('navbar')

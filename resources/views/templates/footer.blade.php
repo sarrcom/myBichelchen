@@ -22,7 +22,7 @@
 <!--Copyright-->
 <div class="footer-copyright py-3 text-center">
     <div class="container-fluid">&copy; 2019 <a href="https://mybichelchen.lu/">myBichelchen.lu</a> - {{ __('footer.rights') }}<br>
-    <a href=""></a> -
+    <a href=""></a>
     </div>
 </div>
 <!--/.Copyright-->
