@@ -223,7 +223,8 @@
         $('#editForm label').addClass('active');
     })
     //Hide Edit button until User Row is Selected
-    $('tbody').click(function() {
+    $('tbody').click(function(e) {
+        e.preventDefault();
         $('#editOpenModal').css('display', 'block');
     });
 </script>
