@@ -37,7 +37,7 @@
                 <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
                     <!-- All Messages -->
                     <ul id="allMessages" class="list-unstyled friend-list">
-                        <!-- Chat box -->
+                        <!-- Inbox Box -->
                         <li class="active grey lighten-3 p-2">
                             <a href="#" class="d-flex justify-content-between">
                             <img src="https://image.flaticon.com/icons/png/512/145/145842.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
@@ -53,9 +53,9 @@
                             </div>  
                             </a>
                         </li>
-                        <!-- /Chat box -->
+                        <!-- /Inbox Box -->
 
-                        <!-- Chat box -->
+                        <!-- Inbox Box -->
                         <li class="p-2">
                             <a href="#" class="d-flex justify-content-between">
                             <img src="https://image.flaticon.com/icons/png/512/145/145844.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
@@ -71,7 +71,7 @@
                                 </div>
                             </a>
                         </li>
-                        <!-- /Chat box -->
+                        <!-- /Inbox Box -->
                     </ul>
                     <!-- /All Messages -->
                 </div>
@@ -98,7 +98,7 @@
                 </p>
               </div>
             </li>
-
+            <!-- Chat Box -->
             <li class="d-flex justify-content-between mb-4">
               <div class="chat-body white p-3 z-depth-1">
                 <div class="header">
@@ -112,7 +112,9 @@
               </div>
               <img src="https://image.flaticon.com/icons/png/512/145/145842.png" alt="avatar" class="avatar rounded-circle mr-0 ml-3 z-depth-1">
             </li>
+            <!-- /Chat Box -->
 
+            <!-- Chat Box -->
             <li class="d-flex justify-content-between mb-4 pb-3">
               <img src="https://image.flaticon.com/icons/png/512/145/145843.png" alt="avatar" class="avatar rounded-circle mr-2 ml-lg-3 ml-0 z-depth-1">
               <div class="chat-body white p-3 ml-2 z-depth-1">
@@ -122,11 +124,13 @@
                 </div>
                 <hr class="w-100">
                 <p class="mb-0">
-                  No problem at all!
+                  No problem at all! Are we still on for the teacher parent meetup?
                 </p>
               </div>
             </li>
+            <!-- /Chat Box -->
 
+            <!-- Chat Box -->
             <li class="white">
                 <!-- Send Message -->
                 <div class="chat-body white p-3 z-depth-1">
