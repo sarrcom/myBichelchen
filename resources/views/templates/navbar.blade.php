@@ -32,7 +32,7 @@
                     @elseif (isset($user) && $user->role=='Teacher')
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item ">
-                                <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
+                                <a class="nav-link" href="/user">{{ __('navbar.overview') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
@@ -67,7 +67,7 @@
                             @elseif (isset($user) && $user->role=='Guardian')
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item ">
-                                        <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
+                                        <a class="nav-link" href="/user">{{ __('navbar.overview') }}</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
@@ -102,7 +102,7 @@
                                     @elseif (isset($user) && $user->role=='MaRe')
                                         <ul class="navbar-nav mr-auto">
                                             <li class="nav-item ">
-                                                <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
+                                                <a class="nav-link" href="/user">{{ __('navbar.overview') }}</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
