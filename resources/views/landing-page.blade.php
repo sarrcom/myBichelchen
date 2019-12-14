@@ -223,7 +223,7 @@
                     <!--Grid row-->
                 </form>
                 <div class="text-center text-md-left my-4">
-                    <a class="btn btn-orange btn-rounded" onclick="document.getElementById('contact-form').submit();">{{ __('landing-page.send') }}</a>
+                    <a class="btn btn-orange btn-rounded" onclick="validateForm()">{{ __('landing-page.send') }}</a>
                 </div>
             </div>
             <!--Grid column-->
@@ -288,6 +288,7 @@
 
 <script>
     document.getElementById('status').innerHTML = "Sending...";
+    
     formData = {
         'name'     : $('input[name=name]').val(),
         'email'    : $('input[name=email]').val(),
@@ -310,35 +311,36 @@
     });
 
     function validateForm() {
-    let name =  document.getElementById('name').value;
-    if (name == "") {
-        document.getElementById('status').innerHTML = "Name cannot be empty";
-        return false;
-        }
-    let email =  document.getElementById('email').value;
-    if (email == "") {
-        document.getElementById('status').innerHTML = "Email cannot be empty";
-        return false;
-        } else {
-        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(!re.test(email)){
-            document.getElementById('status').innerHTML = "Email format invalid";
+        let name =  document.getElementById('name').value;
+        if (name == "") {
+            document.getElementById('status').innerHTML = "Name cannot be empty";
             return false;
+            }
+        let email =  document.getElementById('email').value;
+        if (email == "") {
+            document.getElementById('status').innerHTML = "Email cannot be empty";
+            return false;
+            } else {
+            let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(!re.test(email)){
+                document.getElementById('status').innerHTML = "Email format invalid";
+                return false;
+            }
         }
-    }
+        
     let subject =  document.getElementById('subject').value;
     if (subject == "") {
-            document.getElementById('status').innerHTML = "Subject cannot be empty";
-            return false;
-            }
-        let message =  document.getElementById('message').value;
-        if (message == "") {
-            document.getElementById('status').innerHTML = "Message cannot be empty";
-            return false;
-            }
-        document.getElementById('status').innerHTML = "Sending...";
-        document.getElementById('contact-form').submit();
-
+        document.getElementById('status').innerHTML = "Subject cannot be empty";
+        return false;
         }
+    let message =  document.getElementById('message').value;
+    if (message == "") {
+        document.getElementById('status').innerHTML = "Message cannot be empty";
+        return false;
+        }
+    document.getElementById('status').innerHTML = "Sending...";
+    document.getElementById('contact-form').submit();
+
+    }
 </script>
 @endsection
