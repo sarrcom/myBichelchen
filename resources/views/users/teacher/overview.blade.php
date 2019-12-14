@@ -27,7 +27,7 @@
 
 <!-- Notifications -->
 <div id="overview" class="container">
-    <!-- Card -->
+    <!-- Homework Card -->
     <div class="row mx-1">
         <div class="card card-cascade narrower">
 
@@ -58,7 +58,7 @@
     </div>
     <!-- /Card -->
 
-    <!-- Card -->
+    <!-- Notes Card -->
     <div class="row mx-1">
         <div class="card card-cascade narrower">
 
@@ -88,7 +88,7 @@
     </div>
     <!-- /Card -->
 
-    <!-- Card -->
+    <!-- Absences Card -->
     <div class="row mx-1">
         <div class="card card-cascade narrower">
 

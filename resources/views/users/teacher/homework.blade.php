@@ -78,7 +78,7 @@ teacher-homework
         showTables();
     }
 
-    //function to change the selector  of recipient of homework
+    //function to change the selector of recipient of homework
     function changeRecipient(){
         $(recipient).empty();
         let radioSelected = $('input[name=sendTo]:checked').val();
