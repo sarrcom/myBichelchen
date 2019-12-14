@@ -59,17 +59,8 @@ teacher-messages
 
     showMessages();
     function showMessages() {
-        $('#allMessages').html('');
-        let listItem;
-        let content;
-        @foreach ($messages as $message);
-            listItem = $('<li></li>');
-            content = "{{$message->subject}}";
-            listItem.text(content);
-
-            $('#allMessages').append(listItem);
-        @endforeach
-
+        
+        requestMessages();
     }
 
 
@@ -82,7 +73,7 @@ teacher-messages
                 data: $('#sendMessageForm').serialize(),
                 success: function(result){
                     console.log(result);
-                    location.reload();
+                    showMessages() 
                 },
                 error: function(err){
                     console.log('error')
@@ -91,20 +82,29 @@ teacher-messages
         });
     });
 
-    /*
+    
     function requestMessages() {
     $.ajax({
-        url: '/user/messages',
+        url: '/user/messages/'+{{$user->id}},
         type: 'get',
         success: function(result){
-            console.log("hello boi");
+            console.log(result);
+            let listItem;
+            let content;
+            $('#allMessages').html('');
+            for(message of result){
+            content = message.subject;
+            listItem = $('<li></li>');
+            listItem.text(content);
             
-            showMessages();
+            $('#allMessages').append(listItem);    
+            }  
+
         },
         error: function(err){
-            console.log('error')
+            console.log(err)
         }
     });
 }     
-*/
+
 </script>
