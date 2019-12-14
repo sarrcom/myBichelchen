@@ -200,6 +200,8 @@ class UsersController extends Controller
         return redirect('/admin/users');
     }
 
+
+    
     /**
      * Display the overview of the user.
      *
@@ -231,20 +233,35 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function homework()
+    public function homework($date=null)
     {
+
+        /*
+        This contrroller sends the view if the argument is empty, if it provides a date it calls
+        a function to return data
+        */
         $user = session()->get('loggedUser');
+        if($date == null){
+            
+    
+    
+            if ($user->role=='Teacher') {
+    
+                return view('users.teacher.homework',['user'=> $user]);
+            }
+            if ($user->role=='Guardian') {
+                return view('users.guardian.homework',['user'=> $user]);
+            }
+            if ($user->role=='MaRe') {
+                return view('users.mare.homework',['user'=> $user]);
+            }
+        }else{
+            $homeworks = Notification::where('date', $date)
+            ->where('user_id', $user->id)
+            ->where('type', 'Homework')
+            ->get();
 
-
-        if ($user->role=='Teacher') {
-
-            return view('users.teacher.homework',['user'=> $user]);
-        }
-        if ($user->role=='Guardian') {
-            return view('users.guardian.homework',['user'=> $user]);
-        }
-        if ($user->role=='MaRe') {
-            return view('users.mare.homework',['user'=> $user]);
+            return $homeworks;
         }
     }
 
@@ -254,23 +271,29 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function messages()
+    public function messages($id=null)
     {
 
         $user = session()->get('loggedUser');
 
-        $messages = Notification::where('user_id',$user->id)->get();
+        if ($id == null) {
+            
+            if ($user->role=='Teacher') {
+                
+                return view('users.teacher.messages',['user'=> $user]);
+            }
+            if ($user->role=='Guardian') {
+                return view('users.guardian.messages',['user'=> $user]);
+            }
+            if ($user->role=='MaRe') {
+                return view('users.mare.messages',['user'=> $user]);
+            }
+        }else{
+            $messages = Notification::where('user_id',$id)->get();
 
-        if ($user->role=='Teacher') {
-   
-            return view('users.teacher.messages',['user'=> $user, 'messages'=>$messages]);
+            return $messages;
         }
-        if ($user->role=='Guardian') {
-            return view('users.guardian.messages',['user'=> $user, 'messages'=>$messages]);
-        }
-        if ($user->role=='MaRe') {
-            return view('users.mare.messages',['user'=> $user, 'messages'=>$messages]);
-        }
+
     }
 
     public function login(Request $request)
@@ -368,35 +391,13 @@ class UsersController extends Controller
 
         return 'submitted';
     }
-
-    public function showHomework($date){
-        
-        $user = session()->get('loggedUser');
-
-        $homeworks = Notification::where('date', $date)
-                ->where('user_id', $user->id)
-                ->get();
-
-        return $homeworks;
-    }
-/*
-    public function messages(){
-        
-        $user = session()->get('loggedUser');
-
-        $messages = Notification::where('user_id')
-                ->get();
-
-        return $messages;
-    }
-*/
     /*
 
     for debugging the homework query we may need it later so dont delete this
 
     it shows the error page in stead of staying in the same page
     typo in the Model:(
-
+        
     public function test(){
         // get the current user to provide id
 

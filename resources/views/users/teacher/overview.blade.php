@@ -1,5 +1,5 @@
 @extends('templates.main')
-@section('title', 'overview')
+@section('title', 'Overview')
 
 <header id="secondaryHeader">
 @section('navbar')
@@ -19,14 +19,15 @@
     <br>
 @endforeach -->
 
-<h1 class="d-flex justify-content-center">Teacher {{$user->first_name}}'s Messages</h1>
+<h1 class="d-flex justify-content-center">Overview</h1>
 <div class="d-flex justify-content-center">
     <p class="h5 text-primary createShowP">{{date("l")}}, {{date("d/m/Y")}}</p>
     <br><br><br>
 </div>
 
+<!-- Notifications -->
 <div id="overview" class="container">
-    <!-- Card -->
+    <!-- Homework Card -->
     <div class="row mx-1">
         <div class="card card-cascade narrower">
 
@@ -34,7 +35,9 @@
             <div class="view view-cascade gradient-card-header purple-gradient">
 
                 <!-- Title -->
-                <h2 class="card-header-title mb-3">Homework</h2>
+                <a href="/user/homework" class="white-text">
+                    <h2 class="card-header-title mb-3">Homework</h2>
+                </a>
                 <!-- Subtitle -->
                 <p class="card-header-subtitle mb-0">Today's Homework</p>
             </div>
@@ -53,9 +56,9 @@
 
         </div>
     </div>
-    <!-- Card -->
+    <!-- /Card -->
 
-    <!-- Card -->
+    <!-- Notes Card -->
     <div class="row mx-1">
         <div class="card card-cascade narrower">
 
@@ -63,7 +66,9 @@
             <div class="view view-cascade gradient-card-header peach-gradient">
 
                 <!-- Title -->
-                <h2 class="card-header-title mb-3">Notes</h2>
+                <a href="#!" class="white-text">
+                    <h2 class="card-header-title mb-3">Notes</h2>
+                </a>
                 <!-- Subtitle -->
                 <p class="card-header-subtitle mb-0">Today's Notes</p>
             </div>
@@ -81,17 +86,19 @@
 
         </div>
     </div>
-    <!-- Card -->
+    <!-- /Card -->
 
-    <!-- Card -->
+    <!-- Absences Card -->
     <div class="row mx-1">
         <div class="card card-cascade narrower">
 
             <!-- Card image -->
-            <div class="view view-cascade gradient-card-header blue-gradient">
+            <div class="view view-cascade gradient-card-header aqua-gradient">
 
                 <!-- Title -->
-                <h2 class="card-header-title mb-3">Absences</h2>
+                <a href="#!" class="white-text">
+                    <h2 class="card-header-title mb-3">Absences</h2>
+                </a>
                 <!-- Subtitle -->
                 <p class="card-header-subtitle mb-0">Today's Absences</p>
             </div>
@@ -109,37 +116,100 @@
 
         </div>
     </div>
-    <!-- Card -->
+    <!-- /Card -->
 
 </div>
-<!-- Unread Messages -->
+<!-- /Notifications -->
+
 <br><br><br>
-<!-- Grid row -->
+
+<!-- Unread Messages -->
 <div class="container">
-    <h3 class="d-flex justify-content-center">Unread Messages</h3>
-    <br><br><br>
-    <!-- Grid column -->
-    <div class="col-md-6 col-xl-4 px-0">
-        <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
-            <ul class="list-unstyled friend-list">
-                <li>
-                <a href="#" class="d-flex justify-content-between">
-                    <div class="text-small">
-                        <strong>John Doe</strong>
-                        <p class="last-message text-muted">Hello, Are you there?</p>
-                    </div>
-                    <div class="chat-footer">
-                        <p class="text-smaller text-muted mb-0">Just now</p>
-                        <span class="badge badge-danger float-right">1</span>
-                    </div>
-                </a>
-                </li>
-            </ul>
+    <!-- Table with panel -->
+    <div class="card card-cascade narrower">
+
+    <!--Card image-->
+    <div
+        class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+        <div>
+            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                <i class="far fa-envelope"></i>
+            </button>
         </div>
+
+        <a href="/user/messages" class="white-text mx-3">Unread Messages</a>
+
+        <div>
+            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                <i class="far fa-trash-alt mt-0"></i>
+            </button>
+        </div>
+
     </div>
+    <!--/Card image-->
+
+    <div class="px-4">
+
+        <div class="table-wrapper">
+        <!--Table-->
+        <table class="table table-hover mb-0">
+
+            <!--Table head-->
+            <thead>
+            <tr>
+                    <th>
+                        <input class="form-check-input" type="checkbox" id="checkbox">
+                        <label class="form-check-label" for="checkbox" class="mr-2 label-table"></label>
+                    </th>
+                <th class="th-lg">
+                    <a>First Name</a>
+                </th>
+                <th class="th-lg">
+                    <a href="">Last Name</a>
+                </th>
+                <th class="th-lg">
+                    <a href="">Username</a>
+                </th>
+                <th class="th-lg">
+                    <a href="">Message</a>
+                </th>
+                <th class="th-lg">
+                    <a href="">Date</a>
+                </th>
+            </tr>
+            </thead>
+            <!--/Table head-->
+
+            <!--Table body-->
+            <tbody>
+                <tr>
+                    <th scope="row">
+                    <input class="form-check-input" type="checkbox" id="checkbox1">
+                    <label class="form-check-label" for="checkbox1" class="label-table"></label>
+                    </th>
+                    <td>Elaine</td>
+                    <td>Kim</td>
+                    <td>clusterfox</td>
+                    <td>Hello are you there</td>
+                    <td>{{date("d/m/Y")}}</td>
+                </tr>
+            </tbody>
+            <!--/Table body-->
+        </table>
+        <!--/Table-->
+        </div>
+
+    </div>
+
+    </div>
+    <!-- Table with panel -->
 </div>
+<!-- /Unread Meassages -->
+
 @endsection
 
 @section('footer')
 @include('templates.footer')
 @endsection
+

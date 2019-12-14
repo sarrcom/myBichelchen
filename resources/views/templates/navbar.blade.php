@@ -1,11 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
     <div class="container">
-        <a class="navbar-brand" href="#"><strong>myBichelchen</strong></a>
+        <a class="navbar-brand" href="/user"><strong>myBichelchen</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-            @if (isset($admin))
+            
+            <!-- If User is Admin -->
+            @if (isset($user) && $user->role=='Admin')
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
                         <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>
