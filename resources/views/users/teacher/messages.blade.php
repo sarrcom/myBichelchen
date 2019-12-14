@@ -94,7 +94,7 @@
                 </div>
                 <hr class="w-100">
                 <p class="mb-0">
-                  Hello, how many pages does my son have to write for his homework today?
+                  Hello, how many pages does my son have to write for his homework today? 
                 </p>
               </div>
             </li>
@@ -124,7 +124,7 @@
                 </div>
                 <hr class="w-100">
                 <p class="mb-0">
-                  No problem at all! Are we still on for the teacher parent meetup?
+                  No problem at all! Are we still on for the teacher parent meetup? I'm not sure I am going to be able to make it as my schedule is not free this Friday.
                 </p>
               </div>
             </li>
