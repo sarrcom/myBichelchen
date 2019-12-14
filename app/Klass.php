@@ -16,6 +16,11 @@ class Klass extends Model
     {
         return $this->hasMany('App\Student');
     }
+    public function notifications()
+    {
+        return $this->hasMany('App\Notification');
+    }
+
 
     public function school()
     {

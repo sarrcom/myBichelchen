@@ -179,6 +179,8 @@ class UsersController extends Controller
         return redirect('/admin/users');
     }
 
+
+    
     /**
      * Display the overview of the user.
      *
@@ -210,20 +212,35 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function homework()
+    public function homework($date=null)
     {
+
+        /*
+        This contrroller sends the view if the argument is empty, if it provides a date it calls
+        a function to return data
+        */
         $user = session()->get('loggedUser');
+        if($date == null){
+            
+    
+    
+            if ($user->role=='Teacher') {
+    
+                return view('users.teacher.homework',['user'=> $user]);
+            }
+            if ($user->role=='Guardian') {
+                return view('users.guardian.homework',['user'=> $user]);
+            }
+            if ($user->role=='MaRe') {
+                return view('users.mare.homework',['user'=> $user]);
+            }
+        }else{
+            $homeworks = Notification::where('date', $date)
+            ->where('user_id', $user->id)
+            ->where('type', 'Homework')
+            ->get();
 
-
-        if ($user->role=='Teacher') {
-
-            return view('users.teacher.homework',['user'=> $user]);
-        }
-        if ($user->role=='Guardian') {
-            return view('users.guardian.homework',['user'=> $user]);
-        }
-        if ($user->role=='MaRe') {
-            return view('users.mare.homework',['user'=> $user]);
+            return $homeworks;
         }
     }
 
@@ -233,21 +250,29 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function messages()
+    public function messages($id=null)
     {
 
         $user = session()->get('loggedUser');
 
-        if ($user->role=='Teacher') {
-   
-            return view('users.teacher.messages',['user'=> $user]);
+        if ($id == null) {
+            
+            if ($user->role=='Teacher') {
+                
+                return view('users.teacher.messages',['user'=> $user]);
+            }
+            if ($user->role=='Guardian') {
+                return view('users.guardian.messages',['user'=> $user]);
+            }
+            if ($user->role=='MaRe') {
+                return view('users.mare.messages',['user'=> $user]);
+            }
+        }else{
+            $messages = Notification::where('user_id',$id)->get();
+
+            return $messages;
         }
-        if ($user->role=='Guardian') {
-            return view('users.guardian.messages',['user'=> $user]);
-        }
-        if ($user->role=='MaRe') {
-            return view('users.mare.messages',['user'=> $user]);
-        }
+
     }
 
     public function login(Request $request)
@@ -271,10 +296,12 @@ class UsersController extends Controller
     }
 
     public function submitHomework(Request $request){
-        // get the current user to provide id
-        if (!is_numeric($request->sendTo)) {
+        
+
+        if (!is_numeric($request->recipient)) {
             return $request->recipient;
         }
+        // get the current user to provide id
         $user = session()->get('loggedUser');
 
         //we check for subject and description, because the other fields are filled in by default
@@ -306,15 +333,42 @@ class UsersController extends Controller
         return 'submitted';
     }
 
-    public function showHomework($date){
+
+    public function sendMessages(Request $request){
         
+
+        if (!is_numeric($request->recipient)) {
+            return $request->recipient;
+        }
+        // get the current user to provide id
         $user = session()->get('loggedUser');
 
-        $homeworks = Notification::where('date', $date)
-                ->where('user_id', $user->id)
-                ->get();
+        //we check for subject and description, because the other fields are filled in by default
+        $validation = $request->validate([
+            'subject' => 'required|min:4|max:255',
+            'description' => 'required|min:2|max:255',
+            'dueDate' => 'after:today'
 
-        return $homeworks;
+        ]);
+
+        $message = new Notification();
+
+        $message->description = trim($request->description);
+        $message->subject = trim($request->subject);
+        $message->type = 'Note';
+
+        if ($request->sendTo == 'class')
+            $message->klass_id = $request->recipient;
+        else if($request->sendTo == 'student'){    
+            $message->student_id = $request->recipient;
+        }
+
+        $message->user_id = $user->id;
+
+
+        $message->save();
+
+        return 'submitted';
     }
     /*
 
@@ -322,12 +376,12 @@ class UsersController extends Controller
 
     it shows the error page in stead of staying in the same page
     typo in the Model:(
-
+        
     public function test(){
         // get the current user to provide id
 
         //we check for subject and description, because the other fields are filled in by default
-        $validation = $request->validate([
+        /*$validation = $request->validate([
             'subject' => 'required|min:4|max:255',
             'description' => 'required|min:2|max:255'
             //'dueDate' => 'after:today'
@@ -338,12 +392,12 @@ class UsersController extends Controller
 
         $homework->description = 'hello';
         $homework->subject = 'random';
-        $homework->type = 'Homework';
+        $homework->type = 'Note';
         $homework->klass_id = 1;
 
 
-        $homework->user_id = 1;
-        $homework->date = '2019-12-12';
+        $homework->user_id = 2;
+
 
 
         $homework->save();
