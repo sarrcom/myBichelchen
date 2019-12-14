@@ -151,10 +151,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        print_r($user);
         $validation = $request->validate([
             'first_name' => 'required|min:2|max:20',
             'last_name' => 'required|min:2|max:20'
-        ]);
+            ]);
 
         $user = User::find($id);
 
@@ -164,7 +165,27 @@ class UsersController extends Controller
         $user->role = $request->role;
         $user->timestamps = false;
 
+
         $user->save();
+
+        /*$i = 0;
+        $klassName = 'klass' . $i;
+        $childName = 'child' . $i;
+        if ($user->role == 'Teacher') {
+            TeacherKlass::where('user_id', $user->id)->delete();
+            while (isset($request->$klassName)) {
+                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $i++;
+                $klassName = 'klass' . $i;
+            }
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            ResponsibleOfStudent::where('user_id', $user->id)->delete();
+            while (isset($request->$childName)) {
+                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $i++;
+                $childName = 'child' . $i;
+            }
+        }*/
     }
 
     /**

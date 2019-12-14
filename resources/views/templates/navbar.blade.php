@@ -14,88 +14,88 @@
                         <a class="nav-link" href="#">{{ __('navbar.messages') }}</a>
                     </li>
                 </ul>
-                    @elseif (isset($user) && $user->role=='Teacher')
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
-                            </li>
-                        </ul>
-                        <!-- Drop down menu for Teachers -->
-                        <div class="dropdown">
-                            <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Class
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
-                                @foreach ($user->klasses as $klass)
-                                    <a class="dropdown-item" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
-                                @endforeach
-                            </div>
-                        </div>
-                            @elseif (isset($user) && $user->role=='Guardian')
-                                <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item ">
-                                        <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
-                                    </li>
-                                </ul>
-                                <!-- Drop down menu for Parents -->
-                                <div class="dropdown">
-                                    <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        Child
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
-                                    @foreach ($user->students as $student)
-                                        <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
-                                    @endforeach
-                                    </div>
-                                </div>
-                                    @elseif (isset($user) && $user->role=='MaRe')
-                                        <ul class="navbar-nav mr-auto">
-                                            <li class="nav-item ">
-                                                <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
-                                            </li>
-                                        </ul>
-                                        <!-- Drop down menu for MaRe -->
-                                        <div class="dropdown">
-                                            <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                Child
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
-                                                @foreach ($user->students as $student)
-                                                    <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                            @else
-                                                <ul class="navbar-nav mr-auto">
-                                                    <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
-                                                <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>
-                                                </ul>
-                                                <div>
-                                                    <button class="btn btn-outline-white waves-effect waves-light btn-rounded" type="button" data-toggle="modal" aria-haspopup="true" data-target="#elegantModalForm">Sign In
-                                                    </button>
-                                                </div>
-                                                    @endif
+            @elseif (isset($user) && $user->role=='Teacher')
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
+                    </li>
+                </ul>
+                <!-- Drop down menu for Teachers -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Class
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                        @foreach ($user->klasses as $klass)
+                            <a class="dropdown-item" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
+                        @endforeach
+                    </div>
+                </div>
+            @elseif (isset($user) && $user->role=='Guardian')
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
+                    </li>
+                </ul>
+                <!-- Drop down menu for Parents -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Child
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                        @foreach ($user->students as $student)
+                            <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+            @elseif (isset($user) && $user->role=='MaRe')
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/user/overview">{{ __('navbar.overview') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/messages">{{ __('navbar.messages') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
+                    </li>
+                </ul>
+                <!-- Drop down menu for MaRe -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Child
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                        @foreach ($user->students as $student)
+                            <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+            @else
+                <ul class="navbar-nav mr-auto">
+                    <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
+                <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>
+                </ul>
+                <div>
+                    <button class="btn btn-outline-white waves-effect waves-light btn-rounded" type="button" data-toggle="modal" aria-haspopup="true" data-target="#elegantModalForm">Sign In
+                    </button>
+                </div>
+            @endif
         </div>
     </div>
 </nav>

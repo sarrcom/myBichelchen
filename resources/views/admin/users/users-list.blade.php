@@ -83,7 +83,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form method="POST" id="editForm">
+                            <form action="/users/{{ $user->id ?? ''}}" method="POST" id="editForm">
                                 @csrf
                                 @method('PUT')
                                 <div class="modal-body mx-3 modal-inputs">
@@ -114,7 +114,7 @@
                                     <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center editInsideWrapper">
-                                    <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Edit form
+                                    <button name="editSubmit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Edit form
                                         <i class="far fa-paper-plane ml-1"></i>
                                     </button>
                                 </div>
@@ -206,11 +206,13 @@
 <script>
     const addItemsContainer = $("#addItemsContainer");
     const editItemsContainer = $("#editItemsContainer");
+    let myUser;
     let previousRole;
-    let co = 0;
-    let ko = 0;
+    let counter;
 
     $('#addOpenModal').click(function(e) {
+        counter = 0;
+        addItemsContainer.html("");
         previousRole = $("#addRole").val();
         displayAddKlassOrChild(previousRole, "add");
     });
@@ -256,7 +258,7 @@
                 } else if (method == "edit") {
                     editItemsContainer.html("");
                 }
-                co = 0;
+                counter = 0;
                 previousRole = role;
             }
         } else {
@@ -267,7 +269,7 @@
                 } else if (method == "edit") {
                     editItemsContainer.html("");
                 }
-                ko = 0;
+                counter = 0;
                 previousRole = role;
             }
         }
@@ -301,7 +303,7 @@
         let span = $('<span></span>');
 
         div.attr("class", "divFlex");
-        select.attr("name", "child" + co);
+        select.attr("name", "child" + counter);
         select.attr("class", "form-control input-md");
         button.attr("type", "button");
         button.attr("class", "close text-primary");
@@ -331,7 +333,7 @@
         div.append(button);
         container.append(div);
 
-        co++;
+        counter++;
     }
 
     function addKlassItem(container, user, klassId) {
@@ -341,7 +343,7 @@
         let span = $('<span></span>');
 
         div.attr("class", "divFlex");
-        select.attr("name", "klass" + ko);
+        select.attr("name", "klass" + counter);
         select.attr("class", "form-control input-md");
         button.attr("type", "button");
         button.attr("class", "close text-primary");
@@ -371,7 +373,7 @@
         div.append(button);
         container.append(div);
 
-        ko++;
+        counter++;
     }
 
     function fillRoles(user) {
@@ -405,7 +407,12 @@
     }
 
     function renameItems(container) {
-        console.log(container);
+        counter = 0;
+        let selects = $("#" + container[0].id + " select");
+        for (const select of selects) {
+            $(select).attr("name", select["name"].slice(0, -1) + counter);
+            counter++;
+        }
     }
 </script>
 <script>
@@ -433,7 +440,26 @@
 </script>
 <script>
     $(function(){
+        $('button[name="editSubmit"]').click(function(e){            
+            e.preventDefault();
+            $.ajax({
+                url: '/users/' + myUser.id,
+                type: 'put',
+                data: $('#editForm').serialize(),
+                success: function(result){
+                    console.log("success");
+                },
+                error: function(err){
+                    console.log('Oh boi')
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(function(){
         $('#editOpenModal').click(function(e){
+            counter = 0;
             let username = $('#dt-less-columns .tr-color-selected td').eq(3).text();
 
             e.preventDefault();
@@ -441,17 +467,18 @@
                 url: "/users/" + username + "/edit",
                 type: 'get',
                 success: function(result){
-                    fillRoles(result);
+                    myUser = result;
+                    fillRoles(myUser);
 
-                    $('#modalEdit15 input[name="first_name"]').val(result.first_name);
-                    $('#modalEdit15 input[name="last_name"]').val(result.last_name);
-                    $('#modalEdit15 input[name="date_of_birth"]').val(result.date_of_birth);
+                    $('#modalEdit15 input[name="first_name"]').val(myUser.first_name);
+                    $('#modalEdit15 input[name="last_name"]').val(myUser.last_name);
+                    $('#modalEdit15 input[name="date_of_birth"]').val(myUser.date_of_birth);
 
                     editItemsContainer.html("");
-                    if (result.role == "Teacher") {
-                        fillKlasses(result);
+                    if (myUser.role == "Teacher") {
+                        fillKlasses(myUser);
                     } else {
-                        fillChilds(result);
+                        fillChilds(myUser);
                     }
 
                     previousRole = $("#editRole").val();
