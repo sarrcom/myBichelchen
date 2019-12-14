@@ -238,15 +238,17 @@ class UsersController extends Controller
 
         $user = session()->get('loggedUser');
 
+        $messages = Notification::where('user_id',$user->id)->get();
+
         if ($user->role=='Teacher') {
    
-            return view('users.teacher.messages',['user'=> $user]);
+            return view('users.teacher.messages',['user'=> $user, 'messages'=>$messages]);
         }
         if ($user->role=='Guardian') {
-            return view('users.guardian.messages',['user'=> $user]);
+            return view('users.guardian.messages',['user'=> $user, 'messages'=>$messages]);
         }
         if ($user->role=='MaRe') {
-            return view('users.mare.messages',['user'=> $user]);
+            return view('users.mare.messages',['user'=> $user, 'messages'=>$messages]);
         }
     }
 
@@ -271,10 +273,12 @@ class UsersController extends Controller
     }
 
     public function submitHomework(Request $request){
-        // get the current user to provide id
-        if (!is_numeric($request->sendTo)) {
+        
+
+        if (!is_numeric($request->recipient)) {
             return $request->recipient;
         }
+        // get the current user to provide id
         $user = session()->get('loggedUser');
 
         //we check for subject and description, because the other fields are filled in by default
@@ -306,6 +310,44 @@ class UsersController extends Controller
         return 'submitted';
     }
 
+
+    public function sendMessages(Request $request){
+        
+
+        if (!is_numeric($request->recipient)) {
+            return $request->recipient;
+        }
+        // get the current user to provide id
+        $user = session()->get('loggedUser');
+
+        //we check for subject and description, because the other fields are filled in by default
+        $validation = $request->validate([
+            'subject' => 'required|min:4|max:255',
+            'description' => 'required|min:2|max:255',
+            'dueDate' => 'after:today'
+
+        ]);
+
+        $message = new Notification();
+
+        $message->description = trim($request->description);
+        $message->subject = trim($request->subject);
+        $message->type = 'Note';
+
+        if ($request->sendTo == 'class')
+            $message->klass_id = $request->recipient;
+        else if($request->sendTo == 'student'){    
+            $message->student_id = $request->recipient;
+        }
+
+        $message->user_id = $user->id;
+
+
+        $message->save();
+
+        return 'submitted';
+    }
+
     public function showHomework($date){
         
         $user = session()->get('loggedUser');
@@ -316,6 +358,17 @@ class UsersController extends Controller
 
         return $homeworks;
     }
+/*
+    public function messages(){
+        
+        $user = session()->get('loggedUser');
+
+        $messages = Notification::where('user_id')
+                ->get();
+
+        return $messages;
+    }
+*/
     /*
 
     for debugging the homework query we may need it later so dont delete this
@@ -327,7 +380,7 @@ class UsersController extends Controller
         // get the current user to provide id
 
         //we check for subject and description, because the other fields are filled in by default
-        $validation = $request->validate([
+        /*$validation = $request->validate([
             'subject' => 'required|min:4|max:255',
             'description' => 'required|min:2|max:255'
             //'dueDate' => 'after:today'
@@ -338,12 +391,12 @@ class UsersController extends Controller
 
         $homework->description = 'hello';
         $homework->subject = 'random';
-        $homework->type = 'Homework';
+        $homework->type = 'Note';
         $homework->klass_id = 1;
 
 
-        $homework->user_id = 1;
-        $homework->date = '2019-12-12';
+        $homework->user_id = 2;
+
 
 
         $homework->save();

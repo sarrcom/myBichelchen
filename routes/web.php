@@ -38,6 +38,9 @@ Route::post('/user/homework', 'UsersController@submitHomework');
 Route::get('/test', 'UsersController@test');
 
 Route::get('/user/messages', 'UsersController@messages');
+Route::get('/user/showmessages/{id}', 'UsersController@showMessages');
+Route::post('/user/messages', 'UsersController@sendMessages');
+
 
 
 Route::post('/', 'UsersController@login');
