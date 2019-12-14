@@ -35,9 +35,9 @@
 
                 <h6 class="font-weight-bold mb-3 text-center text-lg-left">Inbox</h6>
                 <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
-                    
+                    <!-- All Messages -->
                     <ul id="allMessages" class="list-unstyled friend-list">
-        
+                        <!-- Chat box -->
                         <li class="active grey lighten-3 p-2">
                             <a href="#" class="d-flex justify-content-between">
                             <img src="https://image.flaticon.com/icons/png/512/145/145842.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
@@ -53,7 +53,9 @@
                             </div>  
                             </a>
                         </li>
-                        
+                        <!-- /Chat box -->
+
+                        <!-- Chat box -->
                         <li class="p-2">
                             <a href="#" class="d-flex justify-content-between">
                             <img src="https://image.flaticon.com/icons/png/512/145/145844.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
@@ -69,8 +71,9 @@
                                 </div>
                             </a>
                         </li>
-                    
+                        <!-- /Chat box -->
                     </ul>
+                    <!-- /All Messages -->
                 </div>
 
             </div>
