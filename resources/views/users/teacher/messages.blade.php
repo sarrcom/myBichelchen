@@ -24,7 +24,7 @@
 </div>
 
 <div class="container">
-    <div class="card near-moon-gradient chat-room">
+    <div class="card winter-neva-gradient chat-room">
         <div class="card-body">
             <!-- Messages List -->
             <!-- Grid row -->
