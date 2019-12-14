@@ -151,11 +151,10 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        print_r($user);
-        $validation = $request->validate([
+        /*$validation = $request->validate([
             'first_name' => 'required|min:2|max:20',
             'last_name' => 'required|min:2|max:20'
-            ]);
+        ]);*/
 
         $user = User::find($id);
 

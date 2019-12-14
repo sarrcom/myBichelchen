@@ -96,10 +96,8 @@
                             @method('PUT')
                             <div class="modal-body mx-3 modal-inputs">
                                 <div class="md-form mb-5">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
-                                </div>
-                                <div class="md-form mb-5">
                                     <select id="editRole" name="role" class="form-control input-md" required></select>
+                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
@@ -122,7 +120,7 @@
                                 <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Class +</p>
                             </div>
                             <div class="modal-footer d-flex justify-content-center editInsideWrapper">
-                                <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Edit form
+                                <button name="editSubmit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Edit form
                                     <i class="far fa-paper-plane ml-1"></i>
                                 </button>
                             </div>
@@ -476,7 +474,7 @@
                     console.log("success");
                 },
                 error: function(err){
-                    console.log('Oh boi')
+                    console.log('Oh boi');
                 }
             });
         });
@@ -509,6 +507,7 @@
 
                     previousRole = $("#editRole").val();
                     displayAddKlassOrChild(previousRole, "edit");
+                    $('#editForm').attr('action', '/users/' + myUser.id);
                 },
                 error: function(err){
                     console.log('Oh boi');
