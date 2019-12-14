@@ -1,5 +1,5 @@
 @extends('templates.main')
-@section('title', 'Homework')
+@section('title', 'Teacher Homework')
 
 <header id="secondaryHeader">
 @section('navbar')
@@ -9,20 +9,23 @@
 
 @section('content')
 
-@endsection
-
-@section('footer')
-@include('templates.footer')
-@endsection
-teacher-homework
-
-<br>
-{{$user->first_name}} {{$user->last_name}}
-<br>
-
-<div id="status">
-
+<h1 class="d-flex justify-content-center">Homework</h1>
+<div class="d-flex justify-content-center">
+    <p class="h5 text-primary createShowP">{{date("l")}}, {{date("d/m/Y")}}</p>
+    <br><br><br>
 </div>
+
+<div class="container">
+    <div class="card night-fade-gradient">
+
+        
+    </div>
+</div>
+
+@endsection
+<div id="status">
+</div>
+
 <form method="POST" id="homeworkForm">
     @csrf
     @method('POST')
@@ -51,10 +54,13 @@ teacher-homework
 <button id="previous">previous</button> <button id="next">next</button>
 
 <div class="homeworkcalendar">
-
 </div>
 
-    @include('templates.scripts')
+@section('footer')
+@include('templates.footer')
+@endsection
+
+@include('templates.scripts')
 <script>
     let page = 0
 
