@@ -219,7 +219,8 @@
     });
     $('.dataTables_length').addClass('bs-select');
     //Add the class 'active'on the Edit form inputs so it doesn't overlap the pre-existing fields
-    $('#editOpenModal').on('click', function () {
+    $('#editOpenModal').on('click', function (e) {
+        e.preventDefault();
         $('#editForm label').addClass('active');
     })
     //Hide Edit button until User Row is Selected
