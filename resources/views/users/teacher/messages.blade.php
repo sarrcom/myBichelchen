@@ -35,31 +35,37 @@
 
                 <h6 class="font-weight-bold mb-3 text-center text-lg-left">myBichelchen Member</h6>
                 <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
+                    
                     <ul class="list-unstyled friend-list">
+
                         <li class="active grey lighten-3 p-2">
                             <a href="#" class="d-flex justify-content-between">
-                                <div class="text-small">
+                            <div class="text-small">
                                 <strong>John Doe</strong>
                                 <p class="last-message text-muted">Hello, Are you there?</p>
-                                </div>
-                                <div class="chat-footer">
+                            </div>
+                            <div class="chat-footer">
                                 <p class="text-smaller text-muted mb-0">Just now</p>
                                 <span class="badge badge-danger float-right">1</span>
-                                </div>
+                            </div>  
                             </a>
                         </li>
+
                         <li class="p-2">
                             <a href="#" class="d-flex justify-content-between">
                                 <div class="text-small">
-                                <strong>Danny Smith</strong>
-                                <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
+                                    <strong>Danny Smith</strong>
+                                    <p class="last-message text-muted">
+                                        <ul id="allMessages"></ul>
+                                    </p>
                                 </div>
                                 <div class="chat-footer">
-                                <p class="text-smaller text-muted mb-0">5 min ago</p>
-                                <span class="text-muted float-right"><i class="fas fa-mail-reply" aria-hidden="true"></i></span>
+                                    <p class="text-smaller text-muted mb-0">5 min ago</p>
+                                    <span class="text-muted float-right"><i class="fas fa-mail-reply" aria-hidden="true"></i></span>
                                 </div>
                             </a>
                         </li>
+                    
                     </ul>
                 </div>
 
@@ -107,7 +113,27 @@
                 <!-- Send Message -->
                 <div class="white">
                     <div class="form-group basic-textarea">
-                    <textarea class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..."></textarea>
+                    <form method="POST" id="sendMessageForm">
+                        @csrf
+                        @method('POST')
+                        
+                        <label for="sendTo">Send To</label>
+                        <input type="radio" name="sendTo" value="class" checked>Class
+                        <input type="radio" name="sendTo" value="student">One Student<br>
+                        
+                        <label for="recipient">Recipient</label>
+                        
+                        {{-- options from script based on the radio: classes or students--}}
+                        <select name="recipient" id="recipient" required>
+                        </select><br>
+                            
+                        <label for="subject">Subject</label>
+                        <input type="text" name="subject" required><br>
+                        
+                        <input type="submit" name="submitHomework" value="Submit">
+                    </form>
+
+                    <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                     </div>
                 </div>
                 <button type="button" class="btn btn-outline-white btn-rounded btn-sm waves-effect waves-dark float-right">Send</button>
@@ -138,8 +164,7 @@
     
     <label for="recipient">Recipient</label>
     
-    {{-- options from script
-        based on the radio: classes or students--}}
+    {{-- options from script based on the radio: classes or students--}}
     <select name="recipient" id="recipient" required>
     </select><br>
         
@@ -152,9 +177,7 @@
     <input type="submit" name="submitHomework" value="Submit">
 </form>
 
-<ul id="allMessages">
-    
-</ul>
+
 
 @include('templates.scripts')
 <script>
