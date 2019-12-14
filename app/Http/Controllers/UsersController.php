@@ -239,7 +239,7 @@ class UsersController extends Controller
         $user = session()->get('loggedUser');
 
         if ($user->role=='Teacher') {
-
+   
             return view('users.teacher.messages',['user'=> $user]);
         }
         if ($user->role=='Guardian') {
@@ -272,6 +272,9 @@ class UsersController extends Controller
 
     public function submitHomework(Request $request){
         // get the current user to provide id
+        if (!is_numeric($request->sendTo)) {
+            return $request->recipient;
+        }
         $user = session()->get('loggedUser');
 
         //we check for subject and description, because the other fields are filled in by default
@@ -290,8 +293,9 @@ class UsersController extends Controller
 
         if ($request->sendTo == 'class')
             $homework->klass_id = $request->recipient;
-        else if($request->sendTo == 'student')
+        else if($request->sendTo == 'student'){    
             $homework->student_id = $request->recipient;
+        }
 
         $homework->user_id = $user->id;
         $homework->date = $request->dueDate;
@@ -302,6 +306,16 @@ class UsersController extends Controller
         return 'submitted';
     }
 
+    public function showHomework($date){
+        
+        $user = session()->get('loggedUser');
+
+        $homeworks = Notification::where('date', $date)
+                ->where('user_id', $user->id)
+                ->get();
+
+        return $homeworks;
+    }
     /*
 
     for debugging the homework query we may need it later so dont delete this

@@ -6,10 +6,14 @@
     <input type="text" name="first_name" placeholder="First Name">
     <input type="text" name="last_name" placeholder="Last Name">
     <input type="date" name="date_of_birth">
-    <select name="role" id="role">
-        <option value="Teacher">Teacher</option>
-        <option value="Guardian">Guardian</option>
-        <option value="MaRe">MaRe</option>
+    <select name="role" id="role" required>
+        @foreach($roles as $role)
+            @if($user->role == $role)
+                <option value="{{ $role }}" selected>{{ $role }}</option>
+            @else
+                <option value="{{ $role }}">{{ $role }}</option>
+            @endif
+        @endforeach
     </select>
     <p id="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
     <div id="childs"></div>

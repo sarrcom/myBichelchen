@@ -12,6 +12,8 @@
     <div class="container">
         <div class="wrapper-editor">
             <div class="block my-4">
+                <h1 class="d-flex justify-content-center">Admin Users List</h1>
+                <br>
                 <div class="d-flex justify-content-center">
                     <p class="h5 text-primary createShowP">0 row selected</p>
                 </div>
@@ -29,7 +31,10 @@
                             <form method="POST" id="addForm">
                                 @csrf
                                 @method('POST')
-                                <div class="modal-body mx-3 modal-add-inputs">
+                                <div class="modal-body mx-3">
+                                    <div class="md-form mb-5">
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
+                                    </div>
                                     <div class="md-form mb-5">
                                         <select id="addRole" name="role" class="form-control input-md" required>
                                             <option value="Guardian">Guardian</option>
@@ -49,6 +54,10 @@
                                         <input type="date" id="inputDate" name="date_of_birth" class="form-control" placeholder="Select Date">
                                         <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
                                     </div>
+                                    <div class="md-form mb-5">
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Child/ren</label>
+                                    </div>
+                                    <br>
                                     <div id="addItemsContainer"></div>
                                     <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
                                     <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
@@ -79,20 +88,27 @@
                                 @method('PUT')
                                 <div class="modal-body mx-3 modal-inputs">
                                     <div class="md-form mb-5">
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
+                                    </div>
+                                    <div class="md-form mb-5">
                                         <select id="editRole" name="role" class="form-control input-md" required></select>
                                     </div>
                                     <div class="md-form mb-5">
                                         <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
-                                        <label data-error="wrong" data-success="right" for="formNameEdit15">First Name</label>
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">First Name</label>
                                     </div>
                                     <div class="md-form mb-5">
                                         <input type="text" id="formPositionEdit15" name="last_name" class="form-control validate">
-                                        <label data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
+                                        <label class="active" data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
                                     </div>
                                     <div class="md-form mb-5">
                                         <input type="date" id="formOfficeEdit15" name="date_of_birth" class="form-control validate">
-                                        <label data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
+                                        <label class="active" data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
                                     </div>
+                                    <div class="md-form mb-5">
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Child/ren</label>
+                                    </div>
+                                    <br>
                                     <div id="editItemsContainer"></div>
                                     <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
                                     <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
@@ -182,6 +198,10 @@
         rowEditor: true
     });
     $('.dataTables_length').addClass('bs-select');
+    //Add the class 'active'on the Edit form inputs so it doesn't overlap the pre-existing fields
+    $('#editOpenModal').on('click', function () {
+        $('#editForm label').addClass('active');
+    })
 </script>
 <script>
     const addItemsContainer = $("#addItemsContainer");

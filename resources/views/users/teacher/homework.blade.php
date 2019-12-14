@@ -30,12 +30,55 @@ teacher-homework
     
     <input type="submit" name="submitHomework" value="Submit">
 </form>
+
+<button id="previous">previous</button> <button id="next">next</button>
+
+<div class="homeworkcalendar">
+
+</div>
+
     @include('templates.scripts')
 <script>
+    let page = 0
 
     changeRecipient();
+    showTables();
+    $('#previous').click(previous);
+    $('#next').click(next);
     $('[name=sendTo]').click(changeRecipient);
+
+
+    //show the date of the tables from today and the next 3 days;
+    //by clicking th buttomn and changing the page variable you can scroll 4 day back/forth
+    function showTables(){
+        $(".homeworkcalendar").empty();
+
+        for (let i = 0; i < 5; i++) {
+
+            let date = $.now();
+            date += ((5*page+i)*24*3600*1000);
+            let dateformated = getDateFormat(date);
+            let divWithID ='<div id="d'+i+'"></div>'
+            $(".homeworkcalendar").append(divWithID);
+            $('#d'+i).append(dateformated);       
+            requestHomework(dateformated,'#d'+i)
+
+        }
+        
+    }
     
+
+    function previous(){
+        page -= 1;
+        showTables();
+    }
+
+    function next(){
+        page += 1;
+        showTables();
+    }
+
+    //function to change the selector  of recipient of homework
     function changeRecipient(){
         $(recipient).empty();
         let radioSelected = $('input[name=sendTo]:checked').val();
@@ -47,6 +90,8 @@ teacher-homework
             @endforeach
         }else{
             @foreach ($user->klasses as $klass)
+                $(recipient).append(new Option("--{{$klass->name}}--", "seperator"));
+
                 @foreach ($klass->students as $student)
                     $(recipient).append(new Option(" {{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
                 @endforeach
@@ -55,6 +100,34 @@ teacher-homework
 
     }
 
+    function fillobjects(array, divID){
+        for (let index = 0; index < array.length; index++) {
+            console.log(array[index].subject);
+            
+            $(divID).append(array[index].subject)
+           }
+
+    }
+
+    function getDateFormat(date) {
+        var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        var date = new Date();
+        date.toLocaleDateString();
+
+        return [year, month, day].join('-');
+    };
+
+
+
+// submit homework to the server
     $(function(){
         $('input[type="submit"]').click(function(e){
             e.preventDefault();
@@ -64,8 +137,11 @@ teacher-homework
                 data: $('#homeworkForm').serialize(),
                 success: function(result){
                     console.log(result);
-                    if (result === 'submitted')
+                    if (result === 'submitted'){
                         $('#status').html('Homework submitted');
+                    }else {
+                        $('#status').html('Recipient cannot be '+ result);
+                    }
                     
 
                 },
@@ -75,4 +151,24 @@ teacher-homework
             });
         });
     });
+
+// request homwork for a specific day
+function requestHomework(date,divID) {
+    let url = '/user/showHomework/'+date;
+    $.ajax({
+        url: url,
+        type: 'get',
+        success: function(result){
+            console.log(result);
+            fillobjects(result,divID)
+            
+
+        },
+        error: function(err){
+            console.log('error')
+        }
+    });
+}   
+    
+
 </script>
