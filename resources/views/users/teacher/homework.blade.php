@@ -65,23 +65,38 @@ teacher-homework
     $('[name=sendTo]').click(changeRecipient);
 
 
-    //show the date of the tables from today and the next 3 days;
-    //by clicking th buttomn and changing the page variable you can scroll 4 day back/forth
+    //show the date of the tables from today and the next 5 schooldays;
+    //by clicking the buttomn and changing the page variable you can scroll 5 schooldays back/forward
     function showTables(){
         $(".homeworkcalendar").empty();
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 7; i++) {
 
-            let date = $.now();
-            date += ((5*page+i)*24*3600*1000);
-            let dateformated = getDateFormat(date);
-            let divWithID ='<div id="d'+i+'"></div>'
-            $(".homeworkcalendar").append(divWithID);
-            $('#d'+i).append(dateformated);       
-            requestHomework(dateformated,'#d'+i)
+            let timeStamp = new Date().getTime()+((7*page+i)*24*3600*1000);
+            let date = new Date(timeStamp);
+            
+            let day = date.getDay();
+            let year;
+            let month;
+            let dayOf;
+            let dateformated;
+            let divWithID;
+            let ulID
 
+            if (day != 6 && day != 0) {
+                year = date.getFullYear();
+                month = date.getMonth()+1;
+                dayOf = date.getDate();
+                dateformated= year+'-'+month+'-'+dayOf;
+                
+                divWithID ='<div id="d'+dateformated+'"></div>'
+                ulID ='<ul id="ul'+dateformated+'"></ul>'
+                $(".homeworkcalendar").append(divWithID);
+                $('#d'+dateformated).append(dateformated);
+                $('#d'+dateformated).append(ulID);
+                requestHomework(dateformated);     
+            }
         }
-        
     }
     
 
@@ -117,32 +132,6 @@ teacher-homework
 
     }
 
-    function fillobjects(array, divID){
-        for (let index = 0; index < array.length; index++) {
-            console.log(array[index].subject);
-            
-            $(divID).append(array[index].subject)
-           }
-
-    }
-
-    function getDateFormat(date) {
-        var d = new Date(date),
-                month = '' + (d.getMonth() + 1),
-                day = '' + d.getDate(),
-                year = d.getFullYear();
-
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
-        var date = new Date();
-        date.toLocaleDateString();
-
-        return [year, month, day].join('-');
-    };
-
-
 
 // submit homework to the server
     $(function(){
@@ -156,6 +145,7 @@ teacher-homework
                     console.log(result);
                     if (result === 'submitted'){
                         $('#status').html('Homework submitted');
+                        showTables()
                     }else {
                         $('#status').html('Recipient cannot be '+ result);
                     }
@@ -170,22 +160,28 @@ teacher-homework
     });
 
 // request homwork for a specific day
-function requestHomework(date,divID) {
-    let url = '/user/showHomework/'+date;
+function requestHomework(date) {   
     $.ajax({
-        url: url,
+        url: '/user/homework/'+date,
         type: 'get',
-        success: function(result){
-            console.log(result);
-            fillobjects(result,divID)
-            
-
+        success: function(result){            
+                console.log(result);
+                let listItem;
+                let content;
+                $('#ul'+date).empty();
+                for(homework of result){
+                content = homework.subject;
+                listItem = $('<li></li>');
+                listItem.text(content);
+                
+                $('#ul'+date).append(listItem);    
+                }  
         },
         error: function(err){
-            console.log('error')
+            console.log(err)
         }
     });
 }   
-    
+
 
 </script>

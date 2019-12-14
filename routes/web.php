@@ -31,14 +31,18 @@ Route::resources([
     'klasses' => 'UsersController'
 ]);
 
-Route::get('/user', 'UsersController@overview');
-Route::get('/user/homework', 'UsersController@homework');
-Route::get('/user/showHomework/{date}', 'UsersController@showHomework');
-Route::post('/user/homework', 'UsersController@submitHomework');
-Route::get('/test', 'UsersController@test');
 
-Route::get('/user/messages', 'UsersController@messages');
+Route::get('/user', 'UsersController@overview');
+
+Route::get('/user/homework/{date?}', 'UsersController@homework');
+Route::post('/user/homework', 'UsersController@submitHomework');
+
+
+Route::get('/user/messages/{id?}', 'UsersController@messages');
+Route::post('/user/messages', 'UsersController@sendMessages');
 
 
 Route::post('/', 'UsersController@login');
 
+
+Route::get('/test', 'UsersController@test');

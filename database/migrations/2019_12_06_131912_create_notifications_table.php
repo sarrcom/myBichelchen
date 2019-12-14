@@ -17,7 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->increments('id');
             $table->string('description', 2000);
             $table->string('subject');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->enum('type', ['Homework', 'Absence', 'Note']);
             $table->boolean('checked')->nullable();
             $table->integer('klass_id')->unsigned()->nullable();
