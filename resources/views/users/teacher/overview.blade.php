@@ -1,5 +1,5 @@
 @extends('templates.main')
-@section('title', 'overview')
+@section('title', 'Overview')
 
 <header id="secondaryHeader">
 @section('navbar')

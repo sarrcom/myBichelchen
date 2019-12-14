@@ -1,4 +1,21 @@
+@extends('templates.main')
+@section('title', 'Homework')
+
+<header id="secondaryHeader">
+@section('navbar')
+@include('templates.navbar')
+@endsection
+</header>
+
+@section('content')
+
+@endsection
+
+@section('footer')
+@include('templates.footer')
+@endsection
 teacher-homework
+
 <br>
 {{$user->first_name}} {{$user->last_name}}
 <br>
