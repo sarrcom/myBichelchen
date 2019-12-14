@@ -134,12 +134,12 @@ footer.page-footer {
 .divFlex span {
     margin: 0 15px;
 }
-.addChild {
+.addChild, .addKlass {
     color: #4285f4;
     font-weight: 400;
 }
-#editRole:focus {
-    outline: none;
-    border-color: #9ecaed;
-    box-shadow: 0 0 10px #9ecaed;
+#editRole:focus, #addRole:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: 0 none;
 }

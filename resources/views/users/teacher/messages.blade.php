@@ -17,7 +17,7 @@
     {{$student->first_name}} <br>
 @endforeach -->
 
-<h1 class="d-flex justify-content-center">Teacher {{$user->first_name}}'s Messages</h1>
+<h1 class="d-flex justify-content-center">Messages</h1>
 <div class="d-flex justify-content-center">
     <p class="h5 text-primary createShowP">{{date("l")}}, {{date("d/m/Y")}}</p>
     <br><br><br>

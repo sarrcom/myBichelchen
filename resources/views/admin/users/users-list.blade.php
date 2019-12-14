@@ -55,12 +55,12 @@
                                         <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
                                     </div>
                                     <div class="md-form mb-5">
-                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Child/ren</label>
+                                        <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Children/Class</label>
                                     </div>
                                     <br>
                                     <div id="addItemsContainer"></div>
-                                    <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add child</p>
-                                    <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add class</p>
+                                    <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Child +</p>
+                                    <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Class +</p>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
                                     <button name="addSubmit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Add form

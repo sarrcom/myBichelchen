@@ -5,6 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+            <!-- If User is Admin -->
             @if (isset($admin))
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
@@ -14,6 +15,14 @@
                         <a class="nav-link" href="#">{{ __('navbar.messages') }}</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
+                    </li>
+                </ul>
+                <!-- /If User is Admin -->
+                
+                    <!-- If User is Teacher -->
                     @elseif (isset($user) && $user->role=='Teacher')
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item ">
@@ -24,6 +33,11 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
                             </li>
                         </ul>
                         <!-- Drop down menu for Teachers -->
@@ -38,6 +52,9 @@
                                 @endforeach
                             </div>
                         </div>
+                        <!-- /If User is Teacher -->
+
+                            <!-- If User is Guardian -->
                             @elseif (isset($user) && $user->role=='Guardian')
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item ">
@@ -50,7 +67,12 @@
                                         <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
                                     </li>
                                 </ul>
-                                <!-- Drop down menu for Parents -->
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
+                                    </li>
+                                </ul>
+                                <!-- Drop down menu for Guardian -->
                                 <div class="dropdown">
                                     <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
@@ -62,6 +84,9 @@
                                     @endforeach
                                     </div>
                                 </div>
+                                <!-- /If User is Guardian -->
+
+                                    <!-- If User is Maison Relais -->
                                     @elseif (isset($user) && $user->role=='MaRe')
                                         <ul class="navbar-nav mr-auto">
                                             <li class="nav-item ">
@@ -72,6 +97,11 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="navbar-nav mr-auto">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
                                             </li>
                                         </ul>
                                         <!-- Drop down menu for MaRe -->
@@ -86,7 +116,8 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                            @else
+                                        <!-- /If User is Maison Relais -->
+                                            @else   
                                                 <ul class="navbar-nav mr-auto">
                                                     <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
                                                 <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>

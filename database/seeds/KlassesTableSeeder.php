@@ -164,4 +164,4 @@ class KlassesTableSeeder extends Seeder
 
     }
 }
-/*
+
