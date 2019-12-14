@@ -15,15 +15,94 @@
     <br><br><br>
 </div>
 
-<div class="container">
-    <div class="card night-fade-gradient">
-
-        
-    </div>
+<div id="status">
 </div>
 
+<form method="POST" id="homeworkForm">
+    @csrf
+    @method('POST')
+    <div class="container">
+        <div class="card night-fade-gradient chat-room">
+
+            <div class="card-body">
+                <!-- Grid row -->
+                <div class="row px-lg-2 px-2">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 col-xl-4 px-0">
+
+                        <h6 class="font-weight-bold mb-3 text-center text-lg-left">Homework Calendar</h6>
+
+                        <button class="btn btn-purple btn-rounded btn-sm waves-effect waves-light" id="previous"><i class="fas fa-caret-left"></i></button> <button class="btn btn-purple btn-rounded btn-sm waves-effect waves-light" id="next"><i class="fas fa-caret-right"></i></button>
+                            <!-- Homework Calender -->
+                            <div class="homeworkcalendar">
+                            </div>
+                    </div>
+                    <!-- /Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0">
+
+                        <ul class="list-unstyled chat">
+                            <!-- Homework Box -->
+                            <li class="d-flex justify-content-between mb-4 pb-3">
+                            <div class="chat-body white p-3 ml-2 z-depth-1">
+                                <div class="header">
+                                    <strong class="primary-font">Homework</strong><br>
+                                    <label for="duedate">Due date:</label><br>
+                                    <label for="subject">Subject</label>
+                                </div>
+                                    <hr class="w-100">
+                                    <p class="mb-0">
+                                        Write an essay on bananas.
+                                    </p>
+                                </div>
+                            </li>
+                            <!-- /Homework Box -->
+
+                            <!-- Send Homework -->
+                            <li class="white">
+                                <div class="chat-body white p-3 z-depth-1">         
+                                    
+                                    <label for="duedate">Due date:</label>
+                                    <input type="date" name="dueDate" required><br>
+                                        
+                                    <label for="sendTo">Send To </label>
+                                    <input type="radio" name="sendTo" value="class" checked> Class
+                                    <input type="radio" name="sendTo" value="student"> One Student<br>
+
+                                    <label for="recipient">Recipient</label>
+                                    
+                                    {{-- options from script based on the radio: classes or students--}}
+                                    <select name="recipient" id="recipient" required>
+                                    </select><br>
+                                        
+                                    <label for="subject">Subject</label>
+                                    <input type="text" name="subject" required><br>
+                                
+                                    <div class="form-group basic-textarea">
+                                        <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <button type="submit" class="btn btn-purple btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </div>
+    </div>
+</form>
+
 @endsection
-<div id="status">
+
+@section('footer')
+@include('templates.footer')
+@endsection
+
+<!-- <div id="status">
 </div>
 
 <form method="POST" id="homeworkForm">
@@ -54,8 +133,8 @@
 <button id="previous">previous</button> <button id="next">next</button>
 
 <div class="homeworkcalendar">
-</div>
-
+</div> -->
+    
 @section('footer')
 @include('templates.footer')
 @endsection

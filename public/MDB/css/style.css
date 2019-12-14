@@ -146,3 +146,8 @@ footer.page-footer {
 #editOpenModal {
     display: none;
 }
+
+#homeworkForm input[type="radio"], #sendMessageForm input[type="radio"] {
+    position: unset;
+    opacity: 1;
+}
