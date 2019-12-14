@@ -117,6 +117,8 @@
                                             </div>
                                         </div>
                                         <!-- /If User is Maison Relais -->
+
+                                            <!-- No one is signed in -->
                                             @else   
                                                 <ul class="navbar-nav mr-auto">
                                                     <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
