@@ -5,6 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+            
             <!-- If User is Admin -->
             @if (isset($admin))
                 <ul class="navbar-nav mr-auto">
@@ -128,7 +129,7 @@
                                                     <button class="btn btn-outline-white waves-effect waves-light btn-rounded" type="button" data-toggle="modal" aria-haspopup="true" data-target="#elegantModalForm">Sign In
                                                     </button>
                                                 </div>
-                                                    @endif
+                                                @endif
         </div>
     </div>
 </nav>
