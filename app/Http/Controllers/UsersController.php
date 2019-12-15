@@ -370,6 +370,13 @@ class UsersController extends Controller
 
         return 'submitted';
     }
+
+    public function logout(){
+        
+                session()->flush();
+
+                return redirect('/'); 
+    }
     /*
 
     for debugging the homework query we may need it later so dont delete this

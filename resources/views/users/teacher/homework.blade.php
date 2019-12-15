@@ -10,14 +10,19 @@
 @section('content')
 
 <h1 class="d-flex justify-content-center">Homework</h1>
-<div class="d-flex justify-content-center">
-    <p class="h5 text-primary createShowP">{{date("l")}}, {{date("d/m/Y")}}</p>
-    <br><br><br>
-</div>
+
 
 <div class="container">
+    <div class="d-flex justify-content-center">
+        <button id="previous">previous</button> <button id="next">next</button>
+        <p class="h5 text-primary createShowP">
+        </p>
+        <br><br><br>
+    </div>
     <div class="card night-fade-gradient">
 
+        <div class="homeworkcalendar">
+        </div>
         
     </div>
 </div>
@@ -51,16 +56,12 @@
     <input type="submit" name="submitHomework" value="Submit">
 </form>
 
-<button id="previous">previous</button> <button id="next">next</button>
 
-<div class="homeworkcalendar">
-</div>
-
-@section('footer')
-@include('templates.footer')
-@endsection
 
 @include('templates.scripts')
+@section('footer')
+@include('templates.footer')
+
 <script>
     let page = 0
 
@@ -82,23 +83,39 @@
             let date = new Date(timeStamp);
             
             let day = date.getDay();
-            let year;
-            let month;
-            let dayOf;
-            let dateformated;
+            let dayName;
+            if(day==1){
+                dayName= 'Monday';
+            }
+            if(day==2){
+                dayName= 'Tuesday';
+            }
+            if(day==3){
+                dayName= 'Wednesday';
+            }
+            if(day==4){
+                dayName= 'Thursday';
+            }
+            if(day==5){
+                dayName= 'Friday';
+            }
+
+            let dayOf=date.getDate();
+            let year = date.getFullYear();
+            let month = date.getMonth()+1;
+            let dateformated= year+'-'+month+'-'+dayOf;
+            let readableDate= dayOf+'.'+month+'.'+year
+            
             let divWithID;
             let ulID
 
             if (day != 6 && day != 0) {
-                year = date.getFullYear();
-                month = date.getMonth()+1;
-                dayOf = date.getDate();
-                dateformated= year+'-'+month+'-'+dayOf;
-                
+
                 divWithID ='<div id="d'+dateformated+'"></div>'
                 ulID ='<ul id="ul'+dateformated+'"></ul>'
                 $(".homeworkcalendar").append(divWithID);
-                $('#d'+dateformated).append(dateformated);
+                
+                $('#d'+dateformated).append(dayName+' '+readableDate);
                 $('#d'+dateformated).append(ulID);
                 requestHomework(dateformated);     
             }
@@ -138,6 +155,18 @@
 
     }
 
+    function fillListOfHomeWork(result, date){
+        let listItem;
+        $('#ul'+date).empty();
+        for(homework of result){
+           
+            content = homework.subject + ' : ' + homework.description + ' ';
+            listItem = $('<li></li>');
+            listItem.text(content);
+            
+            $('#ul'+date).append(listItem);    
+        }  
+    }
 
 // submit homework to the server
     $(function(){
@@ -159,7 +188,7 @@
 
                 },
                 error: function(err){
-                    console.log('error')
+                    console.log(err)
                 }
             });
         });
@@ -171,17 +200,8 @@ function requestHomework(date) {
         url: '/user/homework/'+date,
         type: 'get',
         success: function(result){            
-                console.log(result);
-                let listItem;
-                let content;
-                $('#ul'+date).empty();
-                for(homework of result){
-                content = homework.subject;
-                listItem = $('<li></li>');
-                listItem.text(content);
-                
-                $('#ul'+date).append(listItem);    
-                }  
+                //console.log(result);
+                fillListOfHomeWork(result, date)
         },
         error: function(err){
             console.log(err)
@@ -191,3 +211,5 @@ function requestHomework(date) {
 
 
 </script>
+@endsection
+
