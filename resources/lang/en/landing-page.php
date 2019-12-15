@@ -18,7 +18,7 @@ return [
     'testimonials' => 'Testimonials',
     'tell_us_why' => 'Tell us why you love myBichelchen!',
     'profession_1' => 'Teacher',
-    'testimonial_1' => 'myBichelchen saves me an hour per day and allows me to concentrate on the important stuff.',
+    'testimonial_1' => 'myBichelchen saves me an hour per day and allows me to concentrate on the important stuff, It\'s great!',
     'profession_2' => 'Day care attendant',
     'testimonial_2' => 'Established a long time ago, I somehow got tangled up in this. I don\'t know how, but I like it.',
     'profession_3' => 'Parent',

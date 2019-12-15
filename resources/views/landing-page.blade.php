@@ -109,7 +109,7 @@
                     <!--Content-->
                     <h4 class="font-weight-bold mt-4 mb-3">Jorge Gonzales</h4>
                     <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_1') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_1') }}</p>
+                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_1') }} <i class="fas fa-quote-right"></i></p>
                     <!--Review-->
                     <div class="orange-text">
                         <i class="fas fa-star"> </i>
@@ -131,7 +131,7 @@
                     <!--Content-->
                     <h4 class="font-weight-bold mt-4 mb-3">Dennis Burgers</h4>
                     <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_2') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_2') }}</p>
+                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_2') }} <i class="fas fa-quote-right"></i></p>
                     <!--Review-->
                     <div class="orange-text">
                         <i class="fas fa-star"> </i>
@@ -153,7 +153,7 @@
                     <!--Content-->
                     <h4 class="font-weight-bold mt-4 mb-3">Reginald Wagner</h4>
                     <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_3') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_3') }}</p>
+                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_3') }} <i class="fas fa-quote-right"></i></p>
                     <!--Review-->
                     <div class="orange-text">
                         <i class="fas fa-star"> </i>

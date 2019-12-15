@@ -18,7 +18,7 @@ return [
     'testimonials' => 'Témoignages',
     'tell_us_why' => 'Dites-nous pourquoi vous aimez myBichelchen !',
     'profession_1' => 'Enseignant',
-    'testimonial_1' => 'myBichelchen me fait gagner une heure par jour et me permet de me concentrer sur les choses importantes.',
+    'testimonial_1' => 'myBichelchen me fait gagner une heure par jour et me permet de me concentrer sur les choses importantes, c\'est bien!',
     'profession_2' => 'Maison Relais',
     'testimonial_2' => 'Créé il y a longtemps, je me suis empêtré là-dedans. Je ne sais pas comment, mais ça me plaît.',
     'profession_3' => 'Parent',
