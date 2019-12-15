@@ -220,11 +220,13 @@ class UsersController extends Controller
         a function to return data
         */
         $user = session()->get('loggedUser');
+
+
         if($date == null){
             
     
     
-            if ($user->role=='Teacher') {
+            if ($user->role=='Teacher'){
     
                 return view('users.teacher.homework',['user'=> $user]);
             }
@@ -235,12 +237,15 @@ class UsersController extends Controller
                 return view('users.mare.homework',['user'=> $user]);
             }
         }else{
-            $homeworks = Notification::where('date', $date)
-            ->where('user_id', $user->id)
-            ->where('type', 'Homework')
-            ->get();
+            if ($user->role == 'Teacher'){                
 
-            return $homeworks;
+                $homeworks = Notification::where('date', $date)
+                ->where('user_id', $user->id)
+                ->where('type', 'Homework')
+                ->get();
+    
+                return $homeworks;
+            }
         }
     }
 
@@ -267,12 +272,77 @@ class UsersController extends Controller
             if ($user->role=='MaRe') {
                 return view('users.mare.messages',['user'=> $user]);
             }
-        }else{
-            $messages = Notification::where('user_id',$id)->get();
 
-            return $messages;
-        }
+            session()->flush();
 
+            return redirect('/'); 
+
+
+        }else if ($id == $user->id) {
+            
+            if ($user->role=='Teacher') {
+                
+                $klassesThisTeacher;
+                $studentsThisTeacher;
+    
+                foreach ($user->klasses as $klass) {
+                    $klassesThisTeacher[] = $klass->id;
+    
+                        foreach ($klass->students as $student) {
+                            $studentsThisTeacher[]= $student->id;
+                        }
+                }
+                $messages = DB::table('jerd_notifications')
+                    ->where('type', 'Note')
+                    ->orWhere('user_id', $user->id)
+                    ->orWhere('klass_id', $klassesThisTeacher)
+                    ->orWhere('student_id', $studentsThisTeacher)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    
+                return $messages;
+                
+            }
+            if ($user->role=='Guardian') {
+                
+                $studentsThisGuardian;
+                $klassOfStudents;
+                foreach ($user->students as $student) {
+                    $studentsThisGuardian[]= $student->id;
+                    $klassOfStudents[]= $student->klass_id;
+                    
+                }
+
+                $messages = DB::table('jerd_notifications')
+                    ->where('type', 'Note')
+                    ->orWhere('klass_id', $klassOfStudents)
+                    ->orWhere('student_id', $studentsThisGuardian)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    
+                return $messages;
+
+            }
+            if ($user->role=='MaRe') {
+
+                $studentsThisMaRe;
+                $klassOfStudents;
+                foreach ($user->students as $student) {
+                    $studentsThisGuardian[]= $student->id;
+                    $klassOfStudents[]= $student->klass_id;
+                    
+                }
+
+                $messages = DB::table('jerd_notifications')
+                    ->where('type', 'Note')
+                    ->orWhere('klass_id', $klassOfStudents)
+                    ->orWhere('student_id', $studentsThisGuardian)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    
+                return $messages;
+            }
+        } 
     }
 
     public function login(Request $request)
