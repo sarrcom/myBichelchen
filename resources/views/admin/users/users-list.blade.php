@@ -58,7 +58,7 @@
                                     <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
                                 </div>
                                 <div class="md-form mb-5">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Children/Class</label>
+                                    <label class="active" data-error="wrong" data-success="right" for="addItemsContainer">Children/Class</label>
                                 </div>
                                 <br>
                                 <div id="addItemsContainer"></div>
@@ -111,7 +111,7 @@
                                     <label class="active" data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
                                 </div>
                                 <div class="md-form mb-5">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Children/Class</label>
+                                    <label class="active" data-error="wrong" data-success="right" for="editItemsContainer">Children/Class</label>
                                 </div>
                                 <br>
                                 <div id="editItemsContainer"></div>
@@ -465,11 +465,6 @@
     $(function(){
         $('button[name="editSubmit"]').click(function(e){            
             e.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
             $.ajax({
                 url: '/users/' + myUser.id,
                 type: 'put',
@@ -512,6 +507,7 @@
                     previousRole = $("#editRole").val();
                     displayAddKlassOrChild(previousRole, "edit");
                     $('#editForm').attr('action', '/users/' + myUser.id);
+                    $('input[name="_token"]').val("{{ csrf_token() }}");
                 },
                 error: function(err){
                     console.log('Oh boi');

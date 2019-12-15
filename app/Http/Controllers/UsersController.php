@@ -164,7 +164,6 @@ class UsersController extends Controller
         $user->role = $request->role;
         $user->timestamps = false;
 
-
         $user->save();
 
         $i = 0;
