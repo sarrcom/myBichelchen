@@ -151,10 +151,10 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*$validation = $request->validate([
+        $validation = $request->validate([
             'first_name' => 'required|min:2|max:20',
             'last_name' => 'required|min:2|max:20'
-        ]);*/
+        ]);
 
         $user = User::find($id);
 
@@ -167,7 +167,7 @@ class UsersController extends Controller
 
         $user->save();
 
-        /*$i = 0;
+        $i = 0;
         $klassName = 'klass' . $i;
         $childName = 'child' . $i;
         if ($user->role == 'Teacher') {
@@ -184,7 +184,7 @@ class UsersController extends Controller
                 $i++;
                 $childName = 'child' . $i;
             }
-        }*/
+        }
     }
 
     /**

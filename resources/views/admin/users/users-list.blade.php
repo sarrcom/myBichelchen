@@ -91,9 +91,8 @@
                             </button>
                         </div>
                         <!-- Edit Modal Form -->
-                        <form method="POST" id="editForm">
+                        <form id="editForm">
                             @csrf
-                            @method('PUT')
                             <div class="modal-body mx-3 modal-inputs">
                                 <div class="md-form mb-5">
                                     <select id="editRole" name="role" class="form-control input-md" required></select>
@@ -466,6 +465,11 @@
     $(function(){
         $('button[name="editSubmit"]').click(function(e){            
             e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $.ajax({
                 url: '/users/' + myUser.id,
                 type: 'put',
