@@ -180,7 +180,7 @@ class UsersController extends Controller
     }
 
 
-    
+
     /**
      * Display the overview of the user.
      *
@@ -223,11 +223,11 @@ class UsersController extends Controller
 
 
         if($date == null){
-            
-    
-    
+
+
+
             if ($user->role=='Teacher'){
-    
+
                 return view('users.teacher.homework',['user'=> $user]);
             }
             if ($user->role=='Guardian') {
@@ -241,7 +241,7 @@ class UsersController extends Controller
                 $user = session()->get('loggedUser');
 
                     $klassesThisUser =[];
-                    $studentsThisUser =[];
+                    $studentsThisUser=[];
 
                     /*
                     for the teacher: get the klass and then all the ids of students in this klass
@@ -253,7 +253,7 @@ class UsersController extends Controller
 
                             foreach ($klass->students as $student) {
                                 $studentsThisUser[]= $student->id;
-                                
+
                             }
                         }
                     }else{
@@ -266,11 +266,11 @@ class UsersController extends Controller
                             $klassesThisUser[]= $student->klass_id;
                             }
                     }
-                        
-                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];        
+
+                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
             }
-             
-         
+
+
                 /*
                 get a the homework related to students,  to klass of student(MaRe and Guardian) or
                 klass related to User(teacher) and all students in said klass
@@ -292,7 +292,7 @@ class UsersController extends Controller
                         ->where('date', $date)
                         ->where(function ($query) {
                             $variables = getVariables();
-                            
+
                             // orWhere because the notifiaction has a student or klass id
                             $query->where('klass_id', $variables['klassesThisUser'])
                                 ->orWhere('student_id', $variables['studentsThisUser']);
@@ -305,7 +305,7 @@ class UsersController extends Controller
                         ->where('date', $date)
                         ->where(function ($query) {
                             $variables = getVariables();
-                            
+
                             // orWhere because the notifiaction has a student or klass id
                             $query->where('klass_id', $variables['klassesThisUser'])
                                 ->orWhere('student_id', $variables['studentsThisUser']);
@@ -313,10 +313,10 @@ class UsersController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->get();
                 }
-    
+
                 return $homework;
-        
-            
+
+
         }
     }
 
@@ -332,9 +332,9 @@ class UsersController extends Controller
         $user = session()->get('loggedUser');
 
         if ($id == null) {
-            
+
             if ($user->role=='Teacher') {
-                
+
                 return view('users.teacher.messages',['user'=> $user]);
             }
             if ($user->role=='Guardian') {
@@ -346,7 +346,7 @@ class UsersController extends Controller
 
             session()->flush();
 
-            return redirect('/'); 
+            return redirect('/');
 
 
         }else{
@@ -358,8 +358,8 @@ class UsersController extends Controller
             function getVariables(){
                 $user = session()->get('loggedUser');
 
-                        $klassesThisUser =[];
-                        $studentsThisUser =[];
+                $klassesThisUser =[];
+                $studentsThisUser=[];
 
                         /*
                         for the teacher: get the klass and then all the ids of students in this klass
@@ -368,10 +368,10 @@ class UsersController extends Controller
 
                             foreach ($user->klasses as $klass) {
                             $klassesThisUser[] = $klass->id;
-    
+
                                 foreach ($klass->students as $student) {
                                     $studentsThisUser[]= $student->id;
-                                    
+
                                 }
                             }
                         }else{
@@ -384,11 +384,11 @@ class UsersController extends Controller
                                 $klassesThisUser[]= $student->klass_id;
                                 }
                         }
-                        
-                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];        
+
+                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
             }
-             
-         
+
+
                 /*
                 get a the messages related to students,  to klass of student(MaRe and Guardian) or
                 klass related to User(teacher) and all students in said klass
@@ -408,11 +408,11 @@ class UsersController extends Controller
                     })
                     ->orderBy('created_at', 'desc')
                     ->get();
-    
+
                 return $messages;
-                
-          
-        } 
+
+
+        }
     }
 
     public function login(Request $request)
@@ -436,7 +436,7 @@ class UsersController extends Controller
     }
 
     public function submitHomework(Request $request){
-        
+
 
         if (!is_numeric($request->recipient)) {
             return $request->recipient;
@@ -460,7 +460,7 @@ class UsersController extends Controller
 
         if ($request->sendTo == 'class')
             $homework->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){    
+        else if($request->sendTo == 'student'){
             $homework->student_id = $request->recipient;
         }
 
@@ -475,7 +475,7 @@ class UsersController extends Controller
 
 
     public function sendMessages(Request $request){
-        
+
 
         if (!is_numeric($request->recipient)) {
             return $request->recipient;
@@ -499,7 +499,7 @@ class UsersController extends Controller
 
         if ($request->sendTo == 'class')
             $message->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){    
+        else if($request->sendTo == 'student'){
             $message->student_id = $request->recipient;
         }
 
@@ -512,10 +512,10 @@ class UsersController extends Controller
     }
 
     public function logout(){
-        
+
                 session()->flush();
 
-                return redirect('/'); 
+                return redirect('/');
     }
     /*
 
@@ -523,7 +523,7 @@ class UsersController extends Controller
 
     it shows the error page in stead of staying in the same page
     typo in the Model:(
-        
+
     public function test(){
         // get the current user to provide id
 
