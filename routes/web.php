@@ -59,3 +59,5 @@ Route::post('/', 'UsersController@login');
 
 
 Route::get('/test', 'UsersController@test');
+
+Route::get('/logout', 'UsersController@logout');
