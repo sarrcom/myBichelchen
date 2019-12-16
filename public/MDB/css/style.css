@@ -127,9 +127,14 @@ footer.page-footer {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 /* Admin Users List Modal Forms */
+/* To separate the child select option bars */
 .divFlex {
     display: flex;
     padding-bottom: 3px;
+}
+/* To separate the select class option bars */
+#addItemsContainer select {
+    margin-bottom: 3px;
 }
 .divFlex span {
     margin: 0 15px;
