@@ -185,7 +185,7 @@
     
     
     @foreach ($user->students as $student)
-        $(recipient).append(new Option("{{$student->first_name}} {{$student->last_name}}", "$student->id"));
+        $(recipient).append(new Option("{{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
     @endforeach
             
         

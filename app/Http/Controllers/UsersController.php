@@ -459,9 +459,9 @@ class UsersController extends Controller
         $homework->subject = trim($request->subject);
         $homework->type = 'Homework';
 
-        if ($request->sendTo == 'class')
-            $homework->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){
+        if ($request->has('sendTo')) {
+            $homework->klass_id = $request->recipient;  
+        }else if(!$request->has('sendTo')){
             $homework->student_id = $request->recipient;
         }
 
@@ -502,9 +502,6 @@ class UsersController extends Controller
         }else if(!$request->has('sendTo')){
             $message->student_id = $request->recipient;
         }
-        
-        
-
         $message->user_id = $user->id;
 
 

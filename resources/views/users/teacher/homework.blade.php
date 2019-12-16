@@ -15,40 +15,38 @@
     <br><br><br>
 </div>
 
-<div id="status">
-</div>
 
-    <div class="container">
+<div class="container">
         <div class="card night-fade-gradient chat-room">
-
+            
             <div class="card-body">
                 <!-- Grid row -->
                 <div class="row px-lg-2 px-2">
-
+                    
                     <!-- Grid column -->
                     <div class="col-md-6 col-xl-4 px-0">
-
+                        
                         <h6 class="font-weight-bold mb-3 text-center text-lg-left">Homework Calendar</h6>
-
+                        
                         <button class="btn btn-purple btn-rounded btn-sm waves-effect waves-light" id="previous"><i class="fas fa-caret-left"></i></button> <button class="btn btn-purple btn-rounded btn-sm waves-effect waves-light" id="next"><i class="fas fa-caret-right"></i></button>
-                            <!-- Homework Calender -->
-                            <div class="homeworkcalendar">
-                            </div>
+                        <!-- Homework Calender -->
+                        <div class="homeworkcalendar">
+                        </div>
                     </div>
                     <!-- /Grid column -->
-
+                    
                     <!-- Grid column -->
                     <div class="col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0">
-
+                        
                         <ul class="list-unstyled chat">
                             <!-- Homework Box -->
                             <li class="d-flex justify-content-between mb-4 pb-3">
-                            <div class="chat-body white p-3 ml-2 z-depth-1">
-                                <div class="header">
-                                    <strong class="primary-font">Homework</strong><br>
-                                    <label for="duedate">Due date:</label><br>
-                                    <label for="subject">Subject</label>
-                                </div>
+                                <div class="chat-body white p-3 ml-2 z-depth-1">
+                                    <div class="header">
+                                        <strong class="primary-font">Homework</strong><br>
+                                        <label for="duedate">Due date:</label><br>
+                                        <label for="subject">Subject</label>
+                                    </div>
                                     <hr class="w-100">
                                     <p class="mb-0">
                                         Write an essay on bananas.
@@ -56,16 +54,18 @@
                                 </div>
                             </li>
                             <!-- /Homework Box -->
-
+                            
                             <!-- Send Homework -->
-                            <form method="POST" id="sendMessageForm">
+                            <div id="status">
+                            </div>
+                            <form method="POST" id="homeworkForm">
                                 @csrf
                                 @method('POST')
-    
+                                
                                 <div class="chat-body white p-3 z-depth-1">
-    
+                                    
                                     <ng-container [formGroup]="testForm">
-    
+                                        
                                         <div class="custom-control custom-switch">
                                             <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
                                             <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
@@ -86,8 +86,13 @@
                                     <div class="form-group basic-textarea">
                                         <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                                     </div>
+                                    
+                                    <label for="dueDate">Due Date</label>
+                                    <input type="date" name="dueDate" required><br>
+
                                 </div>
-    
+                                
+
                                 <button type="submit" class="btn btn-blue btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
     
                             </form>
@@ -99,7 +104,6 @@
 
 <div class="container">
     <div class="d-flex justify-content-center">
-        <button id="previous">previous</button> <button id="next">next</button>
         <p class="h5 text-primary createShowP">
         </p>
         <br><br><br>
@@ -215,7 +219,7 @@
         $('#ul'+date).empty();
         for(homework of result){
 
-            content = homework.subject + ' : ' + homework.description + ' ';
+            content = homework.subject + ' : ' + homework.description + ' ' + homework.klass_id;
             listItem = $('<li></li>');
             listItem.text(content);
 
