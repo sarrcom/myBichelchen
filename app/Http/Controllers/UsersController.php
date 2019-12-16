@@ -364,15 +364,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function messages($id=null)
+    public function messages($id = null)
     {
-
         $user = session()->get('loggedUser');
 
         if ($id == null) {
 
             if ($user->role=='Teacher') {
-
                 return view('users.teacher.messages',['user'=> $user]);
             }
             if ($user->role=='Guardian') {
@@ -385,72 +383,62 @@ class UsersController extends Controller
             session()->flush();
 
             return redirect('/');
-
-
-        }else{
-
-
+        } else {
             /*
-            function to get all the student and the klass_ids related to the user
+            get a the messages related to students,  to klass of student(MaRe and Guardian) or
+            klass related to User(teacher) and all students in said klass
+            and all messages written by the user itself
+            ordered by Creation date, to show newest first.
             */
-            function getVariables(){
-                $user = session()->get('loggedUser');
+            $messages = DB::table('jerd_notifications')
+                ->where('type', 'Note')
+                ->where(function ($query) {
+                    $variables = getVariables();
+                    $user = session()->get('loggedUser');
+                    // orWhere because the notifiaction has a student or klass id
+                    $query->where('klass_id', $variables['klassesThisUser'])
+                        ->orWhere('student_id', $variables['studentsThisUser'])
+                        ->orWhere('user_id', $user->id);
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
 
-                $klassesThisUser =[];
-                $studentsThisUser=[];
-
-                /*
-                for the teacher: get the klass and then all the ids of students in this klass
-                */
-                if($user->role=='Teacher'){
-
-                    foreach ($user->klasses as $klass) {
-                    $klassesThisUser[] = $klass->id;
-
-                        foreach ($klass->students as $student) {
-                            $studentsThisUser[]= $student->id;
-
-                        }
-                    }
-                }else{
-
-                    /*
-                    for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
-                    */
-                    foreach ($user->students as $student) {
-                        $studentsThisUser[] = $student->id;
-                        $klassesThisUser[]= $student->klass_id;
-                        }
-                }
-
-                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
-            }
-
-
-                /*
-                get a the messages related to students,  to klass of student(MaRe and Guardian) or
-                klass related to User(teacher) and all students in said klass
-                and all messages written by the user itself
-                ordered by Creation date, to show newest first.
-                */
-
-                $messages = DB::table('jerd_notifications')
-                    ->where('type', 'Note')
-                    ->where(function ($query) {
-                        $variables = getVariables();
-                        $user = session()->get('loggedUser');
-                        // orWhere because the notifiaction has a student or klass id
-                        $query->where('klass_id', $variables['klassesThisUser'])
-                            ->orWhere('student_id', $variables['studentsThisUser'])
-                            ->orWhere('user_id', $user->id);
-                    })
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-
-                return $messages;
-
-
+            return $messages;
         }
+    }
+
+    /*
+    function to get all the student and the klass_ids related to the user
+    */
+    function getVariables() {
+        $user = session()->get('loggedUser');
+
+        $klassesThisUser =[];
+        $studentsThisUser=[];
+
+        /*
+        for the teacher: get the klass and then all the ids of students in this klass
+        */
+        if($user->role=='Teacher'){
+            foreach ($user->klasses as $klass) {
+            $klassesThisUser[] = $klass->id;
+
+                foreach ($klass->students as $student) {
+                    $studentsThisUser[]= $student->id;
+
+                }
+            }
+        }else{
+            /*
+            for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
+            */
+            foreach ($user->students as $student) {
+                $studentsThisUser[] = $student->id;
+                $klassesThisUser[]= $student->klass_id;
+                }
+        }
+
+        return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
     }
 
     public function login(Request $request)
