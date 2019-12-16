@@ -34,8 +34,6 @@
                             @csrf
                             <div class="modal-body mx-3">
                                 <div class="md-form mb-5">
-                                </div>
-                                <div class="md-form mb-5">
                                     <select id="addRole" name="role" class="form-control input-md" required>
                                         <option value="Guardian">Guardian</option>
                                         <option value="Teacher">Teacher</option>
@@ -126,7 +124,7 @@
                 </div>
             </div>
             <div class="text-center buttonEditWrapper">
-                <button id="editOpenModal" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" disabled data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>    
+                <button id="editOpenModal" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" disabled data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>
             </div>
             <!-- Edit User -->
             <!-- Delete User -->
@@ -214,10 +212,7 @@
     });
     $('.dataTables_length').addClass('bs-select');
     //Hide Edit button until User Row is Selected
-    $('tbody').click(function(e) {
-        e.preventDefault();
-        $('#editOpenModal').css('display', 'block');
-    });
+    $('#editOpenModal').prop('disabled', true);
 </script>
 <script>
     const addItemsContainer = $("#addItemsContainer");
@@ -453,7 +448,7 @@
     $(function(){
         $('button[name="editSubmit"]').click(function(e){
             age = Math.floor((new Date() - new Date($('#formDateOfBirthEdit15').val())) / (365.25 * 24 * 60 * 60 * 1000));
-                      
+
             e.preventDefault();
             $.ajax({
                 url: '/users/' + myUser.id,
@@ -496,7 +491,7 @@
             counter = 0;
             usernameSelector = $('#dt-less-columns .tr-color-selected td').eq(3);
             ageSelector = $('#dt-less-columns .tr-color-selected td').eq(4);
-            
+
             usernameText = usernameSelector.text();
 
             e.preventDefault();
