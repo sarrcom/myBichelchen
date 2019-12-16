@@ -15,10 +15,11 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('jerd_schools', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('address', 250)->unique();
-            $table->string('zip');
-            $table->string('city')->nullable();
+            $table->string('name', 150);
+            // $table->string('address', 250)->unique();
+            $table->string('address', 150)->unique();
+            $table->string('zip', 50);
+            $table->string('city', 100)->nullable();
         });
     }
 

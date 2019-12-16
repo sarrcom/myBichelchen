@@ -19,7 +19,7 @@ class NotificationsTableSeeder extends Seeder
             'date' => '2019-12-12',
             'type'  => 'Homework',
             'klass_id' => 3,
-            'student_id' => 21,
+            // 'student_id' => 21,
             'user_id' => 1,
         ]);
 
@@ -29,7 +29,7 @@ class NotificationsTableSeeder extends Seeder
             'date' => '2019-12-12',
             'type'  => 'Homework',
             'klass_id' => 4,
-            'student_id' => 31,
+            // 'student_id' => 31,
             'user_id' => 2,
         ]);
 
@@ -38,18 +38,18 @@ class NotificationsTableSeeder extends Seeder
             'subject' => 'Absence demain',
             'date' => '2019-12-13',
             'type'  => 'Absence',
-            'klass_id' => 3,
+            // 'klass_id' => 3,
             'student_id' => '21',
             'user_id' => '5',
         ]);
 
         DB::table('jerd_notifications')->insert([
-            'description' => '99 bottles of milk is a slightly more involved example than "Hello world", so it can show the things that differentiate one language from the others.',
+            'description' => 'she should drink more milk',
             'subject' => '99 bottles of milk',
             'date' => '2019-12-12',
             'type'  => 'Note',
-            'klass_id' => 3,
-            'student_id' => 21,
+            // 'klass_id' => 3,
+            'student_id' => 31,
             'user_id' => 1,
         ]);
     }

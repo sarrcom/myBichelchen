@@ -14,7 +14,7 @@ return [
     'welcome_h_1' => 'What is myBichelchen?',
     'welcome_p_1' => ' is a digital version of the \'Bichelchen\' - the agenda the teachers use to note the students\' homework in primary school and to communicate with parents.',
     'welcome_p_2' => ' allows an administrator to create teachers, parents, and day care attendants (known as Maison Relais).',
-    'welcome_p_3' => 'Parents, teachers, and day care attendants can see their children\'s homework, notes, planned activities, and manage absences.',
+    'welcome_p_3' => 'Parents, teachers, and day care attendants can see their children\'s homework, notes, planned activities, and manage absences. For registrations please get in touch with us.',
 
     'testimonials' => 'Testimonials',
     'tell_us_why' => 'Tell us why you love myBichelchen!',
