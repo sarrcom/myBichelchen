@@ -23,6 +23,7 @@ class UsersController extends Controller
     public function index()
     {
         $admin = session()->get('loggedAdmin');
+        
         if(!$admin){
             return redirect('/');
         }
@@ -110,13 +111,25 @@ class UsersController extends Controller
         $childName = 'child' . $i;
         if ($user->role == 'Teacher') {
             while (isset($request->$klassName)) {
-                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $teacherKlass = new TeacherKlass;
+
+                $teacherKlass->klass_id = $request->$klassName;
+                $teacherKlass->user_id = $user->id;
+
+                $teacherKlass->save();
+
                 $i++;
                 $klassName = 'klass' . $i;
             }
         } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
             while (isset($request->$childName)) {
-                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $responsibleOfStudent = new ResponsibleOfStudent;
+
+                $responsibleOfStudent->student_id = $request->$childName;
+                $responsibleOfStudent->user_id = $user->id;
+
+                $responsibleOfStudent->save();
+
                 $i++;
                 $childName = 'child' . $i;
             }
@@ -184,14 +197,26 @@ class UsersController extends Controller
         if ($user->role == 'Teacher') {
             TeacherKlass::where('user_id', $user->id)->delete();
             while (isset($request->$klassName)) {
-                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $teacherKlass = new TeacherKlass;
+
+                $teacherKlass->klass_id = $request->$klassName;
+                $teacherKlass->user_id = $user->id;
+
+                $teacherKlass->save();
+
                 $i++;
                 $klassName = 'klass' . $i;
             }
         } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
             ResponsibleOfStudent::where('user_id', $user->id)->delete();
             while (isset($request->$childName)) {
-                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $responsibleOfStudent = new ResponsibleOfStudent;
+
+                $responsibleOfStudent->student_id = $request->$childName;
+                $responsibleOfStudent->user_id = $user->id;
+
+                $responsibleOfStudent->save();
+
                 $i++;
                 $childName = 'child' . $i;
             }
@@ -230,19 +255,17 @@ class UsersController extends Controller
     {
         $user = session()->get('loggedUser');
 
+        if(!$user){
+            return redirect('/');
+        }
+
         if ($user->role === 'Teacher') {
-
-            return view('users.teacher.overview',['user'=> $user]);
+            return view('users.teacher.overview', ['user' => $user]);
+        } else if ($user->role === 'Guardian') {
+            return view('users.guardian.overview', ['user' => $user]);
+        } else if ($user->role === 'MaRe') {
+            return view('users.mare.overview', ['user' => $user]);
         }
-        if ($user->role === 'Guardian') {
-
-            return view('users.guardian.overview',['user'=> $user]);
-        }
-        if ($user->role === 'MaRe') {
-
-            return view('users.mare.overview',['user'=> $user]);
-        }
-
     }
 
     /**
