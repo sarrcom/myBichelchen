@@ -241,7 +241,6 @@ teacher-messages
         }
     });
 }
-
 </script>
 
 @endsection

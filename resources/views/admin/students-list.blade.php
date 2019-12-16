@@ -166,7 +166,7 @@
                         <td>{{ $student->first_name }}</td>
                         <td>{{ $student->last_name }}</td>
                         <td><?php echo DateTime::createFromFormat('Y-m-d', $student->date_of_birth)->diff(new DateTime('now'))->y;?> yrs</td>
-                        <td>{{ $student->klass->name }}</td>
+                        <td>{{ $student->klass->name ?? ''}}</td>
                         <td style="display: none">{{ $student->id }}</td>
                     </tr>
                 @endforeach

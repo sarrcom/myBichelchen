@@ -22,7 +22,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-
+        $admin = session()->get('loggedAdmin');
+        if(!$admin){
+            return redirect('/');
+        }
 
         $users = User::all();
         $students = Student::all();
@@ -31,6 +34,7 @@ class UsersController extends Controller
         $teachersKlasses = TeacherKlass::all();
 
         return view('admin.users-list', [
+            'admin' => $admin,
             'users' => $users,
             'students' => $students,
             'klasses' => $klasses,
@@ -216,8 +220,6 @@ class UsersController extends Controller
         User::destroy($id);
     }
 
-
-
     /**
      * Display the overview of the user.
      *
@@ -262,7 +264,7 @@ class UsersController extends Controller
 
 
 
-            if ($user->role=='Teacher'){
+            if ($user->role=='Teacher') {
 
                 return view('users.teacher.homework',['user'=> $user]);
             }

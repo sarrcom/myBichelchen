@@ -127,6 +127,9 @@ footer.page-footer {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 /* Admin Users List Modal Forms */
+.md-form label.active {
+    -webkit-transform: translateY(-30px) scale(0.8);
+}
 /* To separate the child select option bars */
 .divFlex {
     display: flex;
@@ -151,10 +154,5 @@ footer.page-footer {
 #editOpenModal {
     display: none;
 }
-/* Messages chat scroll bar */
-@media (max-width: 740px) {
-    html, body, .view {
-        height: 1050px;
-    }
-}
+
 

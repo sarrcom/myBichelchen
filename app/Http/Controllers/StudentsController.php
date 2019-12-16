@@ -19,9 +19,15 @@ class StudentsController extends Controller
      */
     public function index()
     {
+        $admin = session()->get('loggedAdmin');
+        if(!$admin){
+            return redirect('/');
+        }
+
         $students = Student::all();
         $klasses = Klass::all();
         return view('admin.students-list', [
+            'admin' => $admin,
             'students' => $students,
             'klasses' => $klasses
         ]);

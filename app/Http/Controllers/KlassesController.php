@@ -19,8 +19,16 @@ class KlassesController extends Controller
      */
     public function index()
     {
+        $admin = session()->get('loggedAdmin');
+        if(!$admin){
+            return redirect('/');
+        }
+
         $klasses = Klass::all();
-        return view('admin.klasses-list', ['klasses' => $klasses]);
+        return view('admin.klasses-list', [
+            'admin' => $admin,
+            'klasses' => $klasses
+            ]);
     }
 
     /**
