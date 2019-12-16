@@ -146,8 +146,10 @@ footer.page-footer {
 #editOpenModal {
     display: none;
 }
-
-#homeworkForm input[type="radio"], #sendMessageForm input[type="radio"] {
-    position: unset;
-    opacity: 1;
+/* Messages chat scroll bar */
+@media (max-width: 740px) {
+    html, body, .view {
+        height: 1050px;
+    }
 }
+
