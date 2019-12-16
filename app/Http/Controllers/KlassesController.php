@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use App\Klass;
+use App\Student;
+use App\Notification;
+use App\Comment;
+use App\TeacherKlass;
 
 class KlassesController extends Controller
 {
@@ -17,7 +20,7 @@ class KlassesController extends Controller
     public function index()
     {
         $klasses = Klass::all();
-        return view('admin.klasses.klasses-list', ['klasses' => $klasses]);
+        return view('admin.klasses-list', ['klasses' => $klasses]);
     }
 
     /**
@@ -27,7 +30,7 @@ class KlassesController extends Controller
      */
     public function create()
     {
-        return view('admin.klasses.add-klass');
+        //
     }
 
     /**
@@ -38,7 +41,17 @@ class KlassesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'name' => 'required|min:2|max:20',
+            'grade' => 'required|integer'
+        ]);
+
+        $klass = new Klass();
+
+        $klass->name = trim($request->name);
+        $klass->grade = trim($request->grade);
+
+        $klass->save();
     }
 
     /**
@@ -61,7 +74,7 @@ class KlassesController extends Controller
     public function edit($id)
     {
         $klass = Klass::find($id);
-        return view('admin.klasses.edit-klass', ['klass' => $klass]);
+        return $klass;
     }
 
     /**
@@ -73,7 +86,17 @@ class KlassesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validation = $request->validate([
+            'name' => 'required|min:2|max:20',
+            'grade' => 'required|integer'
+        ]);
+
+        $klass = Klass::find($id);
+
+        $klass->name = trim($request->name);
+        $klass->grade = trim($request->grade);
+
+        $klass->save();
     }
 
     /**
@@ -84,6 +107,16 @@ class KlassesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $klass = Klass::find($id);
+
+        Student::where('klass_id', $klass->id)->update(['klass_id' => null]);
+
+        while ($notification = Notification::where('klass_id', $klass->id)->first()) {
+            Comment::where('notification_id', $notification->id)->delete();
+            $notification->delete();
+        }
+        TeacherKlass::where('klass_id', $klass->id)->delete();
+
+        Klass::destroy($id);
     }
 }
