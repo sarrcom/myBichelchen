@@ -30,10 +30,21 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/cookies', function () {
+    return view('cookies');
+});
+
 Route::get('/news', function () {
     return view('news');
 });
 
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
+Route::get('/support', function () {
+    return view('support');
+});
 
 Route::get('/admin/login', 'AdminsController@index');
 Route::post('/admin/login', 'AdminsController@login');

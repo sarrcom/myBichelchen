@@ -22,7 +22,8 @@
 <!--Copyright-->
 <div class="footer-copyright py-3 text-center">
     <div class="container-fluid">&copy; 2019 <a href="https://mybichelchen.lu/">myBichelchen.lu</a> - {{ __('footer.rights') }}<br>
-    <a href="/about">About</a> - <a href="/contact">Contact</a> - <a href="/news">News</a> - <a href="/support">Support</a>
+    <a href="/about">{{ __('footer.about_us') }}</a> - <a href="/contact">Contact</a> - <a href="/news">{{ __('footer.news') }}</a> - <a href="/support">{{ __('footer.support') }}</a><br>
+    <a href="/cookies">{{ __('footer.cookie') }}</a> - <a href="/privacy">{{ __('footer.privacy') }}</a>
     </div>
 </div>
 <!--/.Copyright-->
