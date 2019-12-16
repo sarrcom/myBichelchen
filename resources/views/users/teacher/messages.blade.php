@@ -197,11 +197,7 @@
     $('#customSwitches').click(changeRecipient);
     //function to change the selector  of recipient of homework
     function changeRecipient(){
-        $(recipient).empty();
-
-        let test = $('checkbox[name=sendTo]').val();
-        console.log(test);
-        
+        $(recipient).empty();        
         
         if ($('#customSwitches').is(":checked")) {
             @foreach($user->klasses as $klass)
@@ -219,10 +215,7 @@
 
     }
 
-    showMessages();
-    function showMessages() {
-        requestMessages();
-    }
+    requestMessages();
 
 
     $(function(){
@@ -234,7 +227,7 @@
                 data: $('#sendMessageForm').serialize(),
                 success: function(result){
                     console.log(result);
-                    showMessages()
+                    requestMessages();
                 },
                 error: function(err){
                     console.log('error')
