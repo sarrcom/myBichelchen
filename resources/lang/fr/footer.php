@@ -3,10 +3,14 @@
 return [
 
     'rights' => ' Tous droits réservés.',
-    'about_us' => 'About us',
+
+    'about_us' => 'À propos',
     'contact' => 'Contact',
-    'cookie' => 'Cookie policy',
-    'privacy' => 'Privacy policy',
+    'news' => 'Actualités',
+    'support' => 'Aide',
+
+    'cookie' => 'Gestion des cookies',
+    'privacy' => 'Politique de confidentialité',
 
 ];
 
