@@ -423,9 +423,16 @@ class UsersController extends Controller
             foreach ($user->klasses as $klass) {
             $klassesThisUser[] = $klass->id;
 
-                foreach ($klass->students as $student) {
-                    $studentsThisUser[]= $student->id;
-
+                        }
+                    }
+                }else{
+                    /*
+                    for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
+                    */
+                    foreach ($user->students as $student) {
+                        $studentsThisUser[] = $student->id;
+                        $klassesThisUser[]= $student->klass_id;
+                        }
                 }
             }
         }else{
@@ -484,9 +491,9 @@ class UsersController extends Controller
         $homework->subject = trim($request->subject);
         $homework->type = 'Homework';
 
-        if ($request->sendTo == 'class')
-            $homework->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){
+        if ($request->has('sendTo')) {
+            $homework->klass_id = $request->recipient;  
+        }else if(!$request->has('sendTo')){
             $homework->student_id = $request->recipient;
         }
 
@@ -522,17 +529,16 @@ class UsersController extends Controller
         $message->description = trim($request->description);
         $message->subject = trim($request->subject);
         $message->type = 'Note';
-        if ($request->has('sendTo')) {
-            $message->klass_id = $request->recipient;
-        }else if(!$request->has('sendTo')){
+        if ($user->role=='Teacher') {
+            if ($request->has('sendTo')) {
+                $message->klass_id = $request->recipient;  
+            }else if(!$request->has('sendTo')){
+                $message->student_id = $request->recipient;
+            }
+        }else{
             $message->student_id = $request->recipient;
         }
-
-
-
         $message->user_id = $user->id;
-
-
         $message->save();
 
         return 'submitted';
