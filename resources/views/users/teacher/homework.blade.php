@@ -10,10 +10,7 @@
 @section('content')
 
 <h1 class="d-flex justify-content-center">Homework</h1>
-<div class="d-flex justify-content-center">
-    <p class="h5 text-primary createShowP">{{date("l")}}, {{date("d/m/Y")}}</p>
-    <br><br><br>
-</div>
+
 
 <div id="status">
 </div>
@@ -62,24 +59,24 @@
 
                             <!-- Send Homework -->
                             <li class="white">
-                                <div class="chat-body white p-3 z-depth-1">         
-                                    
+                                <div class="chat-body white p-3 z-depth-1">
+
                                     <label for="duedate">Due date:</label>
                                     <input type="date" name="dueDate" required><br>
-                                        
+
                                     <label for="sendTo">Send To </label>
                                     <input type="radio" name="sendTo" value="class" checked> Class
                                     <input type="radio" name="sendTo" value="student"> One Student<br>
 
                                     <label for="recipient">Recipient</label>
-                                    
+
                                     {{-- options from script based on the radio: classes or students--}}
                                     <select name="recipient" id="recipient" required>
                                     </select><br>
-                                        
+
                                     <label for="subject">Subject</label>
                                     <input type="text" name="subject" required><br>
-                                
+
                                     <div class="form-group basic-textarea">
                                         <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                                     </div>
@@ -93,6 +90,19 @@
                 <!-- Grid row -->
             </div>
         </div>
+        
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <button id="previous">previous</button> <button id="next">next</button>
+        <p class="h5 text-primary createShowP">
+        </p>
+        <br><br><br>
+    </div>
+    <div class="card night-fade-gradient">
+
+        <div class="homeworkcalendar">
+        </div>
+
     </div>
 </form>
 
@@ -108,38 +118,36 @@
 <form method="POST" id="homeworkForm">
     @csrf
     @method('POST')
-    
+
     <label for="sendTo">Send To</label>
     <input type="radio" name="sendTo" value="class" checked>Class
     <input type="radio" name="sendTo" value="student">One Student<br>
-    
+
     <label for="recipient">Recipient</label>
-    
+
     {{-- options from script
         based on the radio: classes or students--}}
     <select name="recipient" id="recipient" required>
     </select><br>
-        
+
     <label for="subject">Subject</label>
     <input type="text" name="subject" required><br>
     <textarea name="description" id="" cols="30" rows="10" required></textarea><br>
-    
+
     <label for="duedate">Due date:</label>
     <input type="date" name="dueDate" required><br>
-    
+
     <input type="submit" name="submitHomework" value="Submit">
 </form>
 
-<button id="previous">previous</button> <button id="next">next</button>
 
 <div class="homeworkcalendar">
 </div> -->
-    
-@section('footer')
-@include('templates.footer')
-@endsection
 
 @include('templates.scripts')
+@section('footer')
+@include('templates.footer')
+
 <script>
     let page = 0
 
@@ -159,31 +167,47 @@
 
             let timeStamp = new Date().getTime()+((7*page+i)*24*3600*1000);
             let date = new Date(timeStamp);
-            
+
             let day = date.getDay();
-            let year;
-            let month;
-            let dayOf;
-            let dateformated;
+            let dayName;
+            if(day==1){
+                dayName= 'Monday';
+            }
+            if(day==2){
+                dayName= 'Tuesday';
+            }
+            if(day==3){
+                dayName= 'Wednesday';
+            }
+            if(day==4){
+                dayName= 'Thursday';
+            }
+            if(day==5){
+                dayName= 'Friday';
+            }
+
+            let dayOf=date.getDate();
+            let year = date.getFullYear();
+            let month = date.getMonth()+1;
+            let dateformated= year+'-'+month+'-'+dayOf;
+            let readableDate= dayOf+'.'+month+'.'+year
+
             let divWithID;
             let ulID
 
             if (day != 6 && day != 0) {
-                year = date.getFullYear();
-                month = date.getMonth()+1;
-                dayOf = date.getDate();
-                dateformated= year+'-'+month+'-'+dayOf;
-                
+
                 divWithID ='<div id="d'+dateformated+'"></div>'
                 ulID ='<ul id="ul'+dateformated+'"></ul>'
                 $(".homeworkcalendar").append(divWithID);
-                $('#d'+dateformated).append(dateformated);
+
+                $('#d'+dateformated).append(dayName+' '+readableDate);
                 $('#d'+dateformated).append(ulID);
-                requestHomework(dateformated);     
+                requestHomework(dateformated);
             }
         }
     }
-    
+
 
     function previous(){
         page -= 1;
@@ -200,7 +224,7 @@
         $(recipient).empty();
         let radioSelected = $('input[name=sendTo]:checked').val();
         //console.log(radioSelected);
-        
+
         if (radioSelected == "class") {
             @foreach($user->klasses as $klass)
                 $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
@@ -217,6 +241,18 @@
 
     }
 
+    function fillListOfHomeWork(result, date){
+        let listItem;
+        $('#ul'+date).empty();
+        for(homework of result){
+
+            content = homework.subject + ' : ' + homework.description + ' ';
+            listItem = $('<li></li>');
+            listItem.text(content);
+
+            $('#ul'+date).append(listItem);
+        }
+    }
 
 // submit homework to the server
     $(function(){
@@ -234,39 +270,32 @@
                     }else {
                         $('#status').html('Recipient cannot be '+ result);
                     }
-                    
+
 
                 },
                 error: function(err){
-                    console.log('error')
+                    console.log(err)
                 }
             });
         });
     });
 
 // request homwork for a specific day
-function requestHomework(date) {   
+function requestHomework(date) {
     $.ajax({
         url: '/user/homework/'+date,
         type: 'get',
-        success: function(result){            
-                console.log(result);
-                let listItem;
-                let content;
-                $('#ul'+date).empty();
-                for(homework of result){
-                content = homework.subject;
-                listItem = $('<li></li>');
-                listItem.text(content);
-                
-                $('#ul'+date).append(listItem);    
-                }  
+        success: function(result){
+                //console.log(result);
+                fillListOfHomeWork(result, date)
         },
         error: function(err){
             console.log(err)
         }
     });
-}   
+}
 
 
 </script>
+@endsection
+

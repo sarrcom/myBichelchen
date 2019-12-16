@@ -57,9 +57,11 @@
                                     <a class="dropdown-item" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
                                 @endforeach
                             </div>
+                            <a class="nav-link" href="/logout">
                             <button class="btn btn-outline-white btn-rounded" type="button">
                                 Sign Out
                             </button>
+                            </a>
                         </div>
                         <!-- /If User is Teacher -->
 
@@ -95,6 +97,7 @@
                                     <button class="btn btn-outline-white btn-rounded" type="button">
                                         Sign Out
                                     </button>
+                                    
                                 </div>
                                 <!-- /If User is Guardian -->
 
