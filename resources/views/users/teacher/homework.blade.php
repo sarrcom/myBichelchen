@@ -18,9 +18,6 @@
 <div id="status">
 </div>
 
-<form method="POST" id="homeworkForm">
-    @csrf
-    @method('POST')
     <div class="container">
         <div class="card night-fade-gradient chat-room">
 
@@ -61,33 +58,39 @@
                             <!-- /Homework Box -->
 
                             <!-- Send Homework -->
-                            <li class="white">
+                            <form method="POST" id="sendMessageForm">
+                                @csrf
+                                @method('POST')
+    
                                 <div class="chat-body white p-3 z-depth-1">
-
-                                    <label for="duedate">Due date:</label>
-                                    <input type="date" name="dueDate" required><br>
-
-                                    <label for="sendTo">Send To </label>
-                                    <input type="radio" name="sendTo" value="class" checked> Class
-                                    <input type="radio" name="sendTo" value="student"> One Student<br>
-
-                                    <label for="recipient">Recipient</label>
-
+    
+                                    <ng-container [formGroup]="testForm">
+    
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
+                                            <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
+                                        </div>
+                                        <hr class="w-100">
+    
+                                    </ng-container>
+    
+                                    <label for="recipient">To the Parents of</label>
+    
                                     {{-- options from script based on the radio: classes or students--}}
                                     <select name="recipient" id="recipient" required>
                                     </select><br>
-
+    
                                     <label for="subject">Subject</label>
                                     <input type="text" name="subject" required><br>
-
+    
                                     <div class="form-group basic-textarea">
                                         <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
-                        <button type="submit" class="btn btn-purple btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
-                    </div>
+    
+                                <button type="submit" class="btn btn-blue btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
+    
+                            </form>
                     <!-- Grid column -->
                 </div>
                 <!-- Grid row -->
@@ -111,42 +114,6 @@
 
 @endsection
 
-@section('footer')
-@include('templates.footer')
-@endsection
-
-<!-- <div id="status">
-</div>
-
-<form method="POST" id="homeworkForm">
-    @csrf
-    @method('POST')
-
-    <label for="sendTo">Send To</label>
-    <input type="radio" name="sendTo" value="class" checked>Class
-    <input type="radio" name="sendTo" value="student">One Student<br>
-
-    <label for="recipient">Recipient</label>
-
-    {{-- options from script
-        based on the radio: classes or students--}}
-    <select name="recipient" id="recipient" required>
-    </select><br>
-
-    <label for="subject">Subject</label>
-    <input type="text" name="subject" required><br>
-    <textarea name="description" id="" cols="30" rows="10" required></textarea><br>
-
-    <label for="duedate">Due date:</label>
-    <input type="date" name="dueDate" required><br>
-
-    <input type="submit" name="submitHomework" value="Submit">
-</form>
-
-
-<div class="homeworkcalendar">
-</div> -->
-
 @include('templates.scripts')
 @section('footer')
 @include('templates.footer')
@@ -158,7 +125,7 @@
     showTables();
     $('#previous').click(previous);
     $('#next').click(next);
-    $('[name=sendTo]').click(changeRecipient);
+    $('#customSwitches').click(changeRecipient);
 
 
     //show the date of the tables from today and the next 5 schooldays;
@@ -225,10 +192,9 @@
     //function to change the selector of recipient of homework
     function changeRecipient(){
         $(recipient).empty();
-        let radioSelected = $('input[name=sendTo]:checked').val();
-        //console.log(radioSelected);
+        
 
-        if (radioSelected == "class") {
+        if ($('#customSwitches').is(":checked")) {
             @foreach($user->klasses as $klass)
                 $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
             @endforeach
@@ -259,7 +225,7 @@
 
 // submit homework to the server
     $(function(){
-        $('input[type="submit"]').click(function(e){
+        $('button[type="submit"]').click(function(e){
             e.preventDefault();
             $.ajax({
                 url: '/user/homework',
