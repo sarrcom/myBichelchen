@@ -22,13 +22,26 @@ Route::get('/', function () {
     return view('landing-page');
 });
 
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/news', function () {
+    return view('news');
+});
+
+
 Route::get('/admin/login', 'AdminsController@index');
 Route::post('/admin/login', 'AdminsController@login');
 
 Route::resources([
     'users' => 'UsersController',
-    'students' => 'UsersController',
-    'klasses' => 'UsersController'
+    'students' => 'StudentsController',
+    'klasses' => 'KlassesController'
 ]);
 
 

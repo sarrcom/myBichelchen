@@ -8,7 +8,7 @@
 </header>
 
 @section('content')
-<!-- teacher-messages
+teacher-messages
 <br>
 {{$user->first_name}}
 
@@ -178,8 +178,8 @@
     $('#customSwitches').click(changeRecipient);
     //function to change the selector  of recipient of homework
     function changeRecipient(){
-        $(recipient).empty();        
-        
+        $(recipient).empty();
+
         if ($('#customSwitches').is(":checked")) {
             @foreach($user->klasses as $klass)
             $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
@@ -241,7 +241,6 @@
         }
     });
 }
-
 </script>
 
 @endsection

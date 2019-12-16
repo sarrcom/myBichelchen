@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Klass extends Model
 {
     protected $table='jerd_klasses';
+    public $timestamps = false;
     public function teachers()
     {
         return $this->belongsToMany('App\User','jerd_users');
@@ -20,7 +21,6 @@ class Klass extends Model
     {
         return $this->hasMany('App\Notification');
     }
-
 
     public function school()
     {

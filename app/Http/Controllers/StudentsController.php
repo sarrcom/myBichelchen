@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use App\Student;
 use App\Klass;
+use App\Notification;
+use App\Comment;
+use App\ResponsibleOfStudent;
 
 class StudentsController extends Controller
 {
@@ -17,8 +19,18 @@ class StudentsController extends Controller
      */
     public function index()
     {
+        $admin = session()->get('loggedAdmin');
+        if(!$admin){
+            return redirect('/');
+        }
+
         $students = Student::all();
-        return view('admin.students.students-list', ['students' => $students]);
+        $klasses = Klass::all();
+        return view('admin.students-list', [
+            'admin' => $admin,
+            'students' => $students,
+            'klasses' => $klasses
+        ]);
     }
 
     /**
@@ -28,8 +40,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        $klasses = Klass::all();
-        return view('admin.students.add-student', ['klasses' => $klasses]);
+        //
     }
 
     /**
@@ -40,13 +51,17 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
+        $validation = $request->validate([
+            'first_name' => 'required|min:2|max:20',
+            'last_name' => 'required|min:2|max:20'
+        ]);
+
         $student = new Student;
 
         $student->first_name = trim($request->first_name);
         $student->last_name = trim($request->last_name);
         $student->date_of_birth = $request->date_of_birth;
         $student->klass_id = $request->klass;
-        $student->timestamps = false;
 
         $student->save();
     }
@@ -71,7 +86,7 @@ class StudentsController extends Controller
     public function edit($id)
     {
         $student = Student::find($id);
-        return view('admin.students.edit-student', ['student' => $student]);
+        return $student;
     }
 
     /**
@@ -83,7 +98,19 @@ class StudentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validation = $request->validate([
+            'first_name' => 'required|min:2|max:20',
+            'last_name' => 'required|min:2|max:20'
+        ]);
+
+        $student = Student::find($id);
+
+        $student->first_name = trim($request->first_name);
+        $student->last_name = trim($request->last_name);
+        $student->date_of_birth = $request->date_of_birth;
+        $student->klass_id = $request->klass;
+
+        $student->save();
     }
 
     /**
@@ -94,6 +121,14 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+
+        while ($notification = Notification::where('student_id', $student->id)->first()) {
+            Comment::where('notification_id', $notification->id)->delete();
+            $notification->delete();
+        }
+        ResponsibleOfStudent::where('student_id', $student->id)->delete();
+
+        Student::destroy($id);
     }
 }

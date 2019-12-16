@@ -4,10 +4,8 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-
-            <!-- If User is Admin -->
-            @if (isset($Admin))
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-7">            <!-- If User is Admin -->
+            @if (isset($admin))
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
                         <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>
@@ -17,15 +15,11 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
-                    </li>
                     <li>
                         <a class="nav-link" href="/logout">Sign Out</a>
                     </li>
                 </ul>
             <!-- /If User is Admin -->
-
             <!-- If User is Teacher -->
             @elseif (isset($user) && $user->role=='Teacher')
                 <ul class="navbar-nav mr-auto">

@@ -19,6 +19,7 @@
             </div>
         </div>
         <div class="row d-flex justify-content-center modalWrapper">
+            <!-- Add New User -->
             <div class="modal fade addNewInputs" id="modalAdd15" tabindex="-1" role="dialog" aria-labelledby="modalAdd15" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -28,22 +29,19 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
-                        <!-- Add New User -->
-                        <form method="POST" id="addForm">
+                        <!-- Add Modal Form -->
+                        <form id="addForm">
                             @csrf
-                            @method('POST')
                             <div class="modal-body mx-3">
                                 <div class="md-form mb-5">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
                                 </div>
-                                <!-- Add Modal Form -->
                                 <div class="md-form mb-5">
                                     <select id="addRole" name="role" class="form-control input-md" required>
                                         <option value="Guardian">Guardian</option>
                                         <option value="Teacher">Teacher</option>
                                         <option value="MaRe">Maison Relais</option>
                                     </select>
+                                    <label class="active" data-error="wrong" data-success="right" for="addRole">Role</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
@@ -58,10 +56,9 @@
                                     <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
                                 </div>
                                 <div class="md-form mb-5">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Children/Class</label>
+                                    <div id="addItemsContainer"></div>
+                                    <label class="active" data-error="wrong" data-success="right" for="addItemsContainer">Children/Class</label>
                                 </div>
-                                <br>
-                                <div id="addItemsContainer"></div>
                                 <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Child +</p>
                                 <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Class +</p>
                             </div>
@@ -75,12 +72,11 @@
                     </div>
                 </div>
             </div>
-            <!-- /Add New User -->
-
-            <!-- Edit User -->
             <div class="text-center">
                 <a href="" id="addOpenModal" class="btn btn-info btn-rounded btn-sm" data-toggle="modal" data-target="#modalAdd15">Add<i class="fas fa-plus-square ml-1"></i></a>
             </div>
+            <!-- /Add New User -->
+            <!-- Edit User -->
             <div class="modal fade modalEditClass" id="modalEdit15" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -91,15 +87,12 @@
                             </button>
                         </div>
                         <!-- Edit Modal Form -->
-                        <form method="POST" id="editForm">
-                            @csrf
-                            @method('PUT')
+                        <form id="editForm">
                             <div class="modal-body mx-3 modal-inputs">
                                 <div class="md-form mb-5">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
-                                </div>
-                                <div class="md-form mb-5">
+                                    <input type="hidden">
                                     <select id="editRole" name="role" class="form-control input-md" required></select>
+                                    <label class="active" data-error="wrong" data-success="right" for="editRole">Role</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
@@ -110,19 +103,20 @@
                                     <label class="active" data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
                                 </div>
                                 <div class="md-form mb-5">
-                                    <input type="date" id="formOfficeEdit15" name="date_of_birth" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formOfficeEdit15">Date of Birth</label>
+                                    <input type="date" id="formDateOfBirthEdit15" name="date_of_birth" class="form-control validate">
+                                    <label class="active" data-error="wrong" data-success="right" for="formDateOfBirthEdit15">Date of Birth</label>
                                 </div>
                                 <div class="md-form mb-5">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Children/Class</label>
+                                    <div id="editItemsContainer"></div>
+                                    <label class="active" data-error="wrong" data-success="right" for="editItemsContainer">Children/Class</label>
                                 </div>
-                                <br>
-                                <div id="editItemsContainer"></div>
+                                <input type="hidden">
+                                @csrf
                                 <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Child +</p>
                                 <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Class +</p>
                             </div>
                             <div class="modal-footer d-flex justify-content-center editInsideWrapper">
-                                <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Edit form
+                                <button name="editSubmit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Edit form
                                     <i class="far fa-paper-plane ml-1"></i>
                                 </button>
                             </div>
@@ -131,12 +125,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Edit User -->
-
-            <!-- Delete User -->
             <div class="text-center buttonEditWrapper">
                 <button id="editOpenModal" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" disabled data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>    
             </div>
+            <!-- Edit User -->
+            <!-- Delete User -->
             <div class="modal fade" id="modalDelete15" tabindex="-1" role="dialog" aria-labelledby="modalDelete15" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -146,27 +139,30 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body mx-3">
-                            <p class="text-center h4">Are you sure to delete selected row?</p>
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
-                            <button type="button" class="btn btn-outline-danger btn-rounded btnYesClass" id="btnYes15" data-dismiss="modal">Yes
-                                <i class="far fa-paper-plane ml-1"></i>
-                            </button>
-                            <button type="button" class="btn btn-outline-primary btn-rounded btnNoClass" id="btnNo15" data-dismiss="modal">No
-                                <i class="far fa-paper-plane ml-1"></i>
-                            </button>
-                        </div>
+                        <!-- Delete Modal Form -->
+                        <form id="deleteForm">
+                            @csrf
+                            <div class="modal-body mx-3">
+                                <p class="text-center h4">Are you sure to delete selected row?</p>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center deleteButtonsWrapper">
+                                <button name="deleteSubmit" type="button" class="btn btn-outline-danger btn-rounded btnYesClass" id="btnYes15" data-dismiss="modal">Yes
+                                    <i class="far fa-paper-plane ml-1"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-primary btn-rounded btnNoClass" id="btnNo15" data-dismiss="modal">No
+                                    <i class="far fa-paper-plane ml-1"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <!-- /Delete Modal Form -->
                     </div>
                 </div>
             </div>
-        
             <div class="text-center">
-                <button class="btn btn-danger btn-sm btn-rounded buttonDelete" data-toggle="modal" disabled data-target="#modalDelete15" disabled>Delete<i class="fas fa-times ml-1"></i></a>
+                <button id="deleteOpenModal" class="btn btn-danger btn-sm btn-rounded buttonDelete" data-toggle="modal" disabled data-target="#modalDelete15" disabled>Delete<i class="fas fa-times ml-1"></i></a>
             </div>
         </div>
         <!-- /Delete User -->
-
         <!-- Users List -->
         <table id="dt-less-columns" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
@@ -200,7 +196,6 @@
             </tfoot>
         </table>
         <!-- /Users List -->
-
     </div>
 </div>
 <!-- /Users List Form/Table -->
@@ -218,11 +213,6 @@
         rowEditor: true
     });
     $('.dataTables_length').addClass('bs-select');
-    //Add the class 'active'on the Edit form inputs so it doesn't overlap the pre-existing fields
-    $('#editOpenModal').on('click', function (e) {
-        e.preventDefault();
-        $('#editForm label').addClass('active');
-    })
     //Hide Edit button until User Row is Selected
     $('tbody').click(function(e) {
         e.preventDefault();
@@ -232,11 +222,17 @@
 <script>
     const addItemsContainer = $("#addItemsContainer");
     const editItemsContainer = $("#editItemsContainer");
+    let myUser;
     let previousRole;
-    let co = 0;
-    let ko = 0;
+    let counter;
+    let usernameSelector;
+    let ageSelector;
+    let usernameText;
+    let age;
 
     $('#addOpenModal').click(function(e) {
+        counter = 0;
+        addItemsContainer.html("");
         previousRole = $("#addRole").val();
         displayAddKlassOrChild(previousRole, "add");
     });
@@ -265,10 +261,6 @@
         addKlassItem(editItemsContainer, false, false);
     });
 
-    $('.divFlex').click(function() {
-        console.log("hello");
-    });
-
     function displayAddKlassOrChild(role, method) {
         if (role == "Teacher") {
             showAddKlass(method);
@@ -286,7 +278,7 @@
                 } else if (method == "edit") {
                     editItemsContainer.html("");
                 }
-                co = 0;
+                counter = 0;
                 previousRole = role;
             }
         } else {
@@ -297,7 +289,7 @@
                 } else if (method == "edit") {
                     editItemsContainer.html("");
                 }
-                ko = 0;
+                counter = 0;
                 previousRole = role;
             }
         }
@@ -325,19 +317,22 @@
     }
 
     function addChildItem(container, user, studentId) {
-        let div = $('<div></div>')
+        let div = $('<div></div>');
         let select = $('<select></select>');
         let button = $('<button></button>');
         let span = $('<span></span>');
 
         div.attr("class", "divFlex");
-        select.attr("name", "child" + co);
+        select.attr("name", "child" + counter);
         select.attr("class", "form-control input-md");
         button.attr("type", "button");
         button.attr("class", "close text-primary");
         span.attr("aria-hidden", "true");
         span.html("&times;");
-
+        button.click(function() {
+            button.parent()[0].remove();
+            renameItems(container);
+        });
 
         if (!user) {
             @foreach($students as $student)
@@ -358,14 +353,26 @@
         div.append(button);
         container.append(div);
 
-        co++;
+        counter++;
     }
 
     function addKlassItem(container, user, klassId) {
+        let div = $('<div></div>');
         let select = $('<select></select>');
+        let button = $('<button></button>');
+        let span = $('<span></span>');
 
-        select.attr("name", "klass" + ko);
+        div.attr("class", "divFlex");
+        select.attr("name", "klass" + counter);
         select.attr("class", "form-control input-md");
+        button.attr("type", "button");
+        button.attr("class", "close text-primary");
+        span.attr("aria-hidden", "true");
+        span.html("&times;");
+        button.click(function() {
+            button.parent()[0].remove();
+            renameItems(container);
+        });
 
         if (!user) {
             @foreach($klasses as $klass)
@@ -381,13 +388,16 @@
             @endforeach
         }
 
-        container.append(select);
+        button.append(span);
+        div.append(select);
+        div.append(button);
+        container.append(div);
 
-        ko++;
+        counter++;
     }
 
     function fillRoles(user) {
-        var roles = {'Guardian': 'Guardian', 'Teacher': 'Teacher', 'MaRe': 'Maison Relais'};
+        let roles = {'Guardian': 'Guardian', 'Teacher': 'Teacher', 'MaRe': 'Maison Relais'};
         let select = $('#editRole');
         select.html("");
 
@@ -400,20 +410,25 @@
         }
     }
 
-    function fillChilds(user) {
-        @foreach($responsibleStudents as $responsibleStudent)
-            if ({{ $responsibleStudent->user_id }} === user.id) {
-                addChildItem(editItemsContainer, user, {{ $responsibleStudent->student_id }});
-            }
-        @endforeach
+    function fillChilds(user, childs) {
+        for (const child of childs) {
+            addChildItem(editItemsContainer, user, child.student_id);
+        }
     }
 
-    function fillKlasses(user) {
-        @foreach($teachersKlasses as $teacherKlass)
-            if ({{ $teacherKlass->user_id }} === user.id) {
-                addKlassItem(editItemsContainer, user, {{ $teacherKlass->klass_id }});
-            }
-        @endforeach
+    function fillKlasses(user, klasses) {
+        for (const klass of klasses) {
+            addKlassItem(editItemsContainer, user, klass.klass_id);
+        }
+    }
+
+    function renameItems(container) {
+        counter = 0;
+        let selects = $("#" + container[0].id + " select");
+        for (const select of selects) {
+            $(select).attr("name", select["name"].slice(0, -1) + counter);
+            counter++;
+        }
     }
 </script>
 <script>
@@ -425,12 +440,7 @@
                 type: 'post',
                 data: $('#addForm').serialize(),
                 success: function(result){
-                    console.log(result);
-                    /*if (result === 'Login') {
-                        window.location.replace('/users');
-                    } else {
-                        $('#errorMessage').html(result);
-                    }*/
+                    console.log("success");
                 },
                 error: function(err){
                     console.log('Oh boi')
@@ -441,29 +451,94 @@
 </script>
 <script>
     $(function(){
+        $('button[name="editSubmit"]').click(function(e){
+            age = Math.floor((new Date() - new Date($('#formDateOfBirthEdit15').val())) / (365.25 * 24 * 60 * 60 * 1000));
+                      
+            e.preventDefault();
+            $.ajax({
+                url: '/users/' + myUser.id,
+                type: 'put',
+                data: $('#editForm').serialize(),
+                success: function(result){
+                    usernameSelector.text(usernameText);
+                    ageSelector.text(age + ' yrs');
+                    console.log("success");
+                },
+                error: function(err){
+                    console.log('Oh boi');
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(function(){
+        $('button[name="deleteSubmit"]').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: '/users/' + myUser.id,
+                type: 'delete',
+                data: $('#deleteForm').serialize(),
+                success: function(result){
+                    console.log("success");
+                },
+                error: function(err){
+                    console.log('Oh boi');
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(function(){
         $('#editOpenModal').click(function(e){
-            let username = $('#dt-less-columns .tr-color-selected td').eq(3).text();
+            $('#editForm label').addClass('active');
+            counter = 0;
+            usernameSelector = $('#dt-less-columns .tr-color-selected td').eq(3);
+            ageSelector = $('#dt-less-columns .tr-color-selected td').eq(4);
+            
+            usernameText = usernameSelector.text();
 
             e.preventDefault();
             $.ajax({
-                url: "/users/" + username + "/edit",
+                url: "/users/" + usernameText + "/edit",
                 type: 'get',
                 success: function(result){
-                    fillRoles(result);
+                    myUser = result[0];
+                    items = result[1];
+                    fillRoles(myUser);
 
-                    $('#modalEdit15 input[name="first_name"]').val(result.first_name);
-                    $('#modalEdit15 input[name="last_name"]').val(result.last_name);
-                    $('#modalEdit15 input[name="date_of_birth"]').val(result.date_of_birth);
+                    $('#modalEdit15 input[name="date_of_birth"]').val(myUser.date_of_birth);
 
                     editItemsContainer.html("");
-                    if (result.role == "Teacher") {
-                        fillKlasses(result);
+                    if (myUser.role == "Teacher") {
+                        fillKlasses(myUser, items);
                     } else {
-                        fillChilds(result);
+                        fillChilds(myUser, items);
                     }
 
                     previousRole = $("#editRole").val();
                     displayAddKlassOrChild(previousRole, "edit");
+                },
+                error: function(err){
+                    console.log('Oh boi');
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(function(){
+        $('#deleteOpenModal').click(function(e){
+            usernameSelector = $('#dt-less-columns .tr-color-selected td').eq(3);
+            usernameText = usernameSelector.text();
+
+            e.preventDefault();
+            $.ajax({
+                url: "/users/" + usernameText + "/edit",
+                type: 'get',
+                success: function(result){
+                    myUser = result[0];
                 },
                 error: function(err){
                     console.log('Oh boi');

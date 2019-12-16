@@ -9,6 +9,7 @@ use App\User;
 use App\Student;
 use App\Klass;
 use App\Notification;
+use App\Comment;
 use App\ResponsibleOfStudent;
 use App\TeacherKlass;
 
@@ -21,7 +22,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-
+        $admin = session()->get('loggedAdmin');
+        if(!$admin){
+            return redirect('/');
+        }
 
         $users = User::all();
         $students = Student::all();
@@ -29,7 +33,8 @@ class UsersController extends Controller
         $responsibleStudents = ResponsibleOfStudent::all();
         $teachersKlasses = TeacherKlass::all();
 
-        return view('admin.users.users-list', [
+        return view('admin.users-list', [
+            'admin' => $admin,
             'users' => $users,
             'students' => $students,
             'klasses' => $klasses,
@@ -96,7 +101,6 @@ class UsersController extends Controller
         $user->password = password_hash($pwRand, PASSWORD_DEFAULT);
 
         $user->role = $request->role;
-        $user->timestamps = false;
 
         $user->save();
 
@@ -141,7 +145,14 @@ class UsersController extends Controller
     public function edit($username)
     {
         $user = User::where('username', $username)->first();
-        return $user;
+        if ($user->role == 'Teacher') {
+            $teacherKlasses = TeacherKlass::where('user_id', $user->id)->get();
+            return [$user, $teacherKlasses];
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            $responsibleOfStudents = ResponsibleOfStudent::where('user_id', $user->id)->get();
+            return [$user, $responsibleOfStudents];
+        }
+        return "Error";
     }
 
     /**
@@ -164,9 +175,27 @@ class UsersController extends Controller
         $user->last_name = trim($request->last_name);
         $user->date_of_birth = $request->date_of_birth;
         $user->role = $request->role;
-        $user->timestamps = false;
 
         $user->save();
+
+        $i = 0;
+        $klassName = 'klass' . $i;
+        $childName = 'child' . $i;
+        if ($user->role == 'Teacher') {
+            TeacherKlass::where('user_id', $user->id)->delete();
+            while (isset($request->$klassName)) {
+                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $i++;
+                $klassName = 'klass' . $i;
+            }
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            ResponsibleOfStudent::where('user_id', $user->id)->delete();
+            while (isset($request->$childName)) {
+                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $i++;
+                $childName = 'child' . $i;
+            }
+        }
     }
 
     /**
@@ -177,11 +206,19 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::find($id);
+
+        Comment::where('user_id', $user->id)->delete();
+        Notification::where('user_id', $user->id)->delete();
+
+        if ($user->role == 'Teacher') {
+            TeacherKlass::where('user_id', $user->id)->delete();
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            ResponsibleOfStudent::where('user_id', $user->id)->delete();
+        }
+
         User::destroy($id);
-        return redirect('/admin/users');
     }
-
-
 
     /**
      * Display the overview of the user.
@@ -227,7 +264,7 @@ class UsersController extends Controller
 
 
 
-            if ($user->role=='Teacher'){
+            if ($user->role=='Teacher') {
 
                 return view('users.teacher.homework',['user'=> $user]);
             }
@@ -498,12 +535,12 @@ class UsersController extends Controller
         $message->subject = trim($request->subject);
         $message->type = 'Note';
         if ($request->has('sendTo')) {
-            $message->klass_id = $request->recipient;  
+            $message->klass_id = $request->recipient;
         }else if(!$request->has('sendTo')){
             $message->student_id = $request->recipient;
         }
-        
-        
+
+
 
         $message->user_id = $user->id;
 
