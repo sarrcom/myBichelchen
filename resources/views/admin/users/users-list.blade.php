@@ -38,7 +38,7 @@
                                     <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
                                 </div>
                                 <!-- Add Modal Form -->
-                                <div class="md-form mb-5">
+                                <div class="md-form mb-2">
                                     <select id="addRole" name="role" class="form-control input-md" required>
                                         <option value="Guardian">Guardian</option>
                                         <option value="Teacher">Teacher</option>
@@ -95,7 +95,7 @@
                             @csrf
                             @method('PUT')
                             <div class="modal-body mx-3 modal-inputs">
-                                <div class="md-form mb-5">
+                                <div class="md-form mb-2">
                                     <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Role</label>
                                 </div>
                                 <div class="md-form mb-2">
