@@ -5,9 +5,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-            
+
             <!-- If User is Admin -->
-            @if (isset($user) && $user->role=='Admin')
+            @if (isset($admin))
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
                         <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>

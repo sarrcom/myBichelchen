@@ -22,6 +22,11 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $admin = session()->get('loggedAdmin');
+        if(!$admin){
+            return redirect('/');
+        }
+
         $users = User::all();
         $students = Student::all();
         $klasses = Klass::all();
