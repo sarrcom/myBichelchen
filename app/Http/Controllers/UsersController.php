@@ -496,12 +496,13 @@ class UsersController extends Controller
         $message->description = trim($request->description);
         $message->subject = trim($request->subject);
         $message->type = 'Note';
-
-        if ($request->sendTo == 'class')
-            $message->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){
+        if ($request->has('sendTo')) {
+            $message->klass_id = $request->recipient;  
+        }else if(!$request->has('sendTo')){
             $message->student_id = $request->recipient;
         }
+        
+        
 
         $message->user_id = $user->id;
 

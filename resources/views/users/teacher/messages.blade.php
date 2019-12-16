@@ -147,15 +147,15 @@
                                 <ng-container [formGroup]="testForm">
                                                                       
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitches" formControlName="switchControl">
-                                        <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
+                                        <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
+                                        <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
                                       </div>
                                   
                                     <div class="md-form"><input mdbInputDirective type="text" formControlName="inputControl" autocomplete="off"
                                         [validateSuccess]="false" [validateError]="false" class="form-control"></div>
                                   </ng-container>
 
-                                <label for="recipient">Recipient</label>
+                                <label for="recipient">To the Parents of</label>
                                 
                                 {{-- options from script based on the radio: classes or students--}}
                                 <select name="recipient" id="recipient" required>
@@ -168,10 +168,10 @@
                                     <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                                 </div>
                             </div>
+                            
+                            <button type="submit" class="btn btn-blue btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
+                            
                         </form>
-                        
-                        <button type="submit" class="btn btn-blue btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
-                        
                     </div>
                 </div>
                 <!-- Grid column -->
@@ -194,14 +194,16 @@
 <script>
     
     changeRecipient();
-    $('[name=sendTo]').click(changeRecipient);
+    $('#customSwitches').click(changeRecipient);
     //function to change the selector  of recipient of homework
     function changeRecipient(){
         $(recipient).empty();
-        let radioSelected = $('input[name=sendTo]:checked').val();
-        //console.log(radioSelected);
+
+        let test = $('checkbox[name=sendTo]').val();
+        console.log(test);
         
-        if (radioSelected == "class") {
+        
+        if ($('#customSwitches').is(":checked")) {
             @foreach($user->klasses as $klass)
             $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
             @endforeach
@@ -224,7 +226,7 @@
     
 
     $(function(){
-        $('input[type="submit"]').click(function(e){
+        $('button[type="submit"]').click(function(e){
             e.preventDefault();
             $.ajax({
                 url: '/user/messages',
