@@ -19,7 +19,8 @@
                         <a class="nav-link" href="/logout">Sign Out</a>
                     </li>
                 </ul>
-            <!-- /If User is Admin -->            <!-- If User is Teacher -->
+            <!-- /If User is Admin -->
+            <!-- If User is Teacher -->
             @elseif (isset($user) && $user->role=='Teacher')
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
@@ -52,7 +53,9 @@
                         @endforeach
                     </div>
                 </div>
-                <!-- /If User is Teacher -->                <!-- If User is Guardian -->
+                <!-- /If User is Teacher -->
+
+                <!-- If User is Guardian -->
                 @elseif (isset($user) && $user->role=='Guardian')
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item ">
@@ -85,7 +88,9 @@
                         @endforeach
                         </div>
                     </div>
-                <!-- /If User is Guardian -->                <!-- If User is Maison Relais -->
+                <!-- /If User is Guardian -->
+
+                <!-- If User is Maison Relais -->
                 @elseif (isset($user) && $user->role=='MaRe')
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item ">
@@ -118,7 +123,9 @@
                             @endforeach
                         </div>
                     </div>
-                <!-- /If User is Maison Relais -->                <!-- No one is signed in -->
+                <!-- /If User is Maison Relais -->
+
+                <!-- No one is signed in -->
                 @else
                     <ul class="navbar-nav mr-auto">
                         <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->

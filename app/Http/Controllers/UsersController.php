@@ -259,6 +259,7 @@ class UsersController extends Controller
         a function to return data
         */
         $user = session()->get('loggedUser');
+
         if($date == null){
 
 
@@ -274,12 +275,86 @@ class UsersController extends Controller
                 return view('users.mare.homework',['user'=> $user]);
             }
         }else{
-            $homeworks = Notification::where('date', $date)
-            ->where('user_id', $user->id)
-            ->where('type', 'Homework')
-            ->get();
+            function getVariables(){
+                $user = session()->get('loggedUser');
 
-            return $homeworks;
+                    $klassesThisUser =[];
+                    $studentsThisUser=[];
+
+                    /*
+                    for the teacher: get the klass and then all the ids of students in this klass
+                    */
+                    if($user->role=='Teacher'){
+
+                        foreach ($user->klasses as $klass) {
+                        $klassesThisUser[] = $klass->id;
+
+                            foreach ($klass->students as $student) {
+                                $studentsThisUser[]= $student->id;
+
+                            }
+                        }
+                    }else{
+
+                        /*
+                        for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
+                        */
+                        foreach ($user->students as $student) {
+                            $studentsThisUser[] = $student->id;
+                            $klassesThisUser[]= $student->klass_id;
+                            }
+                    }
+
+                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
+            }
+
+
+                /*
+                get a the homework related to students,  to klass of student(MaRe and Guardian) or
+                klass related to User(teacher) and all students in said klass
+                and all homewrok written by the user(teacher) itself
+                and for the date
+                if is used to add:
+                    ->where('user_id', $user->id) to show submitted homework by this user
+                    this user does not needs to know homework from other users
+
+                ordered by Creation date, to show newest first.
+                */
+
+
+                if($user->role=='Teacher'){
+
+                    $homework = DB::table('jerd_notifications')
+                        ->where('type', 'Homework')
+                        ->where('user_id', $user->id)
+                        ->where('date', $date)
+                        ->where(function ($query) {
+                            $variables = getVariables();
+
+                            // orWhere because the notifiaction has a student or klass id
+                            $query->where('klass_id', $variables['klassesThisUser'])
+                                ->orWhere('student_id', $variables['studentsThisUser']);
+                        })
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+                }else{
+                    $homework = DB::table('jerd_notifications')
+                        ->where('type', 'Homework')
+                        ->where('date', $date)
+                        ->where(function ($query) {
+                            $variables = getVariables();
+
+                            // orWhere because the notifiaction has a student or klass id
+                            $query->where('klass_id', $variables['klassesThisUser'])
+                                ->orWhere('student_id', $variables['studentsThisUser']);
+                        })
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+                }
+
+                return $homework;
+
+
         }
     }
 
@@ -306,12 +381,76 @@ class UsersController extends Controller
             if ($user->role=='MaRe') {
                 return view('users.mare.messages',['user'=> $user]);
             }
+
+            session()->flush();
+
+            return redirect('/');
+
+
         }else{
-            $messages = Notification::where('user_id',$id)->get();
 
-            return $messages;
+
+            /*
+            function to get all the student and the klass_ids related to the user
+            */
+            function getVariables(){
+                $user = session()->get('loggedUser');
+
+                $klassesThisUser =[];
+                $studentsThisUser=[];
+
+                /*
+                for the teacher: get the klass and then all the ids of students in this klass
+                */
+                if($user->role=='Teacher'){
+
+                    foreach ($user->klasses as $klass) {
+                    $klassesThisUser[] = $klass->id;
+
+                        foreach ($klass->students as $student) {
+                            $studentsThisUser[]= $student->id;
+
+                        }
+                    }
+                }else{
+
+                    /*
+                    for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
+                    */
+                    foreach ($user->students as $student) {
+                        $studentsThisUser[] = $student->id;
+                        $klassesThisUser[]= $student->klass_id;
+                        }
+                }
+
+                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
+            }
+
+
+                /*
+                get a the messages related to students,  to klass of student(MaRe and Guardian) or
+                klass related to User(teacher) and all students in said klass
+                and all messages written by the user itself
+                ordered by Creation date, to show newest first.
+                */
+
+                $messages = DB::table('jerd_notifications')
+                    ->where('type', 'Note')
+                    ->where(function ($query) {
+                        $variables = getVariables();
+                        $user = session()->get('loggedUser');
+                        // orWhere because the notifiaction has a student or klass id
+                        $query->where('klass_id', $variables['klassesThisUser'])
+                            ->orWhere('student_id', $variables['studentsThisUser'])
+                            ->orWhere('user_id', $user->id);
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                return $messages;
+
+
         }
-
     }
 
     public function login(Request $request)
@@ -395,12 +534,13 @@ class UsersController extends Controller
         $message->description = trim($request->description);
         $message->subject = trim($request->subject);
         $message->type = 'Note';
-
-        if ($request->sendTo == 'class')
+        if ($request->has('sendTo')) {
             $message->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){
+        }else if(!$request->has('sendTo')){
             $message->student_id = $request->recipient;
         }
+
+
 
         $message->user_id = $user->id;
 
@@ -408,6 +548,13 @@ class UsersController extends Controller
         $message->save();
 
         return 'submitted';
+    }
+
+    public function logout(){
+
+                session()->flush();
+
+                return redirect('/');
     }
     /*
 
