@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="text-center buttonEditWrapper">
-                <button id="editOpenModal" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" disabled data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>    
+                <button id="editOpenModal" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" disabled data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>
             </div>
             <!-- Edit Student -->
             <!-- Delete Student -->
@@ -197,7 +197,7 @@
         rowEditor: true
     });
     $('.dataTables_length').addClass('bs-select');
-    //Hide Edit button until User Row is Selected
+    //Hide Edit button until Student Row is Selected
     $('tbody').click(function(e) {
         e.preventDefault();
         $('#editOpenModal').css('display', 'block');
@@ -210,7 +210,7 @@
     let age;
     let id;
 
-    function fillKlasses(student) {        
+    function fillKlasses(student) {
         @foreach($klasses as $klass)
             if (student.klass_id === {{ $klass->id }}) {
                 $('#editKlass').append(new Option("{{ $klass->name }}", "{{ $klass->id }}", true, true));
@@ -242,7 +242,7 @@
     $(function(){
         $('button[name="editSubmit"]').click(function(e){
             age = Math.floor((new Date() - new Date($('#formDateOfBirthEdit15').val())) / (365.25 * 24 * 60 * 60 * 1000));
-                      
+
             e.preventDefault();
             $.ajax({
                 url: '/students/' + myStudent.id,
