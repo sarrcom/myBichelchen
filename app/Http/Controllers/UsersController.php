@@ -21,6 +21,8 @@ class UsersController extends Controller
      */
     public function index()
     {
+
+
         $users = User::all();
         $students = Student::all();
         $klasses = Klass::all();
@@ -221,7 +223,6 @@ class UsersController extends Controller
         */
         $user = session()->get('loggedUser');
 
-
         if($date == null){
 
 
@@ -361,29 +362,29 @@ class UsersController extends Controller
                 $klassesThisUser =[];
                 $studentsThisUser=[];
 
-                        /*
-                        for the teacher: get the klass and then all the ids of students in this klass
-                        */
-                        if($user->role=='Teacher'){
+                /*
+                for the teacher: get the klass and then all the ids of students in this klass
+                */
+                if($user->role=='Teacher'){
 
-                            foreach ($user->klasses as $klass) {
-                            $klassesThisUser[] = $klass->id;
+                    foreach ($user->klasses as $klass) {
+                    $klassesThisUser[] = $klass->id;
 
-                                foreach ($klass->students as $student) {
-                                    $studentsThisUser[]= $student->id;
+                        foreach ($klass->students as $student) {
+                            $studentsThisUser[]= $student->id;
 
-                                }
-                            }
-                        }else{
-
-                            /*
-                            for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
-                            */
-                            foreach ($user->students as $student) {
-                                $studentsThisUser[] = $student->id;
-                                $klassesThisUser[]= $student->klass_id;
-                                }
                         }
+                    }
+                }else{
+
+                    /*
+                    for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
+                    */
+                    foreach ($user->students as $student) {
+                        $studentsThisUser[] = $student->id;
+                        $klassesThisUser[]= $student->klass_id;
+                        }
+                }
 
                 return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
             }
