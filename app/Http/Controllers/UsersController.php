@@ -9,6 +9,7 @@ use App\User;
 use App\Student;
 use App\Klass;
 use App\Notification;
+use App\Comment;
 use App\ResponsibleOfStudent;
 use App\TeacherKlass;
 
@@ -27,7 +28,7 @@ class UsersController extends Controller
         $responsibleStudents = ResponsibleOfStudent::all();
         $teachersKlasses = TeacherKlass::all();
 
-        return view('admin.users.users-list', [
+        return view('admin.users-list', [
             'users' => $users,
             'students' => $students,
             'klasses' => $klasses,
@@ -139,7 +140,14 @@ class UsersController extends Controller
     public function edit($username)
     {
         $user = User::where('username', $username)->first();
-        return $user;
+        if ($user->role == 'Teacher') {
+            $teacherKlasses = TeacherKlass::where('user_id', $user->id)->get();
+            return [$user, $teacherKlasses];
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            $responsibleOfStudents = ResponsibleOfStudent::where('user_id', $user->id)->get();
+            return [$user, $responsibleOfStudents];
+        }
+        return "Error";
     }
 
     /**
@@ -165,6 +173,25 @@ class UsersController extends Controller
         $user->timestamps = false;
 
         $user->save();
+
+        $i = 0;
+        $klassName = 'klass' . $i;
+        $childName = 'child' . $i;
+        if ($user->role == 'Teacher') {
+            TeacherKlass::where('user_id', $user->id)->delete();
+            while (isset($request->$klassName)) {
+                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $i++;
+                $klassName = 'klass' . $i;
+            }
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            ResponsibleOfStudent::where('user_id', $user->id)->delete();
+            while (isset($request->$childName)) {
+                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $i++;
+                $childName = 'child' . $i;
+            }
+        }
     }
 
     /**
@@ -175,11 +202,19 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::find($id);
+
+        Notification::where('user_id', $user->id)->delete();
+        Comment::where('user_id', $user->id)->delete();
+
+        if ($user->role == 'Teacher') {
+            TeacherKlass::where('user_id', $user->id)->delete();
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            ResponsibleOfStudent::where('user_id', $user->id)->delete();
+        }
+
         User::destroy($id);
-        return redirect('/admin/users');
     }
-
-
     
     /**
      * Display the overview of the user.

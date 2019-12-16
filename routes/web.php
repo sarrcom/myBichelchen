@@ -27,8 +27,8 @@ Route::post('/admin/login', 'AdminsController@login');
 
 Route::resources([
     'users' => 'UsersController',
-    'students' => 'UsersController',
-    'klasses' => 'UsersController'
+    'students' => 'StudentsController',
+    'klasses' => 'KlassesController'
 ]);
 
 
