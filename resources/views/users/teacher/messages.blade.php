@@ -144,9 +144,16 @@
                         
                             <div class="chat-body white p-3 z-depth-1">
                                 
-                                <label for="sendTo">Send To </label>
-                                <input type="radio" name="sendTo" value="class"> Class
-                                <input type="radio" name="sendTo" value="student"> One Student<br>
+                                <ng-container [formGroup]="testForm">
+                                                                      
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitches" formControlName="switchControl">
+                                        <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
+                                      </div>
+                                  
+                                    <div class="md-form"><input mdbInputDirective type="text" formControlName="inputControl" autocomplete="off"
+                                        [validateSuccess]="false" [validateError]="false" class="form-control"></div>
+                                  </ng-container>
 
                                 <label for="recipient">Recipient</label>
                                 
