@@ -34,6 +34,7 @@ class UsersController extends Controller
         $teachersKlasses = TeacherKlass::all();
 
         return view('admin.users-list', [
+            'admin' => $admin,
             'users' => $users,
             'students' => $students,
             'klasses' => $klasses,
