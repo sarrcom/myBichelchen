@@ -11,13 +11,12 @@
 |
 */
 
-use App\Http\Controllers\UsersController;
-
 Route::get('locale/{locale}', function ($locale){
     Session::put('locale', $locale);
     return redirect()->back();
 });
 
+// Front Office
 Route::get('/', function () {
     return view('landing-page');
 });
@@ -34,7 +33,7 @@ Route::get('/news', function () {
     return view('news');
 });
 
-
+// Admin
 Route::get('/admin/login', 'AdminsController@index');
 Route::post('/admin/login', 'AdminsController@login');
 
@@ -44,6 +43,9 @@ Route::resources([
     'klasses' => 'KlassesController'
 ]);
 
+// Users
+Route::post('/', 'UsersController@login');
+Route::get('/logout', 'UsersController@logout');
 
 Route::get('/user', 'UsersController@overview');
 
@@ -54,10 +56,4 @@ Route::post('/user/homework', 'UsersController@submitHomework');
 Route::get('/user/messages/{id?}', 'UsersController@messages');
 Route::post('/user/messages', 'UsersController@sendMessages');
 
-
-Route::post('/', 'UsersController@login');
-
-
-Route::get('/test', 'UsersController@test');
-
-Route::get('/logout', 'UsersController@logout');
+//Route::get('/test', 'UsersController@test');
