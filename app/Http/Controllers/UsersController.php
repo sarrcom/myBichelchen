@@ -240,8 +240,8 @@ class UsersController extends Controller
             function getVariables(){
                 $user = session()->get('loggedUser');
 
-                    $klassesThisUser;
-                    $studentsThisUser;
+                    $klassesThisUser =[];
+                    $studentsThisUser =[];
 
                     /*
                     for the teacher: get the klass and then all the ids of students in this klass
@@ -358,8 +358,8 @@ class UsersController extends Controller
             function getVariables(){
                 $user = session()->get('loggedUser');
 
-                        $klassesThisUser;
-                        $studentsThisUser;
+                        $klassesThisUser =[];
+                        $studentsThisUser =[];
 
                         /*
                         for the teacher: get the klass and then all the ids of students in this klass
@@ -400,7 +400,7 @@ class UsersController extends Controller
                     ->where('type', 'Note')
                     ->where(function ($query) {
                         $variables = getVariables();
-                        
+                        $user = session()->get('loggedUser');
                         // orWhere because the notifiaction has a student or klass id
                         $query->where('klass_id', $variables['klassesThisUser'])
                             ->orWhere('student_id', $variables['studentsThisUser'])
