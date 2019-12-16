@@ -149,14 +149,13 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
                                         <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
-                                      </div>
-                                  
-                                    <div class="md-form"><input mdbInputDirective type="text" formControlName="inputControl" autocomplete="off"
-                                        [validateSuccess]="false" [validateError]="false" class="form-control"></div>
+                                    </div>
+                                    <hr class="w-100">
+
                                   </ng-container>
 
                                 <label for="recipient">To the Parents of</label>
-                                
+
                                 {{-- options from script based on the radio: classes or students--}}
                                 <select name="recipient" id="recipient" required>
                                 </select><br>
@@ -168,9 +167,9 @@
                                     <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                                 </div>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-blue btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -201,8 +200,8 @@
 
         let test = $('checkbox[name=sendTo]').val();
         console.log(test);
-        
-        
+
+
         if ($('#customSwitches').is(":checked")) {
             @foreach($user->klasses as $klass)
             $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
