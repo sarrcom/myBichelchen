@@ -42,9 +42,8 @@
                         <ul class="list-unstyled friend-list">
 
                             <!-- Inbox Box -->
-                            <li class="p-2" id="allMessages">
+                            <li class="active grey lighten-3 p-2" id="allMessages">
                                 <a href="#" class="d-flex justify-content-between">
-                                    <!-- <img src="https://image.flaticon.com/icons/png/512/145/145844.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"> -->
                                     <div class="text-small">
                                         <strong>Elaine Kim</strong>
                                         <p class="last-message text-muted">
@@ -119,7 +118,7 @@
                             </div>
                         </li>
                         <!-- /Chat Box -->
-
+                    </ul>
                         <!-- Send Message -->
                         <form method="POST" id="sendMessageForm">
                             @csrf
