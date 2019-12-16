@@ -198,10 +198,7 @@
     });
     $('.dataTables_length').addClass('bs-select');
     //Hide Edit button until Student Row is Selected
-    $('tbody').click(function(e) {
-        e.preventDefault();
-        $('#editOpenModal').css('display', 'block');
-    });
+    $('#editOpenModal').prop('disabled', true);
 </script>
 <script>
     let myStudent;

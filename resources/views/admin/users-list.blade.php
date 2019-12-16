@@ -33,7 +33,7 @@
                         <form id="addForm">
                             @csrf
                             <div class="modal-body mx-3">
-                                <div class="md-form mb-3">
+                                <div class="md-form mb-5">
                                     <select id="addRole" name="role" class="form-control input-md" required>
                                         <option value="Guardian">Guardian</option>
                                         <option value="Teacher">Teacher</option>
@@ -212,10 +212,7 @@
     });
     $('.dataTables_length').addClass('bs-select');
     //Hide Edit button until User Row is Selected
-    $('tbody').click(function(e) {
-        e.preventDefault();
-        $('#editOpenModal').css('display', 'block');
-    });
+    $('#editOpenModal').prop('disabled', true);
 </script>
 <script>
     const addItemsContainer = $("#addItemsContainer");
