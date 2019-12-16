@@ -35,33 +35,15 @@
                     <div class="col-md-6 col-xl-4 px-0">
 
                     <h6 class="font-weight-bold mb-3 text-center text-lg-left">Inbox</h6>
-                    <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar scrollbar-lady-lips">
+                    <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
 
                         <!-- All Messages -->
-                        <ul id="allMessages" class="list-unstyled friend-list">
-
-                            <!-- Inbox Box active grey -->
-                            <li class="active grey lighten-3 p-2">
-                                <a href="#" class="d-flex justify-content-between">
-                                    <img src="https://image.flaticon.com/icons/png/512/145/145842.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
-                                    <div class="text-small">
-                                        <strong>Sebastian McLloyd</strong>
-                                        <p class="last-message text-muted">
-                                            Hello, Are you there?
-                                        </p>
-                                    </div>
-                                    <div class="chat-footer">
-                                        <p class="text-smaller text-muted mb-0">Just now</p>
-                                        <span class="badge badge-danger float-right">1</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <!-- /Inbox Box -->
+                        <ul class="list-unstyled friend-list">
 
                             <!-- Inbox Box -->
-                            <li class="p-2">
+                            <li class="p-2" id="allMessages">
                                 <a href="#" class="d-flex justify-content-between">
-                                    <img src="https://image.flaticon.com/icons/png/512/145/145844.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
+                                    <!-- <img src="https://image.flaticon.com/icons/png/512/145/145844.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"> -->
                                     <div class="text-small">
                                         <strong>Elaine Kim</strong>
                                         <p class="last-message text-muted">
@@ -149,14 +131,13 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
                                         <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
-                                      </div>
-                                  
-                                    <div class="md-form"><input mdbInputDirective type="text" formControlName="inputControl" autocomplete="off"
-                                        [validateSuccess]="false" [validateError]="false" class="form-control"></div>
+                                    </div>
+                                    <hr class="w-100">
+
                                   </ng-container>
 
                                 <label for="recipient">To the Parents of</label>
-                                
+
                                 {{-- options from script based on the radio: classes or students--}}
                                 <select name="recipient" id="recipient" required>
                                 </select><br>
@@ -168,9 +149,9 @@
                                     <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                                 </div>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-blue btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -230,7 +211,7 @@
                     requestMessages();
                 },
                 error: function(err){
-                    console.log('error')
+                    console.log(err)
                 }
             });
         });
