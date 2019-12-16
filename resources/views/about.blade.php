@@ -88,8 +88,6 @@
                     <a href="{{ url('locale/fr') }}" class="btn btn-blue btn-rounded"></i>FR</a>
                 </div>
             </div>
-
-        <hr class="mb-5">
     </section>
 
     <hr class="mb-5">

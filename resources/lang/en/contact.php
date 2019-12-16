@@ -2,8 +2,9 @@
 
 return [
 
-    'contact.intro_h_1' => 'Contactez-nous',
-    'contact.intro_p_1' => 'Si .',
+    'intro_h_1' => 'Contact us',
+
+    'intro_h_2' => 'Team',
 
 ];
 

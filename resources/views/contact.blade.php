@@ -75,7 +75,17 @@
             <!--Section heading-->
             <h1 class="font-weight-bold text-center h1 my-5">{{ __('contact.intro_h_1') }}</h1>
             <!--Section description-->
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('contact.intro_p_1') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong><br>9, ave des Hauts-Fourneaux<br>L-4362 Belval<br>Luxembourg</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">+352 691 22 36 00</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><a href="mailto:hello@mybichelchen.lu">hello@mybichelchen.lu</a></p>
+
+            <h1 class="font-weight-bold text-center h1 my-5">{{ __('contact.intro_h_2') }}</h1>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Dennis Burghardt<br>backend and frontend development, testing<br><a href="mailto:sdennis@mybichelchen.lu">dennis@mybichelchen.lu</a></p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Elaine Kim<br>frontend and backend development, testing<br><a href="mailto:elaine@mybichelchen.lu">elaine@mybichelchen.lu</a></p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Jorge Gonçalves<br>backend and frontend development, testing<br><a href="mailto:jorge@mybichelchen.lu">jorge@mybichelchen.lu</a></p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Reginald van Waardhuizen<br>backend development, project management, testing<br><a href="mailto:reginald@mybichelchen.lu">reginald@mybichelchen.lu</a></p>
 
             {{-- making it multilingual --}}
             <div class="text-center">
@@ -84,8 +94,6 @@
                     <a href="{{ url('locale/fr') }}" class="btn btn-blue btn-rounded"></i>FR</a>
                 </div>
             </div>
-
-        <hr class="mb-5">
     </section>
 
     <hr class="mb-5">
