@@ -376,7 +376,6 @@ class UsersController extends Controller
                         }
                     }
                 }else{
-
                     /*
                     for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
                     */
@@ -497,14 +496,16 @@ class UsersController extends Controller
         $message->description = trim($request->description);
         $message->subject = trim($request->subject);
         $message->type = 'Note';
-        if ($request->has('sendTo')) {
-            $message->klass_id = $request->recipient;  
-        }else if(!$request->has('sendTo')){
+        if ($user->role=='Teacher') {
+            if ($request->has('sendTo')) {
+                $message->klass_id = $request->recipient;  
+            }else if(!$request->has('sendTo')){
+                $message->student_id = $request->recipient;
+            }
+        }else{
             $message->student_id = $request->recipient;
         }
         $message->user_id = $user->id;
-
-
         $message->save();
 
         return 'submitted';
