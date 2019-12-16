@@ -10,7 +10,10 @@
 @section('content')
 
 <h1 class="d-flex justify-content-center">Homework</h1>
-
+<div class="d-flex justify-content-center">
+    <p class="h5 text-primary createShowP">{{date("l")}}, {{date("d/m/Y")}}</p>
+    <br><br><br>
+</div>
 
 <div id="status">
 </div>
@@ -90,7 +93,7 @@
                 <!-- Grid row -->
             </div>
         </div>
-        
+
 <div class="container">
     <div class="d-flex justify-content-center">
         <button id="previous">previous</button> <button id="next">next</button>

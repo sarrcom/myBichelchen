@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-            
+
             <!-- If User is Admin -->
             @if (isset($user) && $user->role=='Admin')
                 <ul class="navbar-nav mr-auto">
@@ -20,14 +20,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="/logout">Sign Out</a>
+                    </li>
                 </ul>
-                <div>
-                    <button class="btn btn-outline-white btn-rounded" type="button">
-                        Sign Out
-                    </button>
-                </div>
                 <!-- /If User is Admin -->
-                
+
                     <!-- If User is Teacher -->
                     @elseif (isset($user) && $user->role=='Teacher')
                         <ul class="navbar-nav mr-auto">
@@ -45,6 +43,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
                             </li>
+                            <li>
+                                <a class="nav-link" href="/logout">Sign Out</a>
+                            </li>
                         </ul>
                         <!-- Drop down menu for Teachers -->
                         <div class="dropdown">
@@ -57,11 +58,6 @@
                                     <a class="dropdown-item" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
                                 @endforeach
                             </div>
-                            <a class="nav-link" href="/logout">
-                            <button class="btn btn-outline-white btn-rounded" type="button">
-                                Sign Out
-                            </button>
-                            </a>
                         </div>
                         <!-- /If User is Teacher -->
 
@@ -82,6 +78,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
                                     </li>
+                                    <li>
+                                        <a class="nav-link" href="/logout">Sign Out</a>
+                                    </li>
                                 </ul>
                                 <!-- Drop down menu for Guardian -->
                                 <div class="dropdown">
@@ -94,10 +93,6 @@
                                         <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
                                     @endforeach
                                     </div>
-                                    <button class="btn btn-outline-white btn-rounded" type="button">
-                                        Sign Out
-                                    </button>
-                                    
                                 </div>
                                 <!-- /If User is Guardian -->
 
@@ -118,6 +113,9 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
                                             </li>
+                                            <li>
+                                                <a class="nav-link" href="/logout">Sign Out</a>
+                                            </li>
                                         </ul>
                                         <!-- Drop down menu for MaRe -->
                                         <div class="dropdown">
@@ -130,14 +128,11 @@
                                                     <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
                                                 @endforeach
                                             </div>
-                                            <button class="btn btn-outline-white btn-rounded" type="button">
-                                                Sign Out
-                                            </button>
                                         </div>
                                         <!-- /If User is Maison Relais -->
 
                                             <!-- No one is signed in -->
-                                            @else   
+                                            @else
                                                 <ul class="navbar-nav mr-auto">
                                                     <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
                                                 <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>
