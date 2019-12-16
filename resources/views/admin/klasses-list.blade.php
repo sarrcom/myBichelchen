@@ -34,24 +34,16 @@
                             @csrf
                             <div class="modal-body mx-3">
                                 <div class="md-form mb-5">
-                                    <select id="addKlass" name="klass" class="form-control input-md" required>
-                                    @foreach($klasses as $klass)
-                                        <option value="{{ $klass->id }}">{{ $klass->name }}</option>
-                                    @endforeach
+                                    <select id="addGrade" name="grade" class="form-control input-md" required>
+                                        @for ($i = 1; $i <= 6; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
                                     </select>
-                                    <label class="active" data-error="wrong" data-success="right" for="addKlass">Class</label>
+                                    <label class="active" data-error="wrong" data-success="right" for="addGrade">Class</label>
                                 </div>
                                 <div class="md-form mb-5">
-                                    <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputPosition15">First Name</label>
-                                </div>
-                                <div class="md-form mb-5">
-                                    <input type="text" id="inputOfficeInput15" name="last_name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputOfficeInput15">Last Name</label>
-                                </div>
-                                <div class="md-form mb-5">
-                                    <input type="date" id="inputDate" name="date_of_birth" class="form-control" placeholder="Select Date">
-                                    <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
+                                    <input type="text" id="inputPosition15" name="name" class="form-control validate">
+                                    <label data-error="wrong" data-success="right" for="inputPosition15">Name</label>
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
@@ -82,20 +74,12 @@
                         <form id="editForm">
                             <div class="modal-body mx-3 modal-inputs">
                                 <div class="md-form mb-5">
-                                    <select id="editKlass" name="klass" class="form-control input-md" required></select>
-                                    <label class="active" data-error="wrong" data-success="right" for="editKlass">Class</label>
+                                    <select id="editGrade" name="grade" class="form-control input-md" required></select>
+                                    <label class="active" data-error="wrong" data-success="right" for="editGrade">Class</label>
                                 </div>
                                 <div class="md-form mb-5">
-                                    <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">First Name</label>
-                                </div>
-                                <div class="md-form mb-5">
-                                    <input type="text" id="formPositionEdit15" name="last_name" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
-                                </div>
-                                <div class="md-form mb-5">
-                                    <input type="date" id="formDateOfBirthEdit15" name="date_of_birth" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formDateOfBirthEdit15">Date of Birth</label>
+                                    <input type="text" id="formNameEdit15" name="name" class="form-control validate">
+                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Name</label>
                                 </div>
                                 <input type="hidden">
                                 <input type="hidden">
@@ -153,30 +137,24 @@
         <table id="dt-less-columns" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th class="th-sm">First Name</th>
-                    <th class="th-sm">Last Name</th>
-                    <th class="th-sm">Age</th>
-                    <th class="th-sm">Class</th>
+                    <th class="th-sm">Name</th>
+                    <th class="th-sm">Grade</th>
                     <th style="display: none" class="th-sm">Id</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($students as $student)
+                @foreach($klasses as $klass)
                     <tr>
-                        <td>{{ $student->first_name }}</td>
-                        <td>{{ $student->last_name }}</td>
-                        <td><?php echo DateTime::createFromFormat('Y-m-d', $student->date_of_birth)->diff(new DateTime('now'))->y;?> yrs</td>
-                        <td>{{ $student->klass->name }}</td>
-                        <td style="display: none">{{ $student->id }}</td>
+                        <td>{{ $klass->name }}</td>
+                        <td>{{ $klass->grade }}</td>
+                        <td style="display: none">{{ $klass->id }}</td>
                     </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Age</th>
-                    <th>Class</th>
+                    <th>Name</th>
+                    <th>Grade</th>
                 </tr>
             </tfoot>
         </table>
@@ -204,20 +182,19 @@
     });
 </script>
 <script>
-    let myStudent;
+    let myKlass;
     let idSelector;
-    let ageSelector;
-    let age;
     let id;
 
-    function fillKlasses(student) {
-        @foreach($klasses as $klass)
-            if (student.klass_id === {{ $klass->id }}) {
-                $('#editKlass').append(new Option("{{ $klass->name }}", "{{ $klass->id }}", true, true));
+    function fillGrades(klass) {
+        $('#editGrade').html("");
+        for (let i = 1; i <= 6; i++) {
+            if (klass.grade == i) {
+                $('#editGrade').append(new Option(i, i, true, true));
             } else {
-                $('#editKlass').append(new Option("{{ $klass->name }}", "{{ $klass->id }}"));
+                $('#editGrade').append(new Option(i, i));
             }
-        @endforeach
+        }
     }
 </script>
 <script>
@@ -225,7 +202,7 @@
         $('button[name="addSubmit"]').click(function(e){
             e.preventDefault();
             $.ajax({
-                url: '/students',
+                url: '/klasses',
                 type: 'post',
                 data: $('#addForm').serialize(),
                 success: function(result){
@@ -241,15 +218,12 @@
 <script>
     $(function(){
         $('button[name="editSubmit"]').click(function(e){
-            age = Math.floor((new Date() - new Date($('#formDateOfBirthEdit15').val())) / (365.25 * 24 * 60 * 60 * 1000));
-
             e.preventDefault();
             $.ajax({
-                url: '/students/' + myStudent.id,
+                url: '/klasses/' + myKlass.id,
                 type: 'put',
                 data: $('#editForm').serialize(),
                 success: function(result){
-                    ageSelector.text(age + ' yrs');
                     console.log("success");
                 },
                 error: function(err){
@@ -264,7 +238,7 @@
         $('button[name="deleteSubmit"]').click(function(e){
             e.preventDefault();
             $.ajax({
-                url: '/students/' + myStudent.id,
+                url: '/klasses/' + myKlass.id,
                 type: 'delete',
                 data: $('#deleteForm').serialize(),
                 success: function(result){
@@ -281,19 +255,16 @@
     $(function(){
         $('#editOpenModal').click(function(e){
             $('#editForm label').addClass('active');
-            ageSelector = $('#dt-less-columns .tr-color-selected td').eq(2);
-            idSelector = $('#dt-less-columns .tr-color-selected td').eq(4);
+            idSelector = $('#dt-less-columns .tr-color-selected td').eq(2);
             id = idSelector.text();
 
             e.preventDefault();
             $.ajax({
-                url: "/students/" + id + "/edit",
+                url: "/klasses/" + id + "/edit",
                 type: 'get',
                 success: function(result){
-                    myStudent = result;
-                    fillKlasses(myStudent);
-
-                    $('#modalEdit15 input[name="date_of_birth"]').val(myStudent.date_of_birth);
+                    myKlass = result;
+                    fillGrades(myKlass);
                 },
                 error: function(err){
                     console.log('Oh boi');
@@ -305,15 +276,15 @@
 <script>
     $(function(){
         $('#deleteOpenModal').click(function(e){
-            idSelector = $('#dt-less-columns .tr-color-selected td').eq(4);
+            idSelector = $('#dt-less-columns .tr-color-selected td').eq(2);
             id = idSelector.text();
 
             e.preventDefault();
             $.ajax({
-                url: "/students/" + id + "/edit",
+                url: "/klasses/" + id + "/edit",
                 type: 'get',
                 success: function(result){
-                    myStudent = result;
+                    myKlass = result;
                 },
                 error: function(err){
                     console.log('Oh boi');

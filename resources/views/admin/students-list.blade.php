@@ -211,6 +211,7 @@
     let id;
 
     function fillKlasses(student) {
+        $('#editKlass').html("");
         @foreach($klasses as $klass)
             if (student.klass_id === {{ $klass->id }}) {
                 $('#editKlass').append(new Option("{{ $klass->name }}", "{{ $klass->id }}", true, true));

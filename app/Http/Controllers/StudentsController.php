@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use App\Student;
 use App\Klass;
+use App\Notification;
+use App\Comment;
 use App\ResponsibleOfStudent;
 
 class StudentsController extends Controller
@@ -55,7 +56,6 @@ class StudentsController extends Controller
         $student->last_name = trim($request->last_name);
         $student->date_of_birth = $request->date_of_birth;
         $student->klass_id = $request->klass;
-        $student->timestamps = false;
 
         $student->save();
     }
@@ -103,7 +103,6 @@ class StudentsController extends Controller
         $student->last_name = trim($request->last_name);
         $student->date_of_birth = $request->date_of_birth;
         $student->klass_id = $request->klass;
-        $student->timestamps = false;
 
         $student->save();
     }
@@ -118,6 +117,10 @@ class StudentsController extends Controller
     {
         $student = Student::find($id);
 
+        while ($notification = Notification::where('student_id', $student->id)->first()) {
+            Comment::where('notification_id', $notification->id)->delete();
+            $notification->delete();
+        }
         ResponsibleOfStudent::where('student_id', $student->id)->delete();
 
         Student::destroy($id);

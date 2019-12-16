@@ -95,7 +95,6 @@ class UsersController extends Controller
         $user->password = password_hash($pwRand, PASSWORD_DEFAULT);
 
         $user->role = $request->role;
-        $user->timestamps = false;
 
         $user->save();
 
@@ -170,7 +169,6 @@ class UsersController extends Controller
         $user->last_name = trim($request->last_name);
         $user->date_of_birth = $request->date_of_birth;
         $user->role = $request->role;
-        $user->timestamps = false;
 
         $user->save();
 
@@ -204,8 +202,8 @@ class UsersController extends Controller
     {
         $user = User::find($id);
 
-        Notification::where('user_id', $user->id)->delete();
         Comment::where('user_id', $user->id)->delete();
+        Notification::where('user_id', $user->id)->delete();
 
         if ($user->role == 'Teacher') {
             TeacherKlass::where('user_id', $user->id)->delete();
@@ -215,7 +213,7 @@ class UsersController extends Controller
 
         User::destroy($id);
     }
-    
+
     /**
      * Display the overview of the user.
      *
@@ -256,11 +254,11 @@ class UsersController extends Controller
         */
         $user = session()->get('loggedUser');
         if($date == null){
-            
-    
-    
+
+
+
             if ($user->role=='Teacher') {
-    
+
                 return view('users.teacher.homework',['user'=> $user]);
             }
             if ($user->role=='Guardian') {
@@ -291,9 +289,9 @@ class UsersController extends Controller
         $user = session()->get('loggedUser');
 
         if ($id == null) {
-            
+
             if ($user->role=='Teacher') {
-                
+
                 return view('users.teacher.messages',['user'=> $user]);
             }
             if ($user->role=='Guardian') {
@@ -331,7 +329,7 @@ class UsersController extends Controller
     }
 
     public function submitHomework(Request $request){
-        
+
 
         if (!is_numeric($request->recipient)) {
             return $request->recipient;
@@ -355,7 +353,7 @@ class UsersController extends Controller
 
         if ($request->sendTo == 'class')
             $homework->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){    
+        else if($request->sendTo == 'student'){
             $homework->student_id = $request->recipient;
         }
 
@@ -370,7 +368,7 @@ class UsersController extends Controller
 
 
     public function sendMessages(Request $request){
-        
+
 
         if (!is_numeric($request->recipient)) {
             return $request->recipient;
@@ -394,7 +392,7 @@ class UsersController extends Controller
 
         if ($request->sendTo == 'class')
             $message->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){    
+        else if($request->sendTo == 'student'){
             $message->student_id = $request->recipient;
         }
 
@@ -411,7 +409,7 @@ class UsersController extends Controller
 
     it shows the error page in stead of staying in the same page
     typo in the Model:(
-        
+
     public function test(){
         // get the current user to provide id
 
