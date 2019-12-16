@@ -33,9 +33,7 @@
                         <form id="addForm">
                             @csrf
                             <div class="modal-body mx-3">
-                                <div class="md-form mb-5">
-                                </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mb-3">
                                     <select id="addRole" name="role" class="form-control input-md" required>
                                         <option value="Guardian">Guardian</option>
                                         <option value="Teacher">Teacher</option>
@@ -43,19 +41,19 @@
                                     </select>
                                     <label class="active" data-error="wrong" data-success="right" for="addRole">Role</label>
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mt-5 mb-3">
                                     <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
                                     <label data-error="wrong" data-success="right" for="inputPosition15">First Name</label>
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mt-5 mb-3">
                                     <input type="text" id="inputOfficeInput15" name="last_name" class="form-control validate">
                                     <label data-error="wrong" data-success="right" for="inputOfficeInput15">Last Name</label>
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mt-5 mb-3">
                                     <input type="date" id="inputDate" name="date_of_birth" class="form-control" placeholder="Select Date">
                                     <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mt-5 mb-2">
                                     <div id="addItemsContainer"></div>
                                     <label class="active" data-error="wrong" data-success="right" for="addItemsContainer">Children/Class</label>
                                 </div>
@@ -89,24 +87,24 @@
                         <!-- Edit Modal Form -->
                         <form id="editForm">
                             <div class="modal-body mx-3 modal-inputs">
-                                <div class="md-form mb-5">
+                                <div class="md-form mb-3">
                                     <input type="hidden">
                                     <select id="editRole" name="role" class="form-control input-md" required></select>
                                     <label class="active" data-error="wrong" data-success="right" for="editRole">Role</label>
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mt-5 mb-3">
                                     <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
                                     <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">First Name</label>
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mt-5 mb-3">
                                     <input type="text" id="formPositionEdit15" name="last_name" class="form-control validate">
                                     <label class="active" data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mt-5 mb-3">
                                     <input type="date" id="formDateOfBirthEdit15" name="date_of_birth" class="form-control validate">
                                     <label class="active" data-error="wrong" data-success="right" for="formDateOfBirthEdit15">Date of Birth</label>
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mt-5 mb-2">
                                     <div id="editItemsContainer"></div>
                                     <label class="active" data-error="wrong" data-success="right" for="editItemsContainer">Children/Class</label>
                                 </div>
@@ -126,7 +124,7 @@
                 </div>
             </div>
             <div class="text-center buttonEditWrapper">
-                <button id="editOpenModal" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" disabled data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>    
+                <button id="editOpenModal" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" disabled data-target="#modalEdit15" disabled>Edit<i class="fas fa-pen-square ml-1"></i></a>
             </div>
             <!-- Edit User -->
             <!-- Delete User -->
@@ -453,7 +451,7 @@
     $(function(){
         $('button[name="editSubmit"]').click(function(e){
             age = Math.floor((new Date() - new Date($('#formDateOfBirthEdit15').val())) / (365.25 * 24 * 60 * 60 * 1000));
-                      
+
             e.preventDefault();
             $.ajax({
                 url: '/users/' + myUser.id,
@@ -496,7 +494,7 @@
             counter = 0;
             usernameSelector = $('#dt-less-columns .tr-color-selected td').eq(3);
             ageSelector = $('#dt-less-columns .tr-color-selected td').eq(4);
-            
+
             usernameText = usernameSelector.text();
 
             e.preventDefault();
