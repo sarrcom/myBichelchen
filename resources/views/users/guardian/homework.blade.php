@@ -23,21 +23,16 @@
 
         <div class="homeworkcalendar">
         </div>
-        
+
     </div>
 </div>
 
 @endsection
-<div id="status">
-</div>
-
-
-
-
-@include('templates.scripts')
 @section('footer')
 @include('templates.footer')
+@endsection
 
+@section('extra-scripts')
 <script>
     let page = 0
 
@@ -57,7 +52,7 @@
 
             let timeStamp = new Date().getTime()+((7*page+i)*24*3600*1000);
             let date = new Date(timeStamp);
-            
+
             let day = date.getDay();
             let dayName;
             if(day==1){
@@ -81,7 +76,7 @@
             let month = date.getMonth()+1;
             let dateformated= year+'-'+month+'-'+dayOf;
             let readableDate= dayOf+'.'+month+'.'+year
-            
+
             let divWithID;
             let ulID
 
@@ -90,14 +85,14 @@
                 divWithID ='<div id="d'+dateformated+'"></div>'
                 ulID ='<ul id="ul'+dateformated+'"></ul>'
                 $(".homeworkcalendar").append(divWithID);
-                
+
                 $('#d'+dateformated).append(dayName+' '+readableDate);
                 $('#d'+dateformated).append(ulID);
-                requestHomework(dateformated);     
+                requestHomework(dateformated);
             }
         }
     }
-    
+
 
     function previous(){
         page -= 1;
@@ -114,22 +109,22 @@
         let listItem;
         $('#ul'+date).empty();
         for(homework of result){
-           
+
             content = homework.subject + ' : ' + homework.description + ' '  + homework.klass_id;
             listItem = $('<li></li>');
             listItem.text(content);
-            
-            $('#ul'+date).append(listItem);    
-        }  
+
+            $('#ul'+date).append(listItem);
+        }
     }
 
 
 // request homwork for a specific day
-function requestHomework(date) {   
+function requestHomework(date) {
     $.ajax({
         url: '/user/homework/'+date,
         type: 'get',
-        success: function(result){            
+        success: function(result){
                 //console.log(result);
                 fillListOfHomeWork(result, date)
         },
@@ -137,7 +132,7 @@ function requestHomework(date) {
             console.log(err)
         }
     });
-}   
+}
 
 
 </script>

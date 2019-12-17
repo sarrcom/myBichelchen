@@ -85,10 +85,11 @@
         </div>
 @endsection
 
-@include('templates.scripts')
 @section('footer')
 @include('templates.footer')
+@endsection
 
+@section('extra-scripts')
 <script>
     let page = 0
 

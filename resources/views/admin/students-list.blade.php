@@ -12,6 +12,8 @@
 <div class="container">
     <div class="wrapper-editor">
         <div class="block my-4">
+            <p class="error"></p>
+            <p class="success"></p>
             <h1 class="d-flex justify-content-center">Admin Students List</h1>
             <br>
             <div class="d-flex justify-content-center">
@@ -39,19 +41,19 @@
                                         <option value="{{ $klass->id }}">{{ $klass->name }}</option>
                                     @endforeach
                                     </select>
-                                    <label class="active" data-error="wrong" data-success="right" for="addKlass">Class</label>
+                                    <label class="active adminAddModal" for="addKlass">Class</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputPosition15">First Name</label>
+                                    <label for="inputPosition15">First Name</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="inputOfficeInput15" name="last_name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputOfficeInput15">Last Name</label>
+                                    <label for="inputOfficeInput15">Last Name</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="date" id="inputDate" name="date_of_birth" class="form-control" placeholder="Select Date">
-                                    <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
+                                    <label for="inputDate15">Date of Birth</label>
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
@@ -83,19 +85,19 @@
                             <div class="modal-body mx-3 modal-inputs">
                                 <div class="md-form mb-5">
                                     <select id="editKlass" name="klass" class="form-control input-md" required></select>
-                                    <label class="active" data-error="wrong" data-success="right" for="editKlass">Class</label>
+                                    <label class="active adminEditModal" for="editKlass">Class</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">First Name</label>
+                                    <label class="active" for="formNameEdit15">First Name</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formPositionEdit15" name="last_name" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
+                                    <label class="active" for="formPositionEdit15">Last Name</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="date" id="formDateOfBirthEdit15" name="date_of_birth" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formDateOfBirthEdit15">Date of Birth</label>
+                                    <label class="active" for="formDateOfBirthEdit15">Date of Birth</label>
                                 </div>
                                 <input type="hidden">
                                 <input type="hidden">
@@ -227,10 +229,10 @@
                 type: 'post',
                 data: $('#addForm').serialize(),
                 success: function(result){
-                    console.log("success");
+                    $('.success').text("Student added successfully");
                 },
                 error: function(err){
-                    console.log('Oh boi')
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -248,10 +250,10 @@
                 data: $('#editForm').serialize(),
                 success: function(result){
                     ageSelector.text(age + ' yrs');
-                    console.log("success");
+                    $('.success').text("Student edited successfully");
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -266,10 +268,10 @@
                 type: 'delete',
                 data: $('#deleteForm').serialize(),
                 success: function(result){
-                    console.log("success");
+                    $('.success').text("Student deleted successfully");
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -294,7 +296,7 @@
                     $('#modalEdit15 input[name="date_of_birth"]').val(myStudent.date_of_birth);
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -314,7 +316,7 @@
                     myStudent = result;
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
