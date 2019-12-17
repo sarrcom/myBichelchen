@@ -292,11 +292,20 @@ class UsersController extends Controller
             ->where('date', (new DateTime())->format('Y-m-d'))
             ->whereIn('student_id', $students)
             ->get();
-        //$notes;
-        //$absenses;
+
+        $notes = Notification::where('type', 'Note')
+            ->whereIn('student_id', $students)
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        $absences = Notification::where('type', 'Absence')
+            ->whereIn('student_id', $students)
+            ->where('date', (new DateTime())->format('Y-m-d'))
+            ->get();
 
         if ($user->role === 'Teacher') {
-            return view('users.teacher.overview', ['user' => $user, 'klass' => $item, 'homeworks' => $homeworks]);
+            return view('users.teacher.overview', ['user' => $user, 'klass' => $item, 'homeworkArray' => $homeworks, 'notes' => $notes, 'absences' => $absences]);
         } else if ($user->role === 'Guardian') {
             return view('users.guardian.overview', ['user' => $user, 'student' => $item]);
         } else if ($user->role === 'MaRe') {
@@ -466,40 +475,6 @@ class UsersController extends Controller
         }
     }
 
-    /*
-    function to get all the student and the klass_ids related to the user
-    */
-    function getVariables() {
-        $user = session()->get('loggedUser');
-
-        $klassesThisUser =[];
-        $studentsThisUser=[];
-
-        /*
-        for the teacher: get the klass and then all the ids of students in this klass
-        */
-        if($user->role=='Teacher'){
-            foreach ($user->klasses as $klass) {
-            $klassesThisUser[] = $klass->id;
-
-                foreach ($klass->students as $student) {
-                    $studentsThisUser[]= $student->id;
-
-                }
-            }
-        }else{
-            /*
-            for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
-            */
-            foreach ($user->students as $student) {
-                $studentsThisUser[] = $student->id;
-                $klassesThisUser[]= $student->klass_id;
-                }
-        }
-
-        return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
-    }
-
     public function login(Request $request)
     {
 
@@ -543,9 +518,9 @@ class UsersController extends Controller
         $homework->subject = trim($request->subject);
         $homework->type = 'Homework';
 
-        if ($request->sendTo == 'class')
+        if ($request->has('sendTo')) {
             $homework->klass_id = $request->recipient;
-        else if($request->sendTo == 'student'){
+        }else if(!$request->has('sendTo')){
             $homework->student_id = $request->recipient;
         }
 
@@ -590,8 +565,6 @@ class UsersController extends Controller
 
 
         $message->user_id = $user->id;
-
-
         $message->save();
 
         return 'submitted';
@@ -603,38 +576,37 @@ class UsersController extends Controller
 
                 return redirect('/');
     }
-    /*
 
-    for debugging the homework query we may need it later so dont delete this
+
+    /*for debugging the homework query we may need it later so dont delete this
 
     it shows the error page in stead of staying in the same page
-    typo in the Model:(
+    typo in the Model:(*/
 
     public function test(){
-        // get the current user to provide id
 
-        //we check for subject and description, because the other fields are filled in by default
-        /*$validation = $request->validate([
-            'subject' => 'required|min:4|max:255',
-            'description' => 'required|min:2|max:255'
-            //'dueDate' => 'after:today'
-
-        ]);
-
-        $homework = new Notification();
-
-        $homework->description = 'hello';
-        $homework->subject = 'random';
-        $homework->type = 'Note';
-        $homework->klass_id = 1;
-
-
-        $homework->user_id = 2;
+        /*lets assume we get the id of a class which is 1 for this example */
 
 
 
-        $homework->save();
+        $homework[] = DB::table('jerd_notifications')
+                    ->where('type', 'Homework')
+                    ->where('klass_id', 1)
+                    ->get();
+
+        $homework[] = DB::table('jerd_notifications')
+                        ->where(function ($query) {
+                            $user = session()->get('loggedUser');
+                            foreach ($user->klasses as $klass) {
+                                if ($klass->id == 1/* this value will be provide by the url */) {
+                                    foreach ($klass->students as $student) {
+                                        $query->orWhere('student_id', $student->id);
+                                    }
+                                }
+                            }
+                            })
+                        ->get();
 
         return $homework;
-    }*/
+    }
 }

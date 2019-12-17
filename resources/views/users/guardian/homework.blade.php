@@ -14,7 +14,7 @@
 
 <div class="container">
     <div class="d-flex justify-content-center">
-        <button id="previous">previous</button> <button id="next">next</button>
+        <button class="btn btn-purple btn-rounded btn-sm waves-effect waves-light" id="previous"><i class="fas fa-caret-left"></i></button> <button class="btn btn-purple btn-rounded btn-sm waves-effect waves-light" id="next"><i class="fas fa-caret-right"></i></button>
         <p class="h5 text-primary createShowP">
         </p>
         <br><br><br>
@@ -115,7 +115,7 @@
         $('#ul'+date).empty();
         for(homework of result){
            
-            content = homework.subject + ' : ' + homework.description + ' ';
+            content = homework.subject + ' : ' + homework.description + ' '  + homework.klass_id;
             listItem = $('<li></li>');
             listItem.text(content);
             

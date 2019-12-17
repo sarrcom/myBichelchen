@@ -170,8 +170,8 @@ teacher-messages
 
 @section('footer')
 @include('templates.footer')
-
 @include('templates.scripts')
+
 <script>
 
     changeRecipient();

@@ -117,8 +117,13 @@
 
 
 @endsection
-
+@include('templates.scripts')
 @section('footer')
 @include('templates.footer')
+<script>
+
+
+
+</script>
 @endsection
 
