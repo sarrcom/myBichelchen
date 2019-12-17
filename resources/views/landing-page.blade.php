@@ -287,7 +287,7 @@
 </script>
 
 <script>
-    document.getElementById('status').innerHTML = "Sending...";
+    //document.getElementById('status').innerHTML = "Sending...";
     
     formData = {
         'name'     : $('input[name=name]').val(),
