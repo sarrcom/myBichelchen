@@ -43,6 +43,15 @@
                         @endforeach
                     </p>
 
+                <!-- Text -->
+                <p class="card-text">Today's Homework Logic goes here</p>
+                @foreach($homeworkArray as $homeworks)
+                    @foreach($homeworks as $homework)
+                        <p><strong>{{ $homework->subject }}</strong></p>
+                        <p class="short-description">{{ $homework->description }}</p>
+                        <hr>
+                    @endforeach
+                @endforeach
                 <!-- Link -->
                 <a href="/user/homework" class="purple-text d-flex flex-row-reverse p-2">
                     <p class="waves-effect waves-light">Go to Homework<i class="fas fa-angle-double-right ml-2"></i></p>
@@ -72,10 +81,15 @@
         <!--Card content-->
         <div class="card-body card-body-cascade" style="overflow-y: scroll; height:30rem;">
 
-            <!-- Text -->
-            <p class="card-text">
-                @foreach($notesArray as $note)
-                    <p><strong>{{ $note->subject }}:</strong> {{ $note->description }} <em>{{ $note->created_at }}</em></p>
+                <!-- Text -->
+                <p class="card-text">Today's Notes Logic goes here</p>
+                @foreach($notesArray as $notes)
+                    @foreach($notes as $note)
+                        <p><strong>{{ $note->subject }}</strong></p>
+                        <p class="short-description">{{ $note->description }}</p>
+                        <p class="badge"><em>{{ $note->created_at }}</em></p>
+                        <hr>
+                    @endforeach
                 @endforeach
             </p>
 
@@ -111,7 +125,9 @@
             <!-- Text -->
             <p class="card-text">
                 @foreach($absences as $absence)
-                    <p><strong>{{ $absence->subject }}:</strong> {{ $absence->description }} <em>{{ $absence->created_at }}</em></p>
+                    <p><strong>{{ $absence->subject }}</strong></p>
+                    <p class="short-description">{{ $absence->description }}</p>
+                    <hr>
                 @endforeach
             </p>
 
