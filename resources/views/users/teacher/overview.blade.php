@@ -46,7 +46,7 @@
 
                 <!-- Link -->
                 <a href="/user/homework" class="purple-text d-flex flex-row-reverse p-2">
-                    <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
+                    <p class="waves-effect waves-light">Go to Homework<i class="fas fa-angle-double-right ml-2"></i></p>
                 </a>
             </div>
             <!--/.Card content-->
@@ -83,7 +83,7 @@
 
             <!-- Link -->
             <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
-                <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
+                <p class="waves-effect waves-light">Go to Notes<i class="fas fa-angle-double-right ml-2"></i></p>
             </a>
         </div>
         <!--/.Card content-->
@@ -120,7 +120,7 @@
 
             <!-- Link -->
             <a href="#!" class="blue-text d-flex flex-row-reverse p-2">
-                <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
+                <p class="waves-effect waves-light">Go to Absences<i class="fas fa-angle-double-right ml-2"></i></p>
             </a>
 
         </div>
