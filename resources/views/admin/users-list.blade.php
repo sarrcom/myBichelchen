@@ -441,7 +441,7 @@
                     $('#inputDate').val("");
                 },
                 error: function(err){
-                    console.log('Oh boi')
+                    console.log(err)
                 }
             });
         });

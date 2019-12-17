@@ -93,7 +93,7 @@ class UsersController extends Controller
 
         // Saving the password in users.json
         $allUsers = [];
-        $jsonFile = file_get_contents('users.json');
+        $jsonFile = file_get_contents(resource_path('jerd_users.json'));
         $jsonDecoded = json_decode($jsonFile);
         if ($jsonDecoded == '') {
             $jsonDecoded = [];
@@ -102,7 +102,7 @@ class UsersController extends Controller
             $allUsers[] = $value;
         }
         $allUsers[] = ['username' => $user->username, 'password' => $pwRand];
-        file_put_contents('users.json', json_encode($allUsers, JSON_PRETTY_PRINT));
+        file_put_contents(resource_path('jerd_users.json'), json_encode($allUsers, JSON_PRETTY_PRINT));
         $user->password = password_hash($pwRand, PASSWORD_DEFAULT);
 
         $user->role = $request->role;
