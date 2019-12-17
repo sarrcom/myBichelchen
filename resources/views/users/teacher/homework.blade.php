@@ -114,7 +114,8 @@
         </div>
 
     </div>
-</form>
+</div>
+<button id="testerino">Homework of student 1</button>
 
 @endsection
 
@@ -131,7 +132,8 @@
     $('#next').click(next);
     $('#customSwitches').click(changeRecipient);
 
-
+    $('#testerino').click(test);
+    
     //show the date of the tables from today and the next 5 schooldays;
     //by clicking the buttomn and changing the page variable you can scroll 5 schooldays back/forward
     function showTables(){
@@ -267,6 +269,21 @@ function requestHomework(date) {
         }
     });
 }
+
+function test() {
+    $.ajax({
+        url: '/test',
+        type: 'get',
+        success: function(result){
+                
+        },
+        error: function(err){
+            console.log(err)
+        }
+    });
+}
+
+
 
 
 </script>
