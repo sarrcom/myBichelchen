@@ -38,7 +38,9 @@
                     <p class="card-text">
                         @foreach($homeworkArray as $homeworks)
                             @foreach($homeworks as $homework)
-                                <p><strong>{{ $homework->subject }}:</strong> {{ $homework->description }}</p>
+                                <p><strong>{{ $homework->subject }}</strong></p>
+                                <p class="short-description">{{ $homework->description }}</p>
+                                <hr>
                             @endforeach
                         @endforeach
                     </p>

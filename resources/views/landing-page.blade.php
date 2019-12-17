@@ -274,9 +274,7 @@
                         window.location.replace('/user');
                     }else{
                         $('#errorMessage').html(result);
-
                     }
-
                 },
                 error: function(err){
                     console.log(err)
