@@ -26,10 +26,9 @@
 
                 <!-- Title -->
                 <a href="/user/homework" class="white-text">
-                    <h2 class="card-header-title mb-3">Homework</h2>
+                    <h2 class="card-header-title mb-2">Homework</h2>
                 </a>
-                <!-- Subtitle -->
-                <p class="card-header-subtitle mb-0">Today's Homework</p>
+
             </div>
 
             <!--Card content-->
@@ -65,10 +64,9 @@
 
             <!-- Title -->
             <a href="/user/messages" class="white-text">
-                <h2 class="card-header-title mb-3">Notes</h2>
+                <h2 class="card-header-title mb-2">Notes</h2>
             </a>
-            <!-- Subtitle -->
-            <p class="card-header-subtitle mb-0">Today's Notes</p>
+
         </div>
 
         <!--Card content-->
@@ -102,10 +100,9 @@
 
             <!-- Title -->
             <a href="#!" class="white-text">
-                <h2 class="card-header-title mb-3">Absences</h2>
+                <h2 class="card-header-title mb-2">Absences</h2>
             </a>
-            <!-- Subtitle -->
-            <p class="card-header-subtitle mb-0">Today's Absences</p>
+
         </div>
 
         <!--Card content-->
