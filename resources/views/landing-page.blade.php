@@ -49,12 +49,12 @@
                 @method('POST')
                 <div class="md-form mb-5">
                     <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="Form-email1">{{ __('landing-page.your_username') }}</label>
+                    <label for="Form-email1">{{ __('landing-page.your_username') }}</label>
                 </div>
 
                 <div class="md-form pb-3">
                     <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="Form-pass1">{{ __('landing-page.your_password') }}</label>
+                    <label for="Form-pass1">{{ __('landing-page.your_password') }}</label>
                     <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">{{ __('landing-page.forgot_password') }}</a></p>
                 </div>
 
@@ -288,7 +288,7 @@
 
 <script>
     //document.getElementById('status').innerHTML = "Sending...";
-    
+
     formData = {
         'name'     : $('input[name=name]').val(),
         'email'    : $('input[name=email]').val(),
@@ -327,7 +327,7 @@
                 return false;
             }
         }
-        
+
     let subject =  document.getElementById('subject').value;
     if (subject == "") {
         document.getElementById('status').innerHTML = "Subject cannot be empty";

@@ -5,7 +5,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-
             <!-- If User is Admin -->
             @if (isset($admin))
             <ul class="navbar-nav mr-auto">
@@ -53,9 +52,13 @@
                 <div class="dropdown">
                     <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Class
+                        @foreach ($user->klasses as $klass)
+                            @if ($klass->id == Cookie::get('item'))
+                                {{ $klass->name }}
+                            @endif
+                        @endforeach
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
+                    <div class="dropdown-menu">
                         @foreach ($user->klasses as $klass)
                             <a class="dropdown-item" id="nav{{ $klass->id }}" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
                         @endforeach
@@ -88,7 +91,11 @@
                     <div class="dropdown">
                         <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            Child
+                            @foreach ($user->students as $student)
+                                @if ($student->id == Cookie::get('item'))
+                                    {{ $student->first_name }} {{ $student->last_name }}
+                                @endif
+                            @endforeach
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
                         @foreach ($user->students as $student)
@@ -123,7 +130,11 @@
                     <div class="dropdown">
                         <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            Child
+                            @foreach ($user->students as $student)
+                                @if ($student->id == Cookie::get('item'))
+                                    {{ $student->first_name }} {{ $student->last_name }}
+                                @endif
+                            @endforeach
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
                             @foreach ($user->students as $student)

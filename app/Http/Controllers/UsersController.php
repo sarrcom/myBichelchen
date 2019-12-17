@@ -266,10 +266,10 @@ class UsersController extends Controller
         if (!Cookie::has('item')) {
             if ($user->role === 'Teacher') {
                 $teacherKlass = TeacherKlass::where('user_id', $user->id)->first();
-                Cookie::queue('item', $teacherKlass->klass_id, 10);
+                Cookie::queue('item', $teacherKlass->klass_id, 60 * 24 * 7);
             } else if ($user->role === 'Guardian' || $user->role === 'MaRe') {
                 $responsibleOfStudent = ResponsibleOfStudent::where('user_id', $user->id)->first();
-                Cookie::queue('item', $responsibleOfStudent->student_id, 10);
+                Cookie::queue('item', $responsibleOfStudent->student_id, 60 * 24 * 7);
             }
         }
 
@@ -307,7 +307,7 @@ class UsersController extends Controller
                 ->where('date', (new DateTime())->format('Y-m-d'))
                 ->get();
 
-            return view('users.teacher.overview', ['user' => $user, 'klass' => $item, 'homeworkArray' => $homeworks, 'notes' => $notes, 'absences' => $absences]);
+            return view('users.teacher.overview', ['user' => $user, 'klassId' => $item, 'homeworkArray' => $homeworks, 'notes' => $notes, 'absences' => $absences]);
         } else if ($user->role === 'Guardian') {
             // Guardian Queries
             $student = Student::find($item);
@@ -338,7 +338,7 @@ class UsersController extends Controller
                 ->limit(5)
                 ->get();
 
-            return view('users.guardian.overview', ['user' => $user, 'student' => $item, 'homeworkArray' => $homeworks, 'notesArray' => $notes, 'absences' => $absences]);
+            return view('users.guardian.overview', ['user' => $user, 'studentId' => $item, 'homeworkArray' => $homeworks, 'notesArray' => $notes, 'absences' => $absences]);
         } else if ($user->role === 'MaRe') {
             // MaRe Queries
             $student = Student::find($item);
@@ -369,7 +369,7 @@ class UsersController extends Controller
                 ->limit(5)
                 ->get();
 
-            return view('users.mare.overview', ['user' => $user, 'student' => $item, 'homeworkArray' => $homeworks, 'notesArray' => $notes, 'absences' => $absences]);
+            return view('users.mare.overview', ['user' => $user, 'studentId' => $item, 'homeworkArray' => $homeworks, 'notesArray' => $notes, 'absences' => $absences]);
         }
     }
 

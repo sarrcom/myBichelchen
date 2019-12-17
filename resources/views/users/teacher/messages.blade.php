@@ -180,8 +180,9 @@
 
 @section('footer')
 @include('templates.footer')
-@include('templates.scripts')
+@endsection
 
+@section('extra-scripts')
 <script>
 
     changeRecipient();

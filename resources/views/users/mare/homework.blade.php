@@ -92,12 +92,16 @@
                 <!-- Grid row -->
             </div>
         </div>
-@endsection
 
-@include('templates.scripts')
+    </div>
+</div>
+
+@endsection
 @section('footer')
 @include('templates.footer')
+@endsection
 
+@section('extra-scripts')
 <script>
     let page = 0
 
