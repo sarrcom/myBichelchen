@@ -39,7 +39,7 @@
                                         <option value="Teacher">Teacher</option>
                                         <option value="MaRe">Maison Relais</option>
                                     </select>
-                                    <label class="active" data-error="wrong" data-success="right" for="addRole">Role</label>
+                                    <label class="active adminAddModal" data-error="wrong" data-success="right" for="addRole">Role</label>
                                 </div>
                                 <div class="md-form mt-5 mb-3">
                                     <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="md-form mt-5 mb-2">
                                     <div id="addItemsContainer"></div>
-                                    <label class="active" data-error="wrong" data-success="right" for="addItemsContainer">Children/Class</label>
+                                    <label class="active adminAddModal" data-error="wrong" data-success="right" for="addItemsContainer">Children/Class</label>
                                 </div>
                                 <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Child +</p>
                                 <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Class +</p>
@@ -90,7 +90,7 @@
                                 <div class="md-form mb-3">
                                     <input type="hidden">
                                     <select id="editRole" name="role" class="form-control input-md" required></select>
-                                    <label class="active" data-error="wrong" data-success="right" for="editRole">Role</label>
+                                    <label class="active adminEditModal" data-error="wrong" data-success="right" for="editRole">Role</label>
                                 </div>
                                 <div class="md-form mt-5 mb-3">
                                     <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="md-form mt-5 mb-2">
                                     <div id="editItemsContainer"></div>
-                                    <label class="active" data-error="wrong" data-success="right" for="editItemsContainer">Children/Class</label>
+                                    <label class="active adminEditModal" data-error="wrong" data-success="right" for="editItemsContainer">Children/Class</label>
                                 </div>
                                 <input type="hidden">
                                 @csrf
