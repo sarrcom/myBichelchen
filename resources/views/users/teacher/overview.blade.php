@@ -8,7 +8,6 @@
 </header>
 
 @section('content')
-
 <h1 class="d-flex justify-content-center">Overview</h1>
 <div class="d-flex justify-content-center">
     <p class="h5 text-primary createShowP">{{date("l")}}, {{date("d/m/Y")}}</p>
@@ -37,6 +36,9 @@
 
                 <!-- Text -->
                 <p class="card-text">Today's Homework Logic goes here</p>
+                @foreach($homeworks as $homework)
+                    <p><strong>{{ $homework->subject }}:</strong> {{ $homework->description }}</p>
+                @endforeach
 
                 <!-- Link -->
                 <a href="/user/homework" class="purple-text d-flex flex-row-reverse p-2">

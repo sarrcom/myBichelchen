@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 
 use App\User;
 use App\Student;
@@ -259,12 +262,43 @@ class UsersController extends Controller
             return redirect('/');
         }
 
+        if (!Cookie::has('item')) {
+            if ($user->role === 'Teacher') {
+                $teacherKlass = TeacherKlass::where('user_id', $user->id)->first();
+                Cookie::queue('item', $teacherKlass->klass_id, 10);
+            } else if ($user->role === 'Guardian' || $user->role === 'MaRe') {
+                $responsibleOfStudent = ResponsibleOfStudent::where('user_id', $user->id)->first();
+                Cookie::queue('item', $responsibleOfStudent->student_id, 10);
+            }
+        }
+
+        $item = Cookie::get('item');
+
+        $students = [];
+
+        $rows = Student::where('klass_id', $item)->get();
+        
+        foreach ($rows as $row) {
+            $students[] = $row->id;
+        }
+
+        $homeworkKlass = Notification::where('user_id', $user->id)
+            ->where('type', 'Homework')
+            ->where('date', (new DateTime())->format('Y-m-d'))
+            ->where('klass_id', $item)->get();
+        $homeworkStudent = Notification::where('user_id', $user->id)
+            ->where('type', 'Homework')
+            ->where('date', (new DateTime())->format('Y-m-d'))
+            ->whereIn('student_id', $students)->get();
+        $notes;
+        $absenses;
+
         if ($user->role === 'Teacher') {
-            return view('users.teacher.overview', ['user' => $user]);
+            return view('users.teacher.overview', ['user' => $user, 'klass' => $item, 'homeworks' => [$homeworkKlass, $homeworkStudent]]);
         } else if ($user->role === 'Guardian') {
-            return view('users.guardian.overview', ['user' => $user]);
+            return view('users.guardian.overview', ['user' => $user, 'student' => $item]);
         } else if ($user->role === 'MaRe') {
-            return view('users.mare.overview', ['user' => $user]);
+            return view('users.mare.overview', ['user' => $user, 'student' => $item]);
         }
     }
 
