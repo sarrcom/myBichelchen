@@ -26,7 +26,7 @@ class UsersController extends Controller
     public function index()
     {
         $admin = session()->get('loggedAdmin');
-        
+
         if(!$admin){
             return redirect('/');
         }
@@ -277,24 +277,26 @@ class UsersController extends Controller
         $students = [];
 
         $rows = Student::where('klass_id', $item)->get();
-        
+
         foreach ($rows as $row) {
             $students[] = $row->id;
         }
 
-        $homeworkKlass = Notification::where('user_id', $user->id)
+        $homeworks[] = Notification::where('user_id', $user->id)
             ->where('type', 'Homework')
             ->where('date', (new DateTime())->format('Y-m-d'))
-            ->where('klass_id', $item)->get();
-        $homeworkStudent = Notification::where('user_id', $user->id)
+            ->where('klass_id', $item)
+            ->get();
+        $homeworks[] = Notification::where('user_id', $user->id)
             ->where('type', 'Homework')
             ->where('date', (new DateTime())->format('Y-m-d'))
-            ->whereIn('student_id', $students)->get();
-        $notes;
-        $absenses;
+            ->whereIn('student_id', $students)
+            ->get();
+        //$notes;
+        //$absenses;
 
         if ($user->role === 'Teacher') {
-            return view('users.teacher.overview', ['user' => $user, 'klass' => $item, 'homeworks' => [$homeworkKlass, $homeworkStudent]]);
+            return view('users.teacher.overview', ['user' => $user, 'klass' => $item, 'homeworks' => $homeworks]);
         } else if ($user->role === 'Guardian') {
             return view('users.guardian.overview', ['user' => $user, 'student' => $item]);
         } else if ($user->role === 'MaRe') {
