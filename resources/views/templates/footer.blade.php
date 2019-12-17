@@ -22,10 +22,10 @@
 <!--Copyright-->
 <div class="footer-copyright py-3 text-center">
     <div class="container-fluid">
-        <ul class="list-unstyled d-flex justify-content-center mb-0 py-4 list-inline">
+        <ul class="list-unstyled d-flex justify-content-center mb-0 list-inline">
             <li class="list-inline-item">&copy; 2019 <a href="https://mybichelchen.lu/">myBichelchen.lu</a> - {{ __('footer.rights') }}</li>
         </ul>
-        <ul class="list-unstyled d-flex justify-content-center mb-0 py-4 list-inline">
+        <ul class="list-unstyled d-flex justify-content-center mb-0 list-inline">
             <li class="list-inline-item pl-2"><a href="/about">{{ __('footer.about_us') }}</a></li>|
             <li class="list-inline-item pl-2"><a href="/contact">Contact</a></li>|
             <li class="list-inline-item pl-2"><a href="/news">{{ __('footer.news') }}</a></li>|
