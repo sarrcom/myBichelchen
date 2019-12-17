@@ -27,6 +27,7 @@
                     </li>
                 </ul>
             <!-- /If User is Admin -->
+
             <!-- If User is Teacher -->
             @elseif (isset($user) && $user->role=='Teacher')
                 <ul class="navbar-nav mr-auto">
@@ -38,6 +39,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/absences">Absences</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-auto">
@@ -77,6 +81,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/user/homework">{{ __('navbar.homework') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/absences">Absences</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav mr-auto">
