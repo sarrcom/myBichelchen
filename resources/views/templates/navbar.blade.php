@@ -49,7 +49,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
                         @foreach ($user->klasses as $klass)
-                            <a class="dropdown-item" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
+                            <a class="dropdown-item" id="nav{{ $klass->id }}" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
                         @endforeach
                     </div>
                 </div>
