@@ -224,7 +224,6 @@
             content = homework.subject + ' : ' + homework.description + ' ' + homework.klass_id;
             listItem = $('<li></li>');
             listItem.text(content);
-
             $('#ul'+date).append(listItem);
         }
     }
