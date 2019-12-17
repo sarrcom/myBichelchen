@@ -39,7 +39,7 @@
                                         <option value="{{ $klass->id }}">{{ $klass->name }}</option>
                                     @endforeach
                                     </select>
-                                    <label class="active" data-error="wrong" data-success="right" for="addKlass">Class</label>
+                                    <label class="active adminAddModal" data-error="wrong" data-success="right" for="addKlass">Class</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
