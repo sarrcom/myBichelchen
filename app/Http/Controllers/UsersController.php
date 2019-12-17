@@ -444,6 +444,44 @@ class UsersController extends Controller
         }
     }
 
+    public function submitHomework(Request $request){
+
+
+        if (!is_numeric($request->recipient)) {
+            return $request->recipient;
+        }
+        // get the current user to provide id
+        $user = session()->get('loggedUser');
+
+        //we check for subject and description, because the other fields are filled in by default
+        /*$validation = $request->validate([
+            'subject' => 'required|min:4|max:255',
+            'description' => 'required|min:2|max:255',
+            'dueDate' => 'after:today'
+
+        ]);*/
+
+        $homework = new Notification();
+
+        $homework->description = trim($request->description);
+        $homework->subject = trim($request->subject);
+        $homework->type = 'Homework';
+
+        if ($request->has('sendTo')) {
+            $homework->klass_id = $request->recipient;
+        }else if(!$request->has('sendTo')){
+            $homework->student_id = $request->recipient;
+        }
+
+        $homework->user_id = $user->id;
+        $homework->date = $request->dueDate;
+
+
+        $homework->save();
+
+        return 'submitted';
+    }
+
     /**
      * Display the overview of the user.
      *
@@ -509,65 +547,6 @@ class UsersController extends Controller
         }
     }
 
-    public function login(Request $request)
-    {
-
-        $user = User::where('username', $request->loginFormUserName)->get();
-
-        if (count($user) != 0) {
-            //with hashed password
-            //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
-
-            if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
-                session()->flush();
-                session(['loggedUser' => $user[0]]);
-                return 'Login';
-            }
-        }
-
-        return 'Wrong Username or Password';
-
-    }
-
-    public function submitHomework(Request $request){
-
-
-        if (!is_numeric($request->recipient)) {
-            return $request->recipient;
-        }
-        // get the current user to provide id
-        $user = session()->get('loggedUser');
-
-        //we check for subject and description, because the other fields are filled in by default
-        /*$validation = $request->validate([
-            'subject' => 'required|min:4|max:255',
-            'description' => 'required|min:2|max:255',
-            'dueDate' => 'after:today'
-
-        ]);*/
-
-        $homework = new Notification();
-
-        $homework->description = trim($request->description);
-        $homework->subject = trim($request->subject);
-        $homework->type = 'Homework';
-
-        if ($request->has('sendTo')) {
-            $homework->klass_id = $request->recipient;
-        }else if(!$request->has('sendTo')){
-            $homework->student_id = $request->recipient;
-        }
-
-        $homework->user_id = $user->id;
-        $homework->date = $request->dueDate;
-
-
-        $homework->save();
-
-        return 'submitted';
-    }
-
-
     public function sendMessages(Request $request){
 
 
@@ -604,11 +583,113 @@ class UsersController extends Controller
         return 'submitted';
     }
 
+    public function absences($id=null)
+    {
+
+        /*
+        This contrroller sends the view if the argument is empty, if it provides a date it calls
+        a function to return data
+        */
+        $user = session()->get('loggedUser');
+
+        $this->loginCheck($user);
+
+        if($id == null){
+
+            if ($user->role=='Teacher') {
+
+                return view('users.teacher.absences',['user'=> $user]);
+            }
+            if ($user->role=='Guardian') {
+                return view('users.guardian.absences',['user'=> $user]);
+            }
+            if ($user->role=='MaRe') {
+                return view('users.mare.overview',['user'=> $user]);
+            }
+        }else{
+
+            if($user->role=='Guardian'){
+                $user = session()->get('loggedUser');
+                $item = Cookie::get('item');
+                $absences = Notification::where('user_id',$user->id)
+                                ->where('student_id',$item)
+                                ->where('type','Ansences')               
+                                ->get();
+
+                return $absences;
+
+            }else{
+                $absences = Notification::where(function ($query) {
+                    $user = session()->get('loggedUser');
+                    $item = Cookie::get('item');
+                    foreach ($user->klasses as $klass) {
+                        if ($klass->id == $item) {
+                            foreach ($klass->students as $student) {
+                                $query->orWhere('student_id', $student->id);
+                                }
+                            }
+                        }  
+                    })
+                    ->get();
+                return $absences;
+            }
+        }
+    }
+
+    public function sendAbsences(Request $request){
+
+
+    
+        // get the current user to provide id
+        $user = session()->get('loggedUser');
+
+        //we check for subject and description, because the other fields are filled in by default
+        $validation = $request->validate([
+            'subject' => 'required|min:4|max:255',
+            'description' => 'required|min:2|max:255',
+            'dueDate' => 'after:today'
+
+        ]);
+
+        $absence = new Notification();
+
+        $absence->description = trim($request->description);
+        $absence->subject = trim($request->subject);
+        $absence->type = 'Absence';
+       
+        $absence->student_id = Cookie::get('item');
+        
+        $absence->user_id = $user->id;
+        $absence->save();
+
+        return 'submitted';
+    }
+
     public function logout(){
 
                 session()->flush();
 
                 return redirect('/');
+    }
+
+    public function login(Request $request)
+    {
+
+        $user = User::where('username', $request->loginFormUserName)->get();
+
+        if (count($user) != 0) {
+            //with hashed password
+            //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
+
+            if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
+                session()->flush();
+                session(['loggedUser' => $user[0]]);
+                return 'Login';
+            }
+        }
+
+        return 'Wrong Username or Password';
+
     }
 
 }

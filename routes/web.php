@@ -68,4 +68,6 @@ Route::post('/user/homework', 'UsersController@submitHomework');
 Route::get('/user/messages/{id?}', 'UsersController@messages');
 Route::post('/user/messages', 'UsersController@sendMessages');
 
-Route::get('pdfview',array('as'=>'pdfview','uses'=>'ItemController@pdfview'));
+
+Route::get('/user/absences/{id?}', 'UsersController@absences');
+Route::post('/user/absences', 'UsersController@sendAbsences');
