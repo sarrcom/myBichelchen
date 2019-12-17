@@ -8,17 +8,20 @@
 
             <!-- If User is Admin -->
             @if (isset($admin))
-                <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
-                        <a class="nav-link" href="#">{{ __('navbar.overview') }}</a>
+                        <a class="nav-link" href="/users">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('navbar.messages') }}</a>
+                        <a class="nav-link" href="/students">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/klasses">Classes</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/user">{{$user->first_name}} {{$user->last_name}}</a>
+                        <a class="nav-link" href="/user">Admin</a>
                     </li>
                     <li>
                         <a class="nav-link" href="/logout">Sign Out</a>
