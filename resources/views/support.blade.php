@@ -7,7 +7,7 @@
 @endsection
 <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="mask rgba-white-slight">
-        <div class="container h-100 d-flex justify-content-center align-items-center" style="height: 100%;">
+        <div class="container h-100 d-flex justify-content-center align-items-center">
             <div class="row pt-5 mt-3">
                 <div class="col-md-12 wow fadeIn mb-3">
                     <div class="text-center">
@@ -73,102 +73,40 @@
     <!--Section: Features v.4-->
     <section id="about" class="section wow fadeIn" data-wow-delay="0.3s">
             <!--Section heading-->
-            <h1 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.welcome_h_1') }}</h1>
+            <h1 class="font-weight-bold text-center h1 my-5">Support</h1>
             <!--Section description-->
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('landing-page.welcome_p_1') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Questions arise at off-hours and are usually urgent. If you have an issue with your <strong>myBichelchen</strong> portal, you should never have to wait to receive answers to your questions. If we are unable to speak with you immediately, please leave a message so we can return your call as soon as possible. If your question is not listed in our online documentation, please do not hesitate to <a href="/contact">contact</a> us.</p>
 
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('landing-page.welcome_p_2') }}</p>
+            <h1 class="font-weight-bold text-center h1 my-5">Documentation</h1>
 
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">{{ __('landing-page.welcome_p_3') }}</p>
+            <h2 class="font-weight-bold text-center h2 my-5">Parents</h2>
 
-            {{-- making it multilingual --}}
-            <div class="text-center">
-                <div class="wow fadeInUp" data-wow-delay="0.4s">
-                    <a class="btn btn-blue btn-rounded" href="{{ url('locale/en') }}"></i>EN</a>
-                    <a href="{{ url('locale/fr') }}" class="btn btn-blue btn-rounded"></i>FR</a>
-                </div>
-            </div>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">- you can login by clicking the <strong>Login</strong> button on the home page<br>
+            - once logged in you will see an overview and you can easily switch between your children (if you have more than 1)<br>
+            - you can see the homework and notes for each child, and you can add notes by clicking the <strong>Add</strong> button<br>
+            - you can sign the agenda checking the checkbox next to the homework<br>
+            - you can inform the teacher if a child is absent by clicking the <strong>Absent</strong> button<br>
+            - you can send messages to the teacher by clicking the <strong>Message</strong> button</p>
 
-        <hr class="mb-5">
+            <h2 class="font-weight-bold text-center h2 my-5">Daycare</h2>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">- you can login by clicking the <strong>Login</strong> button on the home page<br>
+            - once logged in you can an overview of all the children in your care<br>
+            - you can select a child in the list and then click the <strong>Edit</strong> button to edit the details<br>
+            - you can sign the agenda checking the checkbox next to the homework<br>
+            - you can see the homework and notes for each child, and you can add or reply to notes by clicking the <strong>Add</strong> button</p>
+
+            <h2 class="font-weight-bold text-center h2 my-5">Teachers</h2>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">- you can login by clicking the <strong>Login</strong> button on the home page<br>
+            - you can see the homework and notes for the day, and you can add homework and notes by clicking the <strong>Add</strong> button<br>
+            - you can create homework and/or notes for the entire class or a single student<br>
+            - you can see who replied to your notes by clicking the <strong>Messages</strong> tab<br>
+            - you can add and see absences by clicking the <strong>Absent</strong> button</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">If your question is not listed in our online documentation, please do not hesitate to get in touch.</p>
     </section>
-    <!--Section: Testimonials v.3-->
-    <section class="section team-section text-center pb-3 wow fadeIn" data-wow-delay="0.3s">
-        <!--Section heading-->
-        <h1 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.testimonials') }}</h1>
-        <!--Section description-->
-        <p class="text-center grey-text mb-5 mx-auto w-responsive">{{ __('landing-page.tell_us_why') }}</p>
-        <!--Grid row-->
-        <div class="row text-center">
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/jorge.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Jorge Gonzales</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_1') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_1') }} <i class="fas fa-quote-right"></i></p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star-half-alt"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/dennis.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Dennis Burgers</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_2') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_2') }} <i class="fas fa-quote-right"></i></p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/reginald.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Reginald Wagner</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_3') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_3') }} <i class="fas fa-quote-right"></i></p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="far fa-star"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
-    </section>
-    <!--Section: Testimonials v.3-->
+
     <hr class="mb-5">
     <!--Section: Contact v.2-->
     <section id="contact" class="section pb-5 wow fadeIn" data-wow-delay="0.3s">
@@ -223,7 +161,7 @@
                     <!--Grid row-->
                 </form>
                 <div class="text-center text-md-left my-4">
-                    <a class="btn btn-orange btn-rounded" onclick="validateForm()">{{ __('landing-page.send') }}</a>
+                    <a class="btn btn-orange btn-rounded">{{ __('landing-page.send') }}</a>
                 </div>
             </div>
             <!--Grid column-->
@@ -279,68 +217,10 @@
 
                 },
                 error: function(err){
-                    console.log(err)
+                    console.log('Oh boi')
                 }
             });
         });
     });
-</script>
-
-<script>
-    //document.getElementById('status').innerHTML = "Sending...";
-    
-    formData = {
-        'name'     : $('input[name=name]').val(),
-        'email'    : $('input[name=email]').val(),
-        'subject'  : $('input[name=subject]').val(),
-        'message'  : $('textarea[name=message]').val()
-        };
-
-    $.ajax({
-    url : "mail.php",
-    type: "POST",
-    data : formData,
-    success: function(data, textStatus, jqXHR) {
-        $('#status').text(data.message);
-        if (data.code) //If mail was sent successfully, reset the form.
-        $('#contact-form').closest('form').find("input[type=text], textarea").val("");
-        },
-    error: function (jqXHR, textStatus, errorThrown){
-        $('#status').text(jqXHR);
-        }
-    });
-
-    function validateForm() {
-        let name =  document.getElementById('name').value;
-        if (name == "") {
-            document.getElementById('status').innerHTML = "Name cannot be empty";
-            return false;
-            }
-        let email =  document.getElementById('email').value;
-        if (email == "") {
-            document.getElementById('status').innerHTML = "Email cannot be empty";
-            return false;
-            } else {
-            let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if(!re.test(email)){
-                document.getElementById('status').innerHTML = "Email format invalid";
-                return false;
-            }
-        }
-        
-    let subject =  document.getElementById('subject').value;
-    if (subject == "") {
-        document.getElementById('status').innerHTML = "Subject cannot be empty";
-        return false;
-        }
-    let message =  document.getElementById('message').value;
-    if (message == "") {
-        document.getElementById('status').innerHTML = "Message cannot be empty";
-        return false;
-        }
-    document.getElementById('status').innerHTML = "Sending...";
-    document.getElementById('contact-form').submit();
-
-    }
 </script>
 @endsection

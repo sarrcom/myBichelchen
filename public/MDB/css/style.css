@@ -1,10 +1,20 @@
 * {
     scroll-behavior: smooth;
 }
-html,
-body,
-header,
-.jarallax {
+
+/* body {
+    margin:20vh 0 0 0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:100vh;
+}
+main {
+    flex:1 0 auto;
+} */
+
+html, body, header, .jarallax {
     height: 700px;
 }
 #secondaryHeader {
@@ -127,9 +137,10 @@ footer.page-footer {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 /* Admin Users List Modal Forms */
+
+/* To separate the child select option bars */
 .divFlex {
     display: flex;
-    padding-bottom: 3px;
 }
 .divFlex span {
     margin: 0 15px;
@@ -143,13 +154,52 @@ footer.page-footer {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     outline: 0 none;
 }
-#editOpenModal {
-    display: none;
-}
-/* Messages chat scroll bar */
-@media (max-width: 740px) {
-    html, body, .view {
-        height: 1050px;
-    }
+label.adminAddModal, label.adminEditModal {
+    position: absolute;
+    top: -15px;
 }
 
+.card.chat-room .members-panel-1,
+.card.chat-room .chat-1 {
+position: relative;
+overflow-y: scroll; }
+
+.card.chat-room .members-panel-1 {
+height: 570px; }
+
+.card.chat-room .chat-1 {
+height: 495px; }
+
+.card.chat-room .friend-list li {
+border-bottom: 1px solid #e0e0e0; }
+.card.chat-room .friend-list li:last-of-type {
+border-bottom: none; }
+
+.scrollbar-light-blue::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #F5F5F5;
+border-radius: 10px; }
+
+.scrollbar-light-blue::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-light-blue::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #82B1FF; }
+
+.card.chat-room .members-panel-1 {
+    height: 734px;
+}
+
+.error {
+    color: red;
+}
+.success {
+    color: #00C851;
+}
+
+.card-body .header .homeworkCalendarList {
+    height: 200px;
+}

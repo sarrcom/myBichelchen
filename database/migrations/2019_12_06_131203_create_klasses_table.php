@@ -15,7 +15,7 @@ class CreateKlassesTable extends Migration
     {
         Schema::create('jerd_klasses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name', 190);
             $table->integer('grade');
             $table->integer('school_id')->unsigned();
 

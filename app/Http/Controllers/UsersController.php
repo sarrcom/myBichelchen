@@ -9,6 +9,7 @@ use App\User;
 use App\Student;
 use App\Klass;
 use App\Notification;
+use App\Comment;
 use App\ResponsibleOfStudent;
 use App\TeacherKlass;
 use Illuminate\Support\Facades\Cookie;
@@ -22,7 +23,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-
+        $admin = session()->get('loggedAdmin');
+        if(!$admin){
+            return redirect('/');
+        }
 
         $users = User::all();
         $students = Student::all();
@@ -30,7 +34,8 @@ class UsersController extends Controller
         $responsibleStudents = ResponsibleOfStudent::all();
         $teachersKlasses = TeacherKlass::all();
 
-        return view('admin.users.users-list', [
+        return view('admin.users-list', [
+            'admin' => $admin,
             'users' => $users,
             'students' => $students,
             'klasses' => $klasses,
@@ -97,7 +102,6 @@ class UsersController extends Controller
         $user->password = password_hash($pwRand, PASSWORD_DEFAULT);
 
         $user->role = $request->role;
-        $user->timestamps = false;
 
         $user->save();
 
@@ -142,7 +146,14 @@ class UsersController extends Controller
     public function edit($username)
     {
         $user = User::where('username', $username)->first();
-        return $user;
+        if ($user->role == 'Teacher') {
+            $teacherKlasses = TeacherKlass::where('user_id', $user->id)->get();
+            return [$user, $teacherKlasses];
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            $responsibleOfStudents = ResponsibleOfStudent::where('user_id', $user->id)->get();
+            return [$user, $responsibleOfStudents];
+        }
+        return "Error";
     }
 
     /**
@@ -165,9 +176,27 @@ class UsersController extends Controller
         $user->last_name = trim($request->last_name);
         $user->date_of_birth = $request->date_of_birth;
         $user->role = $request->role;
-        $user->timestamps = false;
 
         $user->save();
+
+        $i = 0;
+        $klassName = 'klass' . $i;
+        $childName = 'child' . $i;
+        if ($user->role == 'Teacher') {
+            TeacherKlass::where('user_id', $user->id)->delete();
+            while (isset($request->$klassName)) {
+                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $i++;
+                $klassName = 'klass' . $i;
+            }
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            ResponsibleOfStudent::where('user_id', $user->id)->delete();
+            while (isset($request->$childName)) {
+                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $i++;
+                $childName = 'child' . $i;
+            }
+        }
     }
 
     /**
@@ -178,11 +207,19 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::find($id);
+
+        Comment::where('user_id', $user->id)->delete();
+        Notification::where('user_id', $user->id)->delete();
+
+        if ($user->role == 'Teacher') {
+            TeacherKlass::where('user_id', $user->id)->delete();
+        } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
+            ResponsibleOfStudent::where('user_id', $user->id)->delete();
+        }
+
         User::destroy($id);
-        return redirect('/admin/users');
     }
-
-
 
     /**
      * Display the overview of the user.
@@ -228,7 +265,7 @@ class UsersController extends Controller
 
 
 
-            if ($user->role=='Teacher'){
+            if ($user->role=='Teacher') {
 
                 return view('users.teacher.homework',['user'=> $user]);
             }
@@ -295,15 +332,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function messages($id=null)
+    public function messages($id = null)
     {
-
         $user = session()->get('loggedUser');
 
         if ($id == null) {
 
             if ($user->role=='Teacher') {
-
                 return view('users.teacher.messages',['user'=> $user]);
             }
             if ($user->role=='Guardian') {
@@ -316,71 +351,43 @@ class UsersController extends Controller
             session()->flush();
 
             return redirect('/');
-
-
-        }else{
-
-
-            /*
-            function to get all the student and the klass_ids related to the user
-            */
-            function getVariables(){
-                $user = session()->get('loggedUser');
-
-                $klassesThisUser =[];
-                $studentsThisUser=[];
-
-                /*
-                for the teacher: get the klass and then all the ids of students in this klass
-                */
-                if($user->role=='Teacher'){
-
-                    foreach ($user->klasses as $klass) {
-                    $klassesThisUser[] = $klass->id;
-
-                        foreach ($klass->students as $student) {
-                            $studentsThisUser[]= $student->id;
-
-                        }
-                    }
-                }else{
-                    /*
-                    for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
-                    */
-                    foreach ($user->students as $student) {
-                        $studentsThisUser[] = $student->id;
-                        $klassesThisUser[]= $student->klass_id;
-                        }
-                }
-
-                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
-            }
-
-
-                /*
-                get a the messages related to students,  to klass of student(MaRe and Guardian) or
-                klass related to User(teacher) and all students in said klass
-                and all messages written by the user itself
-                ordered by Creation date, to show newest first.
-                */
-
-                $messages = DB::table('jerd_notifications')
-                    ->where('type', 'Note')
-                    ->where(function ($query) {
-                        $variables = getVariables();
-                        $user = session()->get('loggedUser');
-                        // orWhere because the notifiaction has a student or klass id
-                        $query->where('klass_id', $variables['klassesThisUser'])
-                            ->orWhere('student_id', $variables['studentsThisUser'])
-                            ->orWhere('user_id', $user->id);
-                    })
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-
-                return $messages;
-
-
+        } else {
+           
         }
+    }
+
+    /*
+    function to get all the student and the klass_ids related to the user
+    */
+    function getVariables() {
+        $user = session()->get('loggedUser');
+
+        $klassesThisUser =[];
+        $studentsThisUser=[];
+
+        /*
+        for the teacher: get the klass and then all the ids of students in this klass
+        */
+        if($user->role=='Teacher'){
+            foreach ($user->klasses as $klass) {
+            $klassesThisUser[] = $klass->id;
+
+                foreach ($klass->students as $student) {
+                    $studentsThisUser[]= $student->id;
+
+                }
+            }
+        }else{
+            /*
+            for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
+            */
+            foreach ($user->students as $student) {
+                $studentsThisUser[] = $student->id;
+                $klassesThisUser[]= $student->klass_id;
+                }
+        }
+
+        return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
     }
 
     public function login(Request $request)
@@ -427,7 +434,7 @@ class UsersController extends Controller
         $homework->type = 'Homework';
 
         if ($request->has('sendTo')) {
-            $homework->klass_id = $request->recipient;  
+            $homework->klass_id = $request->recipient;
         }else if(!$request->has('sendTo')){
             $homework->student_id = $request->recipient;
         }
@@ -464,15 +471,14 @@ class UsersController extends Controller
         $message->description = trim($request->description);
         $message->subject = trim($request->subject);
         $message->type = 'Note';
-        if ($user->role=='Teacher') {
-            if ($request->has('sendTo')) {
-                $message->klass_id = $request->recipient;  
-            }else if(!$request->has('sendTo')){
-                $message->student_id = $request->recipient;
-            }
-        }else{
+        if ($request->has('sendTo')) {
+            $message->klass_id = $request->recipient;
+        }else if(!$request->has('sendTo')){
             $message->student_id = $request->recipient;
         }
+
+
+
         $message->user_id = $user->id;
         $message->save();
 
@@ -485,7 +491,7 @@ class UsersController extends Controller
 
                 return redirect('/');
     }
-    
+
 
     /*for debugging the homework query we may need it later so dont delete this
 
@@ -493,10 +499,10 @@ class UsersController extends Controller
     typo in the Model:(*/
 
     public function test(){
-        
+
         /*lets assume we get the id of a class which is 1 for this example */
-        
-       
+
+
 
         $homeworks[] = DB::table('jerd_notifications')
                     ->where('type', 'Homework')
@@ -512,10 +518,10 @@ class UsersController extends Controller
                                     $query->orWhere('student_id', $student->id);
                                     }
                                 }
-                            }  
-                        })
-                    ->get();
-                
+                            }
+                            })
+                        ->get();
+
         return $homeworks;
     }
 }

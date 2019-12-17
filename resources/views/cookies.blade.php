@@ -7,7 +7,7 @@
 @endsection
 <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <div class="mask rgba-white-slight">
-        <div class="container h-100 d-flex justify-content-center align-items-center" style="height: 100%;">
+        <div class="container h-100 d-flex justify-content-center align-items-center">
             <div class="row pt-5 mt-3">
                 <div class="col-md-12 wow fadeIn mb-3">
                     <div class="text-center">
@@ -73,102 +73,44 @@
     <!--Section: Features v.4-->
     <section id="about" class="section wow fadeIn" data-wow-delay="0.3s">
             <!--Section heading-->
-            <h1 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.welcome_h_1') }}</h1>
+            <h1 class="font-weight-bold text-center h1 my-5">Cookie Policy for myBichelchen</h1>
             <!--Section description-->
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('landing-page.welcome_p_1') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">This is the Cookie Policy for myBichelchen, accessible from <a href="https://mybichelchen.lu">https://mybichelchen.lu</a></p>
 
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>myBichelchen</strong>{{ __('landing-page.welcome_p_2') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>What Are Cookies</strong></p>
 
-            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">{{ __('landing-page.welcome_p_3') }}</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">As is common practice with almost all professional websites this site uses cookies, which are tiny files that are downloaded to your computer, to improve your experience. This page describes what information they gather, how we use it and why we sometimes need to store these cookies. We will also share how you can prevent these cookies from being stored however this may downgrade or 'break' certain elements of the sites functionality.</p>
 
-            {{-- making it multilingual --}}
-            <div class="text-center">
-                <div class="wow fadeInUp" data-wow-delay="0.4s">
-                    <a class="btn btn-blue btn-rounded" href="{{ url('locale/en') }}"></i>EN</a>
-                    <a href="{{ url('locale/fr') }}" class="btn btn-blue btn-rounded"></i>FR</a>
-                </div>
-            </div>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>How We Use Cookies</strong></p>
 
-        <hr class="mb-5">
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">We use cookies for a variety of reasons detailed below. Unfortunately in most cases there are no industry standard options for disabling cookies without completely disabling the functionality and features they add to this site. It is recommended that you leave on all cookies if you are not sure whether you need them or not in case they are used to provide a service that you use.</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>Disabling Cookies</strong></p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">You can prevent the setting of cookies by adjusting the settings on your browser (see your browser Help for how to do this). Be aware that disabling cookies will affect the functionality of this and many other websites that you visit. Disabling cookies will usually result in also disabling certain functionality and features of the this site. Therefore it is recommended that you do not disable cookies.</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead"><strong>The Cookies We Set</strong></p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Account related cookies<br>
+            If you create an account with us then we will use cookies for the management of the signup process and general administration. These cookies will usually be deleted when you log out however in some cases they may remain afterwards to remember your site preferences when logged out.</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Login related cookies<br>
+            We use cookies when you are logged in so that we can remember this fact. This prevents you from having to log in every single time you visit a new page. These cookies are typically removed or cleared when you log out to ensure that you can only access restricted features and areas when logged in.</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Forms related cookies<br>
+            When you submit data to through a form such as those found on contact pages or comment forms cookies may be set to remember your user details for future correspondence.</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Site preferences cookies<br>
+            In order to provide you with a great experience on this site we provide the functionality to set your preferences for how this site runs when you use it. In order to remember your preferences we need to set cookies so that this information can be called whenever you interact with a page is affected by your preferences.</p>
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">Third Party Cookies<br>
+            In some special cases we also use cookies provided by trusted third parties. The following section details which third party cookies you might encounter through this site.</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">This site uses Google Analytics which is one of the most widespread and trusted analytics solution on the web for helping us to understand how you use the site and ways that we can improve your experience. These cookies may track things such as how long you spend on the site and the pages that you visit so we can continue to produce engaging content.</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">From time to time we test new features and make subtle changes to the way that the site is delivered. When we are still testing new features these cookies may be used to ensure that you receive a consistent experience whilst on the site whilst ensuring we understand which optimisations our users appreciate the most.</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">We also use social media buttons and/or plugins on this site that allow you to connect with your social network in various ways. For these to work the following social media sites including Facebook, Twitter, Linkedin, Instagram, and Pinterest, will set cookies through our site which may be used to enhance your profile on their site or contribute to the data they hold for various purposes outlined in their respective privacy policies.</p>
+
+            <p class="text-center grey-text mb-5 mx-auto w-responsive lead">If you are still looking for more information then you can <a href="/contact">contact</a> us by <a href="mailto:hello@mybichelchen.lu">email</a>.</p>
     </section>
-    <!--Section: Testimonials v.3-->
-    <section class="section team-section text-center pb-3 wow fadeIn" data-wow-delay="0.3s">
-        <!--Section heading-->
-        <h1 class="font-weight-bold text-center h1 my-5">{{ __('landing-page.testimonials') }}</h1>
-        <!--Section description-->
-        <p class="text-center grey-text mb-5 mx-auto w-responsive">{{ __('landing-page.tell_us_why') }}</p>
-        <!--Grid row-->
-        <div class="row text-center">
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/jorge.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Jorge Gonzales</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_1') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_1') }} <i class="fas fa-quote-right"></i></p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star-half-alt"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/dennis.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Dennis Burgers</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_2') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_2') }} <i class="fas fa-quote-right"></i></p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-md-4 mb-4">
-                <div class="testimonial">
-                    <!--Avatar-->
-                    <div class="avatar mx-auto">
-                        <img src="../../MDB/img/reginald.jpg" class="rounded-circle z-depth-1 img-fluid">
-                    </div>
-                    <!--Content-->
-                    <h4 class="font-weight-bold mt-4 mb-3">Reginald Wagner</h4>
-                    <h6 class="mb-3 font-weight-bold grey-text">{{ __('landing-page.profession_3') }}</h6>
-                    <p><i class="fas fa-quote-left"></i> {{ __('landing-page.testimonial_3') }} <i class="fas fa-quote-right"></i></p>
-                    <!--Review-->
-                    <div class="orange-text">
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="fas fa-star"> </i>
-                        <i class="far fa-star"> </i>
-                    </div>
-                </div>
-            </div>
-            <!--Grid column-->
-        </div>
-        <!--Grid row-->
-    </section>
-    <!--Section: Testimonials v.3-->
+
     <hr class="mb-5">
     <!--Section: Contact v.2-->
     <section id="contact" class="section pb-5 wow fadeIn" data-wow-delay="0.3s">
@@ -223,7 +165,7 @@
                     <!--Grid row-->
                 </form>
                 <div class="text-center text-md-left my-4">
-                    <a class="btn btn-orange btn-rounded" onclick="validateForm()">{{ __('landing-page.send') }}</a>
+                    <a class="btn btn-orange btn-rounded">{{ __('landing-page.send') }}</a>
                 </div>
             </div>
             <!--Grid column-->
@@ -261,6 +203,11 @@
 
 @section('extra-scripts')
 <script>
+    $(document).ready(function(){
+        $(this).scrollTop(0);
+    });
+</script>
+<script>
     $(function(){
         $('button[type="button submit"]').click(function(e){
             e.preventDefault();
@@ -279,68 +226,10 @@
 
                 },
                 error: function(err){
-                    console.log(err)
+                    console.log('Oh boi')
                 }
             });
         });
     });
-</script>
-
-<script>
-    //document.getElementById('status').innerHTML = "Sending...";
-    
-    formData = {
-        'name'     : $('input[name=name]').val(),
-        'email'    : $('input[name=email]').val(),
-        'subject'  : $('input[name=subject]').val(),
-        'message'  : $('textarea[name=message]').val()
-        };
-
-    $.ajax({
-    url : "mail.php",
-    type: "POST",
-    data : formData,
-    success: function(data, textStatus, jqXHR) {
-        $('#status').text(data.message);
-        if (data.code) //If mail was sent successfully, reset the form.
-        $('#contact-form').closest('form').find("input[type=text], textarea").val("");
-        },
-    error: function (jqXHR, textStatus, errorThrown){
-        $('#status').text(jqXHR);
-        }
-    });
-
-    function validateForm() {
-        let name =  document.getElementById('name').value;
-        if (name == "") {
-            document.getElementById('status').innerHTML = "Name cannot be empty";
-            return false;
-            }
-        let email =  document.getElementById('email').value;
-        if (email == "") {
-            document.getElementById('status').innerHTML = "Email cannot be empty";
-            return false;
-            } else {
-            let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if(!re.test(email)){
-                document.getElementById('status').innerHTML = "Email format invalid";
-                return false;
-            }
-        }
-        
-    let subject =  document.getElementById('subject').value;
-    if (subject == "") {
-        document.getElementById('status').innerHTML = "Subject cannot be empty";
-        return false;
-        }
-    let message =  document.getElementById('message').value;
-    if (message == "") {
-        document.getElementById('status').innerHTML = "Message cannot be empty";
-        return false;
-        }
-    document.getElementById('status').innerHTML = "Sending...";
-    document.getElementById('contact-form').submit();
-
-    }
 </script>
 @endsection
