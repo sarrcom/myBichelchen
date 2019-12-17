@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 
 use App\User;
 use App\Student;
@@ -23,6 +26,7 @@ class UsersController extends Controller
     public function index()
     {
         $admin = session()->get('loggedAdmin');
+
         if(!$admin){
             return redirect('/');
         }
@@ -110,13 +114,25 @@ class UsersController extends Controller
         $childName = 'child' . $i;
         if ($user->role == 'Teacher') {
             while (isset($request->$klassName)) {
-                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $teacherKlass = new TeacherKlass;
+
+                $teacherKlass->klass_id = $request->$klassName;
+                $teacherKlass->user_id = $user->id;
+
+                $teacherKlass->save();
+
                 $i++;
                 $klassName = 'klass' . $i;
             }
         } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
             while (isset($request->$childName)) {
-                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $responsibleOfStudent = new ResponsibleOfStudent;
+
+                $responsibleOfStudent->student_id = $request->$childName;
+                $responsibleOfStudent->user_id = $user->id;
+
+                $responsibleOfStudent->save();
+
                 $i++;
                 $childName = 'child' . $i;
             }
@@ -184,14 +200,26 @@ class UsersController extends Controller
         if ($user->role == 'Teacher') {
             TeacherKlass::where('user_id', $user->id)->delete();
             while (isset($request->$klassName)) {
-                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $teacherKlass = new TeacherKlass;
+
+                $teacherKlass->klass_id = $request->$klassName;
+                $teacherKlass->user_id = $user->id;
+
+                $teacherKlass->save();
+
                 $i++;
                 $klassName = 'klass' . $i;
             }
         } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
             ResponsibleOfStudent::where('user_id', $user->id)->delete();
             while (isset($request->$childName)) {
-                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $responsibleOfStudent = new ResponsibleOfStudent;
+
+                $responsibleOfStudent->student_id = $request->$childName;
+                $responsibleOfStudent->user_id = $user->id;
+
+                $responsibleOfStudent->save();
+
                 $i++;
                 $childName = 'child' . $i;
             }
@@ -230,19 +258,59 @@ class UsersController extends Controller
     {
         $user = session()->get('loggedUser');
 
+        if(!$user){
+            return redirect('/');
+        }
+
+        if (!Cookie::has('item')) {
+            if ($user->role === 'Teacher') {
+                $teacherKlass = TeacherKlass::where('user_id', $user->id)->first();
+                Cookie::queue('item', $teacherKlass->klass_id, 10);
+            } else if ($user->role === 'Guardian' || $user->role === 'MaRe') {
+                $responsibleOfStudent = ResponsibleOfStudent::where('user_id', $user->id)->first();
+                Cookie::queue('item', $responsibleOfStudent->student_id, 10);
+            }
+        }
+
+        $item = Cookie::get('item');
+
+        $students = [];
+
+        $rows = Student::where('klass_id', $item)->get();
+
+        foreach ($rows as $row) {
+            $students[] = $row->id;
+        }
+
+        $homeworks[] = Notification::where('user_id', $user->id)
+            ->where('type', 'Homework')
+            ->where('date', (new DateTime())->format('Y-m-d'))
+            ->where('klass_id', $item)
+            ->get();
+        $homeworks[] = Notification::where('user_id', $user->id)
+            ->where('type', 'Homework')
+            ->where('date', (new DateTime())->format('Y-m-d'))
+            ->whereIn('student_id', $students)
+            ->get();
+
+        $notes = Notification::where('type', 'Note')
+            ->whereIn('student_id', $students)
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        $absences = Notification::where('type', 'Absence')
+            ->whereIn('student_id', $students)
+            ->where('date', (new DateTime())->format('Y-m-d'))
+            ->get();
+
         if ($user->role === 'Teacher') {
-
-            return view('users.teacher.overview',['user'=> $user]);
+            return view('users.teacher.overview', ['user' => $user, 'klass' => $item, 'homeworkArray' => $homeworks, 'notes' => $notes, 'absences' => $absences]);
+        } else if ($user->role === 'Guardian') {
+            return view('users.guardian.overview', ['user' => $user, 'student' => $item]);
+        } else if ($user->role === 'MaRe') {
+            return view('users.mare.overview', ['user' => $user, 'student' => $item]);
         }
-        if ($user->role === 'Guardian') {
-
-            return view('users.guardian.overview',['user'=> $user]);
-        }
-        if ($user->role === 'MaRe') {
-
-            return view('users.mare.overview',['user'=> $user]);
-        }
-
     }
 
     /**
@@ -405,40 +473,6 @@ class UsersController extends Controller
 
             return $messages;
         }
-    }
-
-    /*
-    function to get all the student and the klass_ids related to the user
-    */
-    function getVariables() {
-        $user = session()->get('loggedUser');
-
-        $klassesThisUser =[];
-        $studentsThisUser=[];
-
-        /*
-        for the teacher: get the klass and then all the ids of students in this klass
-        */
-        if($user->role=='Teacher'){
-            foreach ($user->klasses as $klass) {
-            $klassesThisUser[] = $klass->id;
-
-                foreach ($klass->students as $student) {
-                    $studentsThisUser[]= $student->id;
-
-                }
-            }
-        }else{
-            /*
-            for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
-            */
-            foreach ($user->students as $student) {
-                $studentsThisUser[] = $student->id;
-                $klassesThisUser[]= $student->klass_id;
-                }
-        }
-
-        return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
     }
 
     public function login(Request $request)
