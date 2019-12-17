@@ -55,15 +55,6 @@
 
                                 <div class="chat-body white p-3 z-depth-1">
 
-                                    <ng-container [formGroup]="testForm">
-
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
-                                            <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
-                                        </div>
-                                        <hr class="w-100">
-
-                                    </ng-container>
 
                                     <label for="recipient">To the Parents of</label>
 
@@ -72,14 +63,14 @@
                                     </select><br>
 
                                     <label for="subject">Subject</label>
-                                    <input type="text" name="subject" required><br>
+                                    <input type="text" name="subject" id="subject" required><br>
 
                                     <div class="form-group basic-textarea">
                                         <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                                     </div>
 
                                     <label for="dueDate">Due Date</label>
-                                    <input type="date" name="dueDate" required><br>
+                                    <input type="date" name="dueDate" id="dueDate" required><br>
 
                                 </div>
 
@@ -106,8 +97,6 @@
     $('#previous').click(previous);
     $('#next').click(next);
     $('#customSwitches').click(changeRecipient);
-
-    $('#testerino').click(test);
 
     //show the date of the tables from today and the next 5 schooldays;
     //by clicking the buttomn and changing the page variable you can scroll 5 schooldays back/forward
@@ -215,7 +204,12 @@
                     console.log(result);
                     if (result === 'submitted'){
                         $('#status').html('Homework submitted');
-                        showTables()
+                        showTables();
+                        $('#recipient').val('');
+                        $('#exampleFormControlTextarea2').val('');
+                        $('#subject').val('');
+                        $('#dueDate').val('');
+
                     }else {
                         $('#status').html('Recipient cannot be '+ result);
                     }
@@ -243,23 +237,6 @@ function requestHomework(date) {
         }
     });
 }
-
-function test() {
-    $.ajax({
-        url: '/test',
-        type: 'get',
-        success: function(result){
-
-        },
-        error: function(err){
-            console.log(err)
-        }
-    });
-}
-
-
-
-
 </script>
 @endsection
 

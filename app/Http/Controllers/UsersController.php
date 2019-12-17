@@ -329,8 +329,6 @@ class UsersController extends Controller
 
         if($date == null){
 
-
-
             if ($user->role=='Teacher') {
 
                 return view('users.teacher.homework',['user'=> $user]);
@@ -346,7 +344,7 @@ class UsersController extends Controller
             if($user->role=='Teacher'){
                 $user = session()->get('loggedUser');
 
-                $homeworkArray[] = Notification::where('user_id',$user->id)
+                $homeworkArray = Notification::where('user_id',$user->id)
                     ->where('date',$date)
                     ->where(function ($query) {
                     $user = session()->get('loggedUser');
@@ -362,14 +360,7 @@ class UsersController extends Controller
                     })
                     ->get();
 
-                $allHomework =[];
-                foreach ($homeworkArray as $homeworks) {
-                    foreach ($homeworks as $homework) {
-                        $allHomework[] = $homework;
-                    }
-                }
-            
-                return $allHomework;
+                return $homeworkArray;
 
             }else{
                 $homeworkArray = Notification::where('date',$date)
@@ -382,13 +373,8 @@ class UsersController extends Controller
                     })
                     ->get();
 
-                
-            
                 return $homeworkArray;
             }
-
-                
-
         }
     }
 
@@ -418,7 +404,40 @@ class UsersController extends Controller
 
             return redirect('/');
         } else {
-           
+
+            if($user->role=='Teacher'){
+
+                $messages = Notification::where('type','Note')
+                    ->where(function ($query) {
+                    $user = session()->get('loggedUser');
+                    $item = Cookie::get('item');
+                    $query->where('user_id', $user->id);
+                    foreach ($user->klasses as $klass) {
+                        if ($klass->id == $item) {
+                            $query->orWhere('klass_id',$item);
+                            foreach ($klass->students as $student) {
+                                $query->orWhere('student_id', $student->id);
+                                }
+                            }
+                        }  
+                    })
+                    ->get();
+
+                return $messages;
+
+            }else{
+                $messages = Notification::where('type','Note')
+                        ->where(function ($query) {
+                        $item = Cookie::get('item');
+                        $student = Student::find($item);
+                        $query->where('klass_id',$student->klass_id)
+                            ->orWhere('student_id', $item);
+                        
+                    })
+                    ->get();
+
+                return $messages;
+            }
         }
     }
 
@@ -452,12 +471,12 @@ class UsersController extends Controller
         $user = session()->get('loggedUser');
 
         //we check for subject and description, because the other fields are filled in by default
-        $validation = $request->validate([
+        /*$validation = $request->validate([
             'subject' => 'required|min:4|max:255',
             'description' => 'required|min:2|max:255',
             'dueDate' => 'after:today'
 
-        ]);
+        ]);*/
 
         $homework = new Notification();
 
@@ -524,39 +543,4 @@ class UsersController extends Controller
                 return redirect('/');
     }
 
-
-    /*for debugging the homework query we may need it later so dont delete this
-
-    it shows the error page in stead of staying in the same page
-    typo in the Model:(*/
-
-    //public function test(){
-
-        /*lets assume we get the id of a class which is 1 for this example */
-
-
-
-/*
-
-            $homeworks[] = DB::table('jerd_notifications')
-                        ->where('type', 'Homework')
-                        ->where('klass_id', 1)
-                        ->get();
-
-            $homeworks[] = DB::table('jerd_notifications')
-                        ->where(function ($query) {
-                            $user = session()->get('loggedUser');
-                            foreach ($user->klasses as $klass) {
-                                if ($klass->id == 1 this value will be provide by the url ) {
-                                    foreach ($klass->students as $student) {
-                                        $query->orWhere('student_id', $student->id);
-                                        }
-                                    }
-                                }
-                                })
-                            ->get();
-
-            return $homeworks;
-      }*/
-    
 }
