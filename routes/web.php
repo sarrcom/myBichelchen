@@ -59,7 +59,7 @@ Route::resources([
 Route::post('/', 'UsersController@login');
 Route::get('/logout', 'UsersController@logout');
 
-Route::get('/user/{}', 'UsersController@overview');
+Route::get('/user', 'UsersController@overview');
 
 Route::get('/user/homework/{date?}', 'UsersController@homework');
 Route::post('/user/homework', 'UsersController@submitHomework');
@@ -68,4 +68,4 @@ Route::post('/user/homework', 'UsersController@submitHomework');
 Route::get('/user/messages/{id?}', 'UsersController@messages');
 Route::post('/user/messages', 'UsersController@sendMessages');
 
-//Route::get('/test', 'UsersController@test');
+Route::get('/test/{id}', 'UsersController@test');
