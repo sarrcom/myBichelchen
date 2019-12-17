@@ -114,13 +114,6 @@ footer.page-footer {
     display: flex;
     justify-content: space-evenly;
 }
-#cardWidth {
-    width: 30em;
-    height: 20em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 .md-form .form-control.input-md {
     display: block;
     width: 100%;

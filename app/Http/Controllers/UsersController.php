@@ -275,42 +275,101 @@ class UsersController extends Controller
 
         $item = Cookie::get('item');
 
-        $students = [];
-
-        $rows = Student::where('klass_id', $item)->get();
-
-        foreach ($rows as $row) {
-            $students[] = $row->id;
-        }
-
-        $homeworks[] = Notification::where('user_id', $user->id)
-            ->where('type', 'Homework')
-            ->where('date', (new DateTime())->format('Y-m-d'))
-            ->where('klass_id', $item)
-            ->get();
-        $homeworks[] = Notification::where('user_id', $user->id)
-            ->where('type', 'Homework')
-            ->where('date', (new DateTime())->format('Y-m-d'))
-            ->whereIn('student_id', $students)
-            ->get();
-
-        $notes = Notification::where('type', 'Note')
-            ->whereIn('student_id', $students)
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
-
-        $absences = Notification::where('type', 'Absence')
-            ->whereIn('student_id', $students)
-            ->where('date', (new DateTime())->format('Y-m-d'))
-            ->get();
+        // MaRe Queries
 
         if ($user->role === 'Teacher') {
+            $students = [];
+            $rows = Student::where('klass_id', $item)->get();
+
+            foreach ($rows as $row) {
+                $students[] = $row->id;
+            }
+            // Teacher Queries
+            $homeworks[] = Notification::where('user_id', $user->id)
+                ->where('type', 'Homework')
+                ->where('date', (new DateTime())->format('Y-m-d'))
+                ->where('klass_id', $item)
+                ->get();
+            $homeworks[] = Notification::where('user_id', $user->id)
+                ->where('type', 'Homework')
+                ->where('date', (new DateTime())->format('Y-m-d'))
+                ->whereIn('student_id', $students)
+                ->get();
+
+            $notes = Notification::where('type', 'Note')
+                ->whereIn('student_id', $students)
+                ->orderBy('created_at', 'desc')
+                ->limit(5)
+                ->get();
+
+            $absences = Notification::where('type', 'Absence')
+                ->whereIn('student_id', $students)
+                ->where('date', (new DateTime())->format('Y-m-d'))
+                ->get();
+
             return view('users.teacher.overview', ['user' => $user, 'klass' => $item, 'homeworkArray' => $homeworks, 'notes' => $notes, 'absences' => $absences]);
         } else if ($user->role === 'Guardian') {
-            return view('users.guardian.overview', ['user' => $user, 'student' => $item]);
+            // Guardian Queries
+            $student = Student::find($item);
+
+            $homeworks[] = Notification::where('type', 'Homework')
+                ->where('date', (new DateTime('tomorrow'))->format('Y-m-d'))
+                ->where('klass_id', $student->klass_id)
+                ->get();
+            $homeworks[] = Notification::where('type', 'Homework')
+                ->where('date', (new DateTime('tomorrow'))->format('Y-m-d'))
+                ->where('student_id', $item)
+                ->get();
+
+            $notes[] = Notification::where('type', 'Note')
+                ->where('student_id', $item)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+            $notes[] = Notification::where('type', 'Note')
+                ->where('klass_id', $student->klass_id)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+
+            $absences = Notification::where('type', 'Absence')
+                ->where('student_id', $item)
+                ->orderBy('date', 'desc')
+                ->limit(5)
+                ->get();
+
+            return view('users.guardian.overview', ['user' => $user, 'student' => $item, 'homeworkArray' => $homeworks, 'notesArray' => $notes, 'absences' => $absences]);
         } else if ($user->role === 'MaRe') {
-            return view('users.mare.overview', ['user' => $user, 'student' => $item]);
+            // MaRe Queries
+            $student = Student::find($item);
+
+            $homeworks[] = Notification::where('type', 'Homework')
+                ->where('date', (new DateTime('tomorrow'))->format('Y-m-d'))
+                ->where('klass_id', $student->klass_id)
+                ->get();
+            $homeworks[] = Notification::where('type', 'Homework')
+                ->where('date', (new DateTime('tomorrow'))->format('Y-m-d'))
+                ->where('student_id', $item)
+                ->get();
+
+            $notes[] = Notification::where('type', 'Note')
+                ->where('student_id', $item)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+            $notes[] = Notification::where('type', 'Note')
+                ->where('klass_id', $student->klass_id)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+
+            $absences = Notification::where('type', 'Absence')
+                ->where('student_id', $item)
+                ->orderBy('date', 'desc')
+                ->limit(5)
+                ->get();
+
+            return view('users.mare.overview', ['user' => $user, 'student' => $item, 'homeworkArray' => $homeworks, 'notesArray' => $notes, 'absences' => $absences]);
         }
     }
 

@@ -436,6 +436,9 @@
                 data: $('#addForm').serialize(),
                 success: function(result){
                     console.log("success");
+                    $('#inputPosition15').val("");
+                    $('#inputOfficeInput15').val("");
+                    $('#inputDate').val("");
                 },
                 error: function(err){
                     console.log('Oh boi')
