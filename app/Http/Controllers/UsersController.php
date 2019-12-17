@@ -633,30 +633,7 @@ class UsersController extends Controller
     it shows the error page in stead of staying in the same page
     typo in the Model:(*/
 
-    public function test(){
-
-        /*lets assume we get the id of a class which is 1 for this example */
-
-
-
-        $homeworks[] = DB::table('jerd_notifications')
-                    ->where('type', 'Homework')
-                    ->where('klass_id', 1)
-                    ->get();
-
-        $homeworks[] = DB::table('jerd_notifications')
-                    ->where(function ($query) {
-                        $user = session()->get('loggedUser');
-                        foreach ($user->klasses as $klass) {
-                            if ($klass->id == 1/* this value will be provide by the url */) {
-                                foreach ($klass->students as $student) {
-                                    $query->orWhere('student_id', $student->id);
-                                    }
-                                }
-                            }
-                            })
-                        ->get();
-
-        return $homeworks;
+    public function test($id){
+        Cookie::queue('item', $id, 60 * 24 * 7);
     }
 }

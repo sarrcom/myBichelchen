@@ -19,14 +19,13 @@
             $(function(){
                 $('.dropdown-item').click(function(e){
                     myId = $(this).prop('id').substr(1);
-
-                    @php Cookie::queue('item', myId, 60 * 24 * 7); @endphp
                     e.preventDefault();
                     $.ajax({
-                        url: @php url()->current() @endphp,
+                        url: '/test/' + myId,
                         type: 'get',
                         success: function(result){
                             console.log("success");
+                            window.location.reload();
                         },
                         error: function(err){
                             console.log("error");
