@@ -32,10 +32,9 @@
             </div>
 
             <!-- Card content -->
-            <div id="cardWidth" class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade text-center">
 
                 <!-- Text -->
-                <p class="card-text">Today's Homework Logic goes here</p>
                 @foreach($homeworkArray as $homeworks)
                     @foreach($homeworks as $homework)
                         <p><strong>{{ $homework->subject }}</strong></p>
@@ -69,10 +68,9 @@
             </div>
 
             <!-- Card content -->
-            <div id="cardWidth" class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade text-center">
 
                 <!-- Text -->
-                <p class="card-text">Today's Notes Logic goes here</p>
                 @foreach($notesArray as $notes)
                     @foreach($notes as $note)
                         <p><strong>{{ $note->subject }}</strong></p>
@@ -107,10 +105,9 @@
             </div>
 
             <!-- Card content -->
-            <div id="cardWidth" class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade text-center">
 
                 <!-- Text -->
-                <p class="card-text">Today's Absences Logic goes here</p>
                 @foreach($absences as $absence)
                     <p><strong>{{ $absence->subject }}</strong></p>
                     <p class="short-description">{{ $absence->description }}</p>

@@ -35,15 +35,13 @@
             <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
                     <!-- Text -->
-                    <p class="card-text">
-                        @foreach($homeworkArray as $homeworks)
-                            @foreach($homeworks as $homework)
-                                <p><strong>{{ $homework->subject }}</strong></p>
-                                <p class="short-description">{{ $homework->description }}</p>
-                                <hr>
-                            @endforeach
+                    @foreach($homeworkArray as $homeworks)
+                        @foreach($homeworks as $homework)
+                            <p><strong>{{ $homework->subject }}</strong></p>
+                            <p class="short-description">{{ $homework->description }}</p>
+                            <hr>
                         @endforeach
-                    </p>
+                    @endforeach
 
                 <!-- Link -->
                 <a href="/user/homework" class="purple-text d-flex flex-row-reverse p-2">
@@ -75,14 +73,12 @@
         <div class="card-body card-body-cascade" style="overflow-y: scroll; height:30rem;">
 
             <!-- Text -->
-            <p class="card-text">
-                @foreach($notes as $note)
-                    <p><strong>{{ $note->subject }}</strong></p>
-                    <p class="short-description">{{ $note->description }}</p>
-                    <p class="badge"><em>{{ $note->created_at }}</em></p>
-                    <hr>
-                @endforeach
-            </p>
+            @foreach($notes as $note)
+                <p><strong>{{ $note->subject }}</strong></p>
+                <p class="short-description">{{ $note->description }}</p>
+                <p class="badge"><em>{{ $note->created_at }}</em></p>
+                <hr>
+            @endforeach
 
             <!-- Link -->
             <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
@@ -114,13 +110,11 @@
         <div class="card-body card-body-cascade" style="overflow-y: scroll; height:30rem;">
 
             <!-- Text -->
-            <p class="card-text">
-                @foreach($absences as $absence)
-                    <p><strong>{{ $absence->subject }}</strong></p>
-                    <p class="short-description">{{ $absence->description }}</p>
-                    <hr>
-                @endforeach
-            </p>
+            @foreach($absences as $absence)
+                <p><strong>{{ $absence->subject }}</strong></p>
+                <p class="short-description">{{ $absence->description }}</p>
+                <hr>
+            @endforeach
 
             <!-- Link -->
             <a href="#!" class="blue-text d-flex flex-row-reverse p-2">
