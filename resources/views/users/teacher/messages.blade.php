@@ -8,14 +8,6 @@
 </header>
 
 @section('content')
-teacher-messages
-<br>
-{{$user->first_name}}
-
-<br>
-@foreach ($user->students as $student)
-    {{$student->first_name}} <br>
-@endforeach -->
 
 <h1 class="d-flex justify-content-center">Messages</h1>
 <div class="d-flex justify-content-center">
@@ -33,11 +25,11 @@ teacher-messages
             <!-- Grid column -->
             <div class="col-md-6 col-xl-4 px-0">
 
-                <h6 class="font-weight-bold mb-3 text-center text-lg-left">Member</h6>
+                <h6 class="font-weight-bold mb-3 text-center text-lg-left">Inbox</h6>
                 <!-- Scroll bar -->
-                <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue" id="homeworkList">
+                <div class="white z-depth-1 px-2 pt-3 pb-0 mb-3 members-panel-1 scrollbar-light-blue" id="homeworkList">
                     <ul class="list-unstyled friend-list">
-                        <li class="active grey lighten-3 p-2" id="allMessages">
+                        <li class="p-2" id="allMessages">
                             <a href="#" class="d-flex justify-content-between">
                             <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
                             <div class="text-small">

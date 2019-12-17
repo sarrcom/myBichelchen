@@ -118,8 +118,6 @@
         <!-- /Card -->
     </div>
 </div>
-<!-- /Notifications -->
-
 
 
 
