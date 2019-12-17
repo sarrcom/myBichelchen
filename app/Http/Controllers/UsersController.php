@@ -248,16 +248,7 @@ class UsersController extends Controller
         User::destroy($id);
     }
 
-    /**
-     * Display the overview of the user.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function overview()
-    {
-        $user = session()->get('loggedUser');
-
+    public function loginCheck($user) {
         if(!$user){
             return redirect('/');
         }
@@ -271,6 +262,19 @@ class UsersController extends Controller
                 Cookie::queue('item', $responsibleOfStudent->student_id, 60 * 24 * 7);
             }
         }
+    }
+
+    /**
+     * Display the overview of the user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function overview()
+    {
+        $user = session()->get('loggedUser');
+
+        $this->loginCheck($user);
 
         $item = Cookie::get('item');
 
@@ -387,6 +391,8 @@ class UsersController extends Controller
         */
         $user = session()->get('loggedUser');
 
+        $this->loginCheck($user);
+
         if($date == null){
 
             if ($user->role=='Teacher') {
@@ -447,6 +453,8 @@ class UsersController extends Controller
     public function messages($id = null)
     {
         $user = session()->get('loggedUser');
+
+        $this->loginCheck($user);
 
         if ($id == null) {
 
