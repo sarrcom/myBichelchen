@@ -83,7 +83,7 @@
                             <div class="modal-body mx-3 modal-inputs">
                                 <div class="md-form mb-5">
                                     <select id="editKlass" name="klass" class="form-control input-md" required></select>
-                                    <label class="active" data-error="wrong" data-success="right" for="editKlass">Class</label>
+                                    <label class="active adminEditModal" data-error="wrong" data-success="right" for="editKlass">Class</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
