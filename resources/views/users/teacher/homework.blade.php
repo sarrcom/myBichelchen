@@ -27,12 +27,15 @@
                         <ul class="list-unstyled chat">
                             <!-- Homework Box -->
                             <li class="d-flex justify-content-center">
-                                <div class="chat-body white p-3 z-depth-1" style="width: 80vh">
+                                <div class="chat-body white p-3 z-depth-1" style="width: 80vh;">
                                     <div class="header">
-                                        <h6 class="font-weight-bold mb-2 text-center text-lg-center">Homework Calendar</h6>
+                                        <h6 class="font-weight-bold mb-2 text-center text-lg-center scrollbar-light-blue">Homework Calendar</h6>
+
                                         <hr class="w-100">
                                         <!-- Homework Calender -->
-                                        <div class="homeworkcalendar">
+                                        <div class="list-unstyled chat-1 scrollbar-light-blue">
+                                            <div class="homeworkcalendar">
+                                            </div>
                                         </div>
                                         <hr class="w-100">
                                     </div>

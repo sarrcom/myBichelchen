@@ -35,7 +35,7 @@
 
                 <h6 class="font-weight-bold mb-3 text-center text-lg-left">Member</h6>
                 <!-- Scroll bar -->
-                <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
+                <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue" id="homeworkList">
                     <ul class="list-unstyled friend-list">
                         <li class="active grey lighten-3 p-2" id="allMessages">
                             <a href="#" class="d-flex justify-content-between">

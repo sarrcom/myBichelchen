@@ -192,3 +192,10 @@ background-color: #82B1FF; }
 .card.chat-room .members-panel-1 {
     height: 734px;
 }
+
+.error {
+    color: red;
+}
+.success {
+    color: #00C851;
+}
