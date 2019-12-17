@@ -12,6 +12,8 @@
 <div class="container">
     <div class="wrapper-editor">
         <div class="block my-4">
+            <p class="error"></p>
+            <p class="success"></p>
             <h1 class="d-flex justify-content-center">Admin Users List</h1>
             <br>
             <div class="d-flex justify-content-center">
@@ -39,23 +41,23 @@
                                         <option value="Teacher">Teacher</option>
                                         <option value="MaRe">Maison Relais</option>
                                     </select>
-                                    <label class="active" data-error="wrong" data-success="right" for="addRole">Role</label>
+                                    <label class="active adminAddModal" for="addRole">Role</label>
                                 </div>
                                 <div class="md-form mt-5 mb-3">
                                     <input type="text" id="inputPosition15" name="first_name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputPosition15">First Name</label>
+                                    <label for="inputPosition15">First Name</label>
                                 </div>
                                 <div class="md-form mt-5 mb-3">
                                     <input type="text" id="inputOfficeInput15" name="last_name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputOfficeInput15">Last Name</label>
+                                    <label for="inputOfficeInput15">Last Name</label>
                                 </div>
                                 <div class="md-form mt-5 mb-3">
                                     <input type="date" id="inputDate" name="date_of_birth" class="form-control" placeholder="Select Date">
-                                    <label data-error="wrong" data-success="right" for="inputDate15">Date of Birth</label>
+                                    <label for="inputDate15">Date of Birth</label>
                                 </div>
                                 <div class="md-form mt-5 mb-2">
                                     <div id="addItemsContainer"></div>
-                                    <label class="active" data-error="wrong" data-success="right" for="addItemsContainer">Children/Class</label>
+                                    <label class="active adminAddModal" for="addItemsContainer">Children/Class</label>
                                 </div>
                                 <p class="addChild" style="cursor: pointer" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Child +</p>
                                 <p class="addKlass" style="cursor: pointer; display: none" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">Add Class +</p>
@@ -90,23 +92,23 @@
                                 <div class="md-form mb-3">
                                     <input type="hidden">
                                     <select id="editRole" name="role" class="form-control input-md" required></select>
-                                    <label class="active" data-error="wrong" data-success="right" for="editRole">Role</label>
+                                    <label class="active adminEditModal" for="editRole">Role</label>
                                 </div>
                                 <div class="md-form mt-5 mb-3">
                                     <input type="text" id="formNameEdit15" name="first_name" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">First Name</label>
+                                    <label class="active" for="formNameEdit15">First Name</label>
                                 </div>
                                 <div class="md-form mt-5 mb-3">
                                     <input type="text" id="formPositionEdit15" name="last_name" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formPositionEdit15">Last Name</label>
+                                    <label class="active" for="formPositionEdit15">Last Name</label>
                                 </div>
                                 <div class="md-form mt-5 mb-3">
                                     <input type="date" id="formDateOfBirthEdit15" name="date_of_birth" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formDateOfBirthEdit15">Date of Birth</label>
+                                    <label class="active" for="formDateOfBirthEdit15">Date of Birth</label>
                                 </div>
                                 <div class="md-form mt-5 mb-2">
                                     <div id="editItemsContainer"></div>
-                                    <label class="active" data-error="wrong" data-success="right" for="editItemsContainer">Children/Class</label>
+                                    <label class="active adminEditModal" for="editItemsContainer">Children/Class</label>
                                 </div>
                                 <input type="hidden">
                                 @csrf
@@ -435,13 +437,13 @@
                 type: 'post',
                 data: $('#addForm').serialize(),
                 success: function(result){
-                    console.log("success");
                     $('#inputPosition15').val("");
                     $('#inputOfficeInput15').val("");
                     $('#inputDate').val("");
+                    $('.success').text("User added successfully");
                 },
                 error: function(err){
-                    console.log(err)
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -460,10 +462,10 @@
                 success: function(result){
                     usernameSelector.text(usernameText);
                     ageSelector.text(age + ' yrs');
-                    console.log("success");
+                    $('.success').text("User edited successfully");
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -478,10 +480,10 @@
                 type: 'delete',
                 data: $('#deleteForm').serialize(),
                 success: function(result){
-                    console.log("success");
+                    $('.success').text("User deleted successfully");
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -519,7 +521,7 @@
                     displayAddKlassOrChild(previousRole, "edit");
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -539,7 +541,7 @@
                     myUser = result[0];
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });

@@ -12,6 +12,8 @@
 <div class="container">
     <div class="wrapper-editor">
         <div class="block my-4">
+            <p class="error"></p>
+            <p class="success"></p>
             <h1 class="d-flex justify-content-center">Admin Classes List</h1>
             <br>
             <div class="d-flex justify-content-center">
@@ -39,11 +41,11 @@
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
-                                    <label class="active" data-error="wrong" data-success="right" for="addGrade">Class</label>
+                                    <label class="active adminAddModal" for="addGrade">Class</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="inputPosition15" name="name" class="form-control validate">
-                                    <label data-error="wrong" data-success="right" for="inputPosition15">Name</label>
+                                    <label for="inputPosition15">Name</label>
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center buttonAddFormWrapper">
@@ -75,11 +77,11 @@
                             <div class="modal-body mx-3 modal-inputs">
                                 <div class="md-form mb-5">
                                     <select id="editGrade" name="grade" class="form-control input-md" required></select>
-                                    <label class="active" data-error="wrong" data-success="right" for="editGrade">Class</label>
+                                    <label class="active adminEditModal" for="editGrade">Class</label>
                                 </div>
                                 <div class="md-form mb-5">
                                     <input type="text" id="formNameEdit15" name="name" class="form-control validate">
-                                    <label class="active" data-error="wrong" data-success="right" for="formNameEdit15">Name</label>
+                                    <label class="active" for="formNameEdit15">Name</label>
                                 </div>
                                 <input type="hidden">
                                 <input type="hidden">
@@ -203,10 +205,10 @@
                 type: 'post',
                 data: $('#addForm').serialize(),
                 success: function(result){
-                    console.log("success");
+                    $('.success').text("Class added successfully");
                 },
                 error: function(err){
-                    console.log('Oh boi')
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -221,10 +223,10 @@
                 type: 'put',
                 data: $('#editForm').serialize(),
                 success: function(result){
-                    console.log("success");
+                    $('.success').text("Class edited successfully");
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -239,10 +241,10 @@
                 type: 'delete',
                 data: $('#deleteForm').serialize(),
                 success: function(result){
-                    console.log("success");
+                    $('.success').text("Class deleted successfully");
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -264,7 +266,7 @@
                     fillGrades(myKlass);
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });
@@ -284,7 +286,7 @@
                     myKlass = result;
                 },
                 error: function(err){
-                    console.log('Oh boi');
+                    $('.error').text("Something went wrong");
                 }
             });
         });

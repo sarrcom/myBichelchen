@@ -189,9 +189,11 @@ background-color: #82B1FF; }
     min-height: 10rem;
 }
 .error {
+    text-align: center;
     color: red;
 }
 .success {
+    text-align: center;
     color: #00C851;
 }
 

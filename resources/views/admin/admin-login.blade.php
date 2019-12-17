@@ -50,7 +50,7 @@
                     <label for="loginFormPassword">Password</label>
                 </div>
 
-                <p id="errorMessage"></p>
+                <p class="error"></p>
                 <!-- Sign in button -->
                 <button class="btn peach-gradient btn-block btn-rounded z-depth-1a" type="button submit" id="loginButtonAdmin">Sign in</button>
 
@@ -191,11 +191,11 @@
                     if (result === 'Login') {
                         window.location.replace('/users');
                     } else {
-                        $('#errorMessage').text(result);
+                        $('.error').text(result);
                     }
                 },
                 error: function(err){
-                    $('#errorMessage').text("Something went wrong");
+                    $('.error').text("Something went wrong");
                 }
             });
         });
