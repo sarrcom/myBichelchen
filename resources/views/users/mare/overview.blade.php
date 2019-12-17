@@ -74,7 +74,7 @@
 
             <!-- Text -->
             <p class="card-text">
-                @foreach($notes as $note)
+                @foreach($notesArray as $note)
                     <p><strong>{{ $note->subject }}:</strong> {{ $note->description }} <em>{{ $note->created_at }}</em></p>
                 @endforeach
             </p>
