@@ -32,7 +32,7 @@ class NotificationsTableSeeder extends Seeder
             'student_id' => 1,
             'user_id' => 2,
         ]);
-        
+
         DB::table('jerd_notifications')->insert([
             'description' => 'Getting jiggy with it',
             'subject' => 'To Student 2 of Klass 1',
@@ -114,7 +114,7 @@ class NotificationsTableSeeder extends Seeder
             'student_id' => 10,
             'user_id' => 2,
         ]);
-        
+
         DB::table('jerd_notifications')->insert([
             'description' => 'Getting jiggy with it',
             'subject' => 'If it works we should have 12 objects',

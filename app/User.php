@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table='jerd_users';
+    public $timestamps = false;
     public function students()
     {
         return $this->belongsToMany('App\Student', 'jerd_responsible_of_students');

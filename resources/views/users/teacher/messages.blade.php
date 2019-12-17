@@ -8,7 +8,7 @@
 </header>
 
 @section('content')
-<!-- teacher-messages
+teacher-messages
 <br>
 {{$user->first_name}}
 
@@ -259,7 +259,6 @@
         }
     });
 }
-
 </script>
 
 @endsection

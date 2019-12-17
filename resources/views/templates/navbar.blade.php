@@ -28,7 +28,6 @@
                     </li>
                 </ul>
             <!-- /If User is Admin -->
-
             <!-- If User is Teacher -->
             @elseif (isset($user) && $user->role=='Teacher')
                 <ul class="navbar-nav mr-auto">

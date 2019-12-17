@@ -15,7 +15,7 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('jerd_comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('comment');
+            $table->string('comment', 190);
             $table->integer('notification_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
