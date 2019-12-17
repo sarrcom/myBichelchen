@@ -6,7 +6,7 @@ use DateTime;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cookie;
+
 
 use App\User;
 use App\Student;
