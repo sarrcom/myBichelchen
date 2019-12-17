@@ -203,3 +203,7 @@ background-color: #82B1FF; }
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.badge {
+    color: rgba(0,0,0,.5) !important;
+}

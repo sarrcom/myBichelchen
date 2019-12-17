@@ -60,7 +60,7 @@
                     </button>
                     <div class="dropdown-menu">
                         @foreach ($user->klasses as $klass)
-                            <a class="dropdown-item" id="nav{{ $klass->id }}" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
+                            <a class="dropdown-item" id="i{{ $klass->id }}" href="#">Class: {{ $klass->name }} Grade: {{ $klass->grade }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
                         @foreach ($user->students as $student)
-                            <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
+                            <a class="dropdown-item" id="i{{ $student->id }}" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
                         @endforeach
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu6">
                             @foreach ($user->students as $student)
-                                <a class="dropdown-item" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
+                                <a class="dropdown-item" id="i{{ $student->id }}" href="#">{{ $student->first_name }} {{ $student->last_name }}</a>
                             @endforeach
                         </div>
                     </div>

@@ -38,7 +38,9 @@
                 <p class="card-text">Today's Homework Logic goes here</p>
                 @foreach($homeworkArray as $homeworks)
                     @foreach($homeworks as $homework)
-                        <p><strong>{{ $homework->subject }}:</strong> {{ $homework->description }}</p>
+                        <p><strong>{{ $homework->subject }}</strong></p>
+                        <p class="short-description">{{ $homework->description }}</p>
+                        <hr>
                     @endforeach
                 @endforeach
                 <!-- Link -->
@@ -73,7 +75,10 @@
                 <p class="card-text">Today's Notes Logic goes here</p>
                 @foreach($notesArray as $notes)
                     @foreach($notes as $note)
-                        <p><strong>{{ $note->subject }}:</strong> {{ $note->description }} <em>{{ $note->created_at }}</em></p>
+                        <p><strong>{{ $note->subject }}</strong></p>
+                        <p class="short-description">{{ $note->description }}</p>
+                        <p class="badge"><em>{{ $note->created_at }}</em></p>
+                        <hr>
                     @endforeach
                 @endforeach
                 <!-- Link -->
@@ -107,7 +112,9 @@
                 <!-- Text -->
                 <p class="card-text">Today's Absences Logic goes here</p>
                 @foreach($absences as $absence)
-                    <p><strong>{{ $absence->subject }}:</strong> {{ $absence->description }} <em>{{ $absence->created_at }}</em></p>
+                    <p><strong>{{ $absence->subject }}</strong></p>
+                    <p class="short-description">{{ $absence->description }}</p>
+                    <hr>
                 @endforeach
                 <!-- Link -->
                 <a href="#!" class="blue-text d-flex flex-row-reverse p-2">

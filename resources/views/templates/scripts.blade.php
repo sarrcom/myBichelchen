@@ -12,3 +12,30 @@
 <script>
     new WOW().init();
 </script>
+<script>
+    let myId;
+    @if($userLogged = session()->get('loggedUser'))
+        @if($userLogged->role == 'Teacher')
+            $(function(){
+                $('.dropdown-item').click(function(e){
+                    myId = $(this).prop('id').substr(1);
+
+                    @php Cookie::queue('item', myId, 60 * 24 * 7); @endphp
+                    e.preventDefault();
+                    $.ajax({
+                        url: @php url()->current() @endphp,
+                        type: 'get',
+                        success: function(result){
+                            console.log("success");
+                        },
+                        error: function(err){
+                            console.log("error");
+                        }
+                    });
+                });
+            });
+        @elseif($userLogged->role == 'Guardian' || $userLogged->role == 'MaRe')
+
+        @endif
+    @endif
+</script>

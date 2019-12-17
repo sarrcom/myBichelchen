@@ -77,7 +77,10 @@
             <!-- Text -->
             <p class="card-text">
                 @foreach($notes as $note)
-                    <p><strong>{{ $note->subject }}:</strong> {{ $note->description }} <em>{{ $note->created_at }}</em></p>
+                    <p><strong>{{ $note->subject }}</strong></p>
+                    <p class="short-description">{{ $note->description }}</p>
+                    <p class="badge"><em>{{ $note->created_at }}</em></p>
+                    <hr>
                 @endforeach
             </p>
 
@@ -113,7 +116,9 @@
             <!-- Text -->
             <p class="card-text">
                 @foreach($absences as $absence)
-                    <p><strong>{{ $absence->subject }}:</strong> {{ $absence->description }} <em>{{ $absence->created_at }}</em></p>
+                    <p><strong>{{ $absence->subject }}</strong></p>
+                    <p class="short-description">{{ $absence->description }}</p>
+                    <hr>
                 @endforeach
             </p>
 
