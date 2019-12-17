@@ -15,26 +15,22 @@
 <script>
     let myId;
     @if($userLogged = session()->get('loggedUser'))
-        @if($userLogged->role == 'Teacher')
-            $(function(){
-                $('.dropdown-item').click(function(e){
-                    myId = $(this).prop('id').substr(1);
-                    e.preventDefault();
-                    $.ajax({
-                        url: '/test/' + myId,
-                        type: 'get',
-                        success: function(result){
-                            console.log("success");
-                            window.location.reload();
-                        },
-                        error: function(err){
-                            console.log("error");
-                        }
-                    });
+        $(function(){
+            $('.dropdown-item').click(function(e){
+                myId = $(this).prop('id').substr(1);
+                e.preventDefault();
+                $.ajax({
+                    url: '/test/' + myId,
+                    type: 'get',
+                    success: function(result){
+                        console.log("success");
+                        window.location.reload();
+                    },
+                    error: function(err){
+                        console.log("error");
+                    }
                 });
             });
-        @elseif($userLogged->role == 'Guardian' || $userLogged->role == 'MaRe')
-
-        @endif
+        });
     @endif
 </script>
