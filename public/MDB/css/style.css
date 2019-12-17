@@ -199,3 +199,7 @@ background-color: #82B1FF; }
 .success {
     color: #00C851;
 }
+
+.card-body .header .homeworkCalendarList {
+    height: 200px;
+}
