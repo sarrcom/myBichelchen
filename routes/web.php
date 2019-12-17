@@ -11,35 +11,61 @@
 |
 */
 
-use App\Http\Controllers\UsersController;
-
 Route::get('locale/{locale}', function ($locale){
     Session::put('locale', $locale);
     return redirect()->back();
 });
 
+// Front Office
 Route::get('/', function () {
     return view('landing-page');
 });
 
-Route::get('/admin/login', 'AdminsController@index');
+Route::get('/about', function () {
+    return view('about');
+});
 
-Route::get('/admin/users', 'UsersController@index');
-Route::get('/admin/user/create', 'UsersController@create');
-Route::post('/admin/user/create', 'UsersController@store');
-Route::get('/admin/user/edit/{id}', 'UsersController@edit');
-Route::put('/admin/user/edit/{id}', 'UsersController@update');
-Route::delete('/admin/user/{id}', 'UsersController@destroy');
-Route::get('/admin/klasses', 'KlassesController@index');
-Route::get('/admin/klass/create', 'KlassesController@create');
-Route::post('/admin/klass/create', 'KlassesController@store');
-Route::get('/admin/klass/edit/{id}', 'KlassesController@edit');
-Route::put('/admin/klass/edit/{id}', 'KlassesController@update');
-Route::delete('/admin/klass/{id}', 'KlassesController@destroy');
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/cookies', function () {
+    return view('cookies');
+});
+
+Route::get('/news', function () {
+    return view('news');
+});
+
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
+Route::get('/support', function () {
+    return view('support');
+});
+
+// Admin
+Route::get('/admin/login', 'AdminsController@index');
+Route::post('/admin/login', 'AdminsController@login');
+
+Route::resources([
+    'users' => 'UsersController',
+    'students' => 'StudentsController',
+    'klasses' => 'KlassesController'
+]);
+
+// Users
+Route::post('/', 'UsersController@login');
+Route::get('/logout', 'UsersController@logout');
 
 Route::get('/user', 'UsersController@overview');
-Route::get('/user/homework', 'UsersController@homework');
-Route::get('/user/messages', 'UsersController@messages');
 
-Route::post('/', 'UsersController@login');
+Route::get('/user/homework/{date?}', 'UsersController@homework');
+Route::post('/user/homework', 'UsersController@submitHomework');
 
+
+Route::get('/user/messages/{id?}', 'UsersController@messages');
+Route::post('/user/messages', 'UsersController@sendMessages');
+
+//Route::get('/test', 'UsersController@test');

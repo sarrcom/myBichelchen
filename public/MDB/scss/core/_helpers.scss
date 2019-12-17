@@ -37,8 +37,6 @@
   border-top: 1px solid $hr-dark;
 }
 
-
-
 // Responsive width
 .w-responsive {
   width: 75%;
@@ -46,10 +44,6 @@
   @media (max-width: 740px) {
     width: 100%;
   }
-}
-
-.w-header {
-  width: 3.2rem;
 }
 
 // Collapsible body

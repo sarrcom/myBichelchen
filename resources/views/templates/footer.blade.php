@@ -21,7 +21,18 @@
 <!--/.Footer Links-->
 <!--Copyright-->
 <div class="footer-copyright py-3 text-center">
-    <div class="container-fluid">&copy; 2019 <a href="https://mybichelchen.lu/">myBichelchen.lu</a> - All right reserved.
+    <div class="container-fluid">
+        <ul class="list-unstyled d-flex justify-content-center mb-0 list-inline">
+            <li class="list-inline-item">&copy; 2019 <a href="https://mybichelchen.lu/">myBichelchen.lu</a> - {{ __('footer.rights') }}</li>
+        </ul>
+        <ul class="list-unstyled d-flex justify-content-center mb-0 list-inline">
+            <li class="list-inline-item pl-2"><a href="/about">{{ __('footer.about_us') }}</a></li>|
+            <li class="list-inline-item pl-2"><a href="/contact">Contact</a></li>|
+            <li class="list-inline-item pl-2"><a href="/news">{{ __('footer.news') }}</a></li>|
+            <li class="list-inline-item pl-2"><a href="/support">{{ __('footer.support') }}</a></li>|
+            <li class="list-inline-item pl-2"><a href="/cookies">{{ __('footer.cookie') }}</a></li>|
+            <li class="list-inline-item pl-2"><a href="/privacy">{{ __('footer.privacy') }}</a></li>
+        </ul>
     </div>
 </div>
 <!--/.Copyright-->

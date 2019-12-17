@@ -15,10 +15,10 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('jerd_students', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name', 190);
+            $table->string('last_name', 190);
             $table->date('date_of_birth')->nullable();
-            $table->integer('klass_id')->unsigned();
+            $table->integer('klass_id')->unsigned()->nullable();
 
             $table->foreign('klass_id')->references('id')->on('jerd_klasses');
         });

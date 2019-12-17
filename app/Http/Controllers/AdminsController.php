@@ -93,7 +93,7 @@ class AdminsController extends Controller
 
             if($request->loginFormPassword == $admin[0]->password/*$passwordValid/*/){
                 session()->flush();
-                session(['loggedUser' => $admin[0]]);
+                session(['loggedAdmin' => $admin[0]]);
                 return 'Login';
             }
         }

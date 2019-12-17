@@ -15,11 +15,11 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('jerd_notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description');
-            $table->string('subject');
-            $table->date('date');
+            $table->string('description', 2000);
+            $table->string('subject', 190);
+            $table->date('date')->nullable();
             $table->enum('type', ['Homework', 'Absence', 'Note']);
-            $table->boolean('checked');
+            $table->boolean('checked')->nullable();
             $table->integer('klass_id')->unsigned()->nullable();
             $table->integer('student_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
