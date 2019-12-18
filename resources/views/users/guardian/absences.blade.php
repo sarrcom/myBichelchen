@@ -96,9 +96,9 @@
     });
 
     fillList();
-    function fillList(){
+    function fillList(id = {{$item}}){
         $.ajax({
-            url: '/user/absences/1',
+            url: '/user/absences/'+id,
             type: 'get',
                 success: function(result){
                 console.log(result);

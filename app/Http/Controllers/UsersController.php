@@ -594,6 +594,8 @@ class UsersController extends Controller
 
         $this->loginCheck($user);
 
+
+
         if($id == null){
 
             if ($user->role=='Teacher') {
@@ -601,7 +603,7 @@ class UsersController extends Controller
                 return view('users.teacher.absences',['user'=> $user]);
             }
             if ($user->role=='Guardian') {
-                return view('users.guardian.absences',['user'=> $user]);
+                return view('users.guardian.absences',['user'=> $user,'item'=>Cookie::get('item')]);
             }
             if ($user->role=='MaRe') {
                 return view('users.mare.overview',['user'=> $user]);
