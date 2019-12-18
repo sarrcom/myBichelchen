@@ -41,7 +41,7 @@
                         <p class="short-description">{{ $homework->description }}</p>
                         <hr>
                     @endforeach
-                </p>
+                @endforeach
                 <!-- Link -->
                 <a href="/user/homework" class="orange-text d-flex flex-row-reverse p-2">
                     <p class="waves-effect waves-light">Go to Homework<i class="fas fa-angle-double-right ml-2"></i></p>
@@ -77,7 +77,7 @@
                         <p class="badge"><em>{{ $note->created_at }}</em></p>
                         <hr>
                     @endforeach
-                </p>
+                @endforeach
 
             <!-- Link -->
             <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
