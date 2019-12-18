@@ -30,17 +30,7 @@
                 <div class="white z-depth-1 px-2 pt-3 pb-0 mb-3 members-panel-1 scrollbar-light-blue" id="homeworkList">
                     <ul class="list-unstyled friend-list">
                         <li class="p-2" id="allMessages">
-                            <a href="#" class="d-flex justify-content-between">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
-                            <div class="text-small">
-                                <strong>John Doe</strong>
-                                <p class="last-message text-muted">Hello, Are you there?</p>
-                            </div>
-                            <div class="chat-footer">
-                                <p class="text-smaller text-muted mb-0">Just now</p>
-                                <span class="badge badge-danger float-right">1</span>
-                            </div>
-                            </a>
+                            
                         </li>
                     </ul>
                 </div>
