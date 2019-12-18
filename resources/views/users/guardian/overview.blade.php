@@ -80,7 +80,6 @@
                         <hr>
                     @endforeach
                 @endforeach
-            </p>
 
             <!-- Link -->
             <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
@@ -117,7 +116,6 @@
                     <p class="short-description">{{ $absence->description }}</p>
                     <hr>
                 @endforeach
-            </p>
 
             <!-- Link -->
             <a href="#!" class="orange-text d-flex flex-row-reverse p-2">

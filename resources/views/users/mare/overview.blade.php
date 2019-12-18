@@ -112,7 +112,6 @@
                     <p class="short-description">{{ $absence->description }}</p>
                     <hr>
                 @endforeach
-            </p>
 
             <!-- Link -->
             <a href="#!" class="orange-text d-flex flex-row-reverse p-2">
