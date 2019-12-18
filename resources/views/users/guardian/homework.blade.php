@@ -47,46 +47,7 @@
                                 <button class="btn btn-info btn-rounded btn-sm waves-effect waves-light" id="next"><i class="fas fa-caret-right"></i></button>
                             </li>
                             <!-- Send Homework -->
-                            <div id="status">
-                            </div>
-                            <form method="POST" id="homeworkForm">
-                                @csrf
-                                @method('POST')
 
-                                <div class="chat-body white p-3 z-depth-1">
-
-                                    <ng-container [formGroup]="testForm">
-
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
-                                            <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
-                                        </div>
-                                        <hr class="w-100">
-
-                                    </ng-container>
-
-                                    <label for="recipient">To the Parents of</label>
-
-                                    {{-- options from script based on the radio: classes or students--}}
-                                    <select name="recipient" id="recipient" required>
-                                    </select><br>
-
-                                    <label for="subject">Subject</label>
-                                    <input type="text" name="subject" required><br>
-
-                                    <div class="form-group basic-textarea">
-                                        <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
-                                    </div>
-
-                                    <label for="dueDate">Due Date</label>
-                                    <input type="date" name="dueDate" required><br>
-
-                                </div>
-
-
-                                <button type="submit" class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right" name="submitHomework">Send</button>
-
-                            </form>
                     <!-- Grid column -->
                 </div>
                 <!-- Grid row -->

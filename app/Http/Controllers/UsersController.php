@@ -467,10 +467,10 @@ class UsersController extends Controller
         $homework->subject = trim($request->subject);
         $homework->type = 'Homework';
 
-        if ($request->has('sendTo')) {
-            $homework->klass_id = $request->recipient;
-        }else if(!$request->has('sendTo')){
-            $homework->student_id = $request->recipient;
+        if ($user->role == 'Teacher') {
+            $homework->klass_id = Cookie::get('item');
+        }else if($user->role == 'MaRe'||$user->role == 'Guardan'){
+            $homework->student_id = Cookie::get('item');
         }
 
         $homework->user_id = $user->id;
@@ -569,10 +569,10 @@ class UsersController extends Controller
         $message->description = trim($request->description);
         $message->subject = trim($request->subject);
         $message->type = 'Note';
-        if ($request->has('sendTo')) {
-            $message->klass_id = $request->recipient;
-        }else if(!$request->has('sendTo')){
-            $message->student_id = $request->recipient;
+        if ($user->role == 'Teacher') {
+            $message->klass_id = Cookie::get('item');
+        }else if($user->role == 'MaRe'||$user->role == 'Guardan'){
+            $message->student_id = Cookie::get('item');
         }
 
 
@@ -600,7 +600,7 @@ class UsersController extends Controller
 
             if ($user->role=='Teacher') {
 
-                return view('users.teacher.absences',['user'=> $user]);
+                return view('users.teacher.absences',['user'=> $user,'item'=>Cookie::get('item')]);
             }
             if ($user->role=='Guardian') {
                 return view('users.guardian.absences',['user'=> $user,'item'=>Cookie::get('item')]);
@@ -613,15 +613,15 @@ class UsersController extends Controller
             if($user->role=='Guardian'){
                 $user = session()->get('loggedUser');
                 $item = Cookie::get('item');
-                $absences = Notification::where('user_id',$user->id)
-                                ->where('student_id',$item)
-                                ->where('type','Ansences')               
+                $absences = Notification::where('student_id',$item)
+                                ->where('type','Absence')               
                                 ->get();
 
                 return $absences;
 
             }else{
-                $absences = Notification::where(function ($query) {
+                $absences = Notification::where('type','Absence') 
+                    ->where(function ($query) {
                     $user = session()->get('loggedUser');
                     $item = Cookie::get('item');
                     foreach ($user->klasses as $klass) {

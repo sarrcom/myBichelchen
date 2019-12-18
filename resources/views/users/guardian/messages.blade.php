@@ -119,9 +119,7 @@
                     <form id="sendMessageForm">
                         @csrf
                         <div class="chat-body white p-3 z-depth-1">
-                            <label for="recipient">To the Teacher of</label>
-                            {{-- options from script based on the radio: classes or students--}}
-                            <select name="recipient" id="recipient" required></select><br>
+
                             <label for="subject">Subject</label>
                             <input type="text" id="subject" name="subject" required><br>
                             <div class="form-group basic-textarea">
@@ -146,9 +144,6 @@
 
 @section('extra-scripts')
 <script>
-    @foreach ($user->students as $student)
-        $(recipient).append(new Option("{{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
-    @endforeach
 
     showMessages();
     function showMessages() {
