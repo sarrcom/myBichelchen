@@ -23,7 +23,7 @@
     <link href="{{ asset('MDB/css/addons-pro/chat.min.css') }}" rel="stylesheet">
 </head>
 <body>
-        @yield('navbar')
+    @yield('navbar')
     <main>
         @yield('content')
     </main>

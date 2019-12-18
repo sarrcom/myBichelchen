@@ -1,5 +1,5 @@
 @extends('templates.main')
-@section('title', 'Teacher Homework')
+@section('title', 'Teacher | Homework')
 
 <header id="secondaryHeader">
 @section('navbar')
@@ -94,10 +94,11 @@
         </div>
 @endsection
 
-@include('templates.scripts')
 @section('footer')
 @include('templates.footer')
+@endsection
 
+@section('extra-scripts')
 <script>
     let page = 0
 
@@ -199,7 +200,6 @@
             content = homework.subject + ' : ' + homework.description + ' ' + homework.klass_id;
             listItem = $('<li></li>');
             listItem.text(content);
-
             $('#ul'+date).append(listItem);
         }
     }
@@ -257,9 +257,6 @@ function test() {
         }
     });
 }
-
-
-
 
 </script>
 @endsection

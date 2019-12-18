@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 use App\User;
 use App\Student;
@@ -12,6 +15,7 @@ use App\Notification;
 use App\Comment;
 use App\ResponsibleOfStudent;
 use App\TeacherKlass;
+use Illuminate\Support\Facades\Cookie;
 
 class UsersController extends Controller
 {
@@ -23,6 +27,7 @@ class UsersController extends Controller
     public function index()
     {
         $admin = session()->get('loggedAdmin');
+
         if(!$admin){
             return redirect('/');
         }
@@ -88,7 +93,7 @@ class UsersController extends Controller
 
         // Saving the password in users.json
         $allUsers = [];
-        $jsonFile = file_get_contents('users.json');
+        $jsonFile = file_get_contents(resource_path('jerd_users.json'));
         $jsonDecoded = json_decode($jsonFile);
         if ($jsonDecoded == '') {
             $jsonDecoded = [];
@@ -97,7 +102,7 @@ class UsersController extends Controller
             $allUsers[] = $value;
         }
         $allUsers[] = ['username' => $user->username, 'password' => $pwRand];
-        file_put_contents('users.json', json_encode($allUsers, JSON_PRETTY_PRINT));
+        file_put_contents(resource_path('jerd_users.json'), json_encode($allUsers, JSON_PRETTY_PRINT));
         $user->password = password_hash($pwRand, PASSWORD_DEFAULT);
 
         $user->role = $request->role;
@@ -110,13 +115,25 @@ class UsersController extends Controller
         $childName = 'child' . $i;
         if ($user->role == 'Teacher') {
             while (isset($request->$klassName)) {
-                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $teacherKlass = new TeacherKlass;
+
+                $teacherKlass->klass_id = $request->$klassName;
+                $teacherKlass->user_id = $user->id;
+
+                $teacherKlass->save();
+
                 $i++;
                 $klassName = 'klass' . $i;
             }
         } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
             while (isset($request->$childName)) {
-                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $responsibleOfStudent = new ResponsibleOfStudent;
+
+                $responsibleOfStudent->student_id = $request->$childName;
+                $responsibleOfStudent->user_id = $user->id;
+
+                $responsibleOfStudent->save();
+
                 $i++;
                 $childName = 'child' . $i;
             }
@@ -184,14 +201,26 @@ class UsersController extends Controller
         if ($user->role == 'Teacher') {
             TeacherKlass::where('user_id', $user->id)->delete();
             while (isset($request->$klassName)) {
-                DB::insert('INSERT INTO jerd_teachers_klasses(klass_id, user_id) VALUES(?, ?)', [$request->$klassName, $user->id]);
+                $teacherKlass = new TeacherKlass;
+
+                $teacherKlass->klass_id = $request->$klassName;
+                $teacherKlass->user_id = $user->id;
+
+                $teacherKlass->save();
+
                 $i++;
                 $klassName = 'klass' . $i;
             }
         } else if ($user->role == 'Guardian' || $user->role == 'MaRe') {
             ResponsibleOfStudent::where('user_id', $user->id)->delete();
             while (isset($request->$childName)) {
-                DB::insert('INSERT INTO jerd_responsible_of_students(student_id, user_id) VALUES(?, ?)', [$request->$childName, $user->id]);
+                $responsibleOfStudent = new ResponsibleOfStudent;
+
+                $responsibleOfStudent->student_id = $request->$childName;
+                $responsibleOfStudent->user_id = $user->id;
+
+                $responsibleOfStudent->save();
+
                 $i++;
                 $childName = 'child' . $i;
             }
@@ -220,6 +249,22 @@ class UsersController extends Controller
         User::destroy($id);
     }
 
+    public function loginCheck($user) {
+        if(!$user){
+            return redirect('/');
+        }
+
+        if (!Cookie::has('item')) {
+            if ($user->role === 'Teacher') {
+                $teacherKlass = TeacherKlass::where('user_id', $user->id)->first();
+                Cookie::queue('item', $teacherKlass->klass_id, 60 * 24 * 7);
+            } else if ($user->role === 'Guardian' || $user->role === 'MaRe') {
+                $responsibleOfStudent = ResponsibleOfStudent::where('user_id', $user->id)->first();
+                Cookie::queue('item', $responsibleOfStudent->student_id, 60 * 24 * 7);
+            }
+        }
+    }
+
     /**
      * Display the overview of the user.
      *
@@ -230,19 +275,106 @@ class UsersController extends Controller
     {
         $user = session()->get('loggedUser');
 
+        $this->loginCheck($user);
+
+        $item = Cookie::get('item');
+
+        // MaRe Queries
+
         if ($user->role === 'Teacher') {
+            $students = [];
+            $rows = Student::where('klass_id', $item)->get();
 
-            return view('users.teacher.overview',['user'=> $user]);
+            foreach ($rows as $row) {
+                $students[] = $row->id;
+            }
+            // Teacher Queries
+            $homeworks[] = Notification::where('user_id', $user->id)
+                ->where('type', 'Homework')
+                ->where('date', (new DateTime())->format('Y-m-d'))
+                ->where('klass_id', $item)
+                ->get();
+            $homeworks[] = Notification::where('user_id', $user->id)
+                ->where('type', 'Homework')
+                ->where('date', (new DateTime())->format('Y-m-d'))
+                ->whereIn('student_id', $students)
+                ->get();
+
+            $notes = Notification::where('type', 'Note')
+                ->whereIn('student_id', $students)
+                ->orderBy('created_at', 'desc')
+                ->limit(5)
+                ->get();
+
+            $absences = Notification::where('type', 'Absence')
+                ->whereIn('student_id', $students)
+                ->where('date', (new DateTime())->format('Y-m-d'))
+                ->get();
+
+            return view('users.teacher.overview', ['user' => $user, 'klassId' => $item, 'homeworkArray' => $homeworks, 'notes' => $notes, 'absences' => $absences]);
+        } else if ($user->role === 'Guardian') {
+            // Guardian Queries
+            $student = Student::find($item);
+
+            $homeworks[] = Notification::where('type', 'Homework')
+                ->where('date', (new DateTime('tomorrow'))->format('Y-m-d'))
+                ->where('klass_id', $student->klass_id)
+                ->get();
+            $homeworks[] = Notification::where('type', 'Homework')
+                ->where('date', (new DateTime('tomorrow'))->format('Y-m-d'))
+                ->where('student_id', $item)
+                ->get();
+
+            $notes[] = Notification::where('type', 'Note')
+                ->where('student_id', $item)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+            $notes[] = Notification::where('type', 'Note')
+                ->where('klass_id', $student->klass_id)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+
+            $absences = Notification::where('type', 'Absence')
+                ->where('student_id', $item)
+                ->orderBy('date', 'desc')
+                ->limit(5)
+                ->get();
+
+            return view('users.guardian.overview', ['user' => $user, 'studentId' => $item, 'homeworkArray' => $homeworks, 'notesArray' => $notes, 'absences' => $absences]);
+        } else if ($user->role === 'MaRe') {
+            // MaRe Queries
+            $student = Student::find($item);
+
+            $homeworks[] = Notification::where('type', 'Homework')
+                ->where('date', (new DateTime('tomorrow'))->format('Y-m-d'))
+                ->where('klass_id', $student->klass_id)
+                ->get();
+            $homeworks[] = Notification::where('type', 'Homework')
+                ->where('date', (new DateTime('tomorrow'))->format('Y-m-d'))
+                ->where('student_id', $item)
+                ->get();
+
+            $notes[] = Notification::where('type', 'Note')
+                ->where('student_id', $item)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+            $notes[] = Notification::where('type', 'Note')
+                ->where('klass_id', $student->klass_id)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+
+            $absences = Notification::where('type', 'Absence')
+                ->where('student_id', $item)
+                ->orderBy('date', 'desc')
+                ->limit(5)
+                ->get();
+
+            return view('users.mare.overview', ['user' => $user, 'studentId' => $item, 'homeworkArray' => $homeworks, 'notesArray' => $notes, 'absences' => $absences]);
         }
-        if ($user->role === 'Guardian') {
-
-            return view('users.guardian.overview',['user'=> $user]);
-        }
-        if ($user->role === 'MaRe') {
-
-            return view('users.mare.overview',['user'=> $user]);
-        }
-
     }
 
     /**
@@ -260,6 +392,8 @@ class UsersController extends Controller
         */
         $user = session()->get('loggedUser');
 
+        $this->loginCheck($user);
+
         if($date == null){
 
 
@@ -275,84 +409,51 @@ class UsersController extends Controller
                 return view('users.mare.homework',['user'=> $user]);
             }
         }else{
-            function getVariables(){
+
+            if($user->role=='Teacher'){
                 $user = session()->get('loggedUser');
 
-                    $klassesThisUser =[];
-                    $studentsThisUser=[];
-
-                    /*
-                    for the teacher: get the klass and then all the ids of students in this klass
-                    */
-                    if($user->role=='Teacher'){
-
-                        foreach ($user->klasses as $klass) {
-                        $klassesThisUser[] = $klass->id;
-
+                $homeworkArray[] = Notification::where('user_id',$user->id)
+                    ->where('date',$date)
+                    ->where(function ($query) {
+                    $user = session()->get('loggedUser');
+                    $item = Cookie::get('item');
+                    foreach ($user->klasses as $klass) {
+                        if ($klass->id == $item) {
+                            $query->orWhere('klass_id',$item);
                             foreach ($klass->students as $student) {
-                                $studentsThisUser[]= $student->id;
-
+                                $query->orWhere('student_id', $student->id);
+                                }
                             }
                         }
-                    }else{
+                    })
+                    ->get();
 
-                        /*
-                        for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
-                        */
-                        foreach ($user->students as $student) {
-                            $studentsThisUser[] = $student->id;
-                            $klassesThisUser[]= $student->klass_id;
-                            }
+                $allHomework =[];
+                foreach ($homeworkArray as $homeworks) {
+                    foreach ($homeworks as $homework) {
+                        $allHomework[] = $homework;
                     }
-
-                return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
-            }
-
-
-                /*
-                get a the homework related to students,  to klass of student(MaRe and Guardian) or
-                klass related to User(teacher) and all students in said klass
-                and all homewrok written by the user(teacher) itself
-                and for the date
-                if is used to add:
-                    ->where('user_id', $user->id) to show submitted homework by this user
-                    this user does not needs to know homework from other users
-
-                ordered by Creation date, to show newest first.
-                */
-
-
-                if($user->role=='Teacher'){
-
-                    $homework = DB::table('jerd_notifications')
-                        ->where('type', 'Homework')
-                        ->where('user_id', $user->id)
-                        ->where('date', $date)
-                        ->where(function ($query) {
-                            $variables = getVariables();
-
-                            // orWhere because the notifiaction has a student or klass id
-                            $query->where('klass_id', $variables['klassesThisUser'])
-                                ->orWhere('student_id', $variables['studentsThisUser']);
-                        })
-                        ->orderBy('created_at', 'desc')
-                        ->get();
-                }else{
-                    $homework = DB::table('jerd_notifications')
-                        ->where('type', 'Homework')
-                        ->where('date', $date)
-                        ->where(function ($query) {
-                            $variables = getVariables();
-
-                            // orWhere because the notifiaction has a student or klass id
-                            $query->where('klass_id', $variables['klassesThisUser'])
-                                ->orWhere('student_id', $variables['studentsThisUser']);
-                        })
-                        ->orderBy('created_at', 'desc')
-                        ->get();
                 }
 
-                return $homework;
+                return $allHomework;
+
+            }else{
+                $homeworkArray = Notification::where('date',$date)
+                    ->where(function ($query) {
+                        $item = Cookie::get('item');
+                        $student = Student::find(1);
+                        $query->where('klass_id',$student->klass_id)
+                            ->orWhere('student_id', 1);
+
+                    })
+                    ->get();
+
+
+
+                return $homeworkArray;
+            }
+
 
 
         }
@@ -367,6 +468,8 @@ class UsersController extends Controller
     public function messages($id = null)
     {
         $user = session()->get('loggedUser');
+
+        $this->loginCheck($user);
 
         if ($id == null) {
 
@@ -384,26 +487,7 @@ class UsersController extends Controller
 
             return redirect('/');
         } else {
-            /*
-            get a the messages related to students,  to klass of student(MaRe and Guardian) or
-            klass related to User(teacher) and all students in said klass
-            and all messages written by the user itself
-            ordered by Creation date, to show newest first.
-            */
-            $messages = DB::table('jerd_notifications')
-                ->where('type', 'Note')
-                ->where(function ($query) {
-                    $variables = getVariables();
-                    $user = session()->get('loggedUser');
-                    // orWhere because the notifiaction has a student or klass id
-                    $query->where('klass_id', $variables['klassesThisUser'])
-                        ->orWhere('student_id', $variables['studentsThisUser'])
-                        ->orWhere('user_id', $user->id);
-                })
-                ->orderBy('created_at', 'desc')
-                ->get();
 
-            return $messages;
         }
     }
 
@@ -549,30 +633,7 @@ class UsersController extends Controller
     it shows the error page in stead of staying in the same page
     typo in the Model:(*/
 
-    public function test(){
-
-        /*lets assume we get the id of a class which is 1 for this example */
-
-
-
-        $homework[] = DB::table('jerd_notifications')
-                    ->where('type', 'Homework')
-                    ->where('klass_id', 1)
-                    ->get();
-
-        $homework[] = DB::table('jerd_notifications')
-                        ->where(function ($query) {
-                            $user = session()->get('loggedUser');
-                            foreach ($user->klasses as $klass) {
-                                if ($klass->id == 1/* this value will be provide by the url */) {
-                                    foreach ($klass->students as $student) {
-                                        $query->orWhere('student_id', $student->id);
-                                    }
-                                }
-                            }
-                            })
-                        ->get();
-
-        return $homework;
+    public function test($id){
+        Cookie::queue('item', $id, 60 * 24 * 7);
     }
 }

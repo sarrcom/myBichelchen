@@ -68,4 +68,4 @@ Route::post('/user/homework', 'UsersController@submitHomework');
 Route::get('/user/messages/{id?}', 'UsersController@messages');
 Route::post('/user/messages', 'UsersController@sendMessages');
 
-//Route::get('/test', 'UsersController@test');
+Route::get('/test/{id}', 'UsersController@test');

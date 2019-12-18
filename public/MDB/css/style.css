@@ -114,13 +114,6 @@ footer.page-footer {
     display: flex;
     justify-content: space-evenly;
 }
-#cardWidth {
-    width: 30em;
-    height: 20em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 .md-form .form-control.input-md {
     display: block;
     width: 100%;
@@ -189,17 +182,28 @@ border-radius: 10px;
 -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
 background-color: #82B1FF; }
 
+/* Messages Inbox resizer */
 .card.chat-room .members-panel-1 {
-    height: 734px;
+    resize: vertical;
+    max-height: 45.9rem;
+    min-height: 10rem;
 }
-
 .error {
+    text-align: center;
     color: red;
 }
 .success {
+    text-align: center;
     color: #00C851;
 }
 
-.card-body .header .homeworkCalendarList {
-    height: 200px;
+.short-description {
+    width: 20ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.badge {
+    color: rgba(0,0,0,.5) !important;
 }
