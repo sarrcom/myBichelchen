@@ -32,7 +32,7 @@
             </div>
 
             <!-- Card content -->
-            <div class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade">
 
                 <!-- Text -->
                 @foreach($homeworkArray as $homeworks)
@@ -69,7 +69,7 @@
         </div>
 
             <!-- Card content -->
-            <div class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade">
 
                 <!-- Text -->
                 @foreach($notesArray as $notes)
@@ -108,7 +108,7 @@
         </div>
 
         <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
+        <div class="card-body card-body-cascade">
 
                 <!-- Text -->
                 @foreach($absences as $absence)
