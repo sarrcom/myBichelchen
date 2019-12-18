@@ -1,5 +1,5 @@
 @extends('templates.main')
-@section('title', 'Overview')
+@section('title', 'Teacher | Overview')
 
 <header id="secondaryHeader">
 @section('navbar')
@@ -14,106 +14,113 @@
     <br><br><br>
 </div>
 
-<!-- Notifications -->
-<div id="overview" class="container">
-    <!-- Homework Card -->
-    <div class="row mx-1">
-        <div class="col-4">
-            <div class="card card-cascade narrower">
-                <!-- Card image -->
-                <div class="view view-cascade gradient-card-header purple-gradient">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4">
 
-                    <!-- Title -->
-                    <a href="/user/homework" class="white-text">
-                        <h2 class="card-header-title mb-3">Homework</h2>
-                    </a>
-                    <!-- Subtitle -->
-                    <p class="card-header-subtitle mb-0">Today's Homework</p>
-                </div>
+            <!--Card-->
+            <div class="card card-cascade narrower mb-4" style="margin-top: 28px;">
 
-                <!-- Card content -->
-                <div id="cardWidth" class="card-body card-body-cascade text-center">
+           <!-- Card image -->
+           <div class="view view-cascade gradient-card-header purple-gradient">
+
+                <!-- Title -->
+                <a href="/user/homework" class="white-text">
+                    <h2 class="card-header-title mb-2">Homework</h2>
+                </a>
+
+            </div>
+
+            <!--Card content-->
+            <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
                     <!-- Text -->
-                    <p class="card-text">Today's Homework Logic goes here</p>
                     @foreach($homeworkArray as $homeworks)
                         @foreach($homeworks as $homework)
-                            <p><strong>{{ $homework->subject }}:</strong> {{ $homework->description }}</p>
+                            <p><strong>{{ $homework->subject }}</strong></p>
+                            <p class="short-description">{{ $homework->description }}</p>
+                            <hr>
                         @endforeach
                     @endforeach
-                    <!-- Link -->
-                    <a href="/user/homework" class="purple-text d-flex flex-row-reverse p-2">
-                        <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
-                    </a>
-                </div>
 
+                <!-- Link -->
+                <a href="/user/homework" class="purple-text d-flex flex-row-reverse p-2">
+                    <p class="waves-effect waves-light">Go to Homework<i class="fas fa-angle-double-right ml-2"></i></p>
+                </a>
             </div>
+            <!--/.Card content-->
+
         </div>
-        <!-- /Card -->
+        <!--/.Card-->
 
-        <!-- Notes Card -->
-        <div class="col-4">
-            <div class="card card-cascade narrower">
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
 
-                <!-- Card image -->
-                <div class="view view-cascade gradient-card-header peach-gradient">
+        <!--Card-->
+        <div class="card card-cascade narrower mb-4" style="margin-top: 28px">
 
-                    <!-- Title -->
-                    <a href="/user/messages" class="white-text">
-                        <h2 class="card-header-title mb-3">Notes</h2>
-                    </a>
-                    <!-- Subtitle -->
-                    <p class="card-header-subtitle mb-0">Today's Notes</p>
-                </div>
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header peach-gradient">
 
-                <!-- Card content -->
-                <div id="cardWidth" class="card-body card-body-cascade text-center">
+            <!-- Title -->
+            <a href="/user/messages" class="white-text">
+                <h2 class="card-header-title mb-2">Notes</h2>
+            </a>
 
-                    <!-- Text -->
-                    <p class="card-text">Today's Notes Logic goes here</p>
-                    @foreach($notes as $note)
-                        <p><strong>{{ $note->subject }}:</strong> {{ $note->description }} <em>{{ $note->created_at }}</em></p>
-                    @endforeach
-                    <!-- Link -->
-                    <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
-                        <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
-                    </a>
-                </div>
-
-            </div>
         </div>
-        <!-- /Card -->
 
-        <!-- Absences Card -->
-        <div class="col-4">
-            <div class="card card-cascade narrower">
+        <!--Card content-->
+        <div class="card-body card-body-cascade" style="overflow-y: scroll; height:30rem;">
 
-                <!-- Card image -->
-                <div class="view view-cascade gradient-card-header aqua-gradient">
+            <!-- Text -->
+            @foreach($notes as $note)
+                <p><strong>{{ $note->subject }}</strong></p>
+                <p class="short-description">{{ $note->description }}</p>
+                <p class="badge"><em>{{ $note->created_at }}</em></p>
+                <hr>
+            @endforeach
 
-                    <!-- Title -->
-                    <a href="#!" class="white-text">
-                        <h2 class="card-header-title mb-3">Absences</h2>
-                    </a>
-                    <!-- Subtitle -->
-                    <p class="card-header-subtitle mb-0">Today's Absences</p>
-                </div>
+            <!-- Link -->
+            <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
+                <p class="waves-effect waves-light">Go to Notes<i class="fas fa-angle-double-right ml-2"></i></p>
+            </a>
+        </div>
+        <!--/.Card content-->
 
-                <!-- Card content -->
-                <div id="cardWidth" class="card-body card-body-cascade text-center">
+        </div>
+        <!--/.Card-->
 
-                    <!-- Text -->
-                    <p class="card-text">Today's Absences Logic goes here</p>
-                    @foreach($absences as $absence)
-                        <p><strong>{{ $absence->subject }}:</strong> {{ $absence->description }} <em>{{ $absence->created_at }}</em></p>
-                    @endforeach
-                    <!-- Link -->
-                    <a href="#!" class="blue-text d-flex flex-row-reverse p-2">
-                        <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
-                    </a>
-                </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
 
-            </div>
+        <!--Card-->
+        <div class="card card-cascade narrower mb-4" style="margin-top: 28px">
+
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header aqua-gradient">
+
+            <!-- Title -->
+            <a href="#!" class="white-text">
+                <h2 class="card-header-title mb-2">Absences</h2>
+            </a>
+
+        </div>
+
+        <!--Card content-->
+        <div class="card-body card-body-cascade" style="overflow-y: scroll; height:30rem;">
+
+            <!-- Text -->
+            @foreach($absences as $absence)
+                <p><strong>{{ $absence->subject }}</strong></p>
+                <p class="short-description">{{ $absence->description }}</p>
+                <hr>
+            @endforeach
+
+            <!-- Link -->
+            <a href="#!" class="blue-text d-flex flex-row-reverse p-2">
+                <p class="waves-effect waves-light">Go to Absences<i class="fas fa-angle-double-right ml-2"></i></p>
+            </a>
+
         </div>
         <!-- /Card -->
     </div>

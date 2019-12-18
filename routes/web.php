@@ -71,3 +71,5 @@ Route::post('/user/messages', 'UsersController@sendMessages');
 
 Route::get('/user/absences/{id?}', 'UsersController@absences');
 Route::post('/user/absences', 'UsersController@sendAbsences');
+
+Route::get('/test/{id}', 'UsersController@test');

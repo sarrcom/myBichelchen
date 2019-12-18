@@ -197,3 +197,13 @@ background-color: #82B1FF; }
     color: #00C851;
 }
 
+.short-description {
+    width: 20ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.badge {
+    color: rgba(0,0,0,.5) !important;
+}

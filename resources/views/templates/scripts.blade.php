@@ -12,3 +12,25 @@
 <script>
     new WOW().init();
 </script>
+<script>
+    let myId;
+    @if($userLogged = session()->get('loggedUser'))
+        $(function(){
+            $('.dropdown-item').click(function(e){
+                myId = $(this).prop('id').substr(1);
+                e.preventDefault();
+                $.ajax({
+                    url: '/test/' + myId,
+                    type: 'get',
+                    success: function(result){
+                        console.log("success");
+                        window.location.reload();
+                    },
+                    error: function(err){
+                        console.log("error");
+                    }
+                });
+            });
+        });
+    @endif
+</script>

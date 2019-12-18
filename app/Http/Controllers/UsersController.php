@@ -691,7 +691,14 @@ class UsersController extends Controller
         }
 
         return 'Wrong Username or Password';
+    }
+    /*for debugging the homework query we may need it later so dont delete this
 
+    it shows the error page in stead of staying in the same page
+    typo in the Model:(*/
+
+    public function test($id){
+        Cookie::queue('item', $id, 60 * 24 * 7);
     }
 
 }
