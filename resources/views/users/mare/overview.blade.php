@@ -31,19 +31,16 @@
 
             </div>
 
-            <!--Card content-->
-            <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
+            <!-- Card content -->
+            <div class="card-body card-body-cascade text-center">
 
                 <!-- Text -->
-                <p class="card-text">
-                    @foreach($homeworkArray as $homeworks)
-                        @foreach($homeworks as $homework)
-                            <p><strong>{{ $homework->subject }}</strong></p>
-                            <p class="short-description">{{ $homework->description }}</p>
-                            <hr>
-                        @endforeach
+                @foreach($homeworkArray as $homeworks)
+                    @foreach($homeworks as $homework)
+                        <p><strong>{{ $homework->subject }}</strong></p>
+                        <p class="short-description">{{ $homework->description }}</p>
+                        <hr>
                     @endforeach
-                </p>
                 <!-- Link -->
                 <a href="/user/homework" class="orange-text d-flex flex-row-reverse p-2">
                     <p class="waves-effect waves-light">Go to Homework<i class="fas fa-angle-double-right ml-2"></i></p>
@@ -68,22 +65,17 @@
                 <h2 class="card-header-title mb-2">Notes</h2>
             </a>
 
-        </div>
-
-        <!--Card content-->
-        <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
+            <!-- Card content -->
+            <div class="card-body card-body-cascade text-center">
 
                 <!-- Text -->
-                <p class="card-text">
-                    @foreach($notesArray as $notes)
-                        @foreach($notes as $note)
-                            <p><strong>{{ $note->subject }}</strong></p>
-                            <p class="short-description">{{ $note->description }}</p>
-                            <p class="badge"><em>{{ $note->created_at }}</em></p>
-                            <hr>
-                        @endforeach
+                @foreach($notesArray as $notes)
+                    @foreach($notes as $note)
+                        <p><strong>{{ $note->subject }}</strong></p>
+                        <p class="short-description">{{ $note->description }}</p>
+                        <p class="badge"><em>{{ $note->created_at }}</em></p>
+                        <hr>
                     @endforeach
-                </p>
 
             <!-- Link -->
             <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
@@ -109,20 +101,16 @@
                 <h2 class="card-header-title mb-2">Absences</h2>
             </a>
 
-        </div>
+            <!-- Card content -->
+            <div class="card-body card-body-cascade text-center">
 
-        <!--Card content-->
-        <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
-
-            <!-- Text -->
-            <p class="card-text">
+                <!-- Text -->
                 @foreach($absences as $absence)
                     <p><strong>{{ $absence->subject }}</strong></p>
                     <p class="short-description">{{ $absence->description }}</p>
                     <hr>
                 @endforeach
-            </p>
-
+            
             <!-- Link -->
             <a href="#!" class="orange-text d-flex flex-row-reverse p-2">
                 <p class="waves-effect waves-light">Go to Absences<i class="fas fa-angle-double-right ml-2"></i></p>
