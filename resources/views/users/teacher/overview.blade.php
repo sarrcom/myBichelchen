@@ -112,7 +112,7 @@
 
         <!--Card content-->
         <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
-        
+
             <!-- Text -->
             <p class="card-text">
                 @foreach($absences as $absence)
