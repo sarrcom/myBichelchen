@@ -55,7 +55,7 @@
                 <div class="md-form pb-3">
                     <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
                     <label for="Form-pass1">{{ __('landing-page.your_password') }}</label>
-                    <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">{{ __('landing-page.forgot_password') }}</a></p>
+                    <!-- <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">{{ __('landing-page.forgot_password') }}</a></p> -->
                 </div>
 
                 <div class="text-center mb-3">
