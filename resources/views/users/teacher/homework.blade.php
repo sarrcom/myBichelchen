@@ -93,11 +93,9 @@
 <script>
     let page = 0
 
-    changeRecipient();
     showTables();
     $('#previous').click(previous);
     $('#next').click(next);
-    $('#customSwitches').click(changeRecipient);
 
     //show the date of the tables from today and the next 5 schooldays;
     //by clicking the buttomn and changing the page variable you can scroll 5 schooldays back/forward
@@ -161,25 +159,14 @@
     }
 
     //function to change the selector of recipient of homework
-    function changeRecipient(){
-        $(recipient).empty();
-
-
-        if ($('#customSwitches').is(":checked")) {
-            @foreach($user->klasses as $klass)
-                $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
+    @foreach ($user->klasses as $klass)
+        @if($klass->id == $item)
+            $(recipient).append(new Option(" {{$klass->name}}", 0));
+            @foreach ($klass->students as $student)
+                $(recipient).append(new Option(" {{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
             @endforeach
-        }else{
-            @foreach ($user->klasses as $klass)
-                $(recipient).append(new Option("--{{$klass->name}}--", "seperator"));
-
-                @foreach ($klass->students as $student)
-                    $(recipient).append(new Option(" {{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
-                @endforeach
-            @endforeach
-        }
-
-    }
+        @endif
+    @endforeach
 
     function fillListOfHomeWork(result, date){
         let listItem;
@@ -206,13 +193,9 @@
                     if (result === 'submitted'){
                         $('#status').html('Homework submitted');
                         showTables();
-                        $('#recipient').val('');
                         $('#exampleFormControlTextarea2').val('');
                         $('#subject').val('');
                         $('#dueDate').val('');
-
-                    }else {
-                        $('#status').html('Recipient cannot be '+ result);
                     }
 
 

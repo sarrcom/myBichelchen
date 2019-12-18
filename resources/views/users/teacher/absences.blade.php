@@ -26,8 +26,6 @@
                         <!-- All Messages -->
                         <ul id="allMessages" class="list-unstyled friend-list">
                             <!-- Inbox Box active grey -->
-                          
-
                             <!-- /Inbox Box -->
                         </ul>
                         <!-- /All Messages -->

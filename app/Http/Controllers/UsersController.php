@@ -397,13 +397,13 @@ class UsersController extends Controller
 
             if ($user->role=='Teacher') {
 
-                return view('users.teacher.homework',['user'=> $user]);
+                return view('users.teacher.homework',['user'=> $user,'item'=>Cookie::get('item')]);
             }
             if ($user->role=='Guardian') {
-                return view('users.guardian.homework',['user'=> $user]);
+                return view('users.guardian.homework',['user'=> $user,'item'=>Cookie::get('item')]);
             }
             if ($user->role=='MaRe') {
-                return view('users.mare.homework',['user'=> $user]);
+                return view('users.mare.homework',['user'=> $user,'item'=>Cookie::get('item')]);
             }
         }else{
 
@@ -468,11 +468,12 @@ class UsersController extends Controller
         $homework->type = 'Homework';
 
         if ($user->role == 'Teacher') {
-            $homework->klass_id = Cookie::get('item');
-        }else if($user->role == 'MaRe'||$user->role == 'Guardan'){
-            $homework->student_id = Cookie::get('item');
+            if ($request->recipient ==0) {
+                $homework->klass_id = Cookie::get('item');
+            }else{
+                $homework->student_id = $request->recipient;
+            }
         }
-
         $homework->user_id = $user->id;
         $homework->date = $request->dueDate;
 
@@ -497,13 +498,13 @@ class UsersController extends Controller
         if ($id == null) {
 
             if ($user->role=='Teacher') {
-                return view('users.teacher.messages',['user'=> $user]);
+                return view('users.teacher.messages',['user'=> $user, 'item'=>Cookie::get('item')]);
             }
             if ($user->role=='Guardian') {
-                return view('users.guardian.messages',['user'=> $user]);
+                return view('users.guardian.messages',['user'=> $user,'item'=>Cookie::get('item')]);
             }
             if ($user->role=='MaRe') {
-                return view('users.mare.messages',['user'=> $user]);
+                return view('users.mare.messages',['user'=> $user,'item'=>Cookie::get('item')]);
             }
 
             session()->flush();
@@ -570,7 +571,11 @@ class UsersController extends Controller
         $message->subject = trim($request->subject);
         $message->type = 'Note';
         if ($user->role == 'Teacher') {
-            $message->klass_id = Cookie::get('item');
+            if ($request->recipient ==0) {
+                $message->klass_id = Cookie::get('item');
+            }else{
+                $message->student_id = $request->recipient;
+            }
         }else if($user->role == 'MaRe'||$user->role == 'Guardan'){
             $message->student_id = Cookie::get('item');
         }

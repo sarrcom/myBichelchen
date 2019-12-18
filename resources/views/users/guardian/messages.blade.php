@@ -171,28 +171,6 @@
 @section('extra-scripts')
 <script>
 
-    changeRecipient();
-    $('#customSwitches').click(changeRecipient);
-    //function to change the selector  of recipient of homework
-    function changeRecipient(){
-        $(recipient).empty();
-
-        if ($('#customSwitches').is(":checked")) {
-            @foreach($user->klasses as $klass)
-            $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
-            @endforeach
-        }else{
-            @foreach ($user->klasses as $klass)
-                $(recipient).append(new Option("--{{$klass->name}}--", "seperator"));
-
-                @foreach ($klass->students as $student)
-                $(recipient).append(new Option(" {{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
-                @endforeach
-            @endforeach
-            }
-
-    }
-
     requestMessages();
 
 
