@@ -7,7 +7,6 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 use App\User;
 use App\Student;
 use App\Klass;
@@ -396,24 +395,22 @@ class UsersController extends Controller
 
         if($date == null){
 
-
-
             if ($user->role=='Teacher') {
 
-                return view('users.teacher.homework',['user'=> $user]);
+                return view('users.teacher.homework',['user'=> $user,'item'=>Cookie::get('item')]);
             }
             if ($user->role=='Guardian') {
-                return view('users.guardian.homework',['user'=> $user]);
+                return view('users.guardian.homework',['user'=> $user,'item'=>Cookie::get('item')]);
             }
             if ($user->role=='MaRe') {
-                return view('users.mare.homework',['user'=> $user]);
+                return view('users.mare.homework',['user'=> $user,'item'=>Cookie::get('item')]);
             }
         }else{
 
             if($user->role=='Teacher'){
                 $user = session()->get('loggedUser');
 
-                $homeworkArray[] = Notification::where('user_id',$user->id)
+                $homeworkArray = Notification::where('user_id',$user->id)
                     ->where('date',$date)
                     ->where(function ($query) {
                     $user = session()->get('loggedUser');
@@ -429,34 +426,61 @@ class UsersController extends Controller
                     })
                     ->get();
 
-                $allHomework =[];
-                foreach ($homeworkArray as $homeworks) {
-                    foreach ($homeworks as $homework) {
-                        $allHomework[] = $homework;
-                    }
-                }
-
-                return $allHomework;
+                return $homeworkArray;
 
             }else{
                 $homeworkArray = Notification::where('date',$date)
                     ->where(function ($query) {
                         $item = Cookie::get('item');
-                        $student = Student::find(1);
+                        $student = Student::find($item);
                         $query->where('klass_id',$student->klass_id)
-                            ->orWhere('student_id', 1);
-
+                            ->orWhere('student_id', $item);
+                        
                     })
                     ->get();
 
-
-
                 return $homeworkArray;
             }
-
-
-
         }
+    }
+
+    public function submitHomework(Request $request){
+
+
+        if (!is_numeric($request->recipient)) {
+            return $request->recipient;
+        }
+        // get the current user to provide id
+        $user = session()->get('loggedUser');
+
+        //we check for subject and description, because the other fields are filled in by default
+        /*$validation = $request->validate([
+            'subject' => 'required|min:4|max:255',
+            'description' => 'required|min:2|max:255',
+            'dueDate' => 'after:today'
+
+        ]);*/
+
+        $homework = new Notification();
+
+        $homework->description = trim($request->description);
+        $homework->subject = trim($request->subject);
+        $homework->type = 'Homework';
+
+        if ($user->role == 'Teacher') {
+            if ($request->recipient ==0) {
+                $homework->klass_id = Cookie::get('item');
+            }else{
+                $homework->student_id = $request->recipient;
+            }
+        }
+        $homework->user_id = $user->id;
+        $homework->date = $request->dueDate;
+
+
+        $homework->save();
+
+        return 'submitted';
     }
 
     /**
@@ -474,13 +498,13 @@ class UsersController extends Controller
         if ($id == null) {
 
             if ($user->role=='Teacher') {
-                return view('users.teacher.messages',['user'=> $user]);
+                return view('users.teacher.messages',['user'=> $user, 'item'=>Cookie::get('item')]);
             }
             if ($user->role=='Guardian') {
-                return view('users.guardian.messages',['user'=> $user]);
+                return view('users.guardian.messages',['user'=> $user,'item'=>Cookie::get('item')]);
             }
             if ($user->role=='MaRe') {
-                return view('users.mare.messages',['user'=> $user]);
+                return view('users.mare.messages',['user'=> $user,'item'=>Cookie::get('item')]);
             }
 
             session()->flush();
@@ -488,101 +512,41 @@ class UsersController extends Controller
             return redirect('/');
         } else {
 
-        }
-    }
+            if($user->role=='Teacher'){
 
-    /*
-    function to get all the student and the klass_ids related to the user
-    */
-    function getVariables() {
-        $user = session()->get('loggedUser');
+                $messages = Notification::where('type','Note')
+                    ->where(function ($query) {
+                    $user = session()->get('loggedUser');
+                    $item = Cookie::get('item');
+                    $query->where('user_id', $user->id);
+                    foreach ($user->klasses as $klass) {
+                        if ($klass->id == $item) {
+                            $query->orWhere('klass_id',$item);
+                            foreach ($klass->students as $student) {
+                                $query->orWhere('student_id', $student->id);
+                                }
+                            }
+                        }  
+                    })
+                    ->get();
 
-        $klassesThisUser =[];
-        $studentsThisUser=[];
+                return $messages;
 
-        /*
-        for the teacher: get the klass and then all the ids of students in this klass
-        */
-        if($user->role=='Teacher'){
-            foreach ($user->klasses as $klass) {
-            $klassesThisUser[] = $klass->id;
+            }else{
+                $messages = Notification::where('type','Note')
+                        ->where(function ($query) {
+                        $item = Cookie::get('item');
+                        $student = Student::find($item);
+                        $query->where('klass_id',$student->klass_id)
+                            ->orWhere('student_id', $item);
+                        
+                    })
+                    ->get();
 
-                foreach ($klass->students as $student) {
-                    $studentsThisUser[]= $student->id;
-
-                }
-            }
-        }else{
-            /*
-            for MaRe and Guardian: get the id of the student and grab the th klass_id(foreign key)
-            */
-            foreach ($user->students as $student) {
-                $studentsThisUser[] = $student->id;
-                $klassesThisUser[]= $student->klass_id;
-                }
-        }
-
-        return [ 'klassesThisUser' => $klassesThisUser , 'studentsThisUser' => $studentsThisUser ];
-    }
-
-    public function login(Request $request)
-    {
-
-        $user = User::where('username', $request->loginFormUserName)->get();
-
-        if (count($user) != 0) {
-            //with hashed password
-            //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
-
-            if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
-                session()->flush();
-                session(['loggedUser' => $user[0]]);
-                return 'Login';
+                return $messages;
             }
         }
-
-        return 'Wrong Username or Password';
-
     }
-
-    public function submitHomework(Request $request){
-
-
-        if (!is_numeric($request->recipient)) {
-            return $request->recipient;
-        }
-        // get the current user to provide id
-        $user = session()->get('loggedUser');
-
-        //we check for subject and description, because the other fields are filled in by default
-        $validation = $request->validate([
-            'subject' => 'required|min:4|max:255',
-            'description' => 'required|min:2|max:255',
-            'dueDate' => 'after:today'
-
-        ]);
-
-        $homework = new Notification();
-
-        $homework->description = trim($request->description);
-        $homework->subject = trim($request->subject);
-        $homework->type = 'Homework';
-
-        if ($request->has('sendTo')) {
-            $homework->klass_id = $request->recipient;
-        }else if(!$request->has('sendTo')){
-            $homework->student_id = $request->recipient;
-        }
-
-        $homework->user_id = $user->id;
-        $homework->date = $request->dueDate;
-
-
-        $homework->save();
-
-        return 'submitted';
-    }
-
 
     public function sendMessages(Request $request){
 
@@ -606,16 +570,104 @@ class UsersController extends Controller
         $message->description = trim($request->description);
         $message->subject = trim($request->subject);
         $message->type = 'Note';
-        if ($request->has('sendTo')) {
-            $message->klass_id = $request->recipient;
-        }else if(!$request->has('sendTo')){
-            $message->student_id = $request->recipient;
+        if ($user->role == 'Teacher') {
+            if ($request->recipient ==0) {
+                $message->klass_id = Cookie::get('item');
+            }else{
+                $message->student_id = $request->recipient;
+            }
+        }else if($user->role == 'MaRe'||$user->role == 'Guardan'){
+            $message->student_id = Cookie::get('item');
         }
 
 
 
         $message->user_id = $user->id;
         $message->save();
+
+        return 'submitted';
+    }
+
+    public function absences($id=null)
+    {
+
+        /*
+        This contrroller sends the view if the argument is empty, if it provides a date it calls
+        a function to return data
+        */
+        $user = session()->get('loggedUser');
+
+        $this->loginCheck($user);
+
+
+
+        if($id == null){
+
+            if ($user->role=='Teacher') {
+
+                return view('users.teacher.absences',['user'=> $user,'item'=>Cookie::get('item')]);
+            }
+            if ($user->role=='Guardian') {
+                return view('users.guardian.absences',['user'=> $user,'item'=>Cookie::get('item')]);
+            }
+            if ($user->role=='MaRe') {
+                return view('users.mare.overview',['user'=> $user]);
+            }
+        }else{
+
+            if($user->role=='Guardian'){
+                $user = session()->get('loggedUser');
+                $item = Cookie::get('item');
+                $absences = Notification::where('student_id',$item)
+                                ->where('type','Absence')               
+                                ->get();
+
+                return $absences;
+
+            }else{
+                $absences = Notification::where('type','Absence') 
+                    ->where(function ($query) {
+                    $user = session()->get('loggedUser');
+                    $item = Cookie::get('item');
+                    foreach ($user->klasses as $klass) {
+                        if ($klass->id == $item) {
+                            foreach ($klass->students as $student) {
+                                $query->orWhere('student_id', $student->id);
+                                }
+                            }
+                        }  
+                    })
+                    ->get();
+                return $absences;
+            }
+        }
+    }
+
+    public function sendAbsences(Request $request){
+
+
+    
+        // get the current user to provide id
+        $user = session()->get('loggedUser');
+
+        //we check for subject and description, because the other fields are filled in by default
+        $validation = $request->validate([
+            'subject' => 'required|min:4|max:255',
+            'description' => 'required|min:2|max:255',
+            'dueDate' => 'after:today'
+
+        ]);
+
+        $absence = new Notification();
+
+        $absence->description = trim($request->description);
+        $absence->subject = trim($request->subject);
+        $absence->type = 'Absence';
+       
+        $absence->student_id = Cookie::get('item');
+        
+        $absence->user_id = $user->id;
+        $absence->save();
 
         return 'submitted';
     }
@@ -627,7 +679,24 @@ class UsersController extends Controller
                 return redirect('/');
     }
 
+    public function login(Request $request)
+    {
 
+        $user = User::where('username', $request->loginFormUserName)->get();
+
+        if (count($user) != 0) {
+            //with hashed password
+            //$passwordValid = password_verify($request->loginFormPassword,$user[0]->password);
+
+            if($request->loginFormPassword == $user[0]->password/*$passwordValid/*/){
+                session()->flush();
+                session(['loggedUser' => $user[0]]);
+                return 'Login';
+            }
+        }
+
+        return 'Wrong Username or Password';
+    }
     /*for debugging the homework query we may need it later so dont delete this
 
     it shows the error page in stead of staying in the same page
@@ -636,4 +705,5 @@ class UsersController extends Controller
     public function test($id){
         Cookie::queue('item', $id, 60 * 24 * 7);
     }
+
 }

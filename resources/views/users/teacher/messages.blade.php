@@ -137,15 +137,6 @@
 
                             <div class="chat-body white p-3 z-depth-1">
 
-                                <ng-container [formGroup]="testForm">
-
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
-                                        <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
-                                    </div>
-                                    <hr class="w-100">
-
-                                </ng-container>
 
                                 <label for="recipient">To the Parents of</label>
 
@@ -185,27 +176,14 @@
 @section('extra-scripts')
 <script>
 
-    changeRecipient();
-    $('#customSwitches').click(changeRecipient);
-    //function to change the selector  of recipient of homework
-    function changeRecipient(){
-        $(recipient).empty();
-
-        if ($('#customSwitches').is(":checked")) {
-            @foreach($user->klasses as $klass)
-            $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
-            @endforeach
-        }else{
-            @foreach ($user->klasses as $klass)
-                $(recipient).append(new Option("--{{$klass->name}}--", "seperator"));
-
-                @foreach ($klass->students as $student)
+    @foreach ($user->klasses as $klass)
+        @if($klass->id == $item)
+            $(recipient).append(new Option(" {{$klass->name}}", 0));
+            @foreach ($klass->students as $student)
                 $(recipient).append(new Option(" {{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
-                @endforeach
             @endforeach
-            }
-
-    }
+        @endif
+    @endforeach
 
     requestMessages();
 

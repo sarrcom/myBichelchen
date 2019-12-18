@@ -55,15 +55,6 @@
 
                                 <div class="chat-body white p-3 z-depth-1">
 
-                                    <ng-container [formGroup]="testForm">
-
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
-                                            <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
-                                        </div>
-                                        <hr class="w-100">
-
-                                    </ng-container>
 
                                     <label for="recipient">To the Parents of</label>
 
@@ -72,14 +63,14 @@
                                     </select><br>
 
                                     <label for="subject">Subject</label>
-                                    <input type="text" name="subject" required><br>
+                                    <input type="text" name="subject" id="subject" required><br>
 
                                     <div class="form-group basic-textarea">
                                         <textarea name="description" class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..." required></textarea>
                                     </div>
 
                                     <label for="dueDate">Due Date</label>
-                                    <input type="date" name="dueDate" required><br>
+                                    <input type="date" name="dueDate" id="dueDate" required><br>
 
                                 </div>
 
@@ -102,13 +93,9 @@
 <script>
     let page = 0
 
-    changeRecipient();
     showTables();
     $('#previous').click(previous);
     $('#next').click(next);
-    $('#customSwitches').click(changeRecipient);
-
-    $('#testerino').click(test);
 
     //show the date of the tables from today and the next 5 schooldays;
     //by clicking the buttomn and changing the page variable you can scroll 5 schooldays back/forward
@@ -172,25 +159,14 @@
     }
 
     //function to change the selector of recipient of homework
-    function changeRecipient(){
-        $(recipient).empty();
-
-
-        if ($('#customSwitches').is(":checked")) {
-            @foreach($user->klasses as $klass)
-                $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
+    @foreach ($user->klasses as $klass)
+        @if($klass->id == $item)
+            $(recipient).append(new Option(" {{$klass->name}}", 0));
+            @foreach ($klass->students as $student)
+                $(recipient).append(new Option(" {{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
             @endforeach
-        }else{
-            @foreach ($user->klasses as $klass)
-                $(recipient).append(new Option("--{{$klass->name}}--", "seperator"));
-
-                @foreach ($klass->students as $student)
-                    $(recipient).append(new Option(" {{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
-                @endforeach
-            @endforeach
-        }
-
-    }
+        @endif
+    @endforeach
 
     function fillListOfHomeWork(result, date){
         let listItem;
@@ -216,9 +192,10 @@
                     console.log(result);
                     if (result === 'submitted'){
                         $('#status').html('Homework submitted');
-                        showTables()
-                    }else {
-                        $('#status').html('Recipient cannot be '+ result);
+                        showTables();
+                        $('#exampleFormControlTextarea2').val('');
+                        $('#subject').val('');
+                        $('#dueDate').val('');
                     }
 
 
@@ -244,20 +221,6 @@ function requestHomework(date) {
         }
     });
 }
-
-function test() {
-    $.ajax({
-        url: '/test',
-        type: 'get',
-        success: function(result){
-
-        },
-        error: function(err){
-            console.log(err)
-        }
-    });
-}
-
 </script>
 @endsection
 

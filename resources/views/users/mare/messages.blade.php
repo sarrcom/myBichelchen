@@ -99,35 +99,10 @@
                             </p>
                         </div>
                         </li>
-                    <li class="d-flex justify-content-between mb-4">
-                    <div class="chat-body white p-3 z-depth-1">
-                        <div class="header">
-                            <strong class="primary-font">Lara Croft</strong>
-                            <small class="pull-right text-muted"><i class="far fa-clock"></i> 13 mins ago</small>
-                        </div>
-                            <hr class="w-100">
-                            <p class="mb-0">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium.
-                            </p>
-                    </div>
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" class="avatar rounded-circle mr-0 ml-3 z-depth-1">
-                    </li>
-                    <li class="d-flex justify-content-between mb-4 pb-3">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" class="avatar rounded-circle mr-2 ml-lg-3 ml-0 z-depth-1">
-                    <div class="chat-body white p-3 ml-2 z-depth-1">
-                        <div class="header">
-                            <strong class="primary-font">Brad Pitt</strong>
-                            <small class="pull-right text-muted"><i class="far fa-clock"></i> 12 mins ago</small>
-                        </div>
-                            <hr class="w-100">
-                            <p class="mb-0">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.
-                            </p>
-                        </div>
-                    </li>
-                </ul>
+                        <!-- /Chat Box -->
+                    </ul>
+                    <!-- Send Message -->
+
 
                 <div class="white">
                     <div class="form-group basic-textarea">
@@ -136,22 +111,6 @@
                             @method('POST')
 
                             <div class="chat-body white p-3 z-depth-1">
-
-                                <ng-container [formGroup]="testForm">
-
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitches" name="sendTo" formControlName="switchControl" value="class">
-                                        <label class="custom-control-label" for="customSwitches">Toggle to switch between Classes and Students</label>
-                                    </div>
-                                    <hr class="w-100">
-
-                                </ng-container>
-
-                                <label for="recipient">To the Parents of</label>
-
-                                {{-- options from script based on the radio: classes or students--}}
-                                <select name="recipient" id="recipient" required>
-                                </select><br>
 
                                 <label for="subject">Subject</label>
                                 <input type="text" name="subject" required><br>
@@ -185,30 +144,7 @@
 @section('extra-scripts')
 <script>
 
-    changeRecipient();
-    $('#customSwitches').click(changeRecipient);
-    //function to change the selector  of recipient of homework
-    function changeRecipient(){
-        $(recipient).empty();
-
-        if ($('#customSwitches').is(":checked")) {
-            @foreach($user->klasses as $klass)
-            $(recipient).append(new Option(" {{$klass->name}}", "{{$klass->id}}"));
-            @endforeach
-        }else{
-            @foreach ($user->klasses as $klass)
-                $(recipient).append(new Option("--{{$klass->name}}--", "seperator"));
-
-                @foreach ($klass->students as $student)
-                $(recipient).append(new Option(" {{$student->first_name}} {{$student->last_name}}", "{{$student->id}}"));
-                @endforeach
-            @endforeach
-            }
-
-    }
-
     requestMessages();
-
 
     $(function(){
         $('button[type="submit"]').click(function(e){
