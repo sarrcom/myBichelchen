@@ -22,7 +22,7 @@
             <div class="card card-cascade narrower mb-4" style="margin-top: 28px;">
 
            <!-- Card image -->
-           <div class="view view-cascade gradient-card-header purple-gradient">
+           <div class="view view-cascade gradient-card-header peach-gradient">
 
                 <!-- Title -->
                 <a href="/user/homework" class="white-text">
@@ -44,7 +44,7 @@
                     @endforeach
 
                 <!-- Link -->
-                <a href="/user/homework" class="purple-text d-flex flex-row-reverse p-2">
+                <a href="/user/homework" class="orange-text d-flex flex-row-reverse p-2">
                     <p class="waves-effect waves-light">Go to Homework<i class="fas fa-angle-double-right ml-2"></i></p>
                 </a>
             </div>
@@ -70,7 +70,7 @@
         </div>
 
         <!--Card content-->
-        <div class="card-body card-body-cascade" style="overflow-y: scroll; height:30rem;">
+        <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
             <!-- Text -->
             @foreach($notes as $note)
@@ -97,7 +97,7 @@
         <div class="card card-cascade narrower mb-4" style="margin-top: 28px">
 
         <!-- Card image -->
-        <div class="view view-cascade gradient-card-header aqua-gradient">
+        <div class="view view-cascade gradient-card-header peach-gradient">
 
             <!-- Title -->
             <a href="#!" class="white-text">
@@ -107,7 +107,7 @@
         </div>
 
         <!--Card content-->
-        <div class="card-body card-body-cascade" style="overflow-y: scroll; height:30rem;">
+        <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
             <!-- Text -->
             @foreach($absences as $absence)
@@ -117,7 +117,7 @@
             @endforeach
 
             <!-- Link -->
-            <a href="#!" class="blue-text d-flex flex-row-reverse p-2">
+            <a href="#!" class="orange-text d-flex flex-row-reverse p-2">
                 <p class="waves-effect waves-light">Go to Absences<i class="fas fa-angle-double-right ml-2"></i></p>
             </a>
 

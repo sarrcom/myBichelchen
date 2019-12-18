@@ -1,5 +1,5 @@
 @extends('templates.main')
-@section('title', 'Overview')
+@section('title', 'Guardian | Overview')
 
 <header id="secondaryHeader">
 @section('navbar')
@@ -14,21 +14,21 @@
     <br><br><br>
 </div>
 
-<!-- Notifications -->
-<div id="overview" class="container">
-    <!-- Homework Card -->
-    <div class="row mx-1">
-        <div class="card card-cascade narrower">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4">
 
-            <!-- Card image -->
-            <div class="view view-cascade gradient-card-header purple-gradient">
+            <!--Card-->
+            <div class="card card-cascade narrower mb-4" style="margin-top: 28px;">
+
+           <!-- Card image -->
+           <div class="view view-cascade gradient-card-header peach-gradient">
 
                 <!-- Title -->
                 <a href="/user/homework" class="white-text">
-                    <h2 class="card-header-title mb-3">Homework</h2>
+                    <h2 class="card-header-title mb-2">Homework</h2>
                 </a>
-                <!-- Subtitle -->
-                <p class="card-header-subtitle mb-0">Today's Homework</p>
+
             </div>
 
             <!-- Card content -->
@@ -43,29 +43,30 @@
                     @endforeach
                 @endforeach
                 <!-- Link -->
-                <a href="/user/homework" class="purple-text d-flex flex-row-reverse p-2">
-                    <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
+                <a href="/user/homework" class="orange-text d-flex flex-row-reverse p-2">
+                    <p class="waves-effect waves-light">Go to Homework<i class="fas fa-angle-double-right ml-2"></i></p>
                 </a>
             </div>
+            <!--/.Card content-->
 
         </div>
+        <!--/.Card-->
+
     </div>
-    <!-- /Card -->
+    <div class="col-lg-4 col-md-6 mb-4">
 
-    <!-- Notes Card -->
-    <div class="row mx-1">
-        <div class="card card-cascade narrower">
+        <!--Card-->
+        <div class="card card-cascade narrower mb-4" style="margin-top: 28px">
 
-            <!-- Card image -->
-            <div class="view view-cascade gradient-card-header peach-gradient">
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header peach-gradient">
 
-                <!-- Title -->
-                <a href="/user/messages" class="white-text">
-                    <h2 class="card-header-title mb-3">Notes</h2>
-                </a>
-                <!-- Subtitle -->
-                <p class="card-header-subtitle mb-0">Today's Notes</p>
-            </div>
+            <!-- Title -->
+            <a href="/user/messages" class="white-text">
+                <h2 class="card-header-title mb-2">Notes</h2>
+            </a>
+
+        </div>
 
             <!-- Card content -->
             <div class="card-body card-body-cascade text-center">
@@ -79,33 +80,36 @@
                         <hr>
                     @endforeach
                 @endforeach
-                <!-- Link -->
-                <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
-                    <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
-                </a>
-            </div>
+            </p>
+
+            <!-- Link -->
+            <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
+                <p class="waves-effect waves-light">Go to Notes<i class="fas fa-angle-double-right ml-2"></i></p>
+            </a>
+        </div>
+        <!--/.Card content-->
 
         </div>
+        <!--/.Card-->
+
     </div>
-    <!-- /Card -->
+    <div class="col-lg-4 col-md-6">
 
-    <!-- Absences Card -->
-    <div class="row mx-1">
-        <div class="card card-cascade narrower">
+        <!--Card-->
+        <div class="card card-cascade narrower mb-4" style="margin-top: 28px">
 
-            <!-- Card image -->
-            <div class="view view-cascade gradient-card-header aqua-gradient">
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header peach-gradient">
 
-                <!-- Title -->
-                <a href="#!" class="white-text">
-                    <h2 class="card-header-title mb-3">Absences</h2>
-                </a>
-                <!-- Subtitle -->
-                <p class="card-header-subtitle mb-0">Today's Absences</p>
-            </div>
+            <!-- Title -->
+            <a href="#!" class="white-text">
+                <h2 class="card-header-title mb-2">Absences</h2>
+            </a>
 
-            <!-- Card content -->
-            <div class="card-body card-body-cascade text-center">
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
 
                 <!-- Text -->
                 @foreach($absences as $absence)
@@ -113,22 +117,17 @@
                     <p class="short-description">{{ $absence->description }}</p>
                     <hr>
                 @endforeach
-                <!-- Link -->
-                <a href="#!" class="blue-text d-flex flex-row-reverse p-2">
-                    <h5 class="waves-effect waves-light">Read more<i class="fas fa-angle-double-right ml-2"></i></h5>
-                </a>
-            </div>
+            </p>
+
+            <!-- Link -->
+            <a href="#!" class="orange-text d-flex flex-row-reverse p-2">
+                <p class="waves-effect waves-light">Go to Absences<i class="fas fa-angle-double-right ml-2"></i></p>
+            </a>
 
         </div>
+        <!-- /Card -->
     </div>
-    <!-- /Card -->
-
 </div>
-<!-- /Notifications -->
-
-
-
-
 @endsection
 @section('footer')
 @include('templates.footer')
