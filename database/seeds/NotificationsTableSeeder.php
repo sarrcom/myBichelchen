@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class NotificationsTableSeeder extends Seeder
 {
@@ -14,23 +15,25 @@ class NotificationsTableSeeder extends Seeder
         // type is an enum('Homework', 'Absence', 'Note')
 
         DB::table('jerd_notifications')->insert([
-            'description' => 'Getting jiggy with it',
+            'description' => 'Tomorrow test German',
             'subject' => 'To All Students of Klass 1',
             'date' => '2019-12-17',
             'type'  => 'Homework',
             'klass_id' => 3,
             // 'student_id' => 21,
             'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('jerd_notifications')->insert([
-            'description' => 'Getting jiggy with it',
+            'description' => 'Friday bring toys',
             'subject' => 'To Student 1 of Klass 1',
             'date' => '2019-12-17',
             'type'  => 'Homework',
             'klass_id' => 4,
             // 'student_id' => 31,
             'user_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         DB::table('jerd_notifications')->insert([
@@ -41,6 +44,7 @@ class NotificationsTableSeeder extends Seeder
             // 'klass_id' => 3,
             'student_id' => '21',
             'user_id' => '5',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('jerd_notifications')->insert([
             'description' => 'she should drink more milk',
@@ -50,6 +54,7 @@ class NotificationsTableSeeder extends Seeder
             // 'klass_id' => 3,
             'student_id' => 31,
             'user_id' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }
 }
