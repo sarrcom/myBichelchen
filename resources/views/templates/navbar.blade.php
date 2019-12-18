@@ -135,8 +135,7 @@
                     </ul>
                     <!-- Drop down menu for MaRe -->
                     <div class="dropdown">
-                        <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-outline-white dropdown-toggle btn-rounded" type="button" id="dropdownMenu6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @foreach ($user->students as $student)
                                 @if ($student->id == Cookie::get('item'))
                                     {{ $student->first_name }} {{ $student->last_name }}
@@ -155,7 +154,7 @@
                 @else
                     <ul class="navbar-nav mr-auto">
                         <!-- http://www.supremeschoolsupply.com/school-slogan-ideas/ -->
-                    <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>
+                        <a class="navbar-brand" href="#"><strong>the future begins here</strong></a>
                     </ul>
                     <div>
                         <button class="btn btn-outline-white waves-effect waves-light btn-rounded" type="button" data-toggle="modal" aria-haspopup="true" data-target="#elegantModalForm">Sign In
