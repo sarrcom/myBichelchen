@@ -31,17 +31,18 @@
     <div class="modal-dialog" role="document">
         <!--Content-->
         <div class="modal-content form-elegant">
-        <!--Header-->
-        <div class="modal-header text-center">
-            <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>{{ __('landing-page.sign_in_2') }}</strong></h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <!--Body-->
-    <div id="errorMessage">
-    </div>
-        <div class="modal-body mx-4">
+            <!--Header-->
+            <div class="modal-header text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>{{ __('landing-page.sign_in_2') }}</strong></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div id="errorMessage">
+            </div>
+
+            <div class="modal-body mx-4">
             <!--Body-->
 
             <form  method="POST" id="loginForm">
@@ -62,9 +63,9 @@
                     <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">{{ __('landing-page.sign_in') }}</button>
                 </div>
             </form>
-
         </div>
-        </div>
+    </div>
+</div>
         <!--/.Content-->
     </div>
 </div>
