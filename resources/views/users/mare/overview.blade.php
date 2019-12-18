@@ -65,7 +65,7 @@
             <a href="/user/messages" class="white-text">
                 <h2 class="card-header-title mb-2">Notes</h2>
             </a>
-
+        </div>
             <!-- Card content -->
             <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
@@ -88,7 +88,6 @@
 
         </div>
         <!--/.Card-->
-
     </div>
     <div class="col-lg-4 col-md-6">
 
@@ -102,7 +101,7 @@
             <a href="#!" class="white-text">
                 <h2 class="card-header-title mb-2">Absences</h2>
             </a>
-
+        </div>
             <!-- Card content -->
             <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
@@ -118,8 +117,10 @@
                 <p class="waves-effect waves-light">Go to Absences<i class="fas fa-angle-double-right ml-2"></i></p>
             </a>
 
-        </div>
+            </div>
         <!-- /Card -->
+    </div>
+</div>
     </div>
 </div>
 @endsection
