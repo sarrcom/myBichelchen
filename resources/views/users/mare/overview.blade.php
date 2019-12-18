@@ -21,8 +21,8 @@
             <!--Card-->
             <div class="card card-cascade narrower mb-4" style="margin-top: 28px;">
 
-           <!-- Card image -->
-           <div class="view view-cascade gradient-card-header peach-gradient">
+            <!-- Card image -->
+            <div class="view view-cascade gradient-card-header peach-gradient">
 
                 <!-- Title -->
                 <a href="/user/homework" class="white-text">
@@ -32,7 +32,7 @@
             </div>
 
             <!-- Card content -->
-            <div class="card-body card-body-cascade">
+            <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
                 <!-- Text -->
                 @foreach($homeworkArray as $homeworks)
@@ -67,7 +67,7 @@
             </a>
 
             <!-- Card content -->
-            <div class="card-body card-body-cascade">
+            <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
                 <!-- Text -->
                 @foreach($notesArray as $notes)
@@ -104,7 +104,7 @@
             </a>
 
             <!-- Card content -->
-            <div class="card-body card-body-cascade">
+            <div class="card-body card-body-cascade scrollbar-light-blue" style="overflow-y: scroll; height:30rem;">
 
                 <!-- Text -->
                 @foreach($absences as $absence)
