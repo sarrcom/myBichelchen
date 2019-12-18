@@ -32,7 +32,7 @@
             </div>
 
             <!-- Card content -->
-            <div class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade">
 
                 <!-- Text -->
                 @foreach($homeworkArray as $homeworks)
@@ -41,6 +41,7 @@
                         <p class="short-description">{{ $homework->description }}</p>
                         <hr>
                     @endforeach
+                @endforeach
                 <!-- Link -->
                 <a href="/user/homework" class="orange-text d-flex flex-row-reverse p-2">
                     <p class="waves-effect waves-light">Go to Homework<i class="fas fa-angle-double-right ml-2"></i></p>
@@ -66,7 +67,7 @@
             </a>
 
             <!-- Card content -->
-            <div class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade">
 
                 <!-- Text -->
                 @foreach($notesArray as $notes)
@@ -76,6 +77,7 @@
                         <p class="badge"><em>{{ $note->created_at }}</em></p>
                         <hr>
                     @endforeach
+                @endforeach
 
             <!-- Link -->
             <a href="/user/messages" class="orange-text d-flex flex-row-reverse p-2">
@@ -102,7 +104,7 @@
             </a>
 
             <!-- Card content -->
-            <div class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade">
 
                 <!-- Text -->
                 @foreach($absences as $absence)
@@ -110,7 +112,7 @@
                     <p class="short-description">{{ $absence->description }}</p>
                     <hr>
                 @endforeach
-            
+
             <!-- Link -->
             <a href="#!" class="orange-text d-flex flex-row-reverse p-2">
                 <p class="waves-effect waves-light">Go to Absences<i class="fas fa-angle-double-right ml-2"></i></p>
