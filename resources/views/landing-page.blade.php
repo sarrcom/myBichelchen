@@ -2,73 +2,75 @@
 @section('title', 'myBichelchen')
 
 <header>
-@section('navbar')
-@include('templates.navbar')
-@endsection
-<div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
-    <div class="mask rgba-white-slight">
-        <div class="container h-100 d-flex justify-content-center align-items-center" style="height: 100%;">
-            <div class="row pt-5 mt-3">
-                <div class="col-md-12 wow fadeIn mb-3">
-                    <div class="text-center">
-                        <h1 class="display-4 font-weight-bold mb-5 wow fadeInUp"><img id="logo" src="../../MDB/img/logo.PNG" alt=""></h1>
-                        <h5 class="mb-5 wow fadeInUp" data-wow-delay="0.2s">{{ __('landing-page.slug') }}</h5>
-                        <div class="wow fadeInUp" data-wow-delay="0.4s">
-                            <a class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#elegantModalForm"><i class="fas fa-user left"></i>{{ __('landing-page.sign_in') }}</a>
-                            <a href="#contact" class="btn btn-outline-orange btn-rounded"><i class="fas fa-book left"></i>{{ __('landing-page.contact_us') }}</a>
+    @section('navbar')
+    @include('templates.navbar')
+    @endsection
+    <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('../../MDB/img/AdobeStock_190123382_Preview.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+        <div class="mask rgba-white-slight">
+            <div class="container h-100 d-flex justify-content-center align-items-center" style="height: 100%;">
+                <div class="row pt-5 mt-3">
+                    <div class="col-md-12 wow fadeIn mb-3">
+                        <div class="text-center">
+                            <h1 class="display-4 font-weight-bold mb-5 wow fadeInUp"><img id="logo" src="../../MDB/img/logo.PNG" alt=""></h1>
+                            <h5 class="mb-5 wow fadeInUp" data-wow-delay="0.2s">{{ __('landing-page.slug') }}</h5>
+                            <div class="wow fadeInUp" data-wow-delay="0.4s">
+                                <a class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#elegantModalForm"><i class="fas fa-user left"></i>{{ __('landing-page.sign_in') }}</a>
+                                <a href="#contact" class="btn btn-outline-orange btn-rounded"><i class="fas fa-book left"></i>{{ __('landing-page.contact_us') }}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </header>
 
 @section('content')
-<!-- Modal -->
-<div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <!--Content-->
-        <div class="modal-content form-elegant">
-            <!--Header-->
-            <div class="modal-header text-center">
-                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>{{ __('landing-page.sign_in_2') }}</strong></h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+    <!-- Modal -->
+    <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            <!--Content-->
+            <div class="modal-content form-elegant">
+                <!--Header-->
+                <div class="modal-header text-center">
+                    <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>{{ __('landing-page.sign_in_2') }}</strong></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!--Body-->
+                <div id="errorMessage">
+                </div>
+
+                <div class="modal-body mx-4">
+
+                    <form  method="POST" id="loginForm">
+                        @csrf
+                        @method('POST')
+
+                        <div class="md-form mb-5">
+                            <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
+                            <label for="Form-email1">{{ __('landing-page.your_username') }}</label>
+                        </div>
+
+                        <div class="md-form pb-3">
+                            <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
+                            <label for="Form-pass1">{{ __('landing-page.your_password') }}</label>
+                            <!-- <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">{{ __('landing-page.forgot_password') }}</a></p> -->
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">{{ __('landing-page.sign_in') }}</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <!--Body-->
-            <div id="errorMessage">
-            </div>
-
-            <div class="modal-body mx-4">
-            <!--Body-->
-
-            <form  method="POST" id="loginForm">
-                @csrf
-                @method('POST')
-                <div class="md-form mb-5">
-                    <input type="text" id="Form-email1" name="loginFormUserName" class="form-control validate">
-                    <label for="Form-email1">{{ __('landing-page.your_username') }}</label>
-                </div>
-
-                <div class="md-form pb-3">
-                    <input type="password" id="Form-pass1" name="loginFormPassword" class="form-control validate">
-                    <label for="Form-pass1">{{ __('landing-page.your_password') }}</label>
-                    <!-- <p class="font-small orange-text d-flex justify-content-end"><a href="#" class="orange-text ml-1">{{ __('landing-page.forgot_password') }}</a></p> -->
-                </div>
-
-                <div class="text-center mb-3">
-                    <button type="button submit" class="btn peach-gradient btn-block btn-rounded z-depth-1a" id="loginButtonHome">{{ __('landing-page.sign_in') }}</button>
-                </div>
-            </form>
         </div>
-    </div>
-</div>
         <!--/.Content-->
     </div>
-</div>
+    
 <!-- Modal -->
 <div class="container">
     <!--Section: Features v.4-->
